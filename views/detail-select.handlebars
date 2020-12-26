@@ -1,32 +1,106 @@
 <div>
-<div class="row">
-  <div class="col large square">
-    <div class="large-square light-blue"><span class="square-content">Brand</span></div>
+<form action="/view/{{gender}}/filtered" method="GET">
+  <div class="row" id="brand-label">
+    <div class="col">
+      <div class="large-square light-blue"><span class="square-content">Brand</span></div>
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="col">
-    <div class="large-square light-blue"><span class="square-content">Type</span></div>
+
+  <div class="row" id="brand-filter">
+    <div class="col">
+      <div class="filter-square light-purple">
+      {{#each brandItems as |_ idx|}}
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" name="brand" type="checkbox" id="{{brand}}{{idx}}" value="{{brand}}">
+          <label class="form-check-label" for="{{brand}}{{idx}}">{{brand}}</label>
+        </div>
+      {{/each}}
+      </div>
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="col">
-    <div class="large-square light-blue"><span class="square-content">Color</span></div>
+
+  <div class="row" id="type-label">
+    <div class="col">
+      <div class="large-square light-blue"><span class="square-content">Type</span></div>
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="col">
-    <div class="large-square light-blue"><span class="square-content">Size</span></div>
+
+  <div class="row" id="type-filter">
+    <div class="col">
+      <div class="filter-square light-purple">
+      {{#each typeItems as |_ idx|}}
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" name="type" type="checkbox" id="{{type}}{{idx}}" value="{{type}}">
+          <label class="form-check-label" for="{{type}}{{idx}}">{{type}}</label>
+        </div>
+      {{/each}}
+      </div>
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="col">
-    <div class="large-square light-blue"><span class="square-content">Location</span></div>
+
+  <div class="row" id="colors-label">
+    <div class="col">
+      <div class="large-square light-blue"><span class="square-content">Colors</span></div>
+    </div>
   </div>
-</div>
-<div class="row mt-3">
-  <div class="col">
-    <button type="button" class="btn btn-primary large-square">Find</button>
+
+  <div class="row" id="colors-filter">
+    <div class="col">
+      <div class="filter-square light-purple">
+      {{#each colorsItems as |_ idx|}}
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" name="colors" type="checkbox" id="{{colors}}{{idx}}" value="{{colors}}">
+          <label class="form-check-label" for="{{colors}}{{idx}}">{{colors}}</label>
+        </div>
+      {{/each}}
+      </div>
+    </div>
   </div>
+
+  <div class="row" id="size-label">
+    <div class="col">
+      <div class="large-square light-blue"><span class="square-content">Size</span></div>
+    </div>
+  </div>
+
+  <div class="row" id="size-filter">
+    <div class="col">
+      <div class="filter-square light-purple">
+      {{#each sizeItems as |_ idx|}}
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" name="size" type="checkbox" id="{{size}}{{idx}}" value={{size}}>
+          <label class="form-check-label" for="{{size}}{{idx}}">{{size}}</label>
+        </div>
+      {{/each}}
+      </div>
+    </div>
+  </div>
+
+  <div class="row" id="location-label">
+    <div class="col">
+      <div class="large-square light-blue"><span class="square-content">Location</span></div>
+    </div>
+  </div>
+
+  <div class="row" id="location-filter">
+    <div class="col">
+      <div class="filter-square light-purple">
+      {{#each locationItems as |_ idx|}}
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" name="location" type="checkbox" id="{{location}}{{idx}}" value={{location}}>
+          <label class="form-check-label" for="{{location}}{{idx}}">{{location}}</label>
+        </div>
+      {{/each}}
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col">
+      <button type="submit" class="btn btn-primary large-square">Find</button>
+    </div>
+  </div>
+</form>
 </div>
-</div>
+
+<script src="/js/filters.js"></script>
