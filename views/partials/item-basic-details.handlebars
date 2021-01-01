@@ -24,14 +24,14 @@
   <div class="col-9">
     <div class="input-group">
       <span class="input-group-text" id="edit-size">size:</span>
-      <input type="text" class="form-control" placeholder="size" value="{{item.size}}" aria-label="edit-size" aria-describedby="edit-size">
+      <input type="text" class="form-control" value="{{item.size}}" aria-label="edit-size" aria-describedby="edit-size">
     </div>
   </div>
 
   <div class="col-9">
     <div class="input-group">
       <span class="input-group-text" id="edit-brand">brand:</span>
-      <input class="form-control" list="brandOptions" placeholder="Brand" value="{{item.brand}}">
+      <input class="form-control" list="brandOptions" value="{{item.brand}}">
       <datalist id="brandOptions">
         {{#each brands as |brand|}}
         <option value="{{brand}}">
@@ -43,14 +43,14 @@
   <div class="col-9">
     <div class="input-group">
       <span class="input-group-text" id="edit-colors">colors:</span>
-      <input type="text" class="form-control" placeholder="colors" value="{{item.colors}}" aria-label="edit-colors" aria-describedby="edit-colors">
+      <input type="text" class="form-control" placeholder="color1, color2, color3" value="{{item.colors}}" aria-label="edit-colors" aria-describedby="edit-colors">
     </div>
   </div>
 
   <div class="col-9">
     <div class="input-group">
       <span class="input-group-text" id="edit-type">type:</span>
-      <input class="form-control" list="typeOptions" placeholder="type" value="{{item.type}}">
+      <input class="form-control" list="typeOptions" value="{{item.type}}">
       <datalist id="typeOptions">
         {{#each types as |type|}}
         <option value="{{type}}">
