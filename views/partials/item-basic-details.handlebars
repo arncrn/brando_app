@@ -1,0 +1,62 @@
+<div class="row justify-content-center" id="item-basic-details">
+  <div class="col-9">
+    <div class="input-group">
+      <span class="input-group-text" id="edit-tag-number">tag:</span>
+      <input type="text" class="form-control" placeholder="######" value="{{item.tag_number}}" aria-label="######" aria-describedby="edit-tag-number" inputmode="numeric"> 
+    </div>
+  </div>
+
+  <div class="col-9">
+    <div class="input-group">
+      <span class="input-group-text" id="edit-gender">gender:</span>
+      <select class="form-select" aria-label="Select gender">
+        {{#if (isForMen item.gender)}}
+          <option value="women">Female</option>
+          <option value="men" selected>Male</option>
+        {{else}}
+          <option value="women" selected>Female</option>
+          <option value="men">Male</option>
+        {{/if}}
+      </select>
+    </div>
+  </div>
+
+  <div class="col-9">
+    <div class="input-group">
+      <span class="input-group-text" id="edit-size">size:</span>
+      <input type="text" class="form-control" placeholder="size" value="{{item.size}}" aria-label="edit-size" aria-describedby="edit-size">
+    </div>
+  </div>
+
+  <div class="col-9">
+    <div class="input-group">
+      <span class="input-group-text" id="edit-brand">brand:</span>
+      <input class="form-control" list="brandOptions" placeholder="Brand" value="{{item.brand}}">
+      <datalist id="brandOptions">
+        {{#each brands as |brand|}}
+        <option value="{{brand}}">
+        {{/each}}
+      </datalist>
+    </div>
+  </div>
+
+  <div class="col-9">
+    <div class="input-group">
+      <span class="input-group-text" id="edit-colors">colors:</span>
+      <input type="text" class="form-control" placeholder="colors" value="{{item.colors}}" aria-label="edit-colors" aria-describedby="edit-colors">
+    </div>
+  </div>
+
+  <div class="col-9">
+    <div class="input-group">
+      <span class="input-group-text" id="edit-type">type:</span>
+      <input class="form-control" list="typeOptions" placeholder="type" value="{{item.type}}">
+      <datalist id="typeOptions">
+        {{#each types as |type|}}
+        <option value="{{type}}">
+        {{/each}}
+      </datalist>
+    </div>
+  </div>
+
+</div>

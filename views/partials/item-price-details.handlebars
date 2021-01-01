@@ -1,0 +1,72 @@
+<div class="row justify-content-center" id="item-price-details" style="display: none">
+  
+  <div class="col-9">
+    <div class="input-group">
+      <span class="input-group-text" id="receipt">Receipt #:</span>
+      <input type="text" class="form-control" placeholder="##" value="{{item.receipt_id}}" aria-label="##" aria-describedby="receipt" inputmode="numeric">
+    </div>
+  </div>
+
+  <div class="col-9">
+    <div class="input-group">
+      <span class="input-group-text" id="edit-purchase-price">Purchased Price:</span>
+      <input type="text" class="form-control" placeholder="$" value="${{item.purchase_price}}" aria-label="$" aria-describedby="edit-purchase-price" inputmode="numeric">
+    </div>
+  </div>
+
+  <div class="col-4">
+    <div class="input-group">
+      <span class="input-group-text" id="tax-percent">Tax:</span>
+      <input type="text" class="form-control" placeholder="%" value="{{item.tax_percent}}%" aria-label="%" aria-describedby="tax-percent" disabled>
+    </div>
+  </div>
+  <div class="col-5">
+    <div class="input-group">
+      <span class="input-group-text" id="tax-amount">Tax Total:</span>
+      <input type="text" class="form-control" placeholder="$" value="${{item.tax_amount}}" aria-label="%" aria-describedby="tax-amount" disabled>
+    </div>
+  </div>
+
+  <div class="col-9">
+    <div class="input-group">
+      <span class="input-group-text" id="total-price">Total Price:</span>
+      <input type="text" class="form-control" placeholder="$" value="${{item.total_price}}" aria-label="$" aria-describedby="total-price" disabled>
+    </div>
+  </div>
+
+  <div class="col-9">
+    <div class="input-group">
+      <span class="input-group-text" id="purchase-date">Purchase Date:</span>
+      <input type="text" class="form-control" placeholder="##/##/####" value="{{item.purchase_date}}" aria-label="##/##/####" aria-describedby="purchase-date" disabled>
+    </div>
+  </div>
+
+  <div class="col-9">
+    <div class="input-group">
+      <span class="input-group-text" id="shipping-cost">Shipping Cost:</span>
+      <input type="text" class="form-control" placeholder="$" value="${{item.shipping_cost}}" aria-label="$" aria-describedby="shipping-cost" inputmode="numeric">
+    </div>
+  </div>
+
+  <div class="col-9">
+    <div class="input-group">
+      <span class="input-group-text" id="sold-price-usd">Sold Price (USD):</span>
+      <input type="text" class="form-control" placeholder="$" value="${{item.sold_price}}" aria-label="$" aria-describedby="sold-price-usd" inputmode="numeric">
+    </div>
+  </div>
+
+  <div class="col-9">
+    <div class="input-group">
+      <span class="input-group-text" id="sold-price-uah">Sold Price (UAH):</span>
+      <input type="text" class="form-control" placeholder='&#8372'; value="&#8372;{{item.sold_price_uah}}" aria-label="&#8372;" aria-describedby="sold-price-uah" inputmode="numeric">
+    </div>
+  </div>
+
+  <div class="col-9">
+    <div class="input-group">
+      <span class="input-group-text" id="sold-date">Sold Date:</span>
+      <input type="date" class="form-control" placeholder="##/##/####" value="{{item.date_sold}}" aria-label="##/##/####" aria-describedby="sold-date">
+    </div>
+  </div>
+
+</div>

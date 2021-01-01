@@ -1,0 +1,31 @@
+<div id="modal-backdrop"></div>
+
+<div class="container-fluid custom-modal">
+    <div class="row mt-2">
+      <div class="col col-12" id="clickable-area">
+        {{>modal-navigation}}
+        <form id="modal-form" action="/edititem/{{itemId}}" method="POST" x>
+            
+            {{>item-basic-details}}
+
+            {{>image-display}}
+
+            {{>item-price-details}}
+
+            {{>item-package-details}}
+
+            {{>item-order-details}}
+
+            {{>item-extra-info}}
+
+
+          <div class="row">
+            <div class="col offset-2">
+              <button type="submit" class="btn btn-primary px-5 py-3">Save</button>
+              <button class="btn btn-primary px-5 py-3" id="cancel">Cancel</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

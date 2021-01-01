@@ -1,0 +1,44 @@
+<div class="row justify-content-center" id="item-package-details" style="display: none">
+
+  <div class="col-9">
+    <div class="input-group">
+      <span class="input-group-text" id="item-location">Location:</span>
+      <select class="form-select" aria-label="item-location" aria-describedby="item-location">
+        {{#if (isInUSA item.location)}}
+          <option value="usa" selected>USA</option>
+          <option value="ukraine">Ukraine</option>
+          <option value="traveling">Traveling</option>
+        {{else}} {{#if (isInUkraine item.location)}}
+          <option value="usa">USA</option>
+          <option value="ukraine" selected>Ukraine</option>
+          <option value="traveling">Traveling</option>
+        {{else}}
+          <option value="usa">USA</option>
+          <option value="ukraine">Ukraine</option>
+          <option value="traveling" selected>Traveling</option>
+        {{/if}}{{/if}}
+      </select>
+    </div>
+  </div>
+
+  <div class="col-9">
+    <div class="input-group">
+      <span class="input-group-text" id="package-id">Package Id:</span>
+      <input type="text" class="form-control" placeholder="##" value="{{item.package_id}}" aria-label="package-id" aria-describedby="package-id">
+    </div>
+  </div>
+  <div class="col-9">
+    <div class="input-group">
+      <span class="input-group-text" id="package-name">Package Name:</span>
+      <input type="text" class="form-control" value="{{item.package_name}}" aria-label="package-name" aria-describedby="package-name" disabled>
+    </div>
+  </div>
+
+  <div class="col-9">
+    <div class="input-group">
+      <span class="input-group-text" id="shipping-cost">Shipping Cost:</span>
+      <input type="text" class="form-control" placeholder="$" value="${{item.shipping_cost}}" aria-label="$" aria-describedby="shipping-cost" inputmode="numeric" disabled>
+    </div>
+  </div>
+
+</div>
