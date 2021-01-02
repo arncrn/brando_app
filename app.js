@@ -122,6 +122,26 @@ app.post('/duplicateitem/:itemId', async (req, res) => {
   }
 })
 
+app.get('/findtag', async (req, res) => {
+  let tagNumber = req.query.tagNumber;
+  let items = await dataApp.findItemsByTag(tagNumber);
+
+  items = items.map(item => {
+    let taxPercent = item.tax || 8;
+    let taxAmount = +item.purchase_price * (taxPercent / 100);
+    let totalPrice = (+item.purchase_price + taxAmount).toFixed(2);
+    return Object.assign(item, {total_price: totalPrice});
+  });
+  res.render('clothing', {
+    items: items,
+    helpers: {
+      greaterThanZero: function (soldPrice) {
+        return +soldPrice > 0;
+      }
+    }
+  });
+});
+
 app.post('/deleteitem/:itemId', async (req, res) => {
   let itemId = req.params.itemId;
   let deleted = await dataApp.deleteItem(itemId);
