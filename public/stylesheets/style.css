@@ -141,3 +141,7 @@ a, a:hover {
 .edit {
   z-index: 1;
 }
+
+.glowing {
+  background-color: lightgoldenrodyellow;
+}

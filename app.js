@@ -4,6 +4,7 @@ const exphbs = require('express-handlebars');
 const multer = require('multer');
 const pgPersistence = require('./lib/pg-persistence.js');
 const buildFilterString = require('./lib/build-filter-string.js');
+const capitalize = require('./lib/capitalize.js');
 const dataApp = new pgPersistence();
 const port = 3000;
 
@@ -71,6 +72,8 @@ app.post('/edititem/:itemId', async (req, res) => {
   for(prop in dataObj) {
     if (dataObj[prop] === '') {
       dataObj[prop] = null;
+    } else if (prop !== "extra_info") {
+      dataObj[prop] = capitalize(dataObj[prop]);
     }
   }
 
@@ -127,22 +130,6 @@ app.post('/deleteitem/:itemId', async (req, res) => {
   } else {
     res.status(404).send('Could not delete');
   }
-})
-
-app.get('/tester', async (req, res) => {
-  let item = await dataApp.findItemById(1);
-  let taxPercent = item.tax || 8;
-  let taxAmount = +item.purchase_price * (taxPercent / 100);
-  let totalPrice = (+item.purchase_price + taxAmount).toFixed(2);
-  Object.assign(item, {total_price: totalPrice});
-  res.render('partials/item-structure', {
-    item: item,
-    helpers: {
-      greaterThanZero: function (soldPrice) {
-        return +soldPrice > 0;
-      }
-    }
-  });
 })
 
 app.get("/clothing", (req, res) => {

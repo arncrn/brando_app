@@ -12,9 +12,18 @@
       {{#each brandItems as |_ idx|}}
         <div class="form-check form-check-inline">
           <input class="form-check-input" name="brand" type="checkbox" id="{{brand}}{{idx}}" value="{{brand}}">
-          <label class="form-check-label" for="{{brand}}{{idx}}">{{brand}}</label>
+          <label class="form-check-label brand-label" for="{{brand}}{{idx}}">{{brand}}</label>
         </div>
       {{/each}}
+
+        <div class="col">
+          <div class="input-group mt-3">
+            <span class="input-group-text">Brand:</span>
+            <input type="text" id="brand-search" class="form-control">
+            <button class="btn btn-secondary">X</button>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -31,9 +40,17 @@
       {{#each typeItems as |_ idx|}}
         <div class="form-check form-check-inline">
           <input class="form-check-input" name="type" type="checkbox" id="{{type}}{{idx}}" value="{{type}}">
-          <label class="form-check-label" for="{{type}}{{idx}}">{{type}}</label>
+          <label class="form-check-label type-label" for="{{type}}{{idx}}">{{type}}</label>
         </div>
       {{/each}}
+
+        <div class="col">
+          <div class="input-group mt-3">
+            <span class="input-group-text">Type:</span>
+            <input type="text" id="type-search" class="form-control">
+            <button class="btn btn-secondary">X</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -50,9 +67,17 @@
       {{#each colorsItems as |_ idx|}}
         <div class="form-check form-check-inline">
           <input class="form-check-input" name="colors" type="checkbox" id="{{colors}}{{idx}}" value="{{colors}}">
-          <label class="form-check-label" for="{{colors}}{{idx}}">{{colors}}</label>
+          <label class="form-check-label color-label" for="{{colors}}{{idx}}">{{colors}}</label>
         </div>
       {{/each}}
+
+        <div class="col">
+          <div class="input-group mt-3">
+            <span class="input-group-text">Color:</span>
+            <input type="text" id="color-search" class="form-control">
+            <button class="btn btn-secondary">X</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -69,9 +94,17 @@
       {{#each sizeItems as |_ idx|}}
         <div class="form-check form-check-inline">
           <input class="form-check-input" name="size" type="checkbox" id="{{size}}{{idx}}" value={{size}}>
-          <label class="form-check-label" for="{{size}}{{idx}}">{{size}}</label>
+          <label class="form-check-label size-label" for="{{size}}{{idx}}">{{size}}</label>
         </div>
       {{/each}}
+
+        <div class="col">
+          <div class="input-group mt-3">
+            <span class="input-group-text">Size:</span>
+            <input type="text" id="size-search" class="form-control">
+            <button class="btn btn-secondary">X</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

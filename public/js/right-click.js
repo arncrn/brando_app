@@ -55,10 +55,26 @@ class RightClick {
 
   insertItemIntoPage(responseHTML) {
     let currentElement = document.querySelector(`[data-item-id="${this.itemId}"]`);
-    let div = document.createElement('div');
-    div.innerHTML = responseHTML;
-    let newElement = div.firstChild;
+    let newElement = this.convertHtmlStringToDomElement(responseHTML);
+    newElement.classList.add('glowing');
     currentElement.insertAdjacentElement('afterend', newElement);
+    setTimeout(() => {
+      document.querySelector('.glowing').classList.remove('glowing');
+    }, 3000);
+  }
+
+  displayFlashMessage() {
+    let flashMessage = document.querySelector('#flash-message');
+    flashMessage.style.display="flex";
+    setTimeout(() => {
+      flashMessage.style.display = 'none';
+    }, 3000);
+  }
+
+  convertHtmlStringToDomElement(htmlString) {
+    let div = document.createElement('div');
+    div.innerHTML = htmlString;
+    return div.firstChild;
   }
 
   duplicateItem() {
@@ -67,6 +83,7 @@ class RightClick {
     XHR.addEventListener('load', event => {
       let request = event.target;
       this.insertItemIntoPage(request.response);
+      this.displayFlashMessage();
     });
     XHR.addEventListener('error', err => {
       console.log(err);
@@ -79,14 +96,13 @@ class RightClick {
     XHR.open('POST', `/deleteitem/${this.itemId}`);
     XHR.addEventListener('load', event => {
       let request = event.target;
-      console.log(request.response);
       this.removeItemFromPage();
+      this.displayFlashMessage();
     });
     XHR.addEventListener('error', err => {
       console.log(err);
     })
     XHR.send();
-    console.log('delete!', this.itemId);
   }
 
   setContextBehavior(event) {
