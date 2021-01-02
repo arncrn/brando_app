@@ -17,6 +17,10 @@ class FilterSelect {
     this.colorSearch = document.getElementById('color-search');
     this.sizeSearch = document.getElementById('size-search');
 
+    this.clearBrandButton = document.getElementById('clear-brand');
+    this.clearTypeButton = document.getElementById('clear-type');
+    this.clearColorButton = document.getElementById('clear-color');
+    this.clearSizeButton = document.getElementById('clear-size');
 
     this.displayBrandFilter = this.displayBrandFilter.bind(this);
     this.displayTypeFilter = this.displayTypeFilter.bind(this);
@@ -28,6 +32,11 @@ class FilterSelect {
     this.findColors = this.findColors.bind(this);
     this.findTypes = this.findTypes.bind(this);
     this.findSizes = this.findSizes.bind(this);
+
+    this.clearBrandInput = this.clearBrandInput.bind(this);
+    this.clearColorInput = this.clearColorInput.bind(this);
+    this.clearSizeInput = this.clearSizeInput.bind(this);
+    this.clearTypeInput = this.clearTypeInput.bind(this);
   }
 
   displayBrandFilter(event) {
@@ -71,54 +80,71 @@ class FilterSelect {
     this.typeSearch.addEventListener('input', this.findTypes);
     this.colorSearch.addEventListener('input', this.findColors);
     this.sizeSearch.addEventListener('input', this.findSizes);
+
+    this.clearBrandButton.addEventListener('click', this.clearBrandInput);
+    this.clearTypeButton.addEventListener('click', this.clearTypeInput);
+    this.clearColorButton.addEventListener('click', this.clearColorInput);
+    this.clearSizeButton.addEventListener('click', this.clearSizeInput);
+  }
+
+  clearBrandInput(event) {
+    event.preventDefault();
+    this.brandSearch.value = '';
+    this.setLabelBackgroundColors('brand');
+  }
+
+  clearTypeInput(event) {
+    event.preventDefault();
+    this.typeSearch.value = '';
+    this.setLabelBackgroundColors('type');
+  }
+
+  clearColorInput(event) {
+    event.preventDefault();
+    this.colorSearch.value = '';
+    this.setLabelBackgroundColors('color');
+  }
+
+  clearSizeInput(event) {
+    event.preventDefault();
+    this.sizeSearch.value = '';
+    this.setLabelBackgroundColors('size');
+  }
+
+  setLabelBackgroundColors(filterName) {
+    let filter;
+    let inputBox;
+    switch(filterName) {
+      case 'brand': filter = this.brandFilter; inputBox = this.brandSearch; break;
+      case 'type': filter = this.typeFilter; inputBox = this.typeSearch; break;
+      case 'color': filter = this.colorsFilter; inputBox = this.colorSearch; break;
+      case 'size': filter = this.sizeFilter; inputBox = this.sizeSearch; break;
+    }
+
+    let targets = filter.querySelectorAll(`.${filterName}-label`);
+    targets.forEach(target => {
+      if (inputBox.value.length > 0 && target.textContent.toLowerCase().includes(inputBox.value.toLowerCase())) {
+        target.style.backgroundColor = 'yellow';
+      } else {
+        target.style.backgroundColor = null;
+      }
+    })
   }
 
   findBrands(event) {
-    let brands = this.brandFilter.querySelectorAll('.brand-label');
-
-    brands.forEach(brand => {
-      if (event.currentTarget.value.length > 0 && brand.textContent.toLowerCase().includes(event.currentTarget.value.toLowerCase())) {
-        brand.style.backgroundColor = 'yellow';
-      } else {
-        brand.style.backgroundColor = null;
-      }
-    });
+    this.setLabelBackgroundColors('brand');
   }
 
   findTypes(event) {
-    let types = this.typeFilter.querySelectorAll('.type-label');
-
-    types.forEach(type => {
-      if (event.currentTarget.value.length > 0 && type.textContent.toLowerCase().includes(event.currentTarget.value.toLowerCase())) {
-        type.style.backgroundColor = 'yellow';
-      } else {
-        type.style.backgroundColor = null;
-      }
-    });
+    this.setLabelBackgroundColors('type');
   }
 
   findColors(event) {
-    let colors = this.colorsFilter.querySelectorAll('.color-label');
-
-    colors.forEach(color => {
-      if (event.currentTarget.value.length > 0 && color.textContent.toLowerCase().includes(event.currentTarget.value.toLowerCase())) {
-        color.style.backgroundColor = 'yellow';
-      } else {
-        color.style.backgroundColor = null;
-      }
-    });
+    this.setLabelBackgroundColors('color');
   }
 
   findSizes(event) {
-    let sizes = this.sizeFilter.querySelectorAll('.size-label');
-
-    sizes.forEach(size => {
-      if (event.currentTarget.value.length > 0 && size.textContent.toLowerCase().includes(event.currentTarget.value.toLowerCase())) {
-        size.style.backgroundColor = 'yellow';
-      } else {
-        size.style.backgroundColor = null;
-      }
-    });
+    this.setLabelBackgroundColors('size');
   }
 
   _showAllLabels() {
