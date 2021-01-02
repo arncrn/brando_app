@@ -42,6 +42,18 @@ a, a:hover {
   width: 100%; 
 }
 
+.right-click-options {
+  display: none;
+  position: absolute;
+  top: 20%;
+  width: 100%
+}
+
+.right-click-options button {
+  width: 100%;
+  height: 2rem;
+}
+
 .item-size, .tag-number, .brand-name, .purchase-price, .item-type, 
 .package-name, .item-colors {
   background-color: white;

@@ -3,14 +3,14 @@
   <div class="col-9">
     <div class="input-group">
       <span class="input-group-text" id="receipt">Receipt #:</span>
-      <input type="text" class="form-control" value="{{item.receipt_id}}" aria-label="##" aria-describedby="receipt" inputmode="numeric">
+      <input type="text" class="form-control" name="receipt_id" value="{{item.receipt_id}}" aria-label="##" aria-describedby="receipt" inputmode="numeric">
     </div>
   </div>
 
   <div class="col-9">
     <div class="input-group">
       <span class="input-group-text" id="edit-purchase-price">Purchased Price:</span>
-      <input type="text" class="form-control" value="${{item.purchase_price}}" aria-label="$" aria-describedby="edit-purchase-price" inputmode="numeric">
+      <input type="text" class="form-control" name="purchase_price" value="${{item.purchase_price}}" aria-label="$" aria-describedby="edit-purchase-price" inputmode="numeric">
     </div>
   </div>
 
@@ -44,28 +44,28 @@
   <div class="col-9">
     <div class="input-group">
       <span class="input-group-text" id="shipping-cost">Shipping Cost:</span>
-      <input type="text" class="form-control" value="${{item.shipping_cost}}" aria-label="$" aria-describedby="shipping-cost" inputmode="numeric">
+      <input type="text" class="form-control" name="shipping_cost" value="${{item.shipping_cost}}" aria-label="$" aria-describedby="shipping-cost" inputmode="numeric">
     </div>
   </div>
 
   <div class="col-9">
     <div class="input-group">
-      <span class="input-group-text" id="sold-price-usd">Sold Price (USD):</span>
-      <input type="text" class="form-control" value="${{item.sold_price}}" aria-label="$" aria-describedby="sold-price-usd" inputmode="numeric">
+      <span class="input-group-text">Sold Price (USD):</span>
+      <input type="text" id="sold-price-usd" class="form-control" name="sold_price" value="${{item.sold_price}}" aria-label="$" aria-describedby="sold-price-usd" inputmode="numeric">
     </div>
   </div>
 
   <div class="col-9">
     <div class="input-group">
-      <span class="input-group-text" id="sold-price-uah">Sold Price (UAH):</span>
-      <input type="text" class="form-control" value="&#8372;{{item.sold_price_uah}}" aria-label="&#8372;" aria-describedby="sold-price-uah" inputmode="numeric">
+      <span class="input-group-text">Sold Price (UAH):</span>
+      <input type="text" id="sold-price-uah" class="form-control" value="&#8372;{{item.sold_price_uah}}" aria-label="&#8372;" aria-describedby="sold-price-uah" inputmode="numeric">
     </div>
   </div>
 
   <div class="col-9">
     <div class="input-group">
-      <span class="input-group-text" id="sold-date">Sold Date:</span>
-      <input type="date" class="form-control" value="{{item.date_sold}}" aria-label="##/##/####" aria-describedby="sold-date">
+      <span class="input-group-text">Sold Date:</span>
+      <input type="date" id="sold-date" class="form-control" name="date_sold" value="{{item.date_sold}}" aria-label="##/##/####" aria-describedby="sold-date">
     </div>
   </div>
 

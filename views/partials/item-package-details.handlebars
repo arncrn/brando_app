@@ -3,19 +3,19 @@
   <div class="col-9">
     <div class="input-group">
       <span class="input-group-text" id="item-location">Location:</span>
-      <select class="form-select" aria-label="item-location" aria-describedby="item-location">
-        {{#if (isInUSA item.location)}}
-          <option value="usa" selected>USA</option>
+      <select class="form-select" name="location" aria-label="item-location" aria-describedby="item-location">
+        {{#if (isTraveling item.location)}}
+          <option value="usa">USA</option>
           <option value="ukraine">Ukraine</option>
-          <option value="traveling">Traveling</option>
+          <option value="traveling" selected>Traveling</option>
         {{else}} {{#if (isInUkraine item.location)}}
           <option value="usa">USA</option>
           <option value="ukraine" selected>Ukraine</option>
           <option value="traveling">Traveling</option>
         {{else}}
-          <option value="usa">USA</option>
+          <option value="usa" selected>USA</option>
           <option value="ukraine">Ukraine</option>
-          <option value="traveling" selected>Traveling</option>
+          <option value="traveling">Traveling</option>
         {{/if}}{{/if}}
       </select>
     </div>
@@ -24,7 +24,7 @@
   <div class="col-9">
     <div class="input-group">
       <span class="input-group-text" id="package-id">Package Id:</span>
-      <input type="text" class="form-control" value="{{item.package_id}}" aria-label="package-id" aria-describedby="package-id">
+      <input type="text" class="form-control" name="package_id" value="{{item.package_id}}" aria-label="package-id" aria-describedby="package-id">
     </div>
   </div>
   <div class="col-9">

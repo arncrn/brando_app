@@ -37,7 +37,11 @@
             <div class="package-name"><p>{{package_name}}</p></div>
             <div class="purchase-price"><p>${{total_price}}</p></div>
           </div>
-          <button class="edit">Edit</button>
+          <div class="right-click-options" id="right-click-option-{{id}}">
+            <button class="btn-success duplicate">Duplicate</button>
+            <button class="btn-danger delete">Delete</button>
+          </div>
+            <button class="edit">Edit</button>
           <div class="card-body">
             <pre class="card-text">{{extra_info}}</pre>
           </div>
