@@ -72,7 +72,7 @@ app.post('/edititem/:itemId', async (req, res) => {
   for(prop in dataObj) {
     if (dataObj[prop] === '') {
       dataObj[prop] = null;
-    } else if (prop !== "extra_info") {
+    } else if (prop !== "extra_info" && prop !== 'gender' && prop !== 'ukraine' && prop !== 'picture') {
       dataObj[prop] = capitalize(dataObj[prop]);
     }
   }
@@ -134,9 +134,19 @@ app.get('/findtag', async (req, res) => {
   });
   res.render('clothing', {
     items: items,
+    filters: req.query,
     helpers: {
       greaterThanZero: function (soldPrice) {
         return +soldPrice > 0;
+      },
+      isArray: function(element) {
+        return Array.isArray(element);
+      },
+      joinArray: function(element) {
+        return element.join(', ');
+      },
+      forMen: function(gender) {
+        return gender == 'men';
       }
     }
   });
@@ -192,7 +202,7 @@ app.get("/view/:gender", async (req, res, next) => {
 app.get("/view/:gender/filtered", async (req, res) => {
   let queryObj = req.query;
   let gender = req.params.gender;
-  
+  console.log(queryObj);
   app.locals.queryParams = queryObj;
   let filterString = buildFilterString(queryObj, gender);
   let items = (await dataApp.getFilteredItems(filterString)).map(item => {
@@ -203,9 +213,19 @@ app.get("/view/:gender/filtered", async (req, res) => {
   });
   res.render('clothing', {
     items: items,
+    filters: queryObj,
     helpers: {
       greaterThanZero: function (soldPrice) {
         return +soldPrice > 0;
+      },
+      isArray: function(element) {
+        return Array.isArray(element);
+      },
+      joinArray: function(element) {
+        return element.join(', ');
+      },
+      forMen: function(gender) {
+        return gender == 'men';
       }
     }
   });
