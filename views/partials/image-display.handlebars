@@ -1,8 +1,19 @@
 <div class="row justify-content-center" id="image-display" style="display: none">
   <div class="col-9 mt-2">
-    <img src="/images/clothing/woman-placeholder.jpg" class="img-fluid" alt="...">
-    <div class="mb-3">
-      <input class="form-control" type="file" id="formFile">
+    {{#if item.picture}}
+      <img src="/images/clothing/{{item.picture}}" class="custom-img-fluid" alt="{{item.picture}}">
+    {{else}} 
+      {{#if (isForMen item.gender)}}
+        <img src="/images/clothing/man-placeholder.jpeg" class="custom-img-fluid" alt="{{item.picture}}">
+      {{else}}
+        <img src="/images/clothing/woman-placeholder.jpg" class="custom-img-fluid" alt="{{item.picture}}">
+      {{/if}}
+    {{/if}}
+    <div class="col-9 mb-3">
+      <span class="input-group-text">Picture</span>
+      <div id="preview"></div>
+      <input type="file" class="form-control" name="brandomania-picture" id="picture-uploader" accept="image/png, image/jpeg, image/jpg"/>
+      <input type="text" name="picture" value="{{item.picture}}" style="visibility: hidden;">
     </div>
   </div>
 </div>

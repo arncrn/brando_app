@@ -14,6 +14,30 @@ class PopupDisplay {
     this.soldPriceUSD;
     this.soldPriceUAH;
     this.form;
+
+    this.previewBox; 
+    this.form; 
+    this.imageInput;
+    this.newItemContainer;
+  }
+
+  removeImagePreview() {
+    while(this.previewBox.firstChild) {
+      this.previewBox.removeChild(this.previewBox.firstChild); // might need to bind?
+    }
+  }
+
+  displayImagePreview(file) {
+    this.removeImagePreview();
+    if (!file || !file.type.startsWith('image/')) return;
+  
+    const img = document.createElement("img");
+    img.file = file;
+    this.previewBox.appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
+  
+    const reader = new FileReader();
+    reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
+    reader.readAsDataURL(file);
   }
 
   changeTab(tab) {
@@ -41,7 +65,13 @@ class PopupDisplay {
 
   openModal(responseData) {
     this.modalContainer.innerHTML = responseData;
+    this.trimStrangeWhiteSpaceFromExtraInfo();
     this.modalContainer.addEventListener('click', this.removeModal);
+  }
+
+  trimStrangeWhiteSpaceFromExtraInfo() {
+    let textArea = this.modalContainer.querySelector('textarea');
+    textArea.value = textArea.value.split(/\n/).map(string => string.trim()).join('\n');
   }
 
   removeModal(event) {
@@ -66,17 +96,20 @@ class PopupDisplay {
   }
 
   getPageDetails() {
-    this.basicDetails = document.getElementById('item-basic-details');
-    this.imageDisplay = document.getElementById('image-display');
-    this.priceDetails = document.getElementById('item-price-details');
-    this.packageDetails = document.getElementById('item-package-details');
-    this.orderDetails = document.getElementById('item-order-details');
-    this.extraInfo = document.getElementById('item-extra-info');
+    this.basicDetails = this.modalContainer.querySelector('#item-basic-details');
+    this.imageDisplay = this.modalContainer.querySelector('#image-display');
+    this.priceDetails = this.modalContainer.querySelector('#item-price-details');
+    this.packageDetails = this.modalContainer.querySelector('#item-package-details');
+    this.orderDetails = this.modalContainer.querySelector('#item-order-details');
+    this.extraInfo = this.modalContainer.querySelector('#item-extra-info');
 
-    this.soldPriceUSD = document.getElementById('sold-price-usd');
-    this.soldPriceUAH = document.getElementById('sold-price-uah');
+    this.soldPriceUSD = this.modalContainer.querySelector('#sold-price-usd');
+    this.soldPriceUAH = this.modalContainer.querySelector('#sold-price-uah');
 
-    this.form = document.querySelector('form');
+    this.form = this.modalContainer.querySelector('form');
+    this.previewBox = this.modalContainer.querySelector('#preview');
+    this.imageInput = this.modalContainer.querySelector('#picture-uploader');
+    this.newItemContainer = this.modalContainer.querySelector('#item-container');
   }
 
   hideAllTabs() {
@@ -138,6 +171,7 @@ document.addEventListener('click', (event) => {
 
     xhr.open('GET', `/item/${itemId}`);
     xhr.addEventListener('load', event => {
+      //working
       let response = event.target.response;
       popupDisplay.openModal(response);
       popupDisplay.getPageDetails();
@@ -163,6 +197,7 @@ document.addEventListener('click', (event) => {
 
       popupDisplay.form.addEventListener('submit', event => {
         event.preventDefault();
+        
         let formData = {};
         [...popupDisplay.form.elements].forEach(element => {
           if (element.name) {
@@ -174,6 +209,8 @@ document.addEventListener('click', (event) => {
             }
           }
         })
+
+        // console.log(formData);
 
         popupDisplay.submitForm(formData);
       })

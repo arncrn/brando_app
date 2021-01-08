@@ -1,0 +1,169 @@
+<div class="row justify-content-center">
+  <div class="col">
+    <form action="/tester" method="post" enctype="multipart/form-data">
+      <div class="col-9">
+        <span class="input-group-text">Picture</span>
+        <div id="preview"></div>
+        <input type="file" class="form-control" name="brandomania-picture" id="picture-uploader" accept="image/png, image/jpeg, image/jpg"/>
+      </div>
+
+      <div class="col-9">
+        <div class="input-group">
+          <span class="input-group-text" id="edit-tag-number">tag:</span>
+          <input type="text" name="tag_number" class="form-control" placeholder="######" aria-label="######" aria-describedby="edit-tag-number" inputmode="numeric"> 
+        </div>
+      </div>
+
+      <div class="col-9">
+        <div class="input-group">
+          <span class="input-group-text" id="edit-gender">gender:</span>
+          <select name="gender" class="form-select" aria-label="Select gender">
+            <option value="">Gender</option>
+            <option value="women">Female</option>
+            <option value="men">Male</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-9">
+        <div class="input-group">
+          <span class="input-group-text" id="item-location">Location:</span>
+          <select class="form-select" name="location" aria-label="item-location" aria-describedby="item-location">
+            <option value="">Location</option>
+            <option value="usa">USA</option>
+            <option value="ukraine">Ukraine</option>
+            <option value="traveling">Traveling</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="col-9">
+        <div class="input-group">
+          <span class="input-group-text" id="edit-size">size:</span>
+          <input type="text" name="size" class="form-control" aria-label="edit-size" aria-describedby="edit-size">
+        </div>
+      </div>
+
+      <div class="col-9">
+        <div class="input-group">
+          <span class="input-group-text" id="edit-brand">brand:</span>
+          <input class="form-control" name="brand" list="brandOptions">
+          <datalist id="brandOptions">
+            {{#each brands as |brand|}}
+            <option value="{{brand}}">
+            {{/each}}
+          </datalist>
+        </div>
+      </div>
+
+      <div class="col-9">
+        <div class="input-group">
+          <span class="input-group-text" id="edit-type">type:</span>
+          <input class="form-control" name="type" list="typeOptions">
+          <datalist id="typeOptions">
+            {{#each types as |type|}}
+            <option value="{{type}}">
+            {{/each}}
+          </datalist>
+        </div>
+      </div>
+
+      <div class="col-9">
+        <div class="input-group">
+          <span class="input-group-text" id="edit-colors">colors:</span>
+          <input type="text" class="form-control" name="colors" placeholder="color1, color2, color3" aria-label="edit-colors" aria-describedby="edit-colors">
+        </div>
+      </div>
+
+      <div class="col-9">
+        <div class="input-group">
+          <span class="input-group-text" id="receipt">Receipt #:</span>
+          <input type="text" class="form-control" name="receipt_id" aria-label="##" aria-describedby="receipt" inputmode="numeric">
+        </div>
+      </div>
+
+      <div class="col-9">
+        <div class="input-group">
+          <span class="input-group-text" id="edit-purchase-price">Purchased Price:</span>
+          <input type="text" class="form-control" name="purchase_price" aria-label="$" aria-describedby="edit-purchase-price" inputmode="numeric">
+        </div>
+      </div>
+
+      <div class="col-9">
+        <div class="input-group">
+          <span class="input-group-text" id="package-id">Package Id:</span>
+          <input type="text" class="form-control" name="package_id" aria-label="package-id" aria-describedby="package-id">
+        </div>
+      </div>
+
+      <div class="col-9">
+        <div class="input-group">
+          <span class="input-group-text" id="shipping-cost">Shipping Cost:</span>
+          <input type="text" class="form-control" name="shipping_cost" aria-label="$" aria-describedby="shipping-cost" inputmode="numeric">
+        </div>
+      </div>
+
+      <div class="col-9">
+        <div class="input-group">
+          <span class="input-group-text" id="order-id">Order Id:</span>
+          <input type="text" class="form-control" name="order_id" aria-label="order-id" aria-describedby="order-id">
+        </div>
+      </div>
+
+      <div class="col-9">
+        <div class="input-group">
+          <span class="input-group-text">Sold Price (USD):</span>
+          <input type="text" id="sold-price-usd" class="form-control" name="sold_price" aria-label="$" aria-describedby="sold-price-usd" inputmode="numeric">
+        </div>
+      </div>
+
+      <div class="col-9">
+        <div class="input-group">
+          <span class="input-group-text">Sold Price (UAH):</span>
+          <input type="text" id="sold-price-uah" class="form-control" aria-label="&#8372;" aria-describedby="sold-price-uah" inputmode="numeric">
+        </div>
+      </div>
+
+      <div class="col-9">
+        <div class="input-group">
+          <span class="input-group-text">Sold Date:</span>
+          <input type="date" id="sold-date" class="form-control" name="date_sold" aria-label="##/##/####" aria-describedby="sold-date">
+        </div>
+      </div>
+
+      <div class="col-9">
+        <div class="input-group">
+          <span class="input-group-text" id="edit-material">material:</span>
+          <input type="text" class="form-control" name="material" aria-label="edit-material" aria-describedby="edit-material">
+        </div>
+      </div>
+
+      <div class="col-9">
+        <div class="input-group">
+          <span class="input-group-text" id="edit-style">style:</span>
+          <input type="text" class="form-control" name="style" aria-label="edit-style" aria-describedby="edit-style">
+        </div>
+      </div>
+
+      <div class="col-9">
+        <div class="input-group">
+          <span class="input-group-text" id="extra-info">Extra Info</span>
+          <textarea class="form-control" name="extra_info" rows="10" aria-label="extra-info" aria-describedby="extra-info"></textarea>
+        </div>
+      </div>  
+
+      <div class="row">
+        <div class="col offset-2">
+          <button type="submit" class="btn btn-primary px-5 py-3 submit">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row mt-3" id="item-container"></div>
+
+
+<script src="/js/edit-popup.js"></script>
+<script src="/js/right-click.js"></script>
+<script src="/js/create-item.js"></script>

@@ -151,3 +151,16 @@ a, a:hover {
   margin-top: 3px;
   padding: 5px;
 }
+
+#preview {
+  width: 100%;
+}
+
+#preview img {
+  max-width: 50%;
+}
+
+.custom-img-fluid {
+  max-width: 40%;
+  height:auto
+}

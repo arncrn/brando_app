@@ -1,8 +1,12 @@
 <div class="card item-block" style="font-size: 10px">
   {{#if item.picture}}
-    <img src="/images/clothing/{{item.picture}}" class="card-img-top" alt="{{item.picture}}">>
-  {{else}}
-    <img src="/images/clothing/woman-placeholder.jpg" class="card-img-top" alt="...">
+    <img src="/images/clothing/{{item.picture}}" class="card-img-top" alt="{{item.picture}}">
+  {{else}} 
+    {{#if (isForMen item.gender)}}
+      <img src="/images/clothing/man-placeholder.jpeg" class="card-img-top" alt="...">
+    {{else}}
+      <img src="/images/clothing/woman-placeholder.jpg" class="card-img-top" alt="...">
+    {{/if}}
   {{/if}}
   <div class='detail-overlay'>
     {{#if item.location}}
@@ -21,7 +25,7 @@
     <div class="package-name"><p>{{item.package_name}}</p></div>
     <div class="purchase-price"><p>${{item.total_price}}</p></div>
   </div>
-  <div class="right-click-options" id="right-click-option-{{id}}">
+  <div class="right-click-options" id="right-click-option-{{item.id}}">
     <button class="btn-success duplicate">Duplicate</button>
     <button class="btn-danger delete">Delete</button>
   </div>
