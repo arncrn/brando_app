@@ -1,15 +1,18 @@
 const express = require('express');
-const app = express();
 const exphbs = require('express-handlebars');
 const multer = require('multer');
+const session = require("express-session");
+const store = require("connect-loki");
 const pgPersistence = require('./lib/pg-persistence.js');
 const buildFilterString = require('./lib/build-filter-string.js');
 const capitalize = require('./lib/capitalize.js');
 const dataApp = new pgPersistence();
 const port = 5000;
 
+const app = express();
+const LokiStore = store(session);
+
 const path = require("path");
-const dbQuery = require('./lib/db-query.js');
 
 let storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -34,7 +37,67 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.post('/newitem', upload.single('brandomania-picture'), async (req, res) => {
+app.use(session({
+  cookie: {
+    httpOnly: true,
+    maxAge: 31 * 24 * 60 * 60 * 1000,
+    path: "/",
+    secure: false,
+  },
+  name: "brandomania-session-id",
+  resave: false,
+  saveUninitialized: true,
+  secret: "not very secret",
+  store: new LokiStore({}),
+}));
+
+app.use((req, res, next) => {
+  res.locals.signedIn = req.session.signedIn;
+  next();
+})
+
+const requiresAuthentication = (req, res, next) => {
+  if (!res.locals.signedIn) {
+    console.log("Unauthorized");
+    res.status(401).send("Unauthorized")
+  } else {
+    next();
+  }
+}
+
+app.get('/', (req, res) => {
+  if (res.locals.signedIn) {
+    res.redirect('/clothing');
+  } else {
+    res.redirect('/login')
+  }
+});
+
+app.get('/login', (req, res) => {
+  if (res.locals.signedIn) {
+    res.redirect('/clothing');
+  } else {
+    res.render('layouts/login', {
+      layout: null,
+    })
+  }
+})
+
+app.post('/login', async (req, res) => {
+  let username = req.body.username.toLowerCase();
+  let password = req.body.password;
+  let loggedInSuccess = await dataApp.authenticate(username, password);
+
+  if (loggedInSuccess) {
+    // req.session.username = username;
+    req.session.signedIn = true;
+    res.redirect('/clothing');
+  } else {
+    res.render('layouts/login', {layout: null});
+  }
+})
+
+app.post('/newitem', requiresAuthentication, upload.single('brandomania-picture'), async (req, res) => {
   let dataObj = req.body;
   if (req.file) {
     let file = req.file;
@@ -80,11 +143,7 @@ app.post('/newitem', upload.single('brandomania-picture'), async (req, res) => {
   }
 })
 
-app.get('/', (req, res) => {
-  res.redirect('/clothing');
-});
-
-app.get('/item/:itemId', async (req, res) => {
+app.get('/item/:itemId', requiresAuthentication, async (req, res) => {
   let id = req.params.itemId;
   let item = await dataApp.findItemById(id);
   let brands = await dataApp.getBrands();
@@ -131,7 +190,7 @@ app.get('/item/:itemId', async (req, res) => {
   })
 });
 
-app.post('/edititem', upload.single('brandomania-picture'), async (req, res) => {
+app.post('/edititem', requiresAuthentication, upload.single('brandomania-picture'), async (req, res) => {
   //working
   let dataObj = req.body;
   let itemId = dataObj.id;
@@ -185,7 +244,7 @@ app.post('/edititem', upload.single('brandomania-picture'), async (req, res) => 
   }
 })
 
-app.post('/duplicateitem/:itemId', async (req, res) => {
+app.post('/duplicateitem/:itemId', requiresAuthentication, async (req, res) => {
   let itemId = req.params.itemId;
   let duplicateId = await dataApp.duplicateItem(itemId);
 
@@ -219,7 +278,7 @@ app.post('/duplicateitem/:itemId', async (req, res) => {
   }
 })
 
-app.get('/findtag', async (req, res) => {
+app.get('/findtag', requiresAuthentication, async (req, res) => {
   let tagNumber = req.query.tagNumber;
   let items = await dataApp.findItemsByTag(tagNumber);
 
@@ -249,7 +308,7 @@ app.get('/findtag', async (req, res) => {
   });
 });
 
-app.post('/deleteitem/:itemId', async (req, res) => {
+app.post('/deleteitem/:itemId', requiresAuthentication, async (req, res) => {
   let itemId = req.params.itemId;
   let deleted = await dataApp.deleteItem(itemId);
   if (deleted) {
@@ -259,15 +318,15 @@ app.post('/deleteitem/:itemId', async (req, res) => {
   }
 })
 
-app.get("/clothing", (req, res) => {
+app.get("/clothing", requiresAuthentication, (req, res) => {
   res.render('home');
 }); 
 
-app.get("/clothing/view", (req, res) => {
+app.get("/clothing/view", requiresAuthentication, (req, res) => {
   res.render('gender-select');
 });
 
-app.get("/view/:gender", async (req, res, next) => {
+app.get("/view/:gender", requiresAuthentication, async (req, res, next) => {
   let gender = req.params.gender;
   let items;
 
@@ -296,7 +355,7 @@ app.get("/view/:gender", async (req, res, next) => {
   });
 });
 
-app.get("/view/:gender/filtered", async (req, res) => {
+app.get("/view/:gender/filtered", requiresAuthentication, async (req, res) => {
   let queryObj = req.query;
   let gender = req.params.gender;
 
@@ -329,7 +388,7 @@ app.get("/view/:gender/filtered", async (req, res) => {
   });
 });
 
-app.get("/clothing/add", async (req, res) => {
+app.get("/clothing/add", requiresAuthentication, async (req, res) => {
   let brands = await dataApp.getBrands();
   let types = await dataApp.getTypes();
   res.render('create-item', {
