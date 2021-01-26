@@ -1,3 +1,5 @@
+const NEEDED_VALUES = ['size', 'brand', 'type', 'colors', 'tag_number', 'gender', 'location', 'purchase_price'];
+
 class PopupDisplay {
   constructor() {
     this.modalContainer = document.getElementById('modal-container');
@@ -33,6 +35,7 @@ class PopupDisplay {
   
     const img = document.createElement("img");
     img.file = file;
+    console.log(img);
     this.previewBox.appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
   
     const reader = new FileReader();
@@ -121,26 +124,26 @@ class PopupDisplay {
     this.extraInfo.style.display = 'none';
   }
 
-  submitForm(formData) {
-    let XHR = new XMLHttpRequest();
-    XHR.open('POST', `/edititem/${formData.id}`);
-    XHR.setRequestHeader('Content-Type', 'application/json');
-    XHR.addEventListener('load', event => {
-      let request = event.target;
-      if (request.status === 200) {
-        let itemToReplace = document.querySelector(`[data-item-id="${formData.id}"]`);
-        itemToReplace.innerHTML = request.response;
-        this.forceCloseModal();
-        this.displayFlashMessage();
-      }
-    })
+  // submitForm(formData) {
+  //   let XHR = new XMLHttpRequest();
+  //   XHR.open('POST', `/edititem/${formData.id}`);
+  //   XHR.setRequestHeader('Content-Type', 'application/json');
+  //   XHR.addEventListener('load', event => {
+  //     let request = event.target;
+  //     if (request.status === 200) {
+  //       let itemToReplace = document.querySelector(`[data-item-id="${formData.id}"]`);
+  //       itemToReplace.innerHTML = request.response;
+  //       this.forceCloseModal();
+  //       this.displayFlashMessage();
+  //     }
+  //   })
 
-    XHR.addEventListener('error', event => {
-      console.log(event);
-    })
+  //   XHR.addEventListener('error', event => {
+  //     console.log(event);
+  //   })
 
-    XHR.send(JSON.stringify(formData));
-  }
+  //   XHR.send(JSON.stringify(formData));
+  // }
 
   displayFlashMessage() {
     let flashMessage = document.querySelector('#flash-message');
@@ -183,6 +186,10 @@ document.addEventListener('click', (event) => {
         }
       })
 
+      popupDisplay.imageInput.addEventListener('change', event => {
+        popupDisplay.displayImagePreview(event.currentTarget.files[0]);
+      })
+
       popupDisplay.soldPriceUSD.addEventListener('input', event => {
         let regex = /[^0-9.]/g;
         let soldPrice = event.target.value.replace(regex, '');
@@ -197,22 +204,55 @@ document.addEventListener('click', (event) => {
 
       popupDisplay.form.addEventListener('submit', event => {
         event.preventDefault();
-        
-        let formData = {};
-        [...popupDisplay.form.elements].forEach(element => {
-          if (element.name) {
-            if (['purchase_price', 'shipping_cost', 'sold_price'].includes(element.name)) {
-              let regex = /[^0-9.]/g;
-              formData[element.name] = element.value.replace(regex, '');
-            } else {
-              formData[element.name] = element.value;
-            }
+        let form = popupDisplay.form;
+        let formObj = {}
+        for (let i = 0; i < form.elements.length; i += 1) {
+          let element = form.elements[i];
+          formObj[element.name] = element.value;
+          if (NEEDED_VALUES.includes(element.name)) {
+            if (!element.value) {
+              alert(`Missing ${element.name}`);
+              return;
+            } 
+          }
+        }
+
+        let itemId = formObj.id;
+        let formData = new FormData(form);
+
+        let XHR = new XMLHttpRequest();
+        XHR.open('POST', `/edititem`);
+        XHR.addEventListener('load', event => {
+          let request = event.target;
+          if (request.status === 200) {
+            let itemToReplace = document.querySelector(`[data-item-id="${itemId}"]`);
+            itemToReplace.innerHTML = request.response;
+            popupDisplay.forceCloseModal();
+            popupDisplay.displayFlashMessage();
           }
         })
 
+        XHR.addEventListener('error', event => {
+          console.log(event);
+        })
+
+        XHR.send(formData);
+        
+        // let formData = {};
+        // [...popupDisplay.form.elements].forEach(element => {
+        //   if (element.name) {
+        //     if (['purchase_price', 'shipping_cost', 'sold_price'].includes(element.name)) {
+        //       let regex = /[^0-9.]/g;
+        //       formData[element.name] = element.value.replace(regex, '');
+        //     } else {
+        //       formData[element.name] = element.value;
+        //     }
+        //   }
+        // })
+
         // console.log(formData);
 
-        popupDisplay.submitForm(formData);
+        // popupDisplay.submitForm(formData);
       })
 
     });

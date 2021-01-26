@@ -37,9 +37,11 @@ class CreateItem {
   insertItemIntoPage(responseHTML) {
     let newElement = this.convertHtmlStringToDomElement(responseHTML);
     newElement.classList.add('glowing');
+    this.form.classList.add('glowing');
     this.newItemContainer.appendChild(newElement);
     setTimeout(() => {
-      document.querySelector('.glowing').classList.remove('glowing');
+      let glowingItems = document.querySelectorAll('.glowing');
+      [...glowingItems].forEach(item => item.classList.remove("glowing"));
     }, 3000);
   }
 

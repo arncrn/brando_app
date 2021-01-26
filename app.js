@@ -131,13 +131,21 @@ app.get('/item/:itemId', async (req, res) => {
   })
 });
 
-app.post('/edititem/:itemId', upload.single('brandomania-picture'), async (req, res) => {
+app.post('/edititem', upload.single('brandomania-picture'), async (req, res) => {
   //working
-  let itemId = req.params.itemId;
   let dataObj = req.body;
+  let itemId = dataObj.id;
   if (req.file) {
+    console.log(req.file);
     let file = req.file;
     dataObj.picture = file.originalname;
+  }
+
+  for (prop in dataObj) {
+    if (['purchase_price', 'shipping_cost', 'sold_price'].includes(prop)) {
+      let regex = /[^0-9.]/g;
+      dataObj[prop] = dataObj[prop].replace(regex, '');
+    }
   }
 
   for(prop in dataObj) {
@@ -294,6 +302,7 @@ app.get("/view/:gender/filtered", async (req, res) => {
 
   app.locals.queryParams = queryObj;
   let filterString = buildFilterString(queryObj, gender);
+  console.log('line 305', filterString);
   let items = (await dataApp.getFilteredItems(filterString)).map(item => {
     let taxPercent = item.tax || 8;
     let taxAmount = +item.purchase_price * (taxPercent / 100);
