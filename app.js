@@ -1,3 +1,4 @@
+const config = require("./lib/config");
 const express = require('express');
 const exphbs = require('express-handlebars');
 const multer = require('multer');
@@ -7,7 +8,8 @@ const pgPersistence = require('./lib/pg-persistence.js');
 const buildFilterString = require('./lib/build-filter-string.js');
 const capitalize = require('./lib/capitalize.js');
 const dataApp = new pgPersistence();
-const port = 5000;
+const port = config.PORT;
+const host = config.HOST;
 
 const app = express();
 const LokiStore = store(session);
@@ -47,7 +49,7 @@ app.use(session({
   name: "brandomania-session-id",
   resave: false,
   saveUninitialized: true,
-  secret: "not very secret",
+  secret: config.SECRET,
   store: new LokiStore({}),
 }));
 
@@ -399,6 +401,7 @@ app.get("/clothing/add", requiresAuthentication, async (req, res) => {
 
 
 app.listen(port, () => {
+  console.log(config.HOST);
   console.log(`App running on port ${port}`);
 });
 
