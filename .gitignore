@@ -1,3 +1,4 @@
 schema.sql
 node_modules
 session-store.db
+backup.sql
