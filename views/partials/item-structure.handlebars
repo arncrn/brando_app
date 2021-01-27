@@ -8,7 +8,7 @@
       <img src="/images/clothing/woman-placeholder.jpg" class="card-img-top" alt="...">
     {{/if}}
   {{/if}}
-  <div class='detail-overlay'>
+  <div class='card-img-overlay detail-overlay'>
     {{#if item.location}}
       <img src="/images/locations/{{item.location}}.png" class="country-img" alt="{{item.location}}">
     {{else}}
@@ -25,9 +25,13 @@
     <div class="package-name"><p>{{item.package_name}}</p></div>
     <div class="purchase-price"><p>${{item.total_price}}</p></div>
   </div>
-  <div class="right-click-options" id="right-click-option-{{item.id}}">
-    <button class="btn-success duplicate">Duplicate</button>
-    <button class="btn-danger delete">Delete</button>
+  <div class="right-click-options row" id="right-click-option-{{item.id}}">
+    <div class="col-6">
+      <button class="btn-success duplicate">Duplicate</button>
+    </div>
+    <div class="col-6">
+      <button class="btn-danger delete">Delete</button>
+    </div>
   </div>
   <button class="edit">Edit</button>
   <div class="card-body">
