@@ -189,7 +189,7 @@ a, a:hover {
   padding: .3rem .3rem;
 }
 
-.item-block {
+.card-img-top {
   -webkit-user-select: none; /* disable selection/Copy of UIWebView */
-  -webkit-touch-callout: none; /* disable the IOS popup when long-press on a link */
+  /* -webkit-touch-callout: none; disable the IOS popup when long-press on a link */
 }
