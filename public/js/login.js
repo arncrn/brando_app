@@ -3,9 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   form.addEventListener('submit', (event) => {
     event.preventDefault()
     let XHR = new XMLHttpRequest();
-    let formData = new FormData(form)
-    // console.log(formData.values());
-    // console.log(formData);
+    
     XHR.open('POST', '/login')
     XHR.setRequestHeader('content-type', 'application/json')
     XHR.addEventListener('load', (event) => {
