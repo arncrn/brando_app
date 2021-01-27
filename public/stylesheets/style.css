@@ -188,3 +188,8 @@ a, a:hover {
   font-size: 1rem;
   padding: .3rem .3rem;
 }
+
+.item-block {
+  -webkit-user-select: none; /* disable selection/Copy of UIWebView */
+  -webkit-touch-callout: none; /* disable the IOS popup when long-press on a link */
+}
