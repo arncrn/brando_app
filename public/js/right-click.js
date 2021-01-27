@@ -128,7 +128,7 @@ document.addEventListener('contextmenu', (event) => {
     }
     rightClick.findItemId(event.target);
     rightClick.setOptionBlock();
-    rightClick.optionBlock.style.display = 'block';
+    rightClick.optionBlock.style.display = 'flex';
 
     document.addEventListener('click', rightClick.setContextBehavior);
   }
