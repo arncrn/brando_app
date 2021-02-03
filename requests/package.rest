@@ -1,0 +1,20 @@
+POST http://localhost:5000/packages/add
+content-type: multipart/form-data; boundary=----WebKitFormBoundaryKcuJqSj5AmZybMRA
+
+------WebKitFormBoundaryKcuJqSj5AmZybMRA
+Content-Disposition: form-data; name="package_name"
+
+package tester
+------WebKitFormBoundaryKcuJqSj5AmZybMRA
+Content-Disposition: form-data; name="price"
+
+123
+------WebKitFormBoundaryKcuJqSj5AmZybMRA
+Content-Disposition: form-data; name="tracking_number"
+
+
+------WebKitFormBoundaryKcuJqSj5AmZybMRA
+Content-Disposition: form-data; name="date_sent"
+
+
+------WebKitFormBoundaryKcuJqSj5AmZybMRA--

@@ -193,3 +193,15 @@ a, a:hover {
   /* -webkit-user-select: none; disable selection/Copy of UIWebView */
   /* -webkit-touch-callout: none; disable the IOS popup when long-press on a link */
 }
+
+pre {
+  white-space: pre-wrap;       /* Since CSS 2.1 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+.required {
+  border: 2px solid green;
+}

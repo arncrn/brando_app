@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col">
+    <div class="input-group mt-3">
+      <span class="input-group-text" id="basic-addon1">Package Name:</span>
+      <input type="text" id="package-filter" class="form-control">
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Number of Items</th>
+          <th scope="col">Price</th>
+          <th scope="col">Price per item</th>
+          <th scope="col">Date sent</th>
+          <th scope="col">Tracking #</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each pkgs}}
+          <tr id={{id}}>
+            <th>{{id}}</th>
+            <td>{{package_name}}</td>
+            <td>{{item_count}}</td>
+            <td>${{price}}</td>
+            <td>${{price_per_item}}</td>
+            <td>{{date_sent}}</td>
+            <td>{{tracking_number}}</td>
+            <td><button class="edit-pkg">Edit</button></td>
+            <td><a href="/packages/print/{{id}}"><button class="print-pkg">Print</button></a></td>
+          </tr>
+        {{/each}}
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th>${{totalShippingCost}}</th>
+          <th>${{averagePricePerItem}}/item</th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div class="row">
+
+<script src="/js/edit-package.js"></script>

@@ -10,7 +10,7 @@
       <div class="col-9">
         <div class="input-group">
           <span class="input-group-text" id="edit-tag-number">tag:</span>
-          <input type="text" name="tag_number" class="form-control" placeholder="######" aria-label="######" aria-describedby="edit-tag-number" inputmode="numeric"> 
+          <input type="text" name="tag_number" class="form-control required" placeholder="######" aria-label="######" aria-describedby="edit-tag-number" inputmode="decimal"> 
         </div>
       </div>
 
@@ -40,14 +40,14 @@
       <div class="col-9">
         <div class="input-group">
           <span class="input-group-text" id="edit-size">size:</span>
-          <input type="text" name="size" class="form-control" aria-label="edit-size" aria-describedby="edit-size">
+          <input type="text" name="size" class="form-control required" aria-label="edit-size" aria-describedby="edit-size">
         </div>
       </div>
 
       <div class="col-9">
         <div class="input-group">
           <span class="input-group-text" id="edit-brand">brand:</span>
-          <input class="form-control" name="brand" list="brandOptions">
+          <input class="form-control required" name="brand" list="brandOptions">
           <datalist id="brandOptions">
             {{#each brands as |brand|}}
             <option value="{{brand}}">
@@ -59,7 +59,7 @@
       <div class="col-9">
         <div class="input-group">
           <span class="input-group-text" id="edit-type">type:</span>
-          <input class="form-control" name="type" list="typeOptions">
+          <input class="form-control required" name="type" list="typeOptions">
           <datalist id="typeOptions">
             {{#each types as |type|}}
             <option value="{{type}}">
@@ -71,21 +71,21 @@
       <div class="col-9">
         <div class="input-group">
           <span class="input-group-text" id="edit-colors">colors:</span>
-          <input type="text" class="form-control" name="colors" placeholder="color1, color2, color3" aria-label="edit-colors" aria-describedby="edit-colors">
+          <input type="text" class="form-control required" name="colors" placeholder="color1, color2, color3" aria-label="edit-colors" aria-describedby="edit-colors">
         </div>
       </div>
 
       <div class="col-9">
         <div class="input-group">
           <span class="input-group-text" id="receipt">Receipt #:</span>
-          <input type="text" class="form-control" name="receipt_id" aria-label="##" aria-describedby="receipt" inputmode="numeric">
+          <input type="text" class="form-control" name="receipt_id" aria-label="##" aria-describedby="receipt" inputmode="decimal">
         </div>
       </div>
 
       <div class="col-9">
         <div class="input-group">
           <span class="input-group-text" id="edit-purchase-price">Purchased Price:</span>
-          <input type="text" class="form-control" name="purchase_price" aria-label="$" aria-describedby="edit-purchase-price" inputmode="numeric">
+          <input type="text" class="form-control required" name="purchase_price" aria-label="$" aria-describedby="edit-purchase-price" inputmode="decimal">
         </div>
       </div>
 
@@ -99,7 +99,7 @@
       <div class="col-9">
         <div class="input-group">
           <span class="input-group-text" id="shipping-cost">Shipping Cost:</span>
-          <input type="text" class="form-control" name="shipping_cost" aria-label="$" aria-describedby="shipping-cost" inputmode="numeric">
+          <input type="text" class="form-control" name="shipping_cost" aria-label="$" aria-describedby="shipping-cost" inputmode="decimal">
         </div>
       </div>
 
@@ -113,14 +113,14 @@
       <div class="col-9">
         <div class="input-group">
           <span class="input-group-text">Sold Price (USD):</span>
-          <input type="text" id="sold-price-usd" class="form-control" name="sold_price" aria-label="$" aria-describedby="sold-price-usd" inputmode="numeric">
+          <input type="text" id="sold-price-usd" class="form-control" name="sold_price" aria-label="$" aria-describedby="sold-price-usd" inputmode="decimal">
         </div>
       </div>
 
       <div class="col-9">
         <div class="input-group">
           <span class="input-group-text">Sold Price (UAH):</span>
-          <input type="text" id="sold-price-uah" class="form-control" aria-label="&#8372;" aria-describedby="sold-price-uah" inputmode="numeric">
+          <input type="text" id="sold-price-uah" class="form-control" aria-label="&#8372;" aria-describedby="sold-price-uah" inputmode="decimal">
         </div>
       </div>
 

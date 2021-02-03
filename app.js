@@ -6,6 +6,7 @@ const session = require("express-session");
 const store = require("connect-loki");
 const pgPersistence = require('./lib/pg-persistence.js');
 const buildFilterString = require('./lib/build-filter-string.js');
+const formatDate = require('./lib/format-date.js')
 const capitalize = require('./lib/capitalize.js');
 const dataApp = new pgPersistence();
 const port = config.PORT;
@@ -67,6 +68,9 @@ const requiresAuthentication = (req, res, next) => {
   }
 }
 
+
+//====================================Log in===================================
+
 app.get('/', (req, res) => {
   if (res.locals.signedIn) {
     res.redirect('/clothing');
@@ -99,6 +103,143 @@ app.post('/login', async (req, res) => {
   }
 })
 
+//====================================packages===================================
+
+app.get("/packages", requiresAuthentication, (req, res) => {
+  res.render('package-home');
+})
+
+app.get("/packages/view", requiresAuthentication, async (req, res) => {
+  let pkgs = await dataApp.getPackages();
+  let items = await dataApp.getAllItems();
+  let pricePerItemCollection = [];
+  let totalShippingCost = 0;
+
+  pkgs.forEach(pkg => {
+    itemsInPackage = items.filter(item => item.package_id === pkg.id)
+
+    if (Number(pkg.price) && itemsInPackage.length > 0) {
+      let pricePerItem = (+pkg.price / itemsInPackage.length)
+      pkg.price_per_item = pricePerItem.toFixed(2)
+      pricePerItemCollection.push(pricePerItem);
+    } else {
+      pkg.price_per_item = (0).toFixed(2);
+    }
+
+    if (Number(pkg.price) > 0) {
+      totalShippingCost += Number(pkg.price);
+    }
+    
+    pkg.item_count = itemsInPackage.length;
+    if (pkg.date_sent) {
+      pkg.date_sent = pkg.date_sent.toDateString();
+    }
+  })
+
+  averagePricePerItem = (pricePerItemCollection.reduce((sum, price) => {
+    return sum + price;
+  }, 0)) / pricePerItemCollection.length;
+
+  res.render("packages", {
+    pkgs,
+    totalShippingCost: totalShippingCost.toFixed(2),
+    averagePricePerItem: averagePricePerItem.toFixed(2)
+  })
+})
+
+app.get("/packages/add", requiresAuthentication, (req, res) => {
+  res.render("create-package")
+})
+
+app.post("/packages/add", upload.none(), requiresAuthentication, async (req, res) => {
+  const packageData = req.body;
+  for (key in packageData) {
+    packageData[key] = packageData[key] || null;
+  }
+
+  const createdPackage = await dataApp.createPackage(packageData);
+
+  if (createdPackage) {
+    res.redirect("/packages/view");
+  } else {
+    res.render("create-package");
+  }
+})
+
+app.get("/packages/edit/:pkgId", requiresAuthentication, async (req, res) => {
+  let pkgId = req.params.pkgId;
+  let pkg = await dataApp.findPackageById(pkgId);
+  if (pkg.date_sent) {
+    pkg.date_sent = formatDate(pkg.date_sent.toLocaleDateString());
+  }
+
+  res.render("partials/package-row", {
+    layout: false,
+    pkg: pkg
+  });
+})
+
+app.post("/packages/edit/:pkgId", requiresAuthentication, async(req, res) => {
+  let pkgId = req.params.pkgId;
+  let successfulUpdate = await dataApp.updatePackage(req.body);
+  if (successfulUpdate) {
+    let pkg = await dataApp.findPackageById(pkgId);
+    let itemsInPackage = await dataApp.getPackageItems(pkgId);
+
+    pkg.price_per_item = pkg.price && itemsInPackage.length > 0
+      ? (+pkg.price / itemsInPackage.length).toFixed(2)
+      : 0;
+    
+    pkg.item_count = itemsInPackage.length;
+
+    if (pkg.date_sent) {
+      pkg.date_sent = pkg.date_sent.toDateString();
+    }
+
+    res.render(`partials/edited-package-row`, {
+      layout: false,
+      pkg: pkg,
+    })
+  }
+})
+
+app.get("/packages/print/:pkgId", requiresAuthentication, async (req, res) => {
+  const pkgId = req.params.pkgId;
+  const pkg = await dataApp.findPackageById(pkgId);
+  const receipts = await dataApp.getReceipts();
+  const items = await dataApp.getPackageItems(pkgId);
+  let sumOfItems = 0;
+  // modify each item's pruchase price
+
+  const pricePerItem = pkg.price && items.length > 0
+      ? (+pkg.price / items.length).toFixed(2)
+      : 0;
+  
+  items.forEach(item => {
+    let totalPrice = Number(item.tax) + Number(item.purchase_price)
+    item.total_price = totalPrice.toFixed(2);
+    sumOfItems += totalPrice;
+  })
+  //working
+  res.render("print-package", {
+    layout: false,
+    pkg,
+    items,
+    pricePerItem,
+    sumOfItems: sumOfItems.toFixed(2),
+    helpers: {
+      increaseByOne: function(idx) {
+        return idx + 1;
+      }
+    }
+  })
+})
+
+
+
+
+//====================================items===================================
+
 app.post('/newitem', requiresAuthentication, upload.single('brandomania-picture'), async (req, res) => {
   let dataObj = req.body;
   if (req.file) {
@@ -111,6 +252,8 @@ app.post('/newitem', requiresAuthentication, upload.single('brandomania-picture'
       dataObj[prop] = null;
     } else if (prop !== "extra_info" && prop !== 'gender' && prop !== 'location' && prop !== 'picture') {
       dataObj[prop] = capitalize(dataObj[prop]);
+    } else if (prop == "size") {
+      dataObj[prop] = dataObj[prop].toUpperCase();
     }
   }
 
@@ -193,7 +336,6 @@ app.get('/item/:itemId', requiresAuthentication, async (req, res) => {
 });
 
 app.post('/edititem', requiresAuthentication, upload.single('brandomania-picture'), async (req, res) => {
-  //working
   let dataObj = req.body;
   let itemId = dataObj.id;
   if (req.file) {
