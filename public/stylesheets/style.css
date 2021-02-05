@@ -205,3 +205,7 @@ pre {
 .required {
   border: 2px solid green;
 }
+
+a.package-link {
+  color: red;
+}

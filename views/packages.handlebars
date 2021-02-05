@@ -24,9 +24,9 @@
       </thead>
       <tbody>
         {{#each pkgs}}
-          <tr id={{id}}>
+          <tr data-pkg-id={{id}} id={{id}}>
             <th>{{id}}</th>
-            <td>{{package_name}}</td>
+            <td class="package-target"><a class="package-link" href="/packages/view/{{id}}">{{package_name}}</a></td>
             <td>{{item_count}}</td>
             <td>${{price}}</td>
             <td>${{price_per_item}}</td>
@@ -49,3 +49,4 @@
 </div class="row">
 
 <script src="/js/edit-package.js"></script>
+<script src="/js/filter-pkg-by-name.js"></script>

@@ -147,6 +147,38 @@ app.get("/packages/view", requiresAuthentication, async (req, res) => {
   })
 })
 
+app.get("/packages/view/:pkgId", requiresAuthentication, async (req, res) => {
+  //working
+  const pkgId = req.params.pkgId;
+  const pkg = await dataApp.findPackageById(pkgId);
+  
+  let items = (await dataApp.getPackageItems(pkgId)).map(item => {
+    let taxPercent = item.tax || 8;
+    let taxAmount = +item.purchase_price * (taxPercent / 100);
+    let totalPrice = (+item.purchase_price + taxAmount).toFixed(2);
+    return Object.assign(item, {total_price: totalPrice});
+  });
+  res.render('clothing', {
+    items: items,
+    filters: [pkg.package_name],
+    helpers: {
+      greaterThanZero: function (soldPrice) {
+        return +soldPrice > 0;
+      },
+      isArray: function(element) {
+        return Array.isArray(element);
+      },
+      joinArray: function(element) {
+        return element.join(', ');
+      },
+      isForMen: function(gender) {
+        return gender == 'men';
+      }
+    }
+  });
+
+})
+
 app.get("/packages/add", requiresAuthentication, (req, res) => {
   res.render("create-package")
 })
@@ -220,7 +252,7 @@ app.get("/packages/print/:pkgId", requiresAuthentication, async (req, res) => {
     item.total_price = totalPrice.toFixed(2);
     sumOfItems += totalPrice;
   })
-  //working
+
   res.render("print-package", {
     layout: false,
     pkg,
@@ -505,7 +537,7 @@ app.get("/view/:gender/filtered", requiresAuthentication, async (req, res) => {
 
   app.locals.queryParams = queryObj;
   let filterString = buildFilterString(queryObj, gender);
-  console.log('line 305', filterString);
+  
   let items = (await dataApp.getFilteredItems(filterString)).map(item => {
     let taxPercent = item.tax || 8;
     let taxAmount = +item.purchase_price * (taxPercent / 100);
