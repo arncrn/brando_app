@@ -238,32 +238,37 @@ app.post("/packages/edit/:pkgId", requiresAuthentication, async(req, res) => {
 app.get("/packages/print/:pkgId", requiresAuthentication, async (req, res) => {
   const pkgId = req.params.pkgId;
   const pkg = await dataApp.findPackageById(pkgId);
-  const receipts = await dataApp.getReceipts();
   const items = await dataApp.getPackageItems(pkgId);
-  let sumOfItems = 0;
-  // modify each item's pruchase price
 
   const pricePerItem = pkg.price && items.length > 0
       ? (+pkg.price / items.length).toFixed(2)
       : 0;
-  
-  items.forEach(item => {
-    let totalPrice = Number(item.tax) + Number(item.purchase_price)
-    item.total_price = totalPrice.toFixed(2);
-    sumOfItems += totalPrice;
-  })
 
   res.render("print-package", {
     layout: false,
     pkg,
-    items,
     pricePerItem,
+  })
+})
+
+app.get('/api/packageitems/:pkgId', async (req, res) => {
+  const pkgId = req.params.pkgId;
+  const items = await dataApp.getPackageItems(pkgId);
+  // const receipts = await dataApp.getReceipts();
+  let sumOfItems = 0;
+
+  items.forEach(item => {
+    item.tax = +item.tax || 8;
+    let taxAmount = (Number(item.tax) / 100) * Number(item.purchase_price);
+    let totalPrice = taxAmount + Number(item.purchase_price);
+    item.total_price = totalPrice.toFixed(2);
+    item.tax_amount = taxAmount.toFixed(2);
+    sumOfItems += totalPrice;
+  })
+
+  res.json({
+    items: items,
     sumOfItems: sumOfItems.toFixed(2),
-    helpers: {
-      increaseByOne: function(idx) {
-        return idx + 1;
-      }
-    }
   })
 })
 
