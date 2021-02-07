@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Store</th>
+          <th scope="col">Number of Items</th>
+          <th scope="col">Tax</th>
+          <th scope="col">Cost of Items</th>
+          <th scope="col">Purchase Date</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each receipts}}
+          <tr data-receipt-id={{id}} id={{id}}>
+            <th>{{id}}</th>
+            <td class="receipt-target"><a class="receipt-link" href="/receipts/view/{{id}}">{{store}}</a></td>
+            <td>{{number_of_items}}</td>
+            <td>{{tax}}%</td>
+            <td>${{total_price}}</td>
+            <td>{{purchase_date}}</td>
+            <td><button class="edit-receipt">Edit</button></td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div class="row">
+
+<script src="/js/edit-receipt.js"></script>

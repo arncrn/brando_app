@@ -103,6 +103,128 @@ app.post('/login', async (req, res) => {
   }
 })
 
+
+//====================================receipts===================================
+
+app.get("/receipts", requiresAuthentication, (req, res) => {
+  res.render('receipt-home');
+})
+
+app.get("/receipts/view", requiresAuthentication, async (req, res) => {
+  let receipts = await dataApp.getReceipts();
+  let items = await dataApp.getAllItems();
+
+  //working
+  // store   => receipt.store
+  // purchase date => receipt.purchase_date
+  // tax rate => receipt.tax
+
+  receipts.forEach(receipt => {
+    itemsInReceipt = items.filter(item => item.receipt_id === receipt.id)
+    receipt.number_of_items = itemsInReceipt.length;
+    receipt.total_price = itemsInReceipt.reduce((sum, item) => {
+      return sum + (((+receipt.tax / 100) * +item.purchase_price) + +item.purchase_price)
+    }, 0).toFixed(2);
+
+    if (receipt.purchase_date) {
+      receipt.purchase_date = receipt.purchase_date.toDateString();
+    }
+  })
+
+  res.render("receipts", {
+    receipts,
+  })
+})
+
+
+app.get("/receipts/view/:receiptId", requiresAuthentication, async (req, res) => {
+  const receiptId = req.params.receiptId;
+  const receipt = await dataApp.findReceiptById(receiptId);
+  
+  let items = (await dataApp.getReceiptItems(receiptId)).map(item => {
+    let taxPercent = item.tax || 8;
+    let taxAmount = +item.purchase_price * (taxPercent / 100);
+    let totalPrice = (+item.purchase_price + taxAmount).toFixed(2);
+    return Object.assign(item, {total_price: totalPrice});
+  });
+  res.render('clothing', {
+    items: items,
+    filters: [receiptId, receipt.store],
+    helpers: {
+      greaterThanZero: function (soldPrice) {
+        return +soldPrice > 0;
+      },
+      isArray: function(element) {
+        return Array.isArray(element);
+      },
+      joinArray: function(element) {
+        return element.join(', ');
+      },
+      isForMen: function(gender) {
+        return gender == 'men';
+      }
+    }
+  });
+
+})
+
+app.get("/receipts/add", requiresAuthentication, (req, res) => {
+  res.render("create-receipt");
+})
+
+app.post("/receipts/add", upload.none(), requiresAuthentication, async (req, res) => {
+  const receiptData = req.body;
+  for (key in receiptData) {
+    receiptData[key] = receiptData[key] || null;
+  }
+
+  const createdReceipt = await dataApp.createReceipt(receiptData);
+
+  if (createdReceipt) {
+    res.redirect("/receipts/view");
+  } else {
+    res.render("create-receipt");
+  }
+})
+
+app.get("/receipts/edit/:receiptId", requiresAuthentication, async (req, res) => {
+  let receiptId = req.params.receiptId;
+  let receipt = await dataApp.findReceiptById(receiptId);
+  if (receipt.purchase_date) {
+    receipt.purchase_date = formatDate(receipt.purchase_date.toLocaleDateString());
+  }
+
+  res.render("partials/receipt-row", {
+    layout: false,
+    receipt: receipt
+  });
+})
+
+app.post("/receipts/edit/:receiptId", requiresAuthentication, async(req, res) => {
+  let receiptId = req.params.receiptId;
+  console.log(req.body);
+  let successfulUpdate = await dataApp.updateReceipt(req.body);
+  if (successfulUpdate) {
+    let receipt = await dataApp.findReceiptById(receiptId);
+    let itemsOnReceipt = await dataApp.getReceiptItems(receiptId);
+
+    receipt.total_price = itemsOnReceipt.reduce((sum, item) => {
+      return sum + (((+receipt.tax / 100) * +item.purchase_price) + +item.purchase_price)
+    }, 0).toFixed(2);
+    
+    receipt.number_of_items = itemsOnReceipt.length;
+
+    if (receipt.purchase_date) {
+      receipt.purchase_date = receipt.purchase_date.toDateString();
+    }
+
+    res.render(`partials/edited-receipt-row`, {
+      layout: false,
+      receipt: receipt,
+    })
+  }
+})
+
 //====================================packages===================================
 
 app.get("/packages", requiresAuthentication, (req, res) => {
@@ -148,7 +270,6 @@ app.get("/packages/view", requiresAuthentication, async (req, res) => {
 })
 
 app.get("/packages/view/:pkgId", requiresAuthentication, async (req, res) => {
-  //working
   const pkgId = req.params.pkgId;
   const pkg = await dataApp.findPackageById(pkgId);
   
