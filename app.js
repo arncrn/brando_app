@@ -401,6 +401,7 @@ app.get('/api/packageitems/:pkgId', async (req, res) => {
 // https://devcenter.heroku.com/articles/s3-upload-node
 //working
 app.get(`/sign-s3`, (req, res) => {
+  console.log(req.query)
   const s3 = new aws.S3();
   const fileName = req.query['file-name'];
   const fileType = req.query['file-type'];
