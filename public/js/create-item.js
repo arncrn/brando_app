@@ -22,16 +22,18 @@ class CreateItem {
   }
 
   displayImagePreview(file) {
+    //working
     this.removeImagePreview();
     if (!file || !file.type.startsWith('image/')) return;
+    getSignedRequest(file);
   
-    const img = document.createElement("img");
-    img.file = file;
-    this.previewBox.appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
+    // const img = document.createElement("img");
+    // img.file = file;
+    // this.previewBox.appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
   
-    const reader = new FileReader();
-    reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
-    reader.readAsDataURL(file);
+    // const reader = new FileReader();
+    // reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
+    // reader.readAsDataURL(file);
   }
 
   insertItemIntoPage(responseHTML) {
@@ -94,3 +96,41 @@ document.addEventListener('DOMContentLoaded', () => {
     XHR.send(formData);
   })
 })
+
+// for uploading images to amazon's aws s3
+// https://devcenter.heroku.com/articles/s3-upload-node
+function getSignedRequest(file) {
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', `/sign-s3?file-name=${file.name}&file-type=${file.type}`);
+  xhr.onreadystatechange = () => {
+    if(xhr.readyState === 4){
+      if(xhr.status === 200){
+        const response = JSON.parse(xhr.responseText);
+        uploadFile(file, response.signedRequest, response.url);
+      }
+      else{
+        alert('Could not get signed URL.');
+      }
+    }
+  };
+  xhr.send();
+}
+
+// for uploading images to amazon's aws s3
+// https://devcenter.heroku.com/articles/s3-upload-node
+function uploadFile(file, signedRequest, url){
+  const xhr = new XMLHttpRequest();
+  xhr.open('PUT', signedRequest);
+  xhr.onreadystatechange = () => {
+    if(xhr.readyState === 4){
+      if(xhr.status === 200){
+        document.getElementById('preview').src = url;
+        // document.getElementById('avatar-url').value = url;
+      }
+      else{
+        alert('Could not upload file.');
+      }
+    }
+  };
+  xhr.send(file);
+}

@@ -12,6 +12,10 @@ const dataApp = new pgPersistence();
 const port = config.PORT;
 const host = config.HOST;
 
+const aws = require('aws-sdk');
+const AWS_BUCKET = config.AWS_BUCKET;
+aws.config.region = 'us-west-1'
+
 const app = express();
 const LokiStore = store(session);
 
@@ -113,11 +117,6 @@ app.get("/receipts", requiresAuthentication, (req, res) => {
 app.get("/receipts/view", requiresAuthentication, async (req, res) => {
   let receipts = await dataApp.getReceipts();
   let items = await dataApp.getAllItems();
-
-  //working
-  // store   => receipt.store
-  // purchase date => receipt.purchase_date
-  // tax rate => receipt.tax
 
   receipts.forEach(receipt => {
     itemsInReceipt = items.filter(item => item.receipt_id === receipt.id)
@@ -397,6 +396,34 @@ app.get('/api/packageitems/:pkgId', async (req, res) => {
 
 
 //====================================items===================================
+
+// for uploading images to amazon'a aws s3
+// https://devcenter.heroku.com/articles/s3-upload-node
+app.get(`/sign-s3?file-name=${file.name}&file-type=${file.type}`, (req, res) => {
+  const s3 = new aws.S3();
+  const fileName = req.query['file-name'];
+  const fileType = req.query['file-type'];
+  const s3Parama = {
+    Bucket: AWS_BUCKET,
+    Key: fileName,
+    Expires: 60,
+    ContentType: fileType,
+    ACL: 'public-read'
+  };
+
+  s3.getSignedUrl('putObject', s3Params, (err, data) => {
+    if (err) {
+      console.log(err);
+      return res.end();
+    }
+    const returnData = {
+      signedRequest: data,
+      url: `https://${AWS_BUCKET}.s3.amazonaws.com/${fileName}`
+    }
+    res.write(JSON.stringify(returnData));
+    res.end();
+  })
+})
 
 app.post('/newitem', requiresAuthentication, upload.single('brandomania-picture'), async (req, res) => {
   let dataObj = req.body;
