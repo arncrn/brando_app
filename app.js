@@ -423,7 +423,6 @@ app.get(`/sign-s3`, (req, res) => {
       url: `https://${AWS_BUCKET}.s3.amazonaws.com/${fileName}`
     }
     res.send(JSON.stringify(returnData));
-    // res.end();
   })
 })
 
@@ -435,10 +434,8 @@ app.post('/newitem', requiresAuthentication, upload.single('brandomania-picture'
     //   dataObj.picture = file.originalname;
     // }
     if (dataObj.picture) {
-      console.log("before:", dataObj.picture)
       let urlParts = dataObj.picture.split("/");
       let formattedImgName = urlParts[urlParts.length - 1];
-      console.log("after:", formattedImgName);
       dataObj.picture = formattedImgName;
     }
     
@@ -539,10 +536,16 @@ app.get('/item/:itemId', requiresAuthentication, async (req, res) => {
 app.post('/edititem', requiresAuthentication, upload.single('brandomania-picture'), async (req, res) => {
   let dataObj = req.body;
   let itemId = dataObj.id;
-  if (req.file) {
-    console.log(req.file);
-    let file = req.file;
-    dataObj.picture = file.originalname;
+  // if (req.file) {
+  //   console.log(req.file);
+  //   let file = req.file;
+  //   dataObj.picture = file.originalname;
+  // }
+
+  if (dataObj.picture) {
+    let urlParts = dataObj.picture.split("/");
+    let formattedImgName = urlParts[urlParts.length - 1];
+    dataObj.picture = formattedImgName;
   }
 
   for (prop in dataObj) {

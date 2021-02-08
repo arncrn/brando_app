@@ -22,18 +22,9 @@ class CreateItem {
   }
 
   displayImagePreview(file) {
-    //working
     this.removeImagePreview();
     if (!file || !file.type.startsWith('image/')) return;
     getSignedRequest(file);
-  
-    // const img = document.createElement("img");
-    // img.file = file;
-    // this.previewBox.appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
-  
-    // const reader = new FileReader();
-    // reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
-    // reader.readAsDataURL(file);
   }
 
   insertItemIntoPage(responseHTML) {

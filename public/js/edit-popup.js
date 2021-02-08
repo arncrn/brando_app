@@ -32,15 +32,7 @@ class PopupDisplay {
   displayImagePreview(file) {
     this.removeImagePreview();
     if (!file || !file.type.startsWith('image/')) return;
-  
-    const img = document.createElement("img");
-    img.file = file;
-    console.log(img);
-    this.previewBox.appendChild(img); // Assuming that "preview" is the div output where the content will be displayed.
-  
-    const reader = new FileReader();
-    reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(img);
-    reader.readAsDataURL(file);
+    getSignedRequest(file);
   }
 
   changeTab(tab) {
@@ -264,3 +256,43 @@ document.addEventListener('click', (event) => {
     xhr.send();
   }
 });
+
+
+// for uploading images to amazon's aws s3
+// https://devcenter.heroku.com/articles/s3-upload-node
+function getSignedRequest(file) {
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', `/sign-s3?file-name=${file.name}&file-type=${file.type}`);
+  xhr.onreadystatechange = () => {
+    if(xhr.readyState === 4){
+      if(xhr.status === 200){
+        const response = JSON.parse(xhr.response);
+        uploadFile(file, response.signedRequest, response.url);
+      }
+      else{
+        alert('Could not get signed URL.');
+      }
+    }
+  };
+  xhr.send();
+}
+
+// for uploading images to amazon's aws s3
+// https://devcenter.heroku.com/articles/s3-upload-node
+function uploadFile(file, signedRequest, url){
+  const xhr = new XMLHttpRequest();
+  xhr.open('PUT', signedRequest);
+  xhr.onreadystatechange = () => {
+    if(xhr.readyState === 4){
+      if(xhr.status === 200){
+        document.getElementById('preview').src = url;
+        let previewBox = document.getElementById('preview');
+        document.getElementById('clothing-picture').value = url;
+      }
+      else{
+        alert('Could not upload file.');
+      }
+    }
+  };
+  xhr.send(file);
+}
