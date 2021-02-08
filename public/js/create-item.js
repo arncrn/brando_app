@@ -105,7 +105,7 @@ function getSignedRequest(file) {
   xhr.onreadystatechange = () => {
     if(xhr.readyState === 4){
       if(xhr.status === 200){
-        const response = JSON.parse(xhr.responseText);
+        const response = JSON.parse(xhr.response);
         uploadFile(file, response.signedRequest, response.url);
       }
       else{
@@ -125,7 +125,8 @@ function uploadFile(file, signedRequest, url){
     if(xhr.readyState === 4){
       if(xhr.status === 200){
         document.getElementById('preview').src = url;
-        // document.getElementById('avatar-url').value = url;
+        let previewBox = document.getElementById('preview');
+        document.getElementById('clothing-picture').value = url;
       }
       else{
         alert('Could not upload file.');

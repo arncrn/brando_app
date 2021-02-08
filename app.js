@@ -422,17 +422,17 @@ app.get(`/sign-s3`, (req, res) => {
       signedRequest: data,
       url: `https://${AWS_BUCKET}.s3.amazonaws.com/${fileName}`
     }
-    res.write(JSON.stringify(returnData));
-    res.end();
+    res.send(JSON.stringify(returnData));
+    // res.end();
   })
 })
 
 app.post('/newitem', requiresAuthentication, upload.single('brandomania-picture'), async (req, res) => {
   let dataObj = req.body;
-  if (req.file) {
-    let file = req.file;
-    dataObj.picture = file.originalname;
-  }
+  // if (req.file) {
+  //   let file = req.file;
+  //   dataObj.picture = file.originalname;
+  // }
 
   for(prop in dataObj) {
     if (dataObj[prop] === '') {
