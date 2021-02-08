@@ -171,11 +171,11 @@ a, a:hover {
   padding: 5px;
 }
 
-#preview {
+#preview-container {
   width: 100%;
 }
 
-#preview img {
+#preview {
   max-width: 50%;
 }
 
