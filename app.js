@@ -399,7 +399,8 @@ app.get('/api/packageitems/:pkgId', async (req, res) => {
 
 // for uploading images to amazon'a aws s3
 // https://devcenter.heroku.com/articles/s3-upload-node
-app.get(`/sign-s3?file-name=${file.name}&file-type=${file.type}`, (req, res) => {
+//working
+app.get(`/sign-s3`, (req, res) => {
   const s3 = new aws.S3();
   const fileName = req.query['file-name'];
   const fileType = req.query['file-type'];
