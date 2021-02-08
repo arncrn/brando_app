@@ -402,7 +402,6 @@ app.get('/api/packageitems/:pkgId', async (req, res) => {
 // https://devcenter.heroku.com/articles/s3-upload-node
 //working
 app.get(`/sign-s3`, (req, res) => {
-  console.log(req.query)
   const s3 = new aws.S3();
   const fileName = req.query['file-name'];
   const fileType = req.query['file-type'];
@@ -429,58 +428,64 @@ app.get(`/sign-s3`, (req, res) => {
 })
 
 app.post('/newitem', requiresAuthentication, upload.single('brandomania-picture'), async (req, res) => {
-  let dataObj = req.body;
-  // if (req.file) {
-  //   let file = req.file;
-  //   dataObj.picture = file.originalname;
-  // }
-  if (dataObj.picture) {
-    console.log("before:", dataObj.picture)
-    let urlParts = dataObj.picture.split("/");
-    let formattedImgName = urlParst[url.length - 1];
-    console.log("after:", formattedImgName);
-    dataObj.picture = formattedImgName;
-  }
-  
-
-  for(prop in dataObj) {
-    if (dataObj[prop] === '') {
-      dataObj[prop] = null;
-    } else if (prop !== "extra_info" && prop !== 'gender' && prop !== 'location' && prop !== 'picture') {
-      dataObj[prop] = capitalize(dataObj[prop]);
-    } else if (prop == "size") {
-      dataObj[prop] = dataObj[prop].toUpperCase();
+  try {
+    let dataObj = req.body;
+    // if (req.file) {
+    //   let file = req.file;
+    //   dataObj.picture = file.originalname;
+    // }
+    if (dataObj.picture) {
+      console.log("before:", dataObj.picture)
+      let urlParts = dataObj.picture.split("/");
+      let formattedImgName = urlParts[url.length - 1];
+      console.log("after:", formattedImgName);
+      dataObj.picture = formattedImgName;
     }
-  }
+    
 
-  let itemId = await dataApp.createItem(dataObj);
-
-  if (itemId) {
-    let item = await dataApp.findItemById(itemId);
-    let taxPercent = item.tax || 8;
-    let taxAmount = +item.purchase_price * (taxPercent / 100);
-    let totalPrice = (+item.purchase_price + taxAmount).toFixed(2);
-    Object.assign(item, {total_price: totalPrice});
-
-    res.render('partials/item-structure', {
-      layout: 'item-structure-wrapper',
-      id: itemId,
-      item: item,
-      helpers: {
-        greaterThanZero: function (soldPrice) {
-          return +soldPrice > 0;
-        },
-        isArray: function(element) {
-          return Array.isArray(element);
-        },
-        joinArray: function(element) {
-          return element.join(', ');
-        },
-        isForMen: function(gender) {
-          return gender == 'men';
-        }
+    for(prop in dataObj) {
+      if (dataObj[prop] === '') {
+        dataObj[prop] = null;
+      } else if (prop !== "extra_info" && prop !== 'gender' && prop !== 'location' && prop !== 'picture') {
+        dataObj[prop] = capitalize(dataObj[prop]);
+      } else if (prop == "size") {
+        dataObj[prop] = dataObj[prop].toUpperCase();
       }
-    });
+    }
+
+    let itemId = await dataApp.createItem(dataObj);
+
+    if (itemId) {
+      let item = await dataApp.findItemById(itemId);
+      let taxPercent = item.tax || 8;
+      let taxAmount = +item.purchase_price * (taxPercent / 100);
+      let totalPrice = (+item.purchase_price + taxAmount).toFixed(2);
+      Object.assign(item, {total_price: totalPrice});
+
+      res.render('partials/item-structure', {
+        layout: 'item-structure-wrapper',
+        id: itemId,
+        item: item,
+        helpers: {
+          greaterThanZero: function (soldPrice) {
+            return +soldPrice > 0;
+          },
+          isArray: function(element) {
+            return Array.isArray(element);
+          },
+          joinArray: function(element) {
+            return element.join(', ');
+          },
+          isForMen: function(gender) {
+            return gender == 'men';
+          }
+        }
+      });
+    }
+
+  } catch (err) {
+    console.log(err)
+    res.status(404).end();
   }
 })
 
