@@ -563,6 +563,7 @@ app.post('/edititem', requiresAuthentication, upload.single('brandomania-picture
     }
   }
 
+
   let successfulDatabaseUpdate = await dataApp.updateItem(itemId, dataObj);
 
   if (successfulDatabaseUpdate) {
