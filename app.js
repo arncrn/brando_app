@@ -437,7 +437,7 @@ app.post('/newitem', requiresAuthentication, upload.single('brandomania-picture'
     if (dataObj.picture) {
       console.log("before:", dataObj.picture)
       let urlParts = dataObj.picture.split("/");
-      let formattedImgName = urlParts[url.length - 1];
+      let formattedImgName = urlParts[urlParts.length - 1];
       console.log("after:", formattedImgName);
       dataObj.picture = formattedImgName;
     }
