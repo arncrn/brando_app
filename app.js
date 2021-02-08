@@ -20,6 +20,7 @@ const app = express();
 const LokiStore = store(session);
 
 const path = require("path");
+const { url } = require("inspector");
 
 let storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -433,6 +434,14 @@ app.post('/newitem', requiresAuthentication, upload.single('brandomania-picture'
   //   let file = req.file;
   //   dataObj.picture = file.originalname;
   // }
+  if (dataObj.picture) {
+    console.log("before:", dataObj.picture)
+    let urlParts = dataObj.picture.split("/");
+    let formattedImgName = urlParst[url.length - 1];
+    console.log("after:", formattedImgName);
+    dataObj.picture = formattedImgName;
+  }
+  
 
   for(prop in dataObj) {
     if (dataObj[prop] === '') {
