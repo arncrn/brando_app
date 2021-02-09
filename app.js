@@ -542,15 +542,11 @@ app.post('/edititem', requiresAuthentication, upload.single('brandomania-picture
   //   dataObj.picture = file.originalname;
   // }
 
-  console.log("before:", dataObj);
-
   if (dataObj.picture) {
     let urlParts = dataObj.picture.split("/");
     let formattedImgName = urlParts[urlParts.length - 1];
     dataObj.picture = formattedImgName;
   }
-
-  console.log("middle:", dataObj)
 
   for (prop in dataObj) {
     if (['purchase_price', 'shipping_cost', 'sold_price'].includes(prop)) {
@@ -558,8 +554,6 @@ app.post('/edititem', requiresAuthentication, upload.single('brandomania-picture
       dataObj[prop] = dataObj[prop].replace(regex, '');
     }
   }
-
-  console.log("almost done:", dataObj);
 
   for(prop in dataObj) {
     if (dataObj[prop] === '') {
@@ -569,7 +563,6 @@ app.post('/edititem', requiresAuthentication, upload.single('brandomania-picture
     }
   }
 
-  console.log("after:", dataObj);
 
   let successfulDatabaseUpdate = await dataApp.updateItem(itemId, dataObj);
 
