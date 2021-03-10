@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+  <div class="col">
+    <h1>Create Order</h1>
+    <form action="/orders/add" method="post" enctype="multipart/form-data">
+
+      <div class="col-9">
+        <div class="input-group">
+          <span class="input-group-text" id="customer-id">Customer Id</span>
+          <input type="text" name="customer_id" class="form-control required"  aria-describedby="customer-id"> 
+        </div>
+      </div>
+
+      <div class="col-9">
+        <div class="input-group">
+          <span class="input-group-text" id="order-status">Status:</span>
+          <select id="status" name="status">
+            <option value="active">Active</option>
+            <option value="complete">Complete</option>
+            <option value="returned">Returned</option>
+          </select>
+        </div>
+      </div>
+
+
+      
+
+      <div class="col-9">
+        <div class="input-group">
+          <span class="input-group-text" id="date-sent">Date Sent</span>
+          <input type="date" name="date_sent" class="form-control"  aria-describedby="date-sent"> 
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col offset-2">
+          <button type="submit" class="btn btn-primary px-5 py-3 submit">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

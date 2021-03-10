@@ -1,0 +1,16 @@
+<th>{{order.id}}</th>
+<td><input class="input" type="text" value="{{order.customer_id}}" name="customer_id" /></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td><input class="input" type="date" value={{order.date_sent}} name="date_sent" /></td>
+<td>
+  <select class="input" id="status" name="status">
+    <option value="active">Active</option>
+    <option value="complete">Complete</option>
+    <option value="returned">Returned</option>
+  </select>
+</td>
+<td><button class="save">Save</button></td>
+<td><button class="cancel">Cancel</button></td>

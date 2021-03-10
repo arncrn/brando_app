@@ -394,13 +394,275 @@ app.get('/api/packageitems/:pkgId', async (req, res) => {
 })
 
 
+//====================================orders===================================
+
+app.get("/orders", requiresAuthentication, (req, res) => {
+  res.render('order-home');
+})
+
+app.get("/orders/view", requiresAuthentication, async (req, res) => {
+  let orders = await dataApp.getOrders();
+  let items = await dataApp.getAllItems();
+  let pkgs = await dataApp.getPackages();
+  let pkgPrices = {};
+  let totalCogs = 0;
+  let totalRevenue = 0;
+  let totalProfit = 0;
+
+  orders.sort((a, b) => {
+    if (a.name > b.name) return 1;
+    if (a.name < b.name) return -1;
+    return 0;
+  })
+
+  pkgs.forEach(pkg => {
+    itemsInPackage = items.filter(item => item.package_id === pkg.id)
+
+    if (Number(pkg.price) && itemsInPackage.length > 0) {
+      let pricePerItem = (+pkg.price / itemsInPackage.length)
+      pkgPrices[pkg.id] = pricePerItem.toFixed(2);
+    } 
+  })
+
+  orders.forEach(order => {
+    if (order.date_sent) order.date_sent = formatDate(order.date_sent.toLocaleDateString())
+    order.tax_total = 0;
+    order.shipping_total = 0;
+    order.base_cost = 0;
+    order.sold_total = 0;
+    order.cogs = 0;
+    order.total_profit = 0;
+
+    itemsInOrder = items.filter(item => item.order_id === order.id);
+    order.item_count = itemsInOrder.length;
+    itemsInOrder.forEach(item => {
+      item.tax = +item.tax || 8;
+      let taxAmount = (Number(item.tax) / 100) * Number(item.purchase_price);
+      let shippingCost = Number(pkgPrices[item.package_id]) || 0
+      let cogs = (taxAmount + shippingCost + Number(item.purchase_price));
+      let profit = (Number(item.sold_price) - cogs)
+
+      order.tax_total += taxAmount;
+      order.shipping_total += shippingCost;
+      order.base_cost += Number(item.purchase_price);
+      order.sold_total += Number(item.sold_price) || 0;
+      order.cogs += cogs;
+      order.total_profit += profit;
+
+      totalCogs += cogs;
+      totalRevenue += Number(item.sold_price) || 0;
+      totalProfit += profit;
+    })
+
+    order.tax_total = order.tax_total.toFixed(2);
+    order.shipping_total = order.shipping_total.toFixed(2);
+    order.base_cost = order.base_cost.toFixed(2);
+    order.sold_total = order.sold_total.toFixed(2);
+    order.cogs = order.cogs.toFixed(2);
+    order.total_profit = order.total_profit.toFixed(2);
+  })
+
+
+  res.render("orders", {
+    orders,
+    totalRevenue: totalRevenue.toFixed(2),
+    totalCogs: totalCogs.toFixed(2), 
+    totalProfit: totalProfit.toFixed(2),
+  })
+})
+
+app.get("/orders/view/:orderId", requiresAuthentication, async (req, res) => {
+  const orderId = req.params.orderId;
+  const order = await dataApp.findOrderById(orderId);
+  
+  let items = (await dataApp.getOrderItems(orderId)).map(item => {
+    let taxPercent = item.tax || 8;
+    let taxAmount = +item.purchase_price * (taxPercent / 100);
+    let totalPrice = (+item.purchase_price + taxAmount).toFixed(2);
+    return Object.assign(item, {total_price: totalPrice});
+  });
+  res.render('clothing', {
+    items: items,
+    filters: [order.customer_id, order.name],
+    helpers: {
+      greaterThanZero: function (soldPrice) {
+        return +soldPrice > 0;
+      },
+      isArray: function(element) {
+        return Array.isArray(element);
+      },
+      joinArray: function(element) {
+        return element.join(', ');
+      },
+      isForMen: function(gender) {
+        return gender == 'men';
+      }
+    }
+  });
+
+})
+
+app.get("/orders/add", requiresAuthentication, (req, res) => {
+  res.render("create-order");
+})
+
+app.post("/orders/add", upload.none(), requiresAuthentication, async (req, res) => {
+  const orderData = req.body;
+  for (key in orderData) {
+    orderData[key] = orderData[key] || null;
+  }
+
+  const createdOrder= await dataApp.createOrder(orderData);
+
+  if (createdOrder) {
+    res.redirect("/orders/view");
+  } else {
+    res.render("create-order");
+  }
+})
+
+app.get("/orders/edit/:orderId", requiresAuthentication, async (req, res) => {
+  let orderId = req.params.orderId;
+  let order = await dataApp.findOrderById(orderId);
+  if (order.date_sent) {
+    order.date_sent = formatDate(order.date_sent.toLocaleDateString());
+  }
+
+  res.render("partials/order-row", {
+    layout: false,
+    order: order
+  });
+})
+
+app.post("/orders/edit/:orderId", requiresAuthentication, async(req, res) => {
+  let orderId = req.params.orderId;
+  let successfulUpdate = await dataApp.updateOrder(req.body);
+
+  if (successfulUpdate) {
+    let order = await dataApp.findOrderById(orderId);
+    order.tax_total = 0;
+    order.shipping_total = 0;
+    order.base_cost = 0;
+    order.sold_total = 0;
+    order.cogs = 0;
+    order.total_profit = 0;
+    let itemsInOrder = await dataApp.getOrderItems(orderId);
+
+    let items = await dataApp.getAllItems();
+    let pkgs = await dataApp.getPackages();
+    let pkgPrices = {};
+
+
+    pkgs.forEach(pkg => {
+      itemsInPackage = items.filter(item => item.package_id === pkg.id)
+
+      if (Number(pkg.price) && itemsInPackage.length > 0) {
+        let pricePerItem = (+pkg.price / itemsInPackage.length)
+        pkgPrices[pkg.id] = pricePerItem.toFixed(2);
+      } 
+    })
+
+    itemsInOrder.forEach(item => {
+      item.tax = +item.tax || 8;
+      let taxAmount = (Number(item.tax) / 100) * Number(item.purchase_price);
+      let shippingCost = Number(pkgPrices[item.package_id]) || 0
+      let cogs = (taxAmount + shippingCost + Number(item.purchase_price));
+      let profit = (Number(item.sold_price) - cogs)
+
+      order.tax_total += taxAmount;
+      order.shipping_total += shippingCost;
+      order.base_cost += Number(item.purchase_price);
+      order.sold_total += Number(item.sold_price) || 0;
+      order.cogs += cogs;
+      order.total_profit += profit;
+    })  
+
+    order.item_count = itemsInOrder.length;
+
+    if (order.date_sent) {
+      order.date_sent = order.date_sent.toDateString();
+    }
+
+    order.tax_total = order.tax_total.toFixed(2);
+    order.shipping_total = order.shipping_total.toFixed(2);
+    order.base_cost = order.base_cost.toFixed(2);
+    order.sold_total = order.sold_total.toFixed(2);
+    order.cogs = order.cogs.toFixed(2);
+    order.total_profit = order.total_profit.toFixed(2);
+
+    res.render(`partials/edited-order-row`, {
+      layout: false,
+      order: order,
+    })
+  }
+})
+
+
+
+//====================================customers===================================
+
+app.get("/customers", requiresAuthentication, (req, res) => {
+  res.render('customer-home');
+})
+
+app.get("/customers/view", requiresAuthentication, async (req, res) => {
+  let customers = await dataApp.getCustomers();
+  res.render("customers", {
+    customers,
+  })
+})
+
+app.get("/customers/add", requiresAuthentication, (req, res) => {
+  res.render("create-customer");
+})
+
+app.post("/customers/add", upload.none(), requiresAuthentication, async (req, res) => {
+  const customerData = req.body;
+  for (key in customerData) {
+    customerData[key] = customerData[key] || null;
+  }
+
+  const createdcustomer= await dataApp.createcustomer(customerData);
+
+  if (createdcustomer) {
+    res.redirect("/customers/view");
+  } else {
+    res.render("create-customer");
+  }
+})
+
+app.get("/customers/edit/:customerId", requiresAuthentication, async (req, res) => {
+  let customerId = req.params.customerId;
+  let customer = await dataApp.findCustomerById(customerId);
+
+  res.render("partials/customer-row", {
+    layout: false,
+    customer: customer
+  });
+})
+
+app.post("/customers/edit/:customerId", requiresAuthentication, async(req, res) => {
+  let customerId = req.params.customerId;
+  let successfulUpdate = await dataApp.updateCustomer(req.body);
+
+  if (successfulUpdate) {
+    let customer = await dataApp.findCustomerById(customerId);
+    
+
+    res.render(`partials/edited-customer-row`, {
+      layout: false,
+      customer: customer,
+    })
+  }
+})
+
 
 
 //====================================items===================================
 
 // for uploading images to amazon'a aws s3
 // https://devcenter.heroku.com/articles/s3-upload-node
-//working
+
 app.get(`/sign-s3`, (req, res) => {
   const s3 = new aws.S3();
   const fileName = req.query['file-name'];

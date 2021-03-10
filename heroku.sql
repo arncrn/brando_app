@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 11.4
--- Dumped by pg_dump version 12.5
+-- Dumped from database version 13.1
+-- Dumped by pg_dump version 13.1
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -17,6 +17,8 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 SET default_tablespace = '';
+
+SET default_table_access_method = heap;
 
 --
 -- Name: clothing; Type: TABLE; Schema: public; Owner: aaron
@@ -319,13 +321,6 @@ Chest: 55
 Waist: 52
 Length: 64
 Arm: 64', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:07:53.664985', NULL, NULL);
-INSERT INTO public.clothing VALUES (5, 'XS', 'Levis', 'Leather Jacket', 'Black', 1, '516760', 34.99, NULL, NULL, NULL, 'Fluffy inside
-Bomber jacket
-
-Chest: 48
-Waist: 46
-Length: 56
-Arm: 63', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:07:53.672862', NULL, NULL);
 INSERT INTO public.clothing VALUES (11, 'M', 'Tommy Hilfiger', 'Jacket', 'Navy, White, Red', 2, '053086', 19.99, NULL, NULL, NULL, 'navy & white boobs
 
 Chest: 51
@@ -354,7 +349,6 @@ Chest: 47
 Waist: 46
 Length: 59
 Arm: 66', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:07:53.822065', NULL, NULL);
-INSERT INTO public.clothing VALUES (2229, 'S', 'Calvin Klein', 'Tank Top', 'Grey', NULL, '123260', 10.00, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-21 18:00:11.543588', NULL, NULL);
 INSERT INTO public.clothing VALUES (25, 'L', 'Tommy Hilfiger', 'Sweater', 'Black', 3, '116713', 24.99, NULL, NULL, NULL, 'Long neck
 TH + leaves on chest
 
@@ -427,20 +421,12 @@ Waist: 38
 Hips: 46
 Length: 86
 Pasadka: 25', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:07:54.030633', NULL, NULL);
-INSERT INTO public.clothing VALUES (2027, 'S', 'Calvin Klein', 'Sweat Pants', 'Black', NULL, '785414', 20.19, NULL, NULL, NULL, 'stripe + "calvin" on stripe
-
-waist: 37
-hips: 47
-length: 92
-pasadka: 24', NULL, NULL, NULL, NULL, NULL, NULL, '2021-01-08 12:25:53.599038', NULL, NULL);
 INSERT INTO public.clothing VALUES (9, 'S', 'Calvin Klein', 'Sweater', 'Black', 2, '870996', 19.99, NULL, NULL, NULL, 'Long neck
 
 Chest: 42
 Waist: 39
 Length: 61
 Arm: 63', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:53.708607', NULL, NULL);
-INSERT INTO public.clothing VALUES (1993, 'S', 'Calvin Klein', 'Belt', 'Brown', 154, '268656', 3.51, NULL, NULL, NULL, 'Logo belt
-length: 95', NULL, 'women', '20210108_114751.jpg', NULL, NULL, 'usa', '2021-01-08 11:48:38.303382', NULL, 0.00);
 INSERT INTO public.clothing VALUES (1099, '???', 'Calvin Klein', 'unknown', 'Unknown', 88, '197938', 6.37, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:10.715486', NULL, NULL);
 INSERT INTO public.clothing VALUES (1056, 'L', 'Calvin Klein', 'T-Shirt', 'Black', 84, '548868', 6.99, NULL, NULL, 9, 'large white letters on chest', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:10.326111', NULL, NULL);
 INSERT INTO public.clothing VALUES (1081, 'M', 'Calvin Klein', 'T-Shirt', 'White', 86, '893233', 10.04, NULL, NULL, 9, 'golden sign', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:10.553247', NULL, NULL);
@@ -519,14 +505,22 @@ Chest: 43
 Waist: 41
 Length: 55
 Arm: 72', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:07:54.370364', NULL, NULL);
-INSERT INTO public.clothing VALUES (88, 'M', 'Guess', 'Vest Jacket', 'Black', 10, '498868', 29.99, NULL, NULL, NULL, 'puffy
+INSERT INTO public.clothing VALUES (1039, 'S', 'Tommy Hilfiger', 'Polo Shirt', 'Navy', 83, '329795', 11.99, NULL, NULL, 9, 'women
+tommy on chest', true, 'women', NULL, NULL, NULL, 'ukraine', '2020-12-21 01:19:10.170681', NULL, NULL);
+INSERT INTO public.clothing VALUES (2229, 'S', 'Calvin Klein', 'Tank Top', 'Grey', NULL, '123260', 10.00, NULL, 79, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-21 18:00:11.543588', NULL, 0.00);
+INSERT INTO public.clothing VALUES (5, 'XS', 'Levis', 'Leather Jacket', 'Black', 1, '516760', 34.99, NULL, 81, NULL, 'Fluffy inside
+Bomber jacket
+
+Chest: 48
+Waist: 46
+Length: 56
+Arm: 63', NULL, 'women', NULL, NULL, NULL, 'usa', '2020-12-21 01:07:53.672862', NULL, 0.00);
+INSERT INTO public.clothing VALUES (88, 'M', 'Guess', 'Vest Jacket', 'Black', 10, '498868', 29.99, NULL, 84, NULL, 'puffy
 hooded
 
 Chest: 56
 Waist: 55
-Length: 68', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:07:54.404651', NULL, NULL);
-INSERT INTO public.clothing VALUES (1039, 'S', 'Tommy Hilfiger', 'Polo Shirt', 'Navy', 83, '329795', 11.99, NULL, NULL, 9, 'women
-tommy on chest', true, 'women', NULL, NULL, NULL, 'ukraine', '2020-12-21 01:19:10.170681', NULL, NULL);
+Length: 68', NULL, 'women', NULL, NULL, NULL, 'usa', '2020-12-21 01:07:54.404651', NULL, 0.00);
 INSERT INTO public.clothing VALUES (1038, 'M', 'Tommy Hilfiger', 'Polo Shirt', 'Navy', 83, '329801', 11.99, NULL, NULL, 9, 'women
 tommy on chest', true, 'women', NULL, NULL, NULL, 'ukraine', '2020-12-21 01:19:10.161521', NULL, NULL);
 INSERT INTO public.clothing VALUES (1115, '???', 'Calvin Klein', 'unknown', 'Unknown', 89, '847994', 13.99, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:10.869802', NULL, NULL);
@@ -635,13 +629,6 @@ Chest: 51
 Waist: 47
 Length: 62
 Arm: 59', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:54.605333', NULL, NULL);
-INSERT INTO public.clothing VALUES (95, 'M', 'Calvin Klein', 'Sweater', 'White', NULL, '792320', 24.99, NULL, NULL, NULL, 'Long neck
-Black "Calvin" on chest
-
-Chest: 64
-Waist: 53
-Length: 61
-Arm: 40', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:54.46385', NULL, NULL);
 INSERT INTO public.clothing VALUES (2193, 'L', 'Armani Exchange', 'Polo Shirt', 'Grey', 171, '139657', 19.99, NULL, 67, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'ukraine', '2021-01-21 17:24:35.245565', NULL, 0.00);
 INSERT INTO public.clothing VALUES (141, 'M', 'Calvin Klein', 'Hoodie', 'Black', NULL, '687169', 24.99, NULL, NULL, NULL, 'Long neck
 Big white letters on chest
@@ -705,15 +692,6 @@ Waist: 34
 Hips: 51
 Length: 108
 Pasadka: 30', NULL, 'women', NULL, NULL, NULL, 'Usa', '2020-12-21 01:07:55.016296', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2029, 'S', 'Calvin Klein', 'Sweat Pants', 'Black', NULL, '827190', 29.99, NULL, NULL, NULL, '"calvin" on back of calf
-
-waist: 37
-hips: 47
-pasadka: 26
-length: 95', NULL, 'women', NULL, NULL, NULL, NULL, '2021-01-08 12:28:01.995377', NULL, NULL);
-INSERT INTO public.clothing VALUES (1996, 'XS', 'Calvin Klein', 'Belt', 'Brown', 154, '269677', 3.51, NULL, NULL, NULL, 'Logo belt
-length: 87
-', NULL, 'women', '20210108_114751.jpg', NULL, NULL, 'usa', '2021-01-08 11:50:06.322888', NULL, 0.00);
 INSERT INTO public.clothing VALUES (1136, 'M', 'Calvin Klein', 'Puffy Jacket', 'Pink', 95, '224547', 22.02, 81.35, NULL, 10, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:11.060161', NULL, NULL);
 INSERT INTO public.clothing VALUES (1137, '???', 'Calvin Klein', 'unknown', 'Unknown', 95, '873135', 30.51, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:11.069823', NULL, NULL);
 INSERT INTO public.clothing VALUES (175, 'S', 'Tommy Hilfiger', 'Sweater', 'Navy', 18, '728598', 10.39, NULL, NULL, NULL, 'V neck
@@ -734,6 +712,9 @@ INSERT INTO public.clothing VALUES (1138, '???', 'Calvin Klein', 'unknown', 'Unk
 INSERT INTO public.clothing VALUES (1139, '???', 'Calvin Klein', 'unknown', 'Unknown', 96, '051224', 6.71, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:11.088767', NULL, NULL);
 INSERT INTO public.clothing VALUES (1140, '???', 'Calvin Klein', 'unknown', 'Unknown', 96, '499199', 10.11, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:11.097689', NULL, NULL);
 INSERT INTO public.clothing VALUES (1226, '27', 'Levis', 'Shorts', 'Blue', 63, '001027', 34.65, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:11.897371', NULL, NULL);
+INSERT INTO public.clothing VALUES (1996, 'XS', 'Calvin Klein', 'Belt', 'Brown', 154, '269677', 3.51, NULL, 81, NULL, 'Logo belt
+length: 87
+', NULL, 'women', '20210108_114751.jpg', NULL, NULL, 'usa', '2021-01-08 11:50:06.322888', NULL, 0.00);
 INSERT INTO public.clothing VALUES (1150, '???', 'Calvin Klein', 'unknown', 'Unknown', 97, '346561', 16.99, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:11.198831', NULL, NULL);
 INSERT INTO public.clothing VALUES (1152, '???', 'Calvin Klein', 'unknown', 'Unknown', 98, '528137', 10.96, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:11.217392', NULL, NULL);
 INSERT INTO public.clothing VALUES (179, 'M', 'Tommy Hilfiger', 'Sweat Shirt', 'Black', NULL, '932711', 19.99, NULL, NULL, NULL, 'Tommy + red/white line + Hilfiger on chest
@@ -923,19 +904,10 @@ Chest: 61
 Waist: 59
 Length: 71
 Arm: 70', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:07:55.934063', NULL, NULL);
-INSERT INTO public.clothing VALUES (263, 'M', 'Calvin Klein', 'Sweat Pants', 'Black', NULL, '957118', 19.99, NULL, NULL, NULL, 'Calvin Klein down leg
-
-Waist: 43
-Hips: 51
-Length: 99
-Pasadka: 25', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:07:55.950084', NULL, NULL);
 INSERT INTO public.clothing VALUES (266, 'S', 'Guess', 'Puffy Jacket', 'White', NULL, '558654', 39.99, NULL, NULL, NULL, 'Chest: 44
 Waist: 39
 Length: 60
 Arm: 63', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:07:55.976166', NULL, NULL);
-INSERT INTO public.clothing VALUES (2203, 'S', 'DKNY', 'Dress Shirt', 'White', 173, '641862', 14.99, NULL, NULL, NULL, 'chest: 52
-length: 66
-arm: 60', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-21 17:35:11.029441', NULL, NULL);
 INSERT INTO public.clothing VALUES (274, '1SZ', 'Calvin Klein', 'Hat', 'Green', 24, '562795', 6.51, 8.80, NULL, 1, 'Beanie Cap
 dark greenish/greyish', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:07:56.048283', NULL, NULL);
 INSERT INTO public.clothing VALUES (275, '1SZ', 'Calvin Klein', 'Hat', 'Black', 24, '555766', 6.51, 8.80, NULL, 1, 'Beanie Cap', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:07:56.057885', NULL, NULL);
@@ -948,9 +920,8 @@ Chest: 55
 Waist: 52
 Length: 49
 Arm: 51', NULL, 'women', NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:55.769821', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2352, 'S', 'Calvin Klein', 'Gloves', 'Black', 188, '543060', 8.49, NULL, NULL, NULL, 'width: 11
-length: 23', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:10:41.075526', NULL, NULL);
 INSERT INTO public.clothing VALUES (2263, 'XXL', 'Tommy Hilfiger', 'Sweater', 'Navy', 179, '394840', 15.99, NULL, 67, NULL, NULL, NULL, 'men', NULL, NULL, NULL, 'ukraine', '2021-01-23 19:28:15.051665', NULL, 0.00);
+INSERT INTO public.clothing VALUES (1180, 'XS', 'Calvin Klein', 'Puffy Jacket', 'Purple', 102, '873142', 28.72, 0.00, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:11.480418', NULL, NULL);
 INSERT INTO public.clothing VALUES (2097, 'S', 'Karl Lagerfeld', 'Sweat Shirt', 'Black', 161, '851353', 69.99, NULL, NULL, NULL, 'white/pink line down arms
 "karl lagerfeld" on white/pink line
 pink outlining
@@ -968,19 +939,12 @@ hips: 49
 length: 100
 pasadka: 30', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:07:56.540673', NULL, NULL);
 INSERT INTO public.clothing VALUES (2161, 'L', 'DKNY', 'Windbreaker', 'Purple', NULL, '525226', 34.99, NULL, 67, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'ukraine', '2021-01-18 16:07:38.565915', NULL, 0.00);
-INSERT INTO public.clothing VALUES (333, 'XS', 'Calvin Klein', 'Hoodie', 'Blue, Grey', 28, '250868', 9.24, NULL, NULL, NULL, 'zipped
-blue sleeve
-
-chest: 52
-length: 54
-arm: 48-68', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:07:56.580784', NULL, NULL);
 INSERT INTO public.clothing VALUES (328, 'M', 'Calvin Klein', 'Hoodie', 'Black', 28, '676182', 17.85, NULL, NULL, NULL, 'Men
 black sign on chest
 
 chest: 53
 length: 67
 arm: 66', NULL, 'men', NULL, NULL, NULL, NULL, '2020-12-21 01:07:56.524224', NULL, NULL);
-INSERT INTO public.clothing VALUES (345, 'L', 'Calvin Klein', 'Belt', 'Black', 29, '192364', 7.99, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:07:56.682306', NULL, NULL);
 INSERT INTO public.clothing VALUES (347, 'L', 'Calvin Klein', 'Belt', 'Black', 29, '192166', 7.99, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:07:56.699436', NULL, NULL);
 INSERT INTO public.clothing VALUES (331, 'S', 'Calvin Klein', 'Hoodie', 'White', 27, '964758', 25.47, NULL, NULL, NULL, 'Women
 Payetki
@@ -988,13 +952,6 @@ Payetki
 chest: 51
 length: 58
 arm: 56-72', NULL, 'women', NULL, NULL, NULL, NULL, '2020-12-21 01:07:56.563202', NULL, NULL);
-INSERT INTO public.clothing VALUES (342, 'XS', 'Calvin Klein', 'Dress Shirt', 'White', 29, '494675', 11.22, NULL, NULL, NULL, 'Female
-Split back
-
-Chest: 47
-Waist: 47
-Length: 73
-Arm: 61', NULL, 'women', NULL, NULL, NULL, NULL, '2020-12-21 01:07:56.65769', NULL, NULL);
 INSERT INTO public.clothing VALUES (233, 'L', 'Tommy Hilfiger', 'Sweater', 'White', 20, '080597', 22.34, NULL, NULL, NULL, 'Men
 Zipper on top
 Tommy Hilfiger across chest
@@ -1067,12 +1024,6 @@ Chest: 50
 Waist: 47
 Length: 68
 Arm: 66', NULL, 'men', NULL, NULL, NULL, NULL, '2020-12-21 01:07:55.808511', NULL, NULL);
-INSERT INTO public.clothing VALUES (246, 'L', 'Tommy Hilfiger', 'Puffy Jacket', 'Black', NULL, '424164', 59.99, NULL, NULL, NULL, 'Men
-
-Chest: 60
-Waist: 58
-Length: 72
-Arm: 70', NULL, 'men', NULL, NULL, NULL, NULL, '2020-12-21 01:07:55.815597', NULL, NULL);
 INSERT INTO public.clothing VALUES (247, 'L', 'DKNY', 'Puffy Jacket', 'Silver', NULL, '219385', 59.99, NULL, NULL, NULL, 'Men
 
 Chest: 64
@@ -1131,11 +1082,6 @@ INSERT INTO public.clothing VALUES (461, 'XS', 'Calvin Klein', 'T-Shirt', 'White
 
 chest: 43
 length: 62', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:07:57.699537', NULL, NULL);
-INSERT INTO public.clothing VALUES (479, 'S', 'Calvin Klein', 'Vest Jacket', 'Black, Grey', 37, '067670', 10.49, NULL, NULL, NULL, 'women vest
-grey hood
-
-chest: 48
-length: 67/73', NULL, 'women', NULL, NULL, NULL, NULL, '2020-12-21 01:07:57.849777', NULL, NULL);
 INSERT INTO public.clothing VALUES (484, 'XS', 'Calvin Klein', 'Vest Jacket', 'Black, Grey', 37, '752157', 10.49, NULL, NULL, NULL, 'women vest
 shiny
 
@@ -1143,7 +1089,6 @@ chest: 47
 length: 62', NULL, 'women', NULL, NULL, NULL, NULL, '2020-12-21 01:07:57.891699', NULL, NULL);
 INSERT INTO public.clothing VALUES (465, '1SZ', 'Calvin Klein', 'Scarf', 'Grey, Black', NULL, '586370', 11.70, NULL, NULL, NULL, 'logo pattern
 rounded/closed', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:07:57.731236', NULL, NULL);
-INSERT INTO public.clothing VALUES (468, 'M', 'Calvin Klein', 'Gloves', 'Black', 34, '543077', 9.97, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:07:57.756021', NULL, NULL);
 INSERT INTO public.clothing VALUES (1792, 'L', 'Levis', 'T-Shirt', 'White', NULL, '022743', 6.99, NULL, NULL, NULL, 'Men
 red logo on chest
             
@@ -1155,6 +1100,21 @@ INSERT INTO public.clothing VALUES (710, 'S', 'Guess', 'Puffy Jacket', 'White', 
 Waist: 39
 Length: 60
 Arm: 63', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:07:59.873826', NULL, NULL);
+INSERT INTO public.clothing VALUES (2352, 'S', 'Calvin Klein', 'Gloves', 'Black', 188, '543060', 8.49, NULL, 78, NULL, 'width: 11
+length: 23', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:10:41.075526', NULL, 0.00);
+INSERT INTO public.clothing VALUES (468, 'M', 'Calvin Klein', 'Gloves', 'Black', 34, '543077', 9.97, NULL, 78, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2020-12-21 01:07:57.756021', NULL, 0.00);
+INSERT INTO public.clothing VALUES (333, 'XS', 'Calvin Klein', 'Hoodie', 'Blue, Grey', 28, '250868', 9.24, NULL, 80, NULL, 'zipped
+blue sleeve
+
+chest: 52
+length: 54
+arm: 48-68', NULL, 'women', NULL, NULL, NULL, 'usa', '2020-12-21 01:07:56.580784', NULL, 0.00);
+INSERT INTO public.clothing VALUES (246, 'L', 'Tommy Hilfiger', 'Puffy Jacket', 'Black', NULL, '424164', 59.99, NULL, 84, NULL, 'Men
+
+Chest: 60
+Waist: 58
+Length: 72
+Arm: 70', NULL, 'men', NULL, NULL, NULL, 'usa', '2020-12-21 01:07:55.815597', NULL, 0.00);
 INSERT INTO public.clothing VALUES (493, 'XS', 'Calvin Klein', 'Jean Jacket', 'Blue', 34, '105815', 13.10, NULL, NULL, NULL, 'Buttons
 
 Chest: 53
@@ -1179,6 +1139,8 @@ Waist: 36
 Hips: 47
 Length: 90
 Pasadka: 23', NULL, 'women', NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:58.081432', NULL, 0.00);
+INSERT INTO public.clothing VALUES (1181, '???', 'Calvin Klein', 'Puffy Jacket', 'Purple', 102, '873128', 28.72, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:11.48968', NULL, NULL);
+INSERT INTO public.clothing VALUES (1257, '27', 'Levis', 'Shorts', 'Unknown', 112, '270107', 34.65, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:12.189234', NULL, NULL);
 INSERT INTO public.clothing VALUES (506, 'XS', 'Calvin Klein', 'Sweater', 'Black', 15, '084142', 21.25, NULL, NULL, NULL, 'White outlined black stripe with "cavin klein ck" across chest
 
 Chest: 55
@@ -1340,19 +1302,12 @@ calvin on sleeve
 chest: 52
 length: 59
 arm: 56/76', NULL, 'women', '20210108_115551.jpg', NULL, NULL, 'usa', '2021-01-08 11:54:04.688515', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2034, '6', 'Armani Exchange', 'Blazer', 'Navy', 156, '319574', 15.99, NULL, NULL, NULL, 'a lot of buttons
-
-chest: 50
-length: 80
-arm: 42', NULL, 'women', 'IMG_8470.jpg', NULL, NULL, 'usa', '2021-01-08 13:22:36.537651', NULL, 0.00);
 INSERT INTO public.clothing VALUES (701, 'S', 'Tommy Hilfiger', 'Sweater', 'White', 46, '653770', 17.49, NULL, NULL, NULL, 'knitted
 V-neck
 
 Chest: 43
 length: 59
 arm: 61', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:59.800888', NULL, NULL);
-INSERT INTO public.clothing VALUES (1180, 'XS', 'Calvin Klein', 'Puffy Jacket', 'Purple', 102, '873142', 28.72, 0.00, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:11.480418', NULL, NULL);
-INSERT INTO public.clothing VALUES (1181, '???', 'Calvin Klein', 'Puffy Jacket', 'Purple', 102, '873128', 28.72, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:11.48968', NULL, NULL);
 INSERT INTO public.clothing VALUES (1182, '???', 'Calvin Klein', 'Puffy Jacket', 'Purple', 102, '873135', 28.72, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:11.498081', NULL, NULL);
 INSERT INTO public.clothing VALUES (1183, '???', 'Calvin Klein', 'unknown', 'Unknown', 103, '626077', 7.90, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:11.507571', NULL, NULL);
 INSERT INTO public.clothing VALUES (1185, 'XS', 'Calvin Klein', 'Sweat Shirt', 'White', 104, '499298', 11.90, NULL, NULL, 9, 'Chest: 63
@@ -1401,14 +1356,6 @@ INSERT INTO public.clothing VALUES (766, '1SZ', 'Calvin Klein', 'Hat', 'Olive', 
 INSERT INTO public.clothing VALUES (769, 'M', 'Calvin Klein', 'Puffy Jacket', 'Black', 51, '934645', 7.70, NULL, NULL, NULL, 'chest: 58
 length: 70
 arm: 66', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:08:00.37322', NULL, NULL);
-INSERT INTO public.clothing VALUES (770, '14/16L', 'Calvin Klein', 'Hoodie', 'Pink', NULL, '488588', 13.00, NULL, NULL, NULL, 'kids clothes
-14-16 years
-costco
-super furry/fluffy
-
-chest: 44
-length: 61
-arm: 68', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:08:00.381209', NULL, NULL);
 INSERT INTO public.clothing VALUES (771, '7/8S', 'Calvin Klein', 'Hoodie', 'Pink', NULL, '488601', 13.00, NULL, NULL, NULL, 'kids clothes
 7-8 years
 costco
@@ -1448,9 +1395,6 @@ INSERT INTO public.clothing VALUES (755, 'S', 'Tommy Hilfiger', 'Coat', 'Plaid',
 Waist: 45
 length: 96
 arm: 65', false, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:08:00.25468', NULL, NULL);
-INSERT INTO public.clothing VALUES (1966, 'S', 'Tommy Hilfiger', 'Free Sweater', 'Black', 150, '415736', 15.99, NULL, NULL, NULL, 'chest: 51
-length: 69
-arm: 69', NULL, 'men', 'IMG_8457.jpg', NULL, NULL, 'usa', '2021-01-08 10:32:28.900292', NULL, 0.00);
 INSERT INTO public.clothing VALUES (1191, '???', 'Calvin Klein', 'unknown', 'Unknown', 105, '662151', 24.00, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:11.579554', NULL, NULL);
 INSERT INTO public.clothing VALUES (768, 'M', 'Calvin Klein', 'Puffy Jacket', 'Black', 52, '934478', 27.99, NULL, NULL, NULL, 'matte black
 
@@ -1503,17 +1447,22 @@ Chest: 53
 Waist: 51
 Length: 51
 Arm: 67', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:08:00.711966', NULL, NULL);
-INSERT INTO public.clothing VALUES (2061, '36', 'Calvin Klein', 'Belt', 'Black', 157, '267313', 14.99, NULL, NULL, NULL, 'length: 105', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-13 11:16:40.439335', NULL, NULL);
-INSERT INTO public.clothing VALUES (2127, 'S', 'Tommy Hilfiger', 'Windbreaker', 'Blue', 164, '686331', 31.99, NULL, NULL, NULL, 'chest: 50
-length: 66
-arm: 61/63
-shoulders: 40', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-16 18:51:25.9155', NULL, 0.00);
 INSERT INTO public.clothing VALUES (850, 'L', 'Armani Exchange', 'Puffy Jacket', 'Black', 57, '335567', 55.99, NULL, NULL, 9, 'Shiny
 
 Chest: 63cm
 Waist: 63cm
 Length: 73cm
 Arm: 61cm', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:08.33723', NULL, NULL);
+INSERT INTO public.clothing VALUES (2061, '36', 'Calvin Klein', 'Belt', 'Black', 157, '267313', 14.99, NULL, 78, NULL, 'length: 105', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-13 11:16:40.439335', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2034, '6', 'Armani Exchange', 'Blazer', 'Navy', 156, '319574', 15.99, NULL, 88, NULL, 'a lot of buttons
+
+chest: 50
+length: 80
+arm: 42', NULL, 'women', 'man-placeholder.jpeg', NULL, NULL, 'usa', '2021-01-08 13:22:36.537651', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2127, 'S', 'Tommy Hilfiger', 'Windbreaker', 'Blue', 164, '686331', 31.99, NULL, 81, NULL, 'chest: 50
+length: 66
+arm: 61/63
+shoulders: 40', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-16 18:51:25.9155', NULL, 4.44);
 INSERT INTO public.clothing VALUES (853, '32', 'Armani Exchange', 'Jeans', 'Blue', 57, '140188', 14.99, NULL, NULL, 9, 'Waist: 45
 Length: 101
 Lapatka: 25
@@ -1560,7 +1509,6 @@ INSERT INTO public.clothing VALUES (801, 'M', 'Tommy Hilfiger', 'Golfik', 'Navy'
 INSERT INTO public.clothing VALUES (790, 'XS', 'Calvin Klein', 'Satin Pants', 'Black', 54, '549462', 10.81, NULL, NULL, NULL, 'waist: 36
 hips: 50
 Length: 96', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:08:00.560341', NULL, NULL);
-INSERT INTO public.clothing VALUES (2293, 'M', 'Tommy Hilfiger', 'Golfik', 'White', 182, '130252', 8.00, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-23 21:42:31.591529', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2353, 'M', 'Calvin Klein', 'Gloves', 'Black', 188, '543077', 8.49, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:10:49.648659', NULL, 0.00);
 INSERT INTO public.clothing VALUES (1934, 'M', 'Karl Lagerfeld', 'Sweat Pants', 'Red', NULL, '339698', 49.99, NULL, NULL, NULL, 'red stripe on side', NULL, 'women', NULL, NULL, NULL, 'Ukraine', '2021-01-03 04:18:11.506053', NULL, 0.00);
 INSERT INTO public.clothing VALUES (857, 'M', 'Armani Exchange', 'Sport Pants', 'Navy', 57, '493277', 23.99, NULL, NULL, 9, 'Stripe on side
@@ -1598,30 +1546,12 @@ INSERT INTO public.clothing VALUES (2332, 'L', 'Armani Exchange', 'Sweat Pants',
 hips: 56
 pasadka: 32
 length: 108', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 14:51:49.642049', NULL, NULL);
-INSERT INTO public.clothing VALUES (2370, 'XS', 'Calvin Klein', 'Puffy Jacket', 'White', NULL, '056377', 0.00, NULL, NULL, NULL, 'rainbow spacesuit
-
-chest: 57
-length: 80
-arm: 60', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:33:17.791989', NULL, NULL);
 INSERT INTO public.clothing VALUES (1, 'L', 'Tommy Hilfiger', 'Puffy Jacket', 'Red, Navy', 1, '218973', 49.99, NULL, 10, NULL, 'Blue hood, red body
 
 Chest: 55
 Waist: 52
 Length: 64
 Arm: 64', false, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:53.628994', NULL, NULL);
-INSERT INTO public.clothing VALUES (2234, 'M', 'Michael Kors', 'Sweat Shirt', 'Black', 175, '937830', 29.99, NULL, NULL, NULL, 'silver circles creating sign on chest
-
-chest: 54
-length: 65/69
-arm: 51/69
-', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-22 10:05:09.029994', NULL, NULL);
-INSERT INTO public.clothing VALUES (2333, 'L', 'Armani Exchange', 'Hoodie', 'Blue', 186, '147485', 35.99, NULL, NULL, NULL, 'zipped
-
-chest: 58
-length: 69
-arm: 68
-shoulders: 51
-', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 14:53:21.372745', NULL, NULL);
 INSERT INTO public.clothing VALUES (926, '36', 'Calvin Klein', 'Jeans', 'Blue', 64, '011996', 13.52, NULL, NULL, 9, 'Waist: 47
 Length: 111
 Lapatka: 32', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:09.094247', NULL, NULL);
@@ -1655,13 +1585,6 @@ arm: 65', NULL, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:56.966095',
 INSERT INTO public.clothing VALUES (2064, 'M', 'Karl Lagerfeld', 'Hoodie', 'Black', 158, '849176', 29.99, NULL, NULL, NULL, 'chest: 56
 length: 70
 arm: 62', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-01-13 11:20:45.821094', NULL, NULL);
-INSERT INTO public.clothing VALUES (2103, 'N/A', 'Armani Exchange', 'Bag', 'White', 162, '786539', 39.99, NULL, NULL, NULL, 'length: 42
-width: 15
-height: 24', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-16 14:34:42.300828', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2356, 'XS', 'Calvin Klein', 'T-Shirt', 'Black', 188, '855780', 12.74, NULL, NULL, NULL, 'Gold stones "calvin klein"
-
-chest: 42
-length: 61', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:13:02.155402', NULL, NULL);
 INSERT INTO public.clothing VALUES (1935, 'XS', 'DKNY', 'T-Shirt', 'Black', NULL, '923555', 20.00, NULL, NULL, NULL, 'White DKNY on chest
 
 chest: 45
@@ -1670,10 +1593,19 @@ INSERT INTO public.clothing VALUES (2006, 'XS', 'Calvin Klein', 'Skirt', 'Black'
 waist: 32
 hips: 47
 length: 81', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-08 12:02:24.991977', NULL, NULL);
-INSERT INTO public.clothing VALUES (2181, 'S', 'Tommy Hilfiger', 'Windbreaker', 'Navy, Blue', 170, '686331', 32.00, NULL, NULL, NULL, 'chest: 50
-length: 64
-arm: 64
-shoulders: 39', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-21 17:08:38.391872', NULL, NULL);
+INSERT INTO public.clothing VALUES (2293, 'M', 'Tommy Hilfiger', 'Golfik', 'White', 182, '130252', 8.00, NULL, 79, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-23 21:42:31.591529', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2370, 'XS', 'Calvin Klein', 'Puffy Jacket', 'White', NULL, '056377', 0.00, NULL, NULL, NULL, 'rainbow spacesuit
+
+chest: 57
+length: 80
+arm: 60', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:33:17.791989', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2333, 'L', 'Armani Exchange', 'Hoodie', 'Blue', 186, '147485', 35.99, NULL, 88, NULL, 'zipped
+
+chest: 58
+length: 69
+arm: 68
+shoulders: 51
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 14:53:21.372745', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2209, 'XXS', 'DKNY', 'T-Shirt', 'White', 173, '520682', 12.49, NULL, NULL, NULL, 'empire state building
 chest: 42
 length: 61', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-21 17:40:33.400141', NULL, 0.00);
@@ -1738,10 +1670,6 @@ Chest: 65
 Waist: 59
 Length: 72
 Arm: 69', NULL, 'men', NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:53.743531', NULL, NULL);
-INSERT INTO public.clothing VALUES (2318, 'S', 'Michael Kors', 'Puffy Jacket', 'Black', NULL, '280279', 70.80, NULL, NULL, NULL, 'chest: 53
-length: 71
-arm: 64
-shoulders: 41', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 14:38:38.880851', NULL, NULL);
 INSERT INTO public.clothing VALUES (40, 'XS', 'Karl Lagerfeld', 'T-Shirt', 'Black', 6, '886348', 16.99, NULL, 1, NULL, 'Gold sequins "Karl" on chest
 
 Chest: 44
@@ -1846,44 +1774,49 @@ Chest: 54
 Waist: 61
 Length: 92
 Arm: 61', NULL, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:54.429909', NULL, NULL);
-INSERT INTO public.clothing VALUES (2007, 'S', 'Calvin Klein', 'Sweat Shirt', 'Black', 154, '796465', 14.05, NULL, NULL, NULL, '"calvin" on shoulder
-chest: 58
-length: 60/70
-arm: 43/66', NULL, 'women', '20210108_120516.jpg', NULL, NULL, 'usa', '2021-01-08 12:04:39.743902', NULL, 0.00);
 INSERT INTO public.clothing VALUES (1033, '???', 'Tommy Hilfiger', 'unknown', 'Unknown', 83, '575116', 11.99, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:10.103276', NULL, NULL);
 INSERT INTO public.clothing VALUES (1036, '???', 'Tommy Hilfiger', 'unknown', 'Unknown', 83, '329733', 11.99, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:10.143067', NULL, NULL);
-INSERT INTO public.clothing VALUES (1037, '???', 'Tommy Hilfiger', 'unknown', 'Unknown', 83, '329818', 11.99, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:10.152027', NULL, NULL);
 INSERT INTO public.clothing VALUES (1040, 'N/A', 'Tommy Hilfiger', 'Hat', 'Black', 83, '521548', 10.60, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:10.180293', NULL, NULL);
 INSERT INTO public.clothing VALUES (1041, '???', 'Tommy Hilfiger', 'unknown', 'Unknown', 83, '787151', 24.01, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:10.189052', NULL, NULL);
 INSERT INTO public.clothing VALUES (1042, '???', 'Calvin Klein', 'unknown', 'Unknown', 70, '599332', 11.90, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:10.198688', NULL, NULL);
 INSERT INTO public.clothing VALUES (1043, '???', 'Calvin Klein', 'unknown', 'Unknown', 70, '599335', 11.89, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:10.208272', NULL, NULL);
-INSERT INTO public.clothing VALUES (2319, 'XS', 'Michael Kors', 'Puffy Jacket', 'Black', 184, '272908', 70.00, NULL, NULL, NULL, 'long
-
-chest: 51
-length: 93
-arm: 53/74
-shoulders: 60
-', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 14:41:01.407429', NULL, NULL);
 INSERT INTO public.clothing VALUES (1044, '???', 'Calvin Klein', 'unknown', 'Unknown', 70, '826095', 24.32, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:10.217412', NULL, NULL);
-INSERT INTO public.clothing VALUES (2335, 'M', 'Armani Exchange', 'Hoodie', 'Blue', 186, '147492', 35.99, NULL, NULL, NULL, 'zipped
-
-chest: 53
-length: 68
-arm: 67
-shoulders: 46
-', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 14:54:11.891164', NULL, NULL);
-INSERT INTO public.clothing VALUES (2357, 'M', 'Calvin Klein', 'Hoodie', 'Black', 188, '657810', 16.99, NULL, NULL, NULL, 'oversized
-"calvin" on one sleeve
-
-chest: 56
-length: 63
-arm: 55/77', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:15:57.656759', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2028, 'S', 'Calvin Klein', 'Sweat Pants', 'Black', NULL, '827190', 29.99, NULL, 57, NULL, '"calvin" on back of calf
 
 waist: 37
 hips: 47
 pasadka: 26
 length: 95', NULL, 'women', NULL, NULL, NULL, 'ukraine', '2021-01-08 12:27:09.194015', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2357, 'M', 'Calvin Klein', 'Hoodie', 'Black', 188, '657810', 16.99, NULL, 81, NULL, 'oversized
+"calvin" on one sleeve
+
+chest: 56
+length: 63
+arm: 55/77', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:15:57.656759', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2319, 'XS', 'Michael Kors', 'Puffy Jacket', 'Black', 184, '272908', 70.00, NULL, 82, NULL, 'long
+
+chest: 51
+length: 93
+arm: 53/74
+shoulders: 60
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 14:41:01.407429', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2181, 'S', 'Tommy Hilfiger', 'Windbreaker', 'Navy, Blue', 170, '686331', 32.00, NULL, 82, NULL, 'chest: 50
+length: 64
+arm: 64
+shoulders: 39', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-21 17:08:38.391872', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2318, 'S', 'Michael Kors', 'Puffy Jacket', 'Black', NULL, '280279', 70.80, NULL, 85, NULL, 'chest: 53
+length: 71
+arm: 64
+shoulders: 41', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 14:38:38.880851', NULL, 0.00);
+INSERT INTO public.clothing VALUES (1037, 'L', 'Tommy Hilfiger', 'Polo Shirt', 'Navy', 83, '329818', 11.99, NULL, 99, 9, 'chest: 52
+length: 66', NULL, 'women', NULL, NULL, NULL, 'usa', '2020-12-21 01:19:10.152027', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2335, 'M', 'Armani Exchange', 'Hoodie', 'Blue', 186, '147492', 35.99, NULL, 89, NULL, 'zipped
+
+chest: 53
+length: 68
+arm: 67
+shoulders: 46
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 14:54:11.891164', NULL, 0.00);
 INSERT INTO public.clothing VALUES (326, 'XS', 'Calvin Klein', 'Sweater', 'White', 27, '364626', 10.12, NULL, 62, NULL, 'with stars
 
 chest: 60
@@ -2056,10 +1989,6 @@ INSERT INTO public.clothing VALUES (1938, '8', 'Calvin Klein', 'Dress', 'Peach',
 chest: 47
 hips: 48
 length: 100', NULL, 'women', NULL, NULL, NULL, 'ukraine', '2021-01-03 04:26:31.52175', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2184, 'M', 'Tommy Hilfiger', 'Windbreaker', 'Blue, Navy', 170, '686348', 32.00, NULL, NULL, NULL, 'chest: 51
-length: 65
-arm: 64
-shoulders: 40', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-21 17:16:31.179144', NULL, NULL);
 INSERT INTO public.clothing VALUES (1973, 'S', 'Calvin Klein', 'T-Shirt', 'Black', 151, '434657', 0.61, NULL, 59, NULL, 'Pink / silver logo on chest
 chest: 45
 length: 62', NULL, 'women', 'IMG_8463.jpg', NULL, NULL, 'ukraine', '2021-01-08 10:54:32.032062', NULL, 0.00);
@@ -2088,15 +2017,12 @@ shiny
 chest: 65
 length: 73
 arm: 71', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-01-31 14:43:01.390061', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2337, 'L', 'Armani Exchange', 'Polo', 'Black', 187, '802089', 19.99, NULL, NULL, NULL, 'chest: 55
-length: 72
-shoulders: 47', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 14:58:28.596477', NULL, NULL);
 INSERT INTO public.clothing VALUES (2041, '2', 'Armani Exchange', 'Blazer', 'Navy', 156, '319550', 15.99, NULL, NULL, NULL, 'chest: 45
 length: 77', NULL, 'women', 'IMG_8470.jpg', NULL, NULL, 'usa', '2021-01-08 13:27:52.088257', NULL, 0.00);
 INSERT INTO public.clothing VALUES (1608, 'L', 'Levis', 'T-Shirt', 'Unknown', 147, '00460L', 7.99, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:15.460905', NULL, NULL);
-INSERT INTO public.clothing VALUES (2359, 'L', 'Michael Kors', 'Sweat Shirt', 'Black', NULL, '225576', 24.99, NULL, NULL, NULL, 'chest: 56
+INSERT INTO public.clothing VALUES (2337, 'L', 'Michael Kors', 'Polo', 'Black', 187, '802089', 19.99, NULL, 88, NULL, 'chest: 55
 length: 72
-arm: 70', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-01-31 15:18:02.32987', NULL, NULL);
+shoulders: 47', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-01-31 14:58:28.596477', NULL, 0.00);
 INSERT INTO public.clothing VALUES (119, 'XS', 'Tommy Hilfiger', 'Sweat Shirt', 'Navy', 13, '792813', 15.99, NULL, 22, NULL, '"Tommy Hilfiger" in block letters on chest
 
 Chest: 47
@@ -2143,8 +2069,6 @@ INSERT INTO public.clothing VALUES (133, 'N/A', 'Calvin Klein', 'Bag', 'White', 
 INSERT INTO public.clothing VALUES (134, 'N/A', 'Calvin Klein', 'Bag', 'Black', 15, '269452', 32.64, NULL, 6, NULL, 'Tote bage', NULL, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:54.845284', NULL, NULL);
 INSERT INTO public.clothing VALUES (1169, '???', 'Calvin Klein', 'unknown', 'Unknown', 100, '421736', 11.89, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:11.371414', NULL, NULL);
 INSERT INTO public.clothing VALUES (619, 'XS', 'Calvin Klein', 'Sweat Shirt', 'Mint', NULL, '0007', 29.99, 47.20, 24, 4, 'sold with 0006', NULL, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:59.062969', NULL, NULL);
-INSERT INTO public.clothing VALUES (2238, 'L', 'Michael Kors', 'Polo Shirt', 'Black', 175, '986079', 19.99, NULL, 66, NULL, 'chest: 56
-length: 70', NULL, 'men', NULL, NULL, NULL, 'ukraine', '2021-01-22 10:10:46.351292', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2267, 'XL', 'Tommy Hilfiger', 'Sweater', 'White', 179, '622028', 10.39, NULL, 67, NULL, 'with zipper', NULL, 'men', NULL, NULL, NULL, 'ukraine', '2021-01-23 19:31:00.638282', NULL, NULL);
 INSERT INTO public.clothing VALUES (2252, 'S', 'DKNY', 'Puffy Jacket', 'Grey', NULL, '391251', 49.99, NULL, 69, NULL, 'from costco
 
@@ -2183,13 +2107,6 @@ Chest: 52
 Waist: 48
 Length: 61
 Arm: ', NULL, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:19:11.987699', NULL, NULL);
-INSERT INTO public.clothing VALUES (2338, 'XL', 'Armani Exchange', 'Polo', 'Black', 187, '802096', 19.99, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 14:59:16.587221', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2360, '6', 'Calvin Klein', 'Polo Shirt', 'Black', NULL, '275164', 8.99, NULL, NULL, NULL, 'kid clothes
-6 years
-
-chest: 33
-length: 47
-', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:19:54.976521', NULL, NULL);
 INSERT INTO public.clothing VALUES (111, 'S', 'Tommy Hilfiger', 'Sweat Shirt', 'Navy', 13, '792834', 15.99, NULL, 19, NULL, '"Tommy Hilfiger" in block letters on chest
 
 Chest: 53
@@ -2209,10 +2126,6 @@ chest: 41
 length: 115
 waist: 32
 ', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-23 21:32:04.061227', NULL, NULL);
-INSERT INTO public.clothing VALUES (2322, '4', 'Calvin Klein', 'Satin Dress', 'Black', 185, '646362', 7.96, NULL, NULL, NULL, 'chest: 45
-hips: 50
-length: 110
-', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 14:44:26.83341', NULL, NULL);
 INSERT INTO public.clothing VALUES (116, 'XXS', 'Tommy Hilfiger', 'Sweat Shirt', 'Navy', 13, '792803', 15.99, NULL, 19, NULL, '"Tommy Hilfiger" in block letters on chest
 
 Chest: 43
@@ -2284,16 +2197,8 @@ Waist: 52
 Length: 70
 Arm: 68', NULL, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:55.023826', NULL, NULL);
 INSERT INTO public.clothing VALUES (1227, 'XS', 'Levis', 'Hoodie', 'Unknown', 107, '0160XS', 19.99, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:11.906609', NULL, NULL);
-INSERT INTO public.clothing VALUES (2010, 'S', 'Calvin Klein', 'Sweat Shirt', 'Black', 154, '796465', 14.05, NULL, NULL, NULL, '"calvin" on shoulder
-chest: 58
-length: 60/70
-arm: 43/66', NULL, 'women', '20210108_120516.jpg', NULL, NULL, 'usa', '2021-01-08 12:06:07.35519', NULL, 0.00);
 INSERT INTO public.clothing VALUES (1228, '24', 'Levis', 'Jeans', 'Unknown', 107, '602243', 34.99, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:11.915036', NULL, NULL);
 INSERT INTO public.clothing VALUES (1229, '30', 'Levis', 'Jeans', 'Unknown', 107, '603032', 34.99, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:11.924362', NULL, NULL);
-INSERT INTO public.clothing VALUES (1975, 'XS', 'Calvin Klein', 'Sweat Shirt', 'Black', 151, '473724', 0.80, NULL, NULL, NULL, 'white / silver logo on chest
-chest: 48
-length: 57
-arm to neck: 71', NULL, 'women', 'IMG_8465.jpg', NULL, NULL, 'usa', '2021-01-08 10:56:44.991156', NULL, 0.00);
 INSERT INTO public.clothing VALUES (1940, 'L', 'Ralph Lauren', 'Sleeveless Shirt', 'Blue', NULL, '318124', 10.00, NULL, NULL, NULL, 'chest: 58
 length: 67/77', NULL, 'women', NULL, NULL, NULL, 'ukraine', '2021-01-03 04:29:18.401647', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2043, '2', 'Armani Exchange', 'Pants', 'Black', 156, '288078', 15.99, NULL, NULL, NULL, 'wide
@@ -2301,38 +2206,34 @@ waist: 31
 hips: 49
 length: 92
 pasadka: 34', NULL, 'women', 'IMG_8471.jpg', NULL, NULL, 'usa', '2021-01-08 13:29:54.893921', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2135, 'M', 'Calvin Klein', 'Hoodie', 'Salmon', 166, '432141', 21.99, NULL, NULL, NULL, 'chest: 56
+INSERT INTO public.clothing VALUES (1610, 'L', 'Levis', 'T-Shirt', 'Unknown', 147, '01980L', 7.99, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:15.47883', NULL, NULL);
+INSERT INTO public.clothing VALUES (2135, 'M', 'Calvin Klein', 'Hoodie', 'Salmon', 166, '432141', 21.99, NULL, 81, NULL, 'chest: 56
 length: 61
-arm: 55/74', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-16 19:01:42.89705', NULL, NULL);
-INSERT INTO public.clothing VALUES (2323, '4', 'Calvin Klein', 'Satin Dress', 'Black', 185, '646362', 7.96, NULL, NULL, NULL, 'chest: 45
+arm: 55/74', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-16 19:01:42.89705', NULL, 0.00);
+INSERT INTO public.clothing VALUES (1975, 'XS', 'Calvin Klein', 'Sweat Shirt', 'Black', 151, '473724', 0.80, NULL, 81, NULL, 'white / silver logo on chest
+chest: 48
+length: 57
+arm to neck: 71', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-01-08 10:56:44.991156', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2359, 'L', 'Michael Kors', 'Sweat Shirt', 'Black', NULL, '225576', 24.99, NULL, 82, NULL, 'chest: 56
+length: 72
+arm: 70', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-01-31 15:18:02.32987', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2338, 'XL', 'Armani Exchange', 'Polo', 'Black', 187, '802096', 19.99, NULL, 82, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 14:59:16.587221', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2322, '4', 'Calvin Klein', 'Satin Dress', 'Black', 185, '646362', 7.96, NULL, 82, NULL, 'chest: 45
 hips: 50
 length: 110
-', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 14:44:40.154555', NULL, NULL);
-INSERT INTO public.clothing VALUES (1610, 'L', 'Levis', 'T-Shirt', 'Unknown', 147, '01980L', 7.99, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:15.47883', NULL, NULL);
-INSERT INTO public.clothing VALUES (2186, 'L', 'Tommy Hilfiger', 'Windbreaker', 'Navy, White', 170, '686423', 32.00, NULL, NULL, NULL, 'chest: 54
-length: 67
-arm: 64
-shoulders: 43', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-21 17:17:42.074489', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2240, 'S', 'Calvin Klein', 'Windbreaker', 'Silver', 176, '899418', 19.99, NULL, NULL, NULL, 'chest: 53
-length: 81/87', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-22 10:18:39.875125', NULL, NULL);
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 14:44:26.83341', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2238, 'L', 'Michael Kors', 'Polo Shirt', 'Black', 175, '986079', 19.99, NULL, 82, NULL, 'chest: 56
+length: 70', NULL, 'men', NULL, NULL, NULL, 'ukraine', '2021-01-22 10:10:46.351292', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2360, '6', 'Calvin Klein', 'Polo Shirt', 'Black', NULL, '275164', 8.99, NULL, 83, NULL, 'kid clothes
+6 years
+
+chest: 33
+length: 47
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:19:54.976521', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2339, 'S', 'Calvin Klein', 'Polo', 'Coral', 187, '840910', 8.00, NULL, NULL, NULL, 'chest: 50
 length: 69', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:01:04.830439', NULL, NULL);
-INSERT INTO public.clothing VALUES (2269, 'S', 'Tommy Hilfiger', 'Sweat Shirt', 'White', 179, '621991', 10.39, NULL, NULL, NULL, 'zipper on neck
-
-chest: 50
-length: 60
-arm: 61', NULL, 'women', 'IMG_8462.jpg', NULL, NULL, 'usa', '2021-01-23 19:32:29.475175', NULL, 0.00);
 INSERT INTO public.clothing VALUES (1230, 'XS', 'Levis', 'Trucker Jacket', 'Unknown', 108, '0120XS', 44.52, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:11.932907', NULL, NULL);
-INSERT INTO public.clothing VALUES (2282, 'S', 'Tommy Hilfiger', 'Sweater', 'Navy', NULL, '803531', 7.00, NULL, NULL, NULL, 'chest: 52
-length: 62
-arm: 63', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-01-23 21:33:29.179959', NULL, NULL);
 INSERT INTO public.clothing VALUES (1231, 'S', 'Levis', 'Trucker Jacket', 'Unknown', 108, '00150S', 20.64, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:11.942209', NULL, NULL);
-INSERT INTO public.clothing VALUES (2361, 'S', 'Calvin Klein', 'Yoga Pants', 'Black', NULL, '444151', 19.99, NULL, NULL, NULL, 'white calvin performance everywhere
-
-waist: 32
-hips: 39
-pasadka: 25
-length: 84', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:23:03.826964', NULL, NULL);
 INSERT INTO public.clothing VALUES (157, 'L', 'Calvin Klein', 'Windbreaker', 'Black', NULL, '098711', 49.99, NULL, 7, NULL, 'Men
 
 Chest: 60
@@ -2383,6 +2284,11 @@ Waist: 37
 Hips: 45
 Length: 97
 Pasadka: 25', NULL, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:19:12.581213', NULL, NULL);
+INSERT INTO public.clothing VALUES (207, '1SZ', 'U.S. Polo Assn.', 'Hat', 'Grey, Pink', NULL, '749770', 9.99, NULL, 33, NULL, 'Beanie hats
+2 pack
+1 pink
+1 grey
+both sparkly', NULL, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:55.480344', NULL, NULL);
 INSERT INTO public.clothing VALUES (2109, 'XS', 'DKNY', 'Puffy Jacket', 'Black', NULL, '391336', 49.99, NULL, 57, NULL, 'from costco
 
 chest: 50
@@ -2400,10 +2306,6 @@ INSERT INTO public.clothing VALUES (2241, '31X32', 'Diesel', 'Jeans', 'Navy', 17
 hips: 51
 pasadka: 27
 length: 106', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-01-22 10:21:37.066188', NULL, NULL);
-INSERT INTO public.clothing VALUES (2324, '4', 'Calvin Klein', 'Satin Dress', 'Grey', 185, '652240', 7.96, NULL, NULL, NULL, 'chest: 45
-hips: 50
-length: 110
-', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 14:45:13.399435', NULL, NULL);
 INSERT INTO public.clothing VALUES (2340, 'S', 'Tommy Hilfiger', 'Blazer', 'Navy', 187, '430844', 14.00, NULL, NULL, NULL, 'buttons along
 
 chest: 47
@@ -2532,6 +2434,21 @@ INSERT INTO public.clothing VALUES (2187, 'N/A', 'Armani Exchange', 'Bag', 'Whit
 width: 15
 height: 24', NULL, 'women', NULL, NULL, NULL, 'ukraine', '2021-01-21 17:19:30.136347', NULL, 0.00);
 INSERT INTO public.clothing VALUES (1611, 'L', 'Levis', 'T-Shirt', 'Unknown', 147, '01970L', 7.99, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:15.487657', NULL, NULL);
+INSERT INTO public.clothing VALUES (2282, 'S', 'Tommy Hilfiger', 'Sweater', 'Navy', NULL, '803531', 7.00, NULL, 82, NULL, 'chest: 52
+length: 62
+arm: 63', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-01-23 21:33:29.179959', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2361, 'S', 'Calvin Klein', 'Yoga Pants', 'Black', NULL, '444151', 19.99, NULL, 83, NULL, 'white calvin performance everywhere
+
+waist: 32
+hips: 39
+pasadka: 25
+length: 84', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:23:03.826964', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2240, 'S', 'Calvin Klein', 'Windbreaker', 'Silver', 176, '899418', 19.99, NULL, 84, NULL, 'chest: 53
+length: 81/87', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-22 10:18:39.875125', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2186, 'L', 'Tommy Hilfiger', 'Windbreaker', 'Navy, White', 170, '686423', 32.00, NULL, 99, NULL, 'chest: 54
+length: 67
+arm: 64
+shoulders: 43', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-21 17:17:42.074489', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2136, 'L', 'Michael Kors', 'Parka', 'Black', 166, '022228', 49.99, NULL, 71, NULL, 'chest: 65
 length: 89
 arm: 65', NULL, 'men', NULL, NULL, NULL, 'ukraine', '2021-01-16 19:03:56.116596', NULL, 0.00);
@@ -2545,10 +2462,6 @@ INSERT INTO public.clothing VALUES (2164, 'M', 'DKNY', 'Windbreaker', 'Pink', NU
 INSERT INTO public.clothing VALUES (2045, 'M', 'Armani Exchange', 'Sweater', 'Navy', 156, '349512', 9.99, NULL, 60, NULL, 'chest: 50
 length: 65
 arm: 66', NULL, 'women', NULL, NULL, NULL, 'ukraine', '2021-01-08 13:31:25.877586', NULL, 6.35);
-INSERT INTO public.clothing VALUES (2188, 'N/A', 'Armani Exchange', 'Purse', 'Navy', 171, '652315', 29.99, NULL, NULL, NULL, 'letters all around
-length: 90
-height: 13
-width: 7', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-21 17:20:50.918219', NULL, NULL);
 INSERT INTO public.clothing VALUES (2242, 'M', 'Michael Kors', 'Puffy Jacket', 'Black', 177, '111733', 59.99, NULL, NULL, NULL, 'red inside
 
 chest: 56
@@ -2560,19 +2473,6 @@ INSERT INTO public.clothing VALUES (1942, 'L', 'Reebok', 'Windbreaker', 'Black',
 chest: 60
 length: 73
 arm: 70', NULL, 'men', NULL, NULL, NULL, 'ukraine', '2021-01-03 04:34:45.895469', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2013, 'M', 'Calvin Klein', 'Sweat Shirt', 'Black', 154, '796458', 14.05, NULL, NULL, NULL, '"calvin" on shoulder
-chest: 59
-length: 60/70
-arm: 43/68', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-08 12:10:04.10865', NULL, NULL);
-INSERT INTO public.clothing VALUES (2325, '8', 'Calvin Klein', 'Satin Dress', 'Grey', 185, '652264', 7.96, NULL, NULL, NULL, 'chest: 49
-hips: 51
-length: 113
-', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 14:46:06.588501', NULL, NULL);
-INSERT INTO public.clothing VALUES (2363, 'M', 'Karl Lagerfeld', 'Hoodie', 'Black', 189, 'Lore7067', 29.99, NULL, NULL, NULL, 'zipped
-
-chest: 50
-length: 58
-arm: 60', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:27:31.780369', NULL, NULL);
 INSERT INTO public.clothing VALUES (181, 'L', 'Calvin Klein', 'Sweat Shirt', 'Black', NULL, '383734', 24.99, NULL, 10, NULL, 'White "calvin klein" between two white lines on chest
 
 Sweat Suit (comes with pants)
@@ -2614,11 +2514,6 @@ Waist: 53
 Length: 58
 Arm: 44', NULL, 'women', NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:55.42306', NULL, 4.55);
 INSERT INTO public.clothing VALUES (202, 'N/A', 'Michael Kors', 'Wallet', 'Black', NULL, '445057', 19.99, 26.99, 13, 6, NULL, NULL, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:55.440121', NULL, NULL);
-INSERT INTO public.clothing VALUES (207, '1SZ', 'U.S. Polo Assn.', 'Hat', 'Grey, Pink', NULL, '749770', 9.99, NULL, 33, NULL, 'Beanie hats
-2 pack
-1 pink
-1 grey
-both sparkly', NULL, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:55.480344', NULL, NULL);
 INSERT INTO public.clothing VALUES (1195, 'XS', 'Calvin Klein', 'T-Shirt', 'Pink', 105, '860548', 6.33, NULL, NULL, 9, 'Black CK, silver letters on front', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:11.615287', NULL, NULL);
 INSERT INTO public.clothing VALUES (208, 'N/A', 'Michael Kors', 'Wallet', 'Black, Grey', NULL, '445057', 19.99, 26.99, 13, 6, NULL, NULL, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:55.488815', NULL, NULL);
 INSERT INTO public.clothing VALUES (210, 'M', 'Calvin Klein', 'Hoodie', 'Black', NULL, '913190', 24.99, NULL, 6, NULL, 'Gold "KLEIN" on chest
@@ -2645,12 +2540,6 @@ chest: 53
 length: 87
 arm: 63
 shoulders: 42', NULL, 'women', NULL, NULL, NULL, 'ukraine', '2021-01-16 14:40:27.757229', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2019, 'XS', 'Calvin Klein', 'Jacket', 'Black', 155, '015313', 20.72, NULL, 66, NULL, 'double sided
-(black on other side)
-
-chest: 51
-length: 60
-arm: 62', NULL, 'women', '20210108_120035.jpg', NULL, NULL, 'ukraine', '2021-01-08 12:15:38.325992', NULL, 0.00);
 INSERT INTO public.clothing VALUES (350, 'M', 'Calvin Klein', 'Sweat Pants', 'Black', 29, '718734', 20.19, NULL, 69, NULL, 'Men
 black stripe on side
 white letters
@@ -2666,13 +2555,6 @@ chest: 53
 length: 87
 arm: 63
 shoulders: 42', NULL, 'women', NULL, NULL, NULL, 'ukraine', '2021-01-16 14:40:29.49977', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2217, 'S', 'Tommy Hilfiger', 'Sweat Shirt', 'White', NULL, '830956', 19.99, NULL, NULL, NULL, 'flag on chest
-
-chest: 46
-length: 63
-arm: 66', NULL, 'women', NULL, NULL, NULL, NULL, '2021-01-21 17:50:53.466553', NULL, NULL);
-INSERT INTO public.clothing VALUES (2285, 'N/A', 'Calvin Klein', 'Wallet', 'Black', 182, '297731', 9.99, NULL, NULL, NULL, 'length: 11
-height: 8.5', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-23 21:36:25.771833', NULL, NULL);
 INSERT INTO public.clothing VALUES (2326, 'M', 'Calvin Klein', 'Belt', 'Black', 185, '192357', 6.12, NULL, NULL, NULL, 'double sided black/brown
 length: 105', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 14:46:46.901537', NULL, NULL);
 INSERT INTO public.clothing VALUES (2342, 'M', 'Calvin Klein', 'Sweat Pants', 'Black', 187, '750078', 19.99, NULL, NULL, NULL, 'calvin klein on side
@@ -2740,6 +2622,25 @@ length: 73
 arm: 70', NULL, 'men', 'IMG_8456.jpg', NULL, NULL, 'ukraine', '2021-01-08 10:30:28.762537', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2055, '6', 'Michael Kors', 'Jeans', 'Navy', 157, '834818', 10.00, NULL, 64, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'ukraine', '2021-01-13 11:10:31.172786', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2072, 'M', 'Calvin Klein', 'Sweat Shirt', 'White', 158, '023141', 16.00, NULL, 61, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'ukraine', '2021-01-13 11:31:03.459043', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2217, 'S', 'Tommy Hilfiger', 'Sweat Shirt', 'White', NULL, '830956', 19.99, NULL, 79, NULL, 'flag on chest
+
+chest: 46
+length: 63
+arm: 66', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-21 17:50:53.466553', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2285, 'N/A', 'Calvin Klein', 'Wallet', 'Black', 182, '297731', 9.99, NULL, 81, NULL, 'length: 11
+height: 8.5', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-23 21:36:25.771833', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2325, '8', 'Calvin Klein', 'Satin Dress', 'Grey', 185, '652264', 7.96, NULL, 82, NULL, 'chest: 49
+hips: 51
+length: 113
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 14:46:06.588501', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2188, 'N/A', 'Armani Exchange', 'Purse', 'Navy', 171, '652315', 29.99, NULL, 82, NULL, 'letters all around
+length: 90
+height: 13
+width: 7', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-21 17:20:50.918219', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2013, 'M', 'Calvin Klein', 'Sweat Shirt', 'Black', 154, '796458', 14.05, NULL, 92, NULL, '"calvin" on shoulder
+chest: 59
+length: 60/70
+arm: 43/68', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-08 12:10:04.10865', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2160, 'L', 'Calvin Klein', 'Puffy Jacket', 'Black', NULL, '309733', 56.00, NULL, 63, NULL, 'Shiny
 Red line around hood + bottom + wrists
 
@@ -2762,11 +2663,6 @@ INSERT INTO public.clothing VALUES (1205, 'XS', 'Calvin Klein', 'T-Shirt', 'Blac
 INSERT INTO public.clothing VALUES (1204, 'M', 'Calvin Klein', 'T-Shirt', 'White', 105, '893233', 12.59, NULL, NULL, 9, 'golden sign', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:19:11.697916', NULL, NULL);
 INSERT INTO public.clothing VALUES (2244, 'L', 'Tommy Hilfiger', 'Sweater', 'Navy', 177, '407347', 16.00, NULL, 68, NULL, 'deep V
 ', NULL, 'women', NULL, NULL, NULL, 'ukraine', '2021-01-22 10:26:38.285919', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2139, 'M', 'Tommy Hilfiger', 'Sweat Shirt', 'White', NULL, '830949', 19.99, NULL, NULL, NULL, 'flag on chest
-
-chest: 50
-length: 64
-arm: 70', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-16 19:09:29.06326', NULL, NULL);
 INSERT INTO public.clothing VALUES (1529, 'M', 'Levis', 'Leather Jacket', 'Green', 56, '800067', 26.99, NULL, 42, 9, 'Chest: 50
 Waist: 46
 Length: 48
@@ -2784,13 +2680,6 @@ chest: 53
 length: 87
 arm: 63
 shoulders: 42', NULL, 'women', NULL, NULL, NULL, 'ukraine', '2021-01-16 14:40:30.531596', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2365, 'L', 'Karl Lagerfeld', 'Hoodie', 'Black', 189, 'Lorh7081', 24.99, NULL, NULL, NULL, 'pictures on front', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:29:33.713489', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2286, 'N/A', 'Calvin Klein', 'Wallet', 'Black', 182, '297731', 9.99, NULL, NULL, NULL, 'length: 11
-height: 8.5', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-23 21:36:26.365103', NULL, NULL);
-INSERT INTO public.clothing VALUES (2327, 'N/A', 'Armani Exchange', 'Purse', 'Navy', 186, '652315', 26.99, NULL, NULL, NULL, 'letters all around
-length: 90
-height: 13
-width: 7', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 14:48:18.838121', NULL, 0.00);
 INSERT INTO public.clothing VALUES (1943, 'XS', 'Calvin Klein', 'Sweat Shirt', 'Grey', NULL, '883141', 20.00, NULL, NULL, NULL, 'gold CK on chest
 
 chest: 49
@@ -2911,15 +2800,6 @@ Chest: 53
 Waist: 53
 Length: 72', NULL, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:19:15.319145', NULL, NULL);
 INSERT INTO public.clothing VALUES (1219, 'S', 'Calvin Klein', 'T-Shirt', 'White', 106, '866343', 11.04, NULL, NULL, 9, 'blue city picture on chest', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:19:11.833946', NULL, NULL);
-INSERT INTO public.clothing VALUES (2366, 'S', 'Karl Lagerfeld', 'Hoodie', 'Black', 189, 'Lorh7081', 24.99, NULL, NULL, NULL, 'pictures on front', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:30:02.750147', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2257, 'XS', 'Calvin Klein', 'Jacket', 'Black', 178, '015313', 14.53, NULL, NULL, NULL, 'double sided
-(black on other side)
-
-chest: 51
-length: 60
-arm: 62', NULL, 'women', '20210108_120035.jpg', NULL, NULL, 'usa', '2021-01-22 12:50:53.199335', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2287, 'N/A', 'Calvin Klein', 'Wallet', 'Black', 182, '297731', 9.99, NULL, NULL, NULL, 'length: 11
-height: 8.5', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-23 21:36:26.988051', NULL, NULL);
 INSERT INTO public.clothing VALUES (1944, 'M', 'Calvin Klein', 'Vest Jacket', 'Green', NULL, '136093', 30.00, NULL, NULL, NULL, 'Bright green / flouresent yellow
 
 chest: 53
@@ -2940,6 +2820,21 @@ Arm: 63', NULL, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:56.109738',
 INSERT INTO public.clothing VALUES (2344, '36', 'Calvin Klein', 'Belt', 'Black', 187, '004062', 9.99, NULL, NULL, NULL, 'double sided
 
 length: 108', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:06:24.799105', NULL, NULL);
+INSERT INTO public.clothing VALUES (2365, 'L', 'Karl Lagerfeld', 'Hoodie', 'Black', 189, 'Lorh7081', 24.99, NULL, 79, NULL, 'pictures on front', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:29:33.713489', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2139, 'M', 'Tommy Hilfiger', 'Sweat Shirt', 'White', NULL, '830949', 19.99, NULL, 80, NULL, 'flag on chest
+
+chest: 50
+length: 64
+arm: 70', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-16 19:09:29.06326', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2366, 'S', 'Karl Lagerfeld', 'Hoodie', 'Black', 189, 'Lorh7081', 24.99, NULL, 80, NULL, 'pictures on front', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:30:02.750147', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2327, 'N/A', 'Armani Exchange', 'Purse', 'Navy', 186, '652315', 26.99, NULL, 81, NULL, 'letters all around
+length: 90
+height: 13
+width: 7', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 14:48:18.838121', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2286, 'N/A', 'Calvin Klein', 'Wallet', 'Black', 182, '297731', 9.99, NULL, 82, NULL, 'length: 11
+height: 8.5', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-23 21:36:26.365103', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2287, 'N/A', 'Calvin Klein', 'Wallet', 'Black', 182, '297731', 9.99, NULL, 82, NULL, 'length: 11
+height: 8.5', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-23 21:36:26.988051', NULL, 0.00);
 INSERT INTO public.clothing VALUES (262, 'S', 'Michael Kors', 'Hoodie', 'Black', NULL, '223923', 29.99, 59.44, 29, 3, 'white Michael Kors on chest
 White line at bottom
 
@@ -2983,10 +2878,6 @@ INSERT INTO public.clothing VALUES (1240, 'L', 'Levis', 'T-Shirt', 'Unknown', 10
 INSERT INTO public.clothing VALUES (1241, 'S', 'Levis', 'T-Shirt', 'Unknown', 108, '04560S', 8.00, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:12.039015', NULL, NULL);
 INSERT INTO public.clothing VALUES (1242, 'S', 'Levis', 'T-Shirt', 'Unknown', 108, '04570S', 7.99, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:12.052504', NULL, NULL);
 INSERT INTO public.clothing VALUES (1243, 'XS', 'Levis', 'Trucker Jacket', 'Unknown', 109, '0490XS', 19.99, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:12.061506', NULL, NULL);
-INSERT INTO public.clothing VALUES (1981, 'M', 'DKNY', 'Jacket', 'Black', 152, '051030', 24.99, NULL, NULL, NULL, 'With gummy signs
-chest: 56
-length: 69
-arm: 67', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-01-08 11:16:44.429432', NULL, NULL);
 INSERT INTO public.clothing VALUES (1945, 'L', 'Tommy Hilfiger', 'Windbreaker', 'Blue, Navy', NULL, '689332', 20.00, NULL, NULL, NULL, 'chest: 62
 length: 74
 arm: 70', NULL, 'men', NULL, NULL, NULL, 'ukraine', '2021-01-03 04:54:15.077932', NULL, 0.00);
@@ -3010,7 +2901,6 @@ length: 67/72
 arm: 67', NULL, 'men', NULL, NULL, NULL, 'ukraine', '2021-01-03 05:02:46.367872', NULL, 0.00);
 INSERT INTO public.clothing VALUES (1250, '28', 'Levis', 'Shorts', 'Unknown', 111, '270113', 34.65, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:12.126644', NULL, NULL);
 INSERT INTO public.clothing VALUES (1251, '27', 'Levis', 'Pants', 'Unknown', 111, '020106', 34.99, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:12.135738', NULL, NULL);
-INSERT INTO public.clothing VALUES (1257, '27', 'Levis', 'Shorts', 'Unknown', 112, '270107', 34.65, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:12.189234', NULL, NULL);
 INSERT INTO public.clothing VALUES (1258, 'S', 'Levis', 'Bodysuit', 'Unknown', 112, '870009', 3.49, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:12.197872', NULL, NULL);
 INSERT INTO public.clothing VALUES (848, 'S', 'Karl Lagerfeld', 'T-Shirt', 'White', NULL, '159784', 19.99, NULL, NULL, NULL, 'with a picture
 
@@ -3084,7 +2974,6 @@ Waist: 36
 Hips: 47
 Length: 90
 Pasadka: 23', true, 'women', NULL, NULL, NULL, 'ukraine', '2020-12-28 14:14:54.900055', NULL, 2.00);
-INSERT INTO public.clothing VALUES (1220, 'L', 'Calvin Klein', 'T-Shirt', 'Black', 106, '197945', 8.49, NULL, NULL, 9, 'city picture on chest', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:11.843012', NULL, NULL);
 INSERT INTO public.clothing VALUES (1411, 'L', 'Calvin Klein', 'Long sleeved shirt', 'White', 128, '794951', 8.83, 12.06, NULL, 10, 'SOLD TO ALLA', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:13.64799', NULL, NULL);
 INSERT INTO public.clothing VALUES (1297, 'S', 'Tommy Hilfiger', 'Sweat Shirt', 'Teal', 56, '792896', 0.00, NULL, NULL, 9, 'Chest: 49
 Waist: 47
@@ -3102,6 +2991,7 @@ Waist: 39
 Hips: 45
 Length: 95
 Pasadka: 27', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:12.608963', NULL, NULL);
+INSERT INTO public.clothing VALUES (1220, 'L', 'Calvin Klein', 'T-Shirt', 'Black', 106, '197945', 8.49, NULL, NULL, 9, 'city picture on chest', NULL, 'men', NULL, NULL, NULL, 'usa', '2020-12-21 01:19:11.843012', NULL, 0.00);
 INSERT INTO public.clothing VALUES (1305, '10', 'Ralph Lauren', 'Pants', 'White', 56, '939993', 10.00, NULL, NULL, 9, 'Waist: 44
 Hips: 54
 Length: 95
@@ -3119,7 +3009,6 @@ INSERT INTO public.clothing VALUES (1330, '???', 'Armani Exchange', 'Sweat Shirt
 INSERT INTO public.clothing VALUES (1332, '???', 'Armani Exchange', 'Sweat Shirt', 'Unknown', 60, '302644', 27.99, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:12.898003', NULL, NULL);
 INSERT INTO public.clothing VALUES (1333, '???', 'Armani Exchange', 'T-Shirt', 'Unknown', 60, '142961', 20.99, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:12.907613', NULL, NULL);
 INSERT INTO public.clothing VALUES (1334, '???', 'Armani Exchange', 'T-Shirt', 'Unknown', 60, '224604', 9.99, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:12.916133', NULL, NULL);
-INSERT INTO public.clothing VALUES (1335, '???', 'Armani Exchange', 'Sport Jacket', 'Unknown', 60, '579759', 29.99, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:12.925899', NULL, NULL);
 INSERT INTO public.clothing VALUES (1337, '???', 'Armani Exchange', 'Sport Jacket', 'Unknown', 60, '579728', 29.99, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:12.944015', NULL, NULL);
 INSERT INTO public.clothing VALUES (1340, '???', 'Armani Exchange', 'Pants', 'Unknown', 60, '954988', 14.99, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:12.970246', NULL, NULL);
 INSERT INTO public.clothing VALUES (1346, 'M', 'Calvin Klein', 'Sweat Shirt', 'White', 56, '375943', 19.99, NULL, NULL, 9, 'Ross receipt: 461442
@@ -3229,18 +3118,12 @@ INSERT INTO public.clothing VALUES (2077, '26', 'Calvin Klein', 'Jeans', 'Navy',
 INSERT INTO public.clothing VALUES (1780, '12', 'Calvin Klein', 'Dress', 'Navy', NULL, '374090', 19.99, NULL, NULL, NULL, 'with buttons
 tied sash around waist', false, NULL, NULL, NULL, NULL, NULL, '2020-12-25 02:38:20.589321', NULL, NULL);
 INSERT INTO public.clothing VALUES (1947, 'N/A', 'Tommy Hilfiger', 'Purse', 'Grey, Black', NULL, '511931', 16.99, NULL, NULL, NULL, 'grey/white/black striped', NULL, 'women', NULL, NULL, NULL, 'Ukraine', '2021-01-03 05:11:55.977965', NULL, 0.00);
-INSERT INTO public.clothing VALUES (1984, 'M', 'Tommy Hilfiger', 'Blazer', 'Black', 153, '466405', 20.00, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-08 11:35:21.424129', NULL, NULL);
-INSERT INTO public.clothing VALUES (2051, 'N/A', 'Michael Kors', 'Fanny Pack', 'White', NULL, '024720', 0.00, NULL, NULL, NULL, 'Cream colored', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-08 13:48:21.214345', NULL, 0.00);
 INSERT INTO public.clothing VALUES (1365, 'XS', 'Calvin Klein', 'Hoodie Dress', 'White', 56, '890089', 0.00, NULL, NULL, 9, 'Stripe on arms
 
 Chest: 48
 Waist: 46
 Length: 84
 Arm: 53', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:13.200967', NULL, NULL);
-INSERT INTO public.clothing VALUES (1366, '2', 'Tommy Hilfiger', 'Pants', 'Navy', 56, '688069', 0.00, NULL, NULL, 9, 'Waist: 37
-Hips: 50
-Length: 89
-Pasadka: 24', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:13.210157', NULL, NULL);
 INSERT INTO public.clothing VALUES (1367, '2', 'Tommy Hilfiger', 'Pants', 'White', 56, '687596', 0.00, NULL, NULL, 9, 'Waist: 40
 Hips: 50
 Length: 89
@@ -3302,6 +3185,11 @@ Waist: 34
 Hips: 44
 Length: 39', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:13.326992', NULL, NULL);
 INSERT INTO public.clothing VALUES (1607, 'S', 'Levis', 'T-Shirt', 'Unknown', 147, '00460S', 7.99, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:15.452509', NULL, NULL);
+INSERT INTO public.clothing VALUES (1984, 'M', 'Tommy Hilfiger', 'Blazer', 'Black', 153, '466405', 20.00, NULL, 80, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-08 11:35:21.424129', NULL, 0.00);
+INSERT INTO public.clothing VALUES (1366, '2', 'Tommy Hilfiger', 'Pants', 'Navy', 56, '688069', 15.00, NULL, 99, 9, 'Waist: 37
+Hips: 50
+Length: 89
+Pasadka: 24', NULL, 'women', NULL, NULL, NULL, 'usa', '2020-12-21 01:19:13.210157', NULL, 0.00);
 INSERT INTO public.clothing VALUES (1380, 'S', 'Calvin Klein', 'Sweat Shirt', 'Yellow', 125, '680078', 12.74, NULL, NULL, 9, 'Black & white letters
 
 Chest: 50
@@ -3488,9 +3376,6 @@ chest: 37
 length: 48
 arm: 61', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-16 19:16:09.167946', NULL, NULL);
 INSERT INTO public.clothing VALUES (2009, 'XS', 'Calvin Klein', 'Sweat Shirt', 'Black', 154, '888979', 14.05, NULL, 56, NULL, 'rhinestones', NULL, 'women', NULL, NULL, NULL, 'ukraine', '2021-01-08 12:05:38.450594', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2080, 'XS', 'Calvin Klein', 'Hoodie', 'White, Cream', 160, '432219', 21.99, NULL, NULL, NULL, 'chest: 51
-length: 61
-arm: 65', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-13 11:46:46.731701', NULL, NULL);
 INSERT INTO public.clothing VALUES (1949, 'N/A', 'Calvin Klein', 'Wallet', 'Black', NULL, '551939', 15.00, NULL, NULL, NULL, 'White CK pattern', NULL, 'women', NULL, NULL, NULL, 'Usa', '2021-01-03 05:31:57.15707', NULL, 0.00);
 INSERT INTO public.clothing VALUES (1515, 'N/A', 'Tommy Hilfiger', 'Unknown', 'Unknown', 138, '128138', 7.49, NULL, NULL, 9, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2020-12-21 01:19:14.59742', NULL, 0.00);
 INSERT INTO public.clothing VALUES (1495, '???', 'Tommy Hilfiger', 'Unknown', 'Unknown', 137, '574065', 9.59, NULL, NULL, 9, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2020-12-21 01:19:14.407217', NULL, 0.00);
@@ -3665,7 +3550,6 @@ INSERT INTO public.clothing VALUES (1637, '???', 'Calvin Klein', 'unknown', 'Unk
 INSERT INTO public.clothing VALUES (1638, '???', 'Calvin Klein', 'unknown', 'Unknown', 125, '350193', 8.49, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:15.729926', NULL, NULL);
 INSERT INTO public.clothing VALUES (1639, '???', 'Calvin Klein', 'unknown', 'Unknown', 125, '351466', 8.49, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:15.738468', NULL, NULL);
 INSERT INTO public.clothing VALUES (1640, '???', 'Calvin Klein', 'unknown', 'Unknown', 125, '794883', 8.49, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:15.747721', NULL, NULL);
-INSERT INTO public.clothing VALUES (1641, 'L', 'Calvin Klein', 'Long sleeved shirt', 'White', 125, '794951', 8.49, NULL, NULL, 9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:15.756175', NULL, NULL);
 INSERT INTO public.clothing VALUES (1642, 'L', 'Calvin Klein', 'Long sleeved shirt', 'White', 125, '794951', 8.49, NULL, NULL, 9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:15.765567', NULL, NULL);
 INSERT INTO public.clothing VALUES (1660, '2', 'Lee', 'Jeans', 'Navy', 56, '810763', 12.99, NULL, NULL, 9, 'Waist: 36
 Hips: 45
@@ -3755,11 +3639,6 @@ INSERT INTO public.clothing VALUES (1453, 'XL', 'Calvin Klein', 'Man Panties', '
 INSERT INTO public.clothing VALUES (794, 'XS', 'Calvin Klein', 'Jacket', 'Black', 54, '068998', 17.61, NULL, NULL, NULL, 'double sided', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:08:00.604', NULL, NULL);
 INSERT INTO public.clothing VALUES (1632, 'S', 'Calvin Klein', 'Swimsuit', 'Pink', 125, '661543', 8.49, NULL, NULL, 9, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2020-12-21 01:19:15.676294', NULL, 0.00);
 INSERT INTO public.clothing VALUES (1988, 'S', 'Tommy Hilfiger', 'Golfik', 'Purple', 153, '129850', 10.00, NULL, 56, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'ukraine', '2021-01-08 11:37:27.372142', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2023, 'S', 'Calvin Klein', 'Flying Blouse', 'Black', 155, '483150', 7.99, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-08 12:19:05.949577', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2083, 'S', 'Calvin Klein', 'Sweat Shirt', 'Pink', 160, '431854', 19.99, NULL, NULL, NULL, 'chest: 51
-length: 57
-arm: 69', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-13 11:48:56.799963', NULL, NULL);
-INSERT INTO public.clothing VALUES (2367, 'XS', 'Karl Lagerfeld', 'Hoodie', 'Black', 189, 'Lorh7081', 24.99, NULL, NULL, NULL, 'pictures on front', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:30:07.568326', NULL, 0.00);
 INSERT INTO public.clothing VALUES (1414, '2', 'Calvin Klein', 'Shorts', 'Black', 128, '928479', 7.06, NULL, NULL, NULL, 'waist: 32
 hips: 48
 length: 42', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:19:13.67511', NULL, NULL);
@@ -3771,6 +3650,8 @@ Waist: 52
 Length: 65', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:19:12.728496', NULL, NULL);
 INSERT INTO public.clothing VALUES (1146, 'L', 'Calvin Klein', 'T-Shirt', 'Navy', 96, '710950', 5.95, NULL, NULL, 9, 'large blue square, white letters in square', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:19:11.162384', NULL, NULL);
 INSERT INTO public.clothing VALUES (835, 'XS', 'Tommy Hilfiger', 'Sweater', 'Blue', NULL, '569580', 22.00, NULL, NULL, NULL, NULL, true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:08:00.942766', NULL, NULL);
+INSERT INTO public.clothing VALUES (1641, 'L', 'Calvin Klein', 'Long Sleeved Shirt', 'White', 125, '794951', 8.49, NULL, 81, 9, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2020-12-21 01:19:15.756175', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2367, 'XS', 'Karl Lagerfeld', 'Hoodie', 'Black', 189, 'Lorh7081', 24.99, NULL, 92, NULL, 'pictures on front', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:30:07.568326', NULL, 0.00);
 INSERT INTO public.clothing VALUES (1148, 'L', 'Calvin Klein', 'T-Shirt', 'Navy', 96, '710950', 5.95, NULL, NULL, 9, 'large blue square, white letters in square', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:19:11.18062', NULL, NULL);
 INSERT INTO public.clothing VALUES (1149, 'S', 'Calvin Klein', 'T-Shirt', 'Navy', 96, '710936', 5.95, NULL, NULL, 9, 'no tag
 large blue square with white letters', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:19:11.189994', NULL, NULL);
@@ -3805,7 +3686,6 @@ INSERT INTO public.clothing VALUES (876, 'XL', 'Calvin Klein', 'T-Shirt', 'White
 Chest: 60
 Waist: 57
 Length: 71', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:19:08.59303', NULL, NULL);
-INSERT INTO public.clothing VALUES (1102, 'L', 'Calvin Klein', 'T-Shirt', 'Black', 88, '197945', 6.37, NULL, NULL, 9, 'city picture on chest', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:19:10.741428', NULL, NULL);
 INSERT INTO public.clothing VALUES (1144, 'M', 'Calvin Klein', 'T-Shirt', 'Blue', 96, '557845', 6.71, NULL, NULL, 9, 'red square in front', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:19:11.144171', NULL, NULL);
 INSERT INTO public.clothing VALUES (1030, '6', 'Tommy Hilfiger', 'Jeans', 'Navy', 81, '411193', 15.99, NULL, NULL, NULL, 'waist: 41
 hips: 48
@@ -3827,16 +3707,7 @@ Waist: 32
 Hips: 50
 Length: 41
 Pasadka: 29', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:19:09.369356', NULL, NULL);
-INSERT INTO public.clothing VALUES (2289, 'N/A', 'Michael Kors', 'Wallet', 'Brown', 182, '096130', 39.99, NULL, NULL, NULL, 'MK everywhere
-
-length: 13
-height: 9', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-23 21:39:55.986928', NULL, NULL);
 INSERT INTO public.clothing VALUES (2223, 'M', 'Juicy Coture', 'Belt', 'Gold', NULL, '??????', 9.99, NULL, NULL, NULL, 'metallic', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-21 17:56:37.58235', NULL, NULL);
-INSERT INTO public.clothing VALUES (2329, 'M', 'Armani Exchange', 'Sweat Pants', 'Blue', 186, '968690', 26.99, NULL, NULL, NULL, 'waist: 42
-hips: 54
-pasadka: 30
-length: 105', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 14:50:13.384656', NULL, NULL);
-INSERT INTO public.clothing VALUES (2346, 'N/A', 'Calvin Klein', 'Wallet', 'Black', 187, '734519', 9.99, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:07:26.642336', NULL, 0.00);
 INSERT INTO public.clothing VALUES (253, 'M', 'Calvin Klein', 'Sweat Shirt', 'White', NULL, '488739', 24.99, NULL, 18, NULL, 'CK pattern down arms
 
 Chest: 54
@@ -3929,6 +3800,11 @@ INSERT INTO public.clothing VALUES (945, 'N/A', 'Tommy Hilfiger', 'Wallet', 'Bla
 INSERT INTO public.clothing VALUES (946, 'N/A', 'Tommy Hilfiger', 'Wallet', 'Black', 67, '629322', 14.99, 18.73, NULL, 10, 'Ross tag:  188295', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:09.278709', NULL, NULL);
 INSERT INTO public.clothing VALUES (947, 'N/A', 'Tommy Hilfiger', 'Wallet', 'Black', 67, '239323', 14.99, 18.73, NULL, 10, 'Ross tag:  188202', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:09.287185', NULL, NULL);
 INSERT INTO public.clothing VALUES (836, 'XS', 'Tommy Hilfiger', 'Sweater', 'Blue', NULL, '728659', 0.00, NULL, NULL, NULL, NULL, true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:08:00.949749', NULL, NULL);
+INSERT INTO public.clothing VALUES (1102, 'L', 'Calvin Klein', 'T-Shirt', 'Black', 88, '197945', 6.37, NULL, NULL, 9, 'city picture on chest', true, 'men', NULL, NULL, NULL, 'ukraine', '2020-12-21 01:19:10.741428', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2329, 'M', 'Armani Exchange', 'Sweat Pants', 'Blue', 186, '968690', 26.99, NULL, 89, NULL, 'waist: 42
+hips: 54
+pasadka: 30
+length: 105', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 14:50:13.384656', NULL, 0.00);
 INSERT INTO public.clothing VALUES (948, 'N/A', 'Levis', 'Wallet', 'Black', 67, '255774', 12.99, 16.23, NULL, 10, 'Ross tag:  665324', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:09.296882', NULL, NULL);
 INSERT INTO public.clothing VALUES (949, 'M', 'Calvin Klein', 'Sport Jacket', 'Black', 68, '018239', 26.99, NULL, NULL, 9, 'Burlington #: 8158
 
@@ -3991,13 +3867,6 @@ INSERT INTO public.clothing VALUES (992, '???', 'Tommy Hilfiger', 'unknown', 'Un
 INSERT INTO public.clothing VALUES (993, '???', 'Tommy Hilfiger', 'unknown', 'Unknown', 75, '687932', 11.89, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:09.736346', NULL, NULL);
 INSERT INTO public.clothing VALUES (995, '???', 'Tommy Hilfiger', 'unknown', 'Unknown', 76, '792674', 27.99, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:09.754459', NULL, NULL);
 INSERT INTO public.clothing VALUES (996, '???', 'Tommy Hilfiger', 'unknown', 'Unknown', 76, '159323', 11.19, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:09.763967', NULL, NULL);
-INSERT INTO public.clothing VALUES (2084, 'S', 'Calvin Klein', 'Sweat Pants', 'Mint', NULL, '827336', 24.99, NULL, NULL, NULL, 'Black "Calvin" on calf
-Has pockets
-
-Waist: 40
-Hips: 47
-Length: 93
-Pasadka: 25', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-13 11:54:03.434486', NULL, 0.00);
 INSERT INTO public.clothing VALUES (1834, 'S', 'Levis', 'Bodysuit', 'Red', NULL, '197596', 4.00, NULL, NULL, NULL, 'chest: 37
 length: 69', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-26 08:16:23.824073', NULL, NULL);
 INSERT INTO public.clothing VALUES (1879, 'S', 'Calvin Klein', 'Jacket', 'White', NULL, '022373', 39.99, NULL, NULL, NULL, 'delivery $4
@@ -4008,6 +3877,9 @@ waist: 42
 hips: 51
 length: 70
 arm from neck: 73', true, 'women', NULL, NULL, NULL, 'ukraine', '2021-01-01 11:02:41.978395', NULL, 0.00);
+INSERT INTO public.clothing VALUES (575, 'S', 'Calvin Klein', 'Hoodie', 'Black', 36, '962129', 14.88, NULL, NULL, NULL, 'oversized
+cropped
+big black payetki sign', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:58.68803', NULL, NULL);
 INSERT INTO public.clothing VALUES (998, 'XS', 'Tommy Hilfiger', 'Sweat Shirt', 'White', 76, '792742', 27.99, NULL, NULL, 9, '"Tommy Hilfiger" in block letters on chest
 
 Chest: 47
@@ -4154,15 +4026,9 @@ Length: 96
 Pasadka: 24', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:54.200599', NULL, NULL);
 INSERT INTO public.clothing VALUES (2274, 'XL', 'DKNY', 'Puffy Jacket', 'Green', 180, '223047', 69.99, NULL, 68, NULL, NULL, NULL, 'men', NULL, NULL, NULL, 'ukraine', '2021-01-23 20:50:05.85172', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2168, 'XS', 'Calvin Klein', 'Flying Blouse', 'White', 168, '483211', 8.49, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-21 16:53:03.646117', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2225, 'N/A', 'Michael Kors', 'Purse', 'Black', NULL, '454915', 39.99, NULL, NULL, NULL, 'leather', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-21 17:57:55.859776', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2290, 'N/A', 'Michael Kors', 'Wallet', 'White', 182, '096123', 39.99, NULL, NULL, NULL, 'MK everywhere
-
-length: 13
-height: 9', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-23 21:40:05.908982', NULL, NULL);
 INSERT INTO public.clothing VALUES (2303, 'S', 'Tommy Hilfiger', 'Windbreaker', 'Navy', 183, '405614', 23.99, NULL, NULL, NULL, 'Chest: 55
 length: 75
 arm from neck:  79', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-26 15:45:51.123106', NULL, NULL);
-INSERT INTO public.clothing VALUES (2368, 'M', 'Karl Lagerfeld', 'Hoodie', 'Black', 189, 'Lorh7081', 24.99, NULL, NULL, NULL, 'pictures on front', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:30:11.771886', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2116, 'M', 'Tommy Hilfiger', 'Vest Jacket', 'Blue', NULL, '766638', 39.99, NULL, 57, NULL, 'double sided
 
 chest: 58
@@ -4233,6 +4099,11 @@ arm: 66
 shoulders: 43', NULL, 'women', NULL, NULL, NULL, 'ukraine', '2021-01-22 10:29:28.287091', NULL, 0.00);
 INSERT INTO public.clothing VALUES (1785, 'M', 'Calvin Klein', 'Dress', 'Black', NULL, '809868', 19.99, NULL, NULL, NULL, 'sparkly overlined and underlined "calvin klein" on chest', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-25 02:52:06.711626', NULL, NULL);
 INSERT INTO public.clothing VALUES (1786, 'M', 'Calvin Klein', 'Dress', 'Lemon', NULL, '815876', 19.99, NULL, NULL, NULL, NULL, true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-25 02:54:19.027599', NULL, NULL);
+INSERT INTO public.clothing VALUES (2225, 'N/A', 'Michael Kors', 'Purse', 'Black', NULL, '454915', 39.99, NULL, 79, NULL, 'leather', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-21 17:57:55.859776', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2290, 'N/A', 'Michael Kors', 'Wallet', 'White', 182, '096123', 39.99, NULL, 80, NULL, 'MK everywhere
+
+length: 13
+height: 9', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-23 21:40:05.908982', NULL, 0.00);
 INSERT INTO public.clothing VALUES (1787, 'M', 'Calvin Klein', 'Dress', 'Deep Seawave', NULL, '821938', 19.99, NULL, NULL, NULL, 'gold buttons
 3d CK on chest', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-25 02:57:21.544615', NULL, NULL);
 INSERT INTO public.clothing VALUES (1788, 'M', 'Calvin Klein', 'Dress', 'Deep Seawave', NULL, '810277', 19.99, NULL, NULL, NULL, 'white stripe across chest', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-25 02:58:44.9391', NULL, NULL);
@@ -4320,9 +4191,7 @@ length: 93', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-13 12:01:13.011453
 INSERT INTO public.clothing VALUES (845, 'L', 'Karl Lagerfeld', 'T-Shirt', 'Black', NULL, 'RH0024', 8.49, NULL, NULL, NULL, 'golden head', true, 'women', NULL, NULL, NULL, 'ukraine', '2020-12-21 01:08:01.016905', NULL, 0.00);
 INSERT INTO public.clothing VALUES (514, '1SZ', 'Calvin Klein', 'Scarf', 'Grey', 38, '351572', 21.56, NULL, NULL, NULL, 'looks more white', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:58.159316', NULL, NULL);
 INSERT INTO public.clothing VALUES (517, '1SZ', 'Calvin Klein', 'Scarf', 'Grey', 38, '461288', 12.32, NULL, NULL, NULL, NULL, true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:58.184963', NULL, NULL);
-INSERT INTO public.clothing VALUES (575, 'S', 'Calvin Klein', 'Hoodie', 'Black', 36, '962129', 14.88, NULL, NULL, NULL, 'oversized
-cropped
-big black payetki sign', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:58.68803', NULL, NULL);
+INSERT INTO public.clothing VALUES (1748, '4', 'Calvin Klein', 'Blazer', 'Grey', NULL, '471919', 0.00, NULL, NULL, NULL, NULL, true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 09:30:49.737805', NULL, NULL);
 INSERT INTO public.clothing VALUES (587, '1SZ', 'Calvin Klein', 'Hat', 'Grey', 36, '555773', 8.92, NULL, NULL, NULL, 'beanie cap', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:58.790743', NULL, NULL);
 INSERT INTO public.clothing VALUES (703, 'XS', 'Tommy Hilfiger', 'Sweater', 'White', 42, '653763', 17.49, NULL, NULL, NULL, 'knitted
 V-neck
@@ -4422,7 +4291,6 @@ INSERT INTO public.clothing VALUES (833, 'S', 'Karl Lagerfeld', 'T-Shirt', 'Blac
 
 chest: 46
 length: 61', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:08:00.927921', NULL, NULL);
-INSERT INTO public.clothing VALUES (2291, '34X32', 'Calvin Klein', 'Jeans', 'Navy', 182, '172744', 20.00, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-23 21:41:02.772681', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2090, 'S', 'Tommy Hilfiger', 'Puffy Jacket', 'White', NULL, '172924', 67.80, NULL, NULL, NULL, 'chest: 59
 length: 60
 arm: 51/74', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-13 12:02:28.421951', NULL, NULL);
@@ -4446,8 +4314,6 @@ INSERT INTO public.clothing VALUES (1078, 'XS', 'Calvin Klein', 'T-Shirt', 'Blac
 INSERT INTO public.clothing VALUES (1147, 'S', 'Calvin Klein', 'T-Shirt', 'Navy', 96, '557234', 6.71, NULL, NULL, 9, 'large white square, blue ck', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:19:11.171973', NULL, NULL);
 INSERT INTO public.clothing VALUES (2348, 'N/A', 'Calvin Klein', 'Wallet', 'Black', 187, '297731', 9.99, NULL, NULL, NULL, 'length: 11
 height: 8.5', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:08:10.524416', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2369, 'M', 'Calvin Klein', 'Vest Jacket', 'Black', NULL, '389704', 0.00, NULL, NULL, NULL, 'chest: 55
-length: 66', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-01-31 15:31:40.455072', NULL, NULL);
 INSERT INTO public.clothing VALUES (294, '6S', 'Tommy Hilfiger', 'Sport Jacket', 'Navy, White', 25, '081573', 7.79, NULL, 7, NULL, 'Kid clothes
 red/black/blue "tommy hilfiger" everywhere
 
@@ -4465,7 +4331,6 @@ INSERT INTO public.clothing VALUES (1746, 'S', 'Levis', 'Sherpa', 'Navy', NULL, 
 Waist: 48
 Length: 58
 Arm: 56', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 09:28:50.122765', NULL, NULL);
-INSERT INTO public.clothing VALUES (1748, '4', 'Calvin Klein', 'Blazer', 'Grey', NULL, '471919', 0.00, NULL, NULL, NULL, NULL, true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 09:30:49.737805', NULL, NULL);
 INSERT INTO public.clothing VALUES (1749, 'XS', 'Levis', 'Trucker Jacket', 'Blue', NULL, '150665', 25.00, NULL, NULL, NULL, 'indigo color', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 09:31:48.768809', NULL, NULL);
 INSERT INTO public.clothing VALUES (1750, 'M', 'Levis', 'Trucker Jacket', 'Blue', NULL, '105179', 34.00, NULL, NULL, NULL, 'double sided', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 09:33:11.744298', NULL, NULL);
 INSERT INTO public.clothing VALUES (1751, 'M', 'New Balance', 'Windbreaker', 'Black', NULL, '0016', 13.00, NULL, NULL, NULL, 'stripe on sleeve', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 09:41:08.891515', NULL, NULL);
@@ -4488,10 +4353,6 @@ INSERT INTO public.clothing VALUES (1764, 'M', 'Calvin Klein', 'T-Shirt', 'Navy'
 INSERT INTO public.clothing VALUES (1765, 'L', 'Calvin Klein', 'T-Shirt', 'Black', NULL, '288650', 14.99, NULL, NULL, NULL, 'small white logo on chest', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 11:11:52.447954', NULL, NULL);
 INSERT INTO public.clothing VALUES (1766, 'M', 'Calvin Klein', 'Sweat Pants', 'White', NULL, '278602', 0.00, NULL, NULL, NULL, 'stripe on side', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 11:17:03.140706', NULL, NULL);
 INSERT INTO public.clothing VALUES (1767, 'M', 'Calvin Klein', 'Sweat Pants', 'White', NULL, '278602', 0.00, NULL, NULL, NULL, 'stripe on side', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 11:17:05.587907', NULL, NULL);
-INSERT INTO public.clothing VALUES (2172, 'XS', 'Calvin Klein', 'T-Shirt', 'Black', 168, '803668', 12.74, NULL, NULL, NULL, 'payetki sign on chest
-
-chest: 40
-length: 62', NULL, 'women', '20210108_121321.jpg', NULL, NULL, 'usa', '2021-01-21 16:56:04.030944', NULL, 0.00);
 INSERT INTO public.clothing VALUES (1755, 'L', 'Calvin Klein', 'T-Shirt', 'White', NULL, '797473', 6.59, NULL, NULL, NULL, 'large black letters
 small grey letters', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 11:00:50.330077', NULL, NULL);
 INSERT INTO public.clothing VALUES (1757, 'M', 'Calvin Klein', 'T-Shirt', 'White', NULL, '797466', 6.59, NULL, NULL, NULL, 'large black letters
@@ -4515,6 +4376,9 @@ arm: 57/74', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 09:29:52.30109
 INSERT INTO public.clothing VALUES (1734, 'S', 'Karl Lagerfeld', 'Sweat Shirt', 'Black', NULL, '347372', 0.00, NULL, NULL, NULL, 'chest: 51
 length: 61
 arm: 62', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 07:45:07.50074', NULL, NULL);
+INSERT INTO public.clothing VALUES (2291, '34X32', 'Calvin Klein', 'Jeans', 'Navy', 182, '172744', 20.00, NULL, 82, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-23 21:41:02.772681', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2369, 'M', 'Calvin Klein', 'Vest Jacket', 'Black', NULL, '389704', 0.00, NULL, 83, NULL, 'chest: 55
+length: 66', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-01-31 15:31:40.455072', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2227, 'M', 'Tommy Hilfiger', 'Golfik', 'Navy', NULL, '130467', 8.00, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-21 17:59:01.987008', NULL, 0.00);
 INSERT INTO public.clothing VALUES (1737, 'M', 'DKNY', 'Puffy Jacket', 'Black', NULL, '202714', 0.00, NULL, NULL, NULL, 'super long
 
@@ -4526,7 +4390,6 @@ INSERT INTO public.clothing VALUES (851, 'S', 'Armani Exchange', 'Fluffy Jacket'
 Waist: 53
 Length: 93
 Arm: 58', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:19:08.348872', NULL, NULL);
-INSERT INTO public.clothing VALUES (2349, 'N/A', 'Levis', 'Wallet', 'Black', 187, '290089', 12.99, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:08:50.679221', NULL, NULL);
 INSERT INTO public.clothing VALUES (1732, 'XS', 'Levis', 'Sherpa', 'Blue', NULL, '762152', 25.00, NULL, NULL, NULL, 'jean jacket
 
 chest: 43
@@ -4659,6 +4522,7 @@ hips: 46
 length: 93
 pasadka: 24', true, 'women', NULL, NULL, NULL, 'ukraine', '2020-12-23 13:28:07.121827', NULL, 0.00);
 INSERT INTO public.clothing VALUES (264, 'N/A', 'Tommy Hilfiger', 'Wallet', 'Black', NULL, '239286', 14.99, NULL, 53, 1, 'logo dot', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:55.959277', NULL, NULL);
+INSERT INTO public.clothing VALUES (2349, 'N/A', 'Levis', 'Wallet', 'Black', 187, '290089', 12.99, NULL, 76, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:08:50.679221', NULL, 0.00);
 INSERT INTO public.clothing VALUES (1832, 'M', 'Levis', 'T-Shirt', 'White', NULL, '611179', 6.99, NULL, NULL, NULL, 'sign san francisco levis on chest
 
 chest: 46
@@ -4746,6 +4610,7 @@ waist: 42
 hips: 51
 length: 70
 arm from neck: 73', true, 'women', NULL, NULL, NULL, 'ukraine', '2021-01-01 11:02:02.490369', NULL, 0.00);
+INSERT INTO public.clothing VALUES (1089, '???', 'Calvin Klein', 'unknown', 'Unknown', 87, '927915', 14.60, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:10.624438', NULL, NULL);
 INSERT INTO public.clothing VALUES (1861, 'N/A', 'Karl Lagerfeld', 'Purse', 'White', NULL, '991271', 0.00, NULL, NULL, NULL, 'was free gift
 red line + black lines + eiffel tower
 length: 21
@@ -4813,7 +4678,6 @@ Waist: 45
 Hips: 55
 Length: 100
 Pasadka: 27', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:19:12.961308', NULL, NULL);
-INSERT INTO public.clothing VALUES (2350, 'N/A', 'Levis', 'Wallet', 'Black', 187, '290089', 12.99, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:08:51.38697', NULL, NULL);
 INSERT INTO public.clothing VALUES (147, 'S', 'Calvin Klein', 'Sweat Shirt', 'Red', 17, '784912', 28.83, NULL, 27, NULL, 'Black shoulder stripe
 
 Chest: 65
@@ -4965,12 +4829,6 @@ length: 32', true, NULL, NULL, NULL, NULL, 'ukraine', '2021-01-02 07:58:30.11170
 INSERT INTO public.clothing VALUES (1915, 'L', 'Calvin Klein', 'Skirt', 'Black', NULL, '??????', 15.00, NULL, NULL, NULL, 'waist: 41
 hips: 57
 length: 80', true, NULL, NULL, NULL, NULL, 'ukraine', '2021-01-02 08:02:24.77511', NULL, NULL);
-INSERT INTO public.clothing VALUES (2026, 'XS', 'Calvin Klein', 'Sweat Shirt', 'Black', NULL, '796472', 15.99, NULL, NULL, NULL, 'stripe + "calvin" on shoulder
-
-chest: 53
-length: 58-67
-arm: 43-66', NULL, 'women', NULL, NULL, NULL, NULL, '2021-01-08 12:25:30.416915', NULL, NULL);
-INSERT INTO public.clothing VALUES (1089, '???', 'Calvin Klein', 'unknown', 'Unknown', 87, '927915', 14.60, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:10.624438', NULL, NULL);
 INSERT INTO public.clothing VALUES (1090, '???', 'Calvin Klein', 'unknown', 'Unknown', 87, '528335', 7.24, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:10.634082', NULL, NULL);
 INSERT INTO public.clothing VALUES (1731, 'S', 'Levis', 'Jean Jacket', 'Blue', NULL, '931150', 25.00, NULL, NULL, NULL, 'Women
 trucker
@@ -5017,7 +4875,6 @@ INSERT INTO public.clothing VALUES (1091, '???', 'Calvin Klein', 'unknown', 'Unk
 INSERT INTO public.clothing VALUES (1095, '???', 'Calvin Klein', 'unknown', 'Unknown', 87, '662854', 8.83, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:10.68017', NULL, NULL);
 INSERT INTO public.clothing VALUES (1096, '???', 'Calvin Klein', 'unknown', 'Unknown', 87, '528472', 9.69, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:10.688749', NULL, NULL);
 INSERT INTO public.clothing VALUES (1097, '???', 'Calvin Klein', 'unknown', 'Unknown', 87, '847987', 12.26, NULL, NULL, 9, '', NULL, NULL, NULL, NULL, NULL, NULL, '2020-12-21 01:19:10.697462', NULL, NULL);
-INSERT INTO public.clothing VALUES (2351, 'N/A', 'Levis', 'Wallet', 'Black', 187, '290089', 12.99, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:08:52.091738', NULL, NULL);
 INSERT INTO public.clothing VALUES (1331, 'N/A', 'Armani Exchange', 'Bag', 'Black', 60, '767493', 35.00, NULL, 74, 9, NULL, NULL, 'women', NULL, NULL, NULL, 'ukraine', '2020-12-21 01:19:12.889732', NULL, 4.63);
 INSERT INTO public.clothing VALUES (295, '4', 'Levis', 'Hoodie', 'Grey, Navy, Red', NULL, '050015', 19.99, NULL, 7, NULL, 'Kid clothes
 3 piece set
@@ -5068,6 +4925,7 @@ pink stripe on side
 Waist: 30
 Length: 70', NULL, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:56.279241', NULL, NULL);
 INSERT INTO public.clothing VALUES (529, '38', 'Levis', 'Belt', 'Brown', 39, '294742', 10.39, 14.04, 32, 7, NULL, NULL, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:58.290209', NULL, NULL);
+INSERT INTO public.clothing VALUES (2351, 'N/A', 'Levis', 'Wallet', 'Black', 187, '290089', 12.99, NULL, 96, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:08:52.091738', NULL, 0.00);
 INSERT INTO public.clothing VALUES (300, '6', 'Tommy Hilfiger', 'Dress', 'Blue, Pink', NULL, '238688', 12.99, NULL, 7, NULL, 'Kids clothes
 2 pieces
 Pink dress + blue flowery leggings
@@ -5914,7 +5772,6 @@ Chest: 52
 Waist: 49
 Length: 75
 Arm: 73', NULL, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:59.791563', NULL, NULL);
-INSERT INTO public.clothing VALUES (2131, 'L', 'Michael Kors', 'Sweat Shirt', 'Black', 165, '835308', 20.00, NULL, 64, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'ukraine', '2021-01-16 18:57:58.715758', NULL, 0.00);
 INSERT INTO public.clothing VALUES (688, 'XXS', 'Tommy Hilfiger', 'Sweat Pants', 'Navy', 45, '791479', 13.99, NULL, 72, NULL, 'red/white waist-band
 red/white Hilfiger on ankle
 
@@ -6089,12 +5946,6 @@ length: 75
 arm: 62', NULL, 'women', NULL, NULL, NULL, 'ukraine', '2020-12-21 01:08:00.654626', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2033, '28', 'Armani Exchange', 'Jeans', 'Navy', 162, '371378', 39.99, NULL, 58, NULL, 'super skinny
 button fly', NULL, 'women', 'IMG_8469.jpg', NULL, NULL, 'ukraine', '2021-01-08 13:20:43.491672', NULL, 0.00);
-INSERT INTO public.clothing VALUES (796, 'XS', 'Calvin Klein', 'Jacket', 'Black', 54, '015313', 17.61, NULL, 58, 1, 'double sided
-(black on other side)
-
-chest: 51
-length: 60
-arm: 62', NULL, 'women', '20210108_120035.jpg', NULL, NULL, 'ukraine', '2020-12-21 01:08:00.621427', NULL, 0.00);
 INSERT INTO public.clothing VALUES (1967, 'L', 'Tommy Hilfiger', 'Free Sweater', 'Black', 150, '415750', 15.99, NULL, 62, NULL, 'chest: 55
 length: 76
 arm: 74', NULL, 'men', 'IMG_8458.jpg', NULL, NULL, 'ukraine', '2021-01-08 10:33:31.501853', NULL, 0.00);
@@ -6141,12 +5992,6 @@ Waist: 55
 Length: 90
 Arm: 62', NULL, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:19:08.583089', NULL, NULL);
 INSERT INTO public.clothing VALUES (2101, '6', 'Armani Exchange', 'Blazer', 'Black', 162, '365742', 96.00, NULL, 58, NULL, 'white stripe on side', NULL, 'women', NULL, NULL, NULL, 'ukraine', '2021-01-16 14:26:14.078811', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2004, 'XS', 'Calvin Klein', 'Jacket', 'Black', 154, '015313', 18.21, NULL, 58, NULL, 'double sided
-(black on other side)
-
-chest: 51
-length: 60
-arm: 62', NULL, 'women', '20210108_120035.jpg', NULL, NULL, 'ukraine', '2021-01-08 11:58:39.650258', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2305, 'XS', 'Tommy Hilfiger', 'Hoodie', 'Navy, Red, White', NULL, '652148', 19.00, NULL, 72, NULL, 'Tommy Jeans
 Navy front
 red/white back
@@ -6383,6 +6228,7 @@ INSERT INTO public.clothing VALUES (2208, 'XXS', 'DKNY', 'T-Shirt', 'White', 173
 
 chest: 40
 length: 61', NULL, 'women', NULL, NULL, NULL, 'ukraine', '2021-01-21 17:39:54.27652', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2270, 'S', 'DKNY', 'Puffy Jacket', 'Green', 180, '273816', 59.99, NULL, 68, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'ukraine', '2021-01-23 20:43:21.495239', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2121, 'L', 'Calvin Klein', 'Sweat Pants', 'Black', 163, '471614', 19.99, NULL, 73, NULL, 'Calvin in front
 Klein on back
 non-sewn waist
@@ -6470,6 +6316,7 @@ waist: 40
 hips:  51
 pasadka: 25
 length: 95', NULL, 'women', NULL, NULL, NULL, 'ukraine', '2021-01-16 18:43:12.346528', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2131, 'L', 'Michael Kors', 'Sweat Shirt', 'Black', 165, '835308', 20.00, NULL, 64, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'ukraine', '2021-01-16 18:57:58.715758', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2153, 'S', 'DKNY', 'Puffy Jacket', 'Grey', NULL, '391251', 49.99, NULL, 65, NULL, 'from costco
 
 chest: 53
@@ -7198,7 +7045,6 @@ Length: 64
 Arm: 64', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:19:16.010798', NULL, NULL);
 INSERT INTO public.clothing VALUES (2015, 'N/A', 'Calvin Klein', 'Bag', 'Black', 155, '269452', 15.99, NULL, 72, NULL, 'Width: 47
 Height: 30', NULL, 'women', NULL, NULL, NULL, 'ukraine', '2021-01-08 12:12:37.152495', NULL, 0.00);
-INSERT INTO public.clothing VALUES (591, 'S', 'Tommy Hilfiger', 'Sweater', 'Red', NULL, '398947', 15.00, NULL, 19, NULL, 'circle logo sign on chest', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:58.822766', NULL, NULL);
 INSERT INTO public.clothing VALUES (1709, 'L', 'Calvin Klein', 'Sweat Pants', 'White', 56, '790647', 19.99, NULL, 48, 9, 'words down leg
 "calvin klein performance" square
 
@@ -7325,7 +7171,6 @@ INSERT INTO public.clothing VALUES (67, 'S', 'Calvin Klein', 'Sweat Shirt', 'Pur
 Fluffy
 Belly pocket', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:54.226584', NULL, NULL);
 INSERT INTO public.clothing VALUES (2271, 'L', 'DKNY', 'Puffy Jacket', 'Green', 180, '223054', 69.99, NULL, 68, NULL, NULL, NULL, 'men', NULL, NULL, NULL, 'ukraine', '2021-01-23 20:45:29.189483', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2270, 'S', 'DKNY', 'Puffy Jacket', 'Green', 180, '273816', 59.99, NULL, 68, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'ukraine', '2021-01-23 20:43:21.495239', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2162, 'XS', 'DKNY', 'Windbreaker', 'Purple', NULL, '525646', 34.99, NULL, 67, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'ukraine', '2021-01-18 16:08:16.135473', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2163, 'S', 'DKNY', 'Windbreaker', 'Pink', NULL, '526438', 34.99, NULL, 67, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'ukraine', '2021-01-18 16:09:03.204477', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2221, 'L', 'Michael Kors', 'Sweat Shirt', 'Blue', NULL, '788512', 20.00, NULL, 67, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'ukraine', '2021-01-21 17:54:46.523404', NULL, 0.00);
@@ -7575,6 +7420,7 @@ chest: 50
 length: 59
 arm: 65', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:58.865053', NULL, NULL);
 INSERT INTO public.clothing VALUES (615, 'N/A', 'Calvin Klein', 'Wallet', 'Black', NULL, '0567', 14.99, 38.46, 23, 18, 'sold for 1100', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:59.029034', NULL, NULL);
+INSERT INTO public.clothing VALUES (591, 'S', 'Tommy Hilfiger', 'Sweater', 'Red', NULL, '398947', 15.00, NULL, 19, NULL, 'circle logo sign on chest', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:58.822766', NULL, NULL);
 INSERT INTO public.clothing VALUES (589, 'N/A', 'Armani Exchange', 'Purse', 'Pink', NULL, '119288', 29.99, NULL, 19, NULL, NULL, true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:58.807078', NULL, NULL);
 INSERT INTO public.clothing VALUES (570, 'S', 'Michael Kors', 'Sweater', 'White', NULL, '067841', 24.99, NULL, 19, NULL, 'knitted
 long neck', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:58.647887', NULL, NULL);
@@ -7974,12 +7820,6 @@ chest: 59
 length: 89
 arm: 65
 shoulders: 46', NULL, 'women', NULL, NULL, NULL, 'ukraine', '2021-01-22 10:29:40.541555', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2394, 'S', 'Bebe', 'Sport Pants', 'Black', 193, '618910', 14.99, NULL, NULL, NULL, 'Pink letters
-
-waist: 37
-hips: 48
-pasadka: 26
-length: 97', NULL, 'women', '16127334670395834364464387390766.jpg', NULL, NULL, 'usa', '2021-02-07 21:31:27.737062', NULL, 0.00);
 INSERT INTO public.clothing VALUES (1695, 'M', 'Calvin Klein', 'Sweat Shirt', 'Black', 56, '687169', 24.99, NULL, 47, 9, 'Long neck
 Big white letters on chest
 small "calvin klein performance" tag on bottom corner
@@ -8154,23 +7994,20 @@ hips: 50
 pasadka: 27
 length: 102', true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-21 01:19:09.679595', NULL, NULL);
 INSERT INTO public.clothing VALUES (1876, 'M', 'Calvin Klein', 'Sweat Shirt', 'Red', NULL, '789833', 20.00, NULL, 55, 1, NULL, true, NULL, NULL, NULL, NULL, 'ukraine', '2020-12-29 01:16:41.42978', NULL, NULL);
-INSERT INTO public.clothing VALUES (1992, 'S', 'Calvin Klein', 'Belt', 'Brown', 154, '268656', 3.51, NULL, 57, NULL, 'Logo belt
-length: 95', NULL, 'women', '20210108_114751.jpg', NULL, NULL, 'ukraine', '2021-01-08 11:48:15.659857', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2021, 'M', 'Calvin Klein', 'Skirt', 'Black', 155, '659324', 10.39, NULL, 62, NULL, 'waist: 38
 hips: 51
 length: 79', NULL, 'women', NULL, NULL, NULL, 'ukraine', '2021-01-08 12:17:35.474544', NULL, 0.00);
 INSERT INTO public.clothing VALUES (1092, 'M', 'Calvin Klein', 'T-Shirt', 'Pink', 87, '860524', 6.13, NULL, 63, 9, NULL, NULL, 'women', NULL, NULL, NULL, 'ukraine', '2020-12-21 01:19:10.651744', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2226, 'L', 'Michael Kors', 'Polo', 'Navy', NULL, '833878', 19.99, NULL, 74, NULL, 'chest: 56
+length: 74
+', NULL, 'men', 'man-placeholder.jpeg', NULL, NULL, 'ukraine', '2021-01-21 17:58:36.125285', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2385, 'M', 'Calvin Klein', 'Dress', 'White', 191, '404377', 24.99, NULL, NULL, NULL, 'red sign on chest
 chest: 52
 length: 91
 arm: 63
 ', NULL, 'women', '16127326474833296933108804943681.jpg', NULL, NULL, 'usa', '2021-02-07 21:06:12.890889', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2226, 'L', 'Michael Kors', 'Polo', 'Navy', NULL, '833878', 19.99, NULL, 74, NULL, 'chest: 56
-length: 74
-', NULL, 'men', '1612740090674613294529425331507.jpg', NULL, NULL, 'ukraine', '2021-01-21 17:58:36.125285', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2390, 'S', 'Calvin Klein', 'Dress', 'Pink', 192, '117703', 24.99, NULL, NULL, NULL, 'Chest: 49
-length: 83
-', NULL, 'women', '16127328412493709883402644476038.jpg', NULL, NULL, 'usa', '2021-02-07 21:21:08.664793', NULL, 0.00);
+INSERT INTO public.clothing VALUES (1992, 'S', 'Calvin Klein', 'Belt', 'Brown', 154, '268656', 3.51, NULL, 57, NULL, 'Logo belt
+length: 95', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'ukraine', '2021-01-08 11:48:15.659857', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2391, 'S', 'Calvin Klein', 'Hoodie', 'Blue', 192, '281969', 20.00, NULL, NULL, NULL, 'chest: 53
 length: 69
 arm: 65', NULL, 'men', '16127329327005920896725158775847.jpg', NULL, NULL, 'usa', '2021-02-07 21:22:48.30106', NULL, 0.00);
@@ -8184,11 +8021,15 @@ pinky-goldish zipper
 chest: 51
 length: 59
 arm: 58', NULL, 'women', '16127333325836375940055349817184.jpg', NULL, NULL, 'usa', '2021-02-07 21:29:11.064354', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2395, 'M', 'Calvin Klein', 'Leggings', 'Black', 193, '444144', 19.99, NULL, NULL, NULL, 'calvin klein all around
+INSERT INTO public.clothing VALUES (2394, 'S', 'Bebe', 'Sport Pants', 'Black', 193, '618910', 14.99, NULL, NULL, NULL, 'Pink letters
 
-waist: 35
-hips: 41
-length: 85', NULL, 'women', '16127336251614305439435489802899.jpg', NULL, NULL, 'usa', '2021-02-07 21:34:12.905365', NULL, 0.00);
+waist: 37
+hips: 48
+pasadka: 26
+length: 97', NULL, 'women', '16127334670395834364464387390766.jpg', NULL, NULL, 'usa', '2021-02-07 21:31:27.737062', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2426, 'L', 'Tommy Hilfiger', 'Free Sweater', 'Navy', 195, '415965', 15.99, NULL, 76, NULL, 'chest: 55
+length: 76
+arm: 74', NULL, 'men', '16127371337097869907532792535466.jpg', NULL, NULL, 'usa', '2021-02-07 22:33:07.225044', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2396, 'S', 'Bebe', 'Hoodie', 'Black', 193, '621309', 14.99, NULL, NULL, NULL, 'pink letters
 
 chest: 45
@@ -8207,32 +8048,29 @@ length: 100', NULL, 'women', '16127339854642898703682183927395.jpg', NULL, NULL,
 INSERT INTO public.clothing VALUES (2081, 'M', 'Calvin Klein', 'Sweat Shirt', 'Pink', 160, '431847', 19.99, NULL, 70, NULL, 'chest: 53
 length: 60
 arm: 70', NULL, 'women', '16127341694643817690240609785700.jpg', NULL, NULL, 'ukraine', '2021-01-13 11:47:54.209568', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2399, 'M', 'Calvin Klein', 'Sweat Shirt', 'Pink', 193, '431847', 19.99, NULL, NULL, NULL, 'chest: 53
-length: 60
-arm: 70', NULL, 'women', '16127341694643817690240609785700.jpg', NULL, NULL, 'usa', '2021-02-07 21:43:16.647575', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2400, '6', 'Tommy Hilfiger', 'Flip Flops', 'Black', 193, '859438', 14.99, NULL, NULL, NULL, 'length: 23.5
-', NULL, 'women', '16127343103131999065172885378352.jpg', NULL, NULL, 'usa', '2021-02-07 21:45:32.112502', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2415, 'M', 'Michael Kors', 'Polo Shirt', 'Navy', 194, '833861', 19.99, NULL, 82, NULL, 'Michael Kors on shoulder
+
+chest: 52
+length: 70', NULL, 'men', '16127362796235388303206551532742.jpg', NULL, NULL, 'usa', '2021-02-07 22:17:03.42677', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2424, 'S', 'Tommy Hilfiger', 'Sweater', 'Red', 195, '398947', 15.99, NULL, NULL, NULL, 'circle logo sign on chest
+
+chest: 38
+length: 61
+arm: 61', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-02-07 22:29:59.407008', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2402, '8', 'Tommy Hilfiger', 'Flip Flops', 'Black', 193, '859438', 14.99, NULL, NULL, NULL, 'length: 25
-', NULL, 'women', '16127343103131999065172885378352.jpg', NULL, NULL, 'usa', '2021-02-07 21:46:58.372987', NULL, 0.00);
+', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-02-07 21:46:58.372987', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2403, '7', 'Guess', 'Flip Flops', 'Black', 193, '930096', 14.99, NULL, NULL, NULL, 'length: 24.5
 burlington tag number', NULL, 'women', '16127345101208180974836176112875.jpg', NULL, NULL, 'usa', '2021-02-07 21:48:44.891322', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2404, 'S', 'Bebe', 'Sweat Pants', 'Black', 193, '618712', 14.99, NULL, NULL, NULL, 'rose-gold letters on leg
-
-waist: 38
-hips: 49
-pasadka: 27
-length: 100', NULL, 'women', '16127348598474345985805498470326.jpg', NULL, NULL, 'usa', '2021-02-07 21:53:49.908779', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2400, '6', 'Tommy Hilfiger', 'Flip Flops', 'Black', 193, '859438', 14.99, NULL, 84, NULL, 'length: 23.5
+', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-02-07 21:45:32.112502', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2405, 'S', 'Bebe', 'Hoodie', 'Green', 193, '621453', 14.99, NULL, NULL, NULL, 'gold sign on chest
 
 chest: 48
 length: 63
 arm from neck: 80', NULL, 'women', '1612735005460902481930221638250.jpg', NULL, NULL, 'usa', '2021-02-07 21:55:59.9932', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2411, 'L', 'DKNY', 'Sweat Pants', 'Black', 192, '055151', 16.99, NULL, NULL, NULL, 'white DKNY on leg
-
-Waist: 42
-hips: 58
-pasadka: 34
-length: 105', NULL, 'men', '16127357305992010544680457591424.jpg', NULL, NULL, 'usa', '2021-02-07 22:08:26.182909', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2390, 'S', 'Calvin Klein', 'Dress', 'Pink', 192, '117703', 24.99, NULL, 100, NULL, 'Chest: 49
+length: 83
+', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-02-07 21:21:08.664793', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2406, 'XS', 'Adidas', 'Sport Pants', 'Green', 193, '257883', 19.99, NULL, NULL, NULL, 'Track pants
 
 waist: 30
@@ -8246,34 +8084,31 @@ rose-gold
 chest: 48
 length: 62
 arm: 78', NULL, 'women', '16127352337354314953226527272176.jpg', NULL, NULL, 'usa', '2021-02-07 22:00:09.822027', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2408, 'M', 'Bebe', 'Hoodie', 'Black', 193, '621316', 14.99, NULL, NULL, NULL, 'pink letters
+INSERT INTO public.clothing VALUES (2395, 'M', 'Calvin Klein', 'Leggings', 'Black', 193, '444144', 19.99, NULL, 76, NULL, 'calvin klein all around
+
+waist: 35
+hips: 41
+length: 85', NULL, 'women', '16127336251614305439435489802899.jpg', NULL, NULL, 'usa', '2021-02-07 21:34:12.905365', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2408, 'M', 'Bebe', 'Hoodie', 'Black', 193, '621316', 14.99, NULL, 76, NULL, 'pink letters
 
 chest: 49
 length: 61
 arm from neck: 80', NULL, 'women', '16127337302315286166655858277419.jpg', NULL, NULL, 'usa', '2021-02-07 22:02:57.43641', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2409, 'M', 'Bebe', 'Sport Pants', 'Black', 193, '618927', 14.99, NULL, NULL, NULL, 'Pink letters
-
-waist: 40
-hips: 53
-pasadka: 30
-length: 100', NULL, 'women', '16127334670395834364464387390766.jpg', NULL, NULL, 'usa', '2021-02-07 22:04:05.380427', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2410, 'M', 'Michael Kors', 'T-Shirt', 'Navy', 193, '029518', 14.99, NULL, NULL, NULL, NULL, NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-07 22:06:49.219088', NULL, NULL);
 INSERT INTO public.clothing VALUES (2412, 'L', 'Tommy Hilfiger', 'T-Shirt', 'White', 192, '437689', 8.00, NULL, NULL, NULL, 'for mom', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-07 22:10:42.005572', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2413, 'M', 'Michael Kors', 'Polo Shirt', 'Black', 192, '773679', 19.99, NULL, NULL, NULL, 'Chest 53
-length: 70', NULL, 'men', '16127359585914794700886774429386.jpg', NULL, NULL, 'usa', '2021-02-07 22:12:15.695485', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2420, '2', 'Tommy Hilfiger', 'Dress', 'Green', 195, '198788', 26.16, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-07 22:24:27.330397', NULL, NULL);
-INSERT INTO public.clothing VALUES (2425, 'M', 'Tommy Hilfiger', 'Free Sweater', 'Navy', 195, '415958', 15.99, NULL, NULL, NULL, 'chest: 55
+INSERT INTO public.clothing VALUES (2414, 'L', 'Michael Kors', 'Polo', 'Navy', 192, '833878', 19.99, NULL, 82, NULL, 'chest: 56
+length: 74
+', NULL, 'men', 'man-placeholder.jpeg', NULL, NULL, 'usa', '2021-02-07 22:13:13.487471', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2423, 'M', 'Tommy Hilfiger', 'Sweater', 'Burgundy', 195, '394673', 15.99, NULL, NULL, NULL, 'chest: 57
+length: 67
+arm: 67
+', NULL, 'men', 'man-placeholder.jpeg', NULL, NULL, 'usa', '2021-02-07 22:29:08.938558', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2425, 'M', 'Tommy Hilfiger', 'Free Sweater', 'Navy', 195, '415958', 15.99, NULL, 88, NULL, 'chest: 55
 length: 72
 arm: 72
-', NULL, 'men', '16127371337097869907532792535466.jpg', NULL, NULL, 'usa', '2021-02-07 22:31:56.286586', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2421, '4', 'Tommy Hilfiger', 'Jeans', 'Navy', 195, '410387', 16.79, NULL, NULL, NULL, 'waist: 36
-hips: 44
-pasadka: 24
-length: 95', NULL, 'women', '16127367556216286018565076258573.jpg', NULL, NULL, 'usa', '2021-02-07 22:25:40.423059', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2415, 'M', 'Michael Kors', 'Polo Shirt', 'Navy', 194, '833861', 19.99, NULL, NULL, NULL, 'Michael Kors on shoulder
-
-chest: 52
-length: 70', NULL, 'men', '16127362796235388303206551532742.jpg', NULL, NULL, 'usa', '2021-02-07 22:17:03.42677', NULL, 0.00);
+', NULL, 'men', 'man-placeholder.jpeg', NULL, NULL, 'usa', '2021-02-07 22:31:56.286586', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2429, 'L', 'Michael Kors', 'Polo', 'Navy', 196, '833878', 19.99, NULL, 83, NULL, 'chest: 56
+length: 74
+', NULL, 'men', 'man-placeholder.jpeg', NULL, NULL, 'usa', '2021-02-07 23:21:07.16673', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2219, 'M', 'Michael Kors', 'Polo Shirt', 'Navy', NULL, '833861', 19.99, NULL, 66, NULL, 'Michael Kors on shoulder
 
 chest: 52
@@ -8281,24 +8116,17 @@ length: 70', NULL, 'men', NULL, NULL, NULL, 'ukraine', '2021-01-21 17:52:08.9467
 INSERT INTO public.clothing VALUES (2416, 'XS', 'Tommy Hilfiger', 'Hoodie', 'Pink', 194, '869112', 27.99, NULL, NULL, NULL, 'chest: 56
 length: 65
 arm: 55/77', NULL, 'women', '16127364024494123836355190584542.jpg', NULL, NULL, 'usa', '2021-02-07 22:19:48.743254', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2417, '8.5', 'Tommy Hilfiger', 'Shoes', 'Navy', 195, '230064', 21.48, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-07 22:22:40.936974', NULL, NULL);
-INSERT INTO public.clothing VALUES (2418, 'XL', 'Tommy Hilfiger', 'Dress', 'White, Navy', 195, '418577', 28.81, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-07 22:23:45.873056', NULL, NULL);
-INSERT INTO public.clothing VALUES (2419, '4', 'Tommy Hilfiger', 'Dress', 'Green', 195, '198771', 26.16, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-07 22:24:14.695053', NULL, NULL);
-INSERT INTO public.clothing VALUES (2422, 'L', 'Tommy Hilfiger', 'Free Sweater', 'Black', 195, '415750', 15.99, NULL, NULL, NULL, 'chest: 55
-length: 76
-arm: 74', NULL, 'men', 'IMG_8458.jpg', NULL, NULL, 'usa', '2021-02-07 22:26:48.223497', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2423, 'M', 'Tommy Hilfiger', 'Sweater', 'Burgundy', 195, '394673', 15.99, NULL, NULL, NULL, 'chest: 57
-length: 67
-arm: 67
-', NULL, 'men', '16127369628248351912193768802585.jpg', NULL, NULL, 'usa', '2021-02-07 22:29:08.938558', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2424, 'S', 'Tommy Hilfiger', 'Sweater', 'Red', 195, '398947', 15.99, NULL, NULL, NULL, 'circle logo sign on chest
+INSERT INTO public.clothing VALUES (2409, 'M', 'Bebe', 'Sport Pants', 'Black', 193, '618927', 14.99, NULL, 76, NULL, 'Pink letters
 
-chest: 38
-length: 61
-arm: 61', NULL, 'women', '16127370520696499252112367719583.jpg', NULL, NULL, 'usa', '2021-02-07 22:29:59.407008', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2426, 'L', 'Tommy Hilfiger', 'Free Sweater', 'Navy', 195, '415965', 15.99, NULL, NULL, NULL, 'chest: 55
-length: 76
-arm: 74', NULL, 'men', '16127371337097869907532792535466.jpg', NULL, NULL, 'usa', '2021-02-07 22:33:07.225044', NULL, 0.00);
+waist: 40
+hips: 53
+pasadka: 30
+length: 100', NULL, 'women', '16127334670395834364464387390766.jpg', NULL, NULL, 'usa', '2021-02-07 22:04:05.380427', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2413, 'M', 'Michael Kors', 'Polo Shirt', 'Black', 192, '773679', 19.99, NULL, 89, NULL, 'Chest 53
+length: 70', NULL, 'men', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-02-07 22:12:15.695485', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2399, 'M', 'Calvin Klein', 'Sweat Shirt', 'Pink', 193, '431847', 19.99, NULL, 76, NULL, 'chest: 53
+length: 60
+arm: 70', NULL, 'women', '16127341694643817690240609785700.jpg', NULL, NULL, 'usa', '2021-02-07 21:43:16.647575', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2427, 'XXS', 'Tommy Hilfiger', 'Dress', 'Pink', 195, '448802', 14.39, NULL, NULL, NULL, 'chest: 44
 length: 63/67
 arm: 59
@@ -8306,26 +8134,34 @@ arm: 59
 INSERT INTO public.clothing VALUES (2428, 'M', 'Tommy Hilfiger', 'Polo Shirt', 'White', 196, '714189', 16.00, NULL, NULL, NULL, 'chest: 52
 length: 68
 ', NULL, 'men', '16127399656127842304614525200310.jpg', NULL, NULL, 'usa', '2021-02-07 23:19:06.886444', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2414, 'L', 'Michael Kors', 'Polo', 'Navy', 192, '833878', 19.99, NULL, NULL, NULL, 'chest: 56
-length: 74
-', NULL, 'men', '1612740090674613294529425331507.jpg', NULL, NULL, 'usa', '2021-02-07 22:13:13.487471', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2417, '8.5', 'Tommy Hilfiger', 'Shoes', 'Navy', 195, '230064', 21.48, NULL, 62, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-07 22:22:40.936974', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2430, 'XS', 'Calvin Klein', 'Jacket', 'White, Black', 197, '014309', 29.61, NULL, NULL, NULL, 'cold sleeves
 
 chest: 45
 length: 61/65
 arm: 70', NULL, 'women', '16127404900395032188244021751934.jpg', NULL, NULL, 'usa', '2021-02-07 23:27:52.741235', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2429, 'L', 'Michael Kors', 'Polo', 'Navy', 196, '833878', 19.99, NULL, NULL, NULL, 'chest: 56
-length: 74
-', NULL, 'men', '1612740090674613294529425331507.jpg', NULL, NULL, 'usa', '2021-02-07 23:21:07.16673', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2431, 'M', 'Calvin Klein', 'Panties', 'White, Black', 197, '485309', 2.96, NULL, NULL, NULL, 'letters all around', NULL, 'women', '16127405797898605080834181548110.jpg', NULL, NULL, 'usa', '2021-02-07 23:29:19.190961', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2432, 'S', 'Calvin Klein', 'T-Shirt', 'Black', 197, '803651', 11.08, NULL, NULL, NULL, 'payetki sign on chest
+INSERT INTO public.clothing VALUES (2421, '4', 'Tommy Hilfiger', 'Jeans', 'Navy', 195, '410387', 16.79, NULL, 88, NULL, 'waist: 36
+hips: 44
+pasadka: 24
+length: 95', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-02-07 22:25:40.423059', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2782, 'S', 'Calvin Klein', 'Shorts', 'Black', 226, '719227', 14.99, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 06:13:45.480204', NULL, NULL);
+INSERT INTO public.clothing VALUES (2410, 'M', 'Michael Kors', 'T-Shirt', 'Navy', 193, '029518', 14.99, NULL, 82, NULL, NULL, NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-07 22:06:49.219088', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2419, '4', 'Tommy Hilfiger', 'Dress', 'Green', 195, '198771', 26.16, NULL, 82, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-07 22:24:14.695053', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2418, 'XL', 'Tommy Hilfiger', 'Dress', 'White, Navy', 195, '418577', 28.81, NULL, 82, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-07 22:23:45.873056', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2420, '2', 'Tommy Hilfiger', 'Dress', 'Green', 195, '198788', 26.16, NULL, 82, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-07 22:24:27.330397', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2727, 'N/A', 'Tommy Hilfiger', 'Hat', 'Navy', 225, '521548', 9.54, NULL, NULL, NULL, 'baseball cap', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 00:59:10.852303', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2729, 'XL', 'Tommy Hilfiger', 'Sweat Pants', 'Pink, Peach, Salmon', 225, '006578', 0.00, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 01:03:05.938712', NULL, NULL);
+INSERT INTO public.clothing VALUES (2431, 'M', 'Calvin Klein', 'Panties', 'White, Black', 197, '485309', 2.96, NULL, 92, NULL, 'letters all around', NULL, 'women', '16127405797898605080834181548110.jpg', NULL, NULL, 'usa', '2021-02-07 23:29:19.190961', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2435, 'M', 'Calvin Klein', 'T-Shirt', 'Black', 197, '803644', 11.08, NULL, 76, NULL, 'payetki sign on chest
 
-chest: 43
-length: 64', NULL, 'women', '20210108_121321.jpg', NULL, NULL, 'usa', '2021-02-07 23:31:16.857742', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2433, 'S', 'Calvin Klein', 'T-Shirt', 'Black', 197, '803651', 11.08, NULL, NULL, NULL, 'payetki sign on chest
+chest: 48
+length: 64', NULL, 'women', '20210108_121321.jpg', NULL, NULL, 'usa', '2021-02-07 23:34:33.951729', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2468, 'M', 'Michael Kors', 'Sweat Pants', 'Black, White', 201, '196632', 34.99, NULL, 77, NULL, 'White letters everywhere
 
-chest: 43
-length: 64', NULL, 'women', '20210108_121321.jpg', NULL, NULL, 'usa', '2021-02-07 23:31:41.217488', NULL, 0.00);
+waist: 39
+hips: 50
+pasadka: 36
+length: 108', NULL, 'women', '16127439231906900684497442908193.jpg', NULL, NULL, 'usa', '2021-02-08 00:27:09.211833', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2434, 'S', 'Calvin Klein', 'T-Shirt', 'Black', 197, '803651', 13.08, NULL, NULL, NULL, 'payetki sign on chest
 
 chest: 43
@@ -8334,18 +8170,19 @@ INSERT INTO public.clothing VALUES (457, 'M', 'Calvin Klein', 'T-Shirt', 'Black'
 
 chest: 48
 length: 64', true, NULL, '20210108_121321.jpg', NULL, NULL, 'ukraine', '2020-12-21 01:07:57.665528', NULL, NULL);
-INSERT INTO public.clothing VALUES (2435, 'M', 'Calvin Klein', 'T-Shirt', 'Black', 197, '803644', 11.08, NULL, NULL, NULL, 'payetki sign on chest
+INSERT INTO public.clothing VALUES (2451, 'M', 'Levis', 'Hoodie', 'Black', 200, '007904', 16.18, NULL, 76, NULL, 'Green Purple Circle
 
-chest: 48
-length: 64', NULL, 'women', '20210108_121321.jpg', NULL, NULL, 'usa', '2021-02-07 23:34:33.951729', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2437, 'M', 'Calvin Klein', 'T-Shirt', 'Black', 197, '803644', 11.08, NULL, NULL, NULL, 'payetki sign on chest
+chest: 57
+length: 62
+arm from neck: 72', NULL, 'women', '16127423470952687866028074303583.jpg', NULL, NULL, 'usa', '2021-02-07 23:59:29.912734', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2433, 'S', 'Calvin Klein', 'T-Shirt', 'Black', 197, '803651', 11.08, NULL, 77, NULL, 'payetki sign on chest
 
+chest: 43
+length: 64', NULL, 'women', '20210108_121321.jpg', NULL, NULL, 'usa', '2021-02-07 23:31:41.217488', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2457, 'XS', 'Tommy Hilfiger', 'Hoodie', 'Navy', 201, '802090', 22.99, NULL, 82, NULL, 'Tommy Jeans on chest
 chest: 48
-length: 64', NULL, 'women', '20210108_121321.jpg', NULL, NULL, 'usa', '2021-02-07 23:34:44.84493', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2436, 'M', 'Calvin Klein', 'T-Shirt', 'Black', 197, '803644', 13.08, NULL, NULL, NULL, 'payetki sign on chest
-
-chest: 48
-length: 64', NULL, 'women', '20210108_121321.jpg', NULL, NULL, 'usa', '2021-02-07 23:34:43.565608', NULL, 0.00);
+length: 58
+arm: 59', NULL, 'women', '16127430301878363190796987814342.jpg', NULL, NULL, 'usa', '2021-02-08 00:10:18.281368', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2438, 'XS', 'Calvin Klein', 'Hoodie', 'White', 197, '962082', 14.78, NULL, NULL, NULL, 'cropped
 oversized
 white payetki sign on chest
@@ -8357,43 +8194,42 @@ INSERT INTO public.clothing VALUES (2439, 'M', 'Tommy Hilfiger', 'Sweater', 'Blu
 chest: 55
 length: 65
 arm: 68', NULL, 'men', '16127412682657777504790064740275.jpg', NULL, NULL, 'usa', '2021-02-07 23:40:19.328581', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2440, 'M', 'Tommy Hilfiger', 'Sweater', 'Black', 198, '630344', 15.29, NULL, NULL, NULL, 'zipper on neck
+INSERT INTO public.clothing VALUES (2450, 'S', 'Levis', 'Hoodie', 'Black', 200, '640205', 16.18, NULL, 76, NULL, 'Green Purple Circle
+
+chest: 55
+length: 63
+arm from neck: 69', NULL, 'women', '16127423470952687866028074303583.jpg', NULL, NULL, 'usa', '2021-02-07 23:58:56.858866', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2440, 'M', 'Tommy Hilfiger', 'Sweater', 'Black', 198, '630344', 15.29, NULL, 76, NULL, 'zipper on neck
 
 chest: 50
 length: 69
 arm: 65', NULL, 'men', '16127413610477400953787870166455.jpg', NULL, NULL, 'usa', '2021-02-07 23:42:16.167203', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2441, 'M', 'Tommy Hilfiger', 'Sweater', 'Blue', 198, '680721', 15.29, NULL, NULL, NULL, 'zipper on neck
+INSERT INTO public.clothing VALUES (2437, 'M', 'Calvin Klein', 'T-Shirt', 'Black', 197, '803644', 11.08, NULL, 77, NULL, 'payetki sign on chest
 
-chest: 50
-length: 69
-arm: 65', NULL, 'men', '16127414209143547455998919331569.jpg', NULL, NULL, 'usa', '2021-02-07 23:43:29.819903', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2442, 'XL', 'Tommy Hilfiger', 'Sweater', 'White', 198, '596442', 15.29, NULL, NULL, NULL, 'zipper on neck
-
-chest: 59
-length: 75
-arm: 73', NULL, 'men', '1612741526361561748556400620610.jpg', NULL, NULL, 'usa', '2021-02-07 23:44:43.142292', NULL, 0.00);
+chest: 48
+length: 64', NULL, 'women', '20210108_121321.jpg', NULL, NULL, 'usa', '2021-02-07 23:34:44.84493', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2443, '0', 'Calvin Klein', 'Dress', 'Grey', 199, '652172', 7.93, NULL, NULL, NULL, 'mid length
 
 chest: 45
 length: 112
 hips: 45', NULL, 'women', '16127416232712202775426176329856.jpg', NULL, NULL, 'usa', '2021-02-07 23:46:24.420256', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2445, 'XS', 'Calvin Klein', 'T-Shirt', 'Black', 199, '803668', 9.15, NULL, NULL, NULL, 'payetki sign on chest
+INSERT INTO public.clothing VALUES (2436, 'M', 'Calvin Klein', 'T-Shirt', 'Black', 197, '803644', 13.08, NULL, 82, NULL, 'payetki sign on chest
 
-chest: 40
-length: 62', NULL, 'women', '20210108_121321.jpg', NULL, NULL, 'usa', '2021-02-07 23:49:19.877883', NULL, 0.00);
+chest: 48
+length: 64', NULL, 'women', '20210108_121321.jpg', NULL, NULL, 'usa', '2021-02-07 23:34:43.565608', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2446, 'XS', 'Calvin Klein', 'T-Shirt', 'Black', 199, '803668', 9.15, NULL, NULL, NULL, 'payetki sign on chest
 
 chest: 40
 length: 62', NULL, 'women', '20210108_121321.jpg', NULL, NULL, 'usa', '2021-02-07 23:49:31.614069', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2451, 'M', 'Levis', 'Hoodie', 'Black', 200, '007904', 16.18, NULL, NULL, NULL, 'Green Purple Circle
+INSERT INTO public.clothing VALUES (2441, 'M', 'Tommy Hilfiger', 'Sweater', 'Blue', 198, '680721', 15.29, NULL, 76, NULL, 'zipper on neck
 
-chest: 57
-length: 62
-arm from neck: 72', NULL, 'women', '16127423470952687866028074303583.jpg', NULL, NULL, 'usa', '2021-02-07 23:59:29.912734', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2447, 'XXS', 'Calvin Klein', 'T-Shirt', 'Black', 199, '803675', 9.15, NULL, NULL, NULL, 'payetki sign on chest
+chest: 50
+length: 69
+arm: 65', NULL, 'men', '16127414209143547455998919331569.jpg', NULL, NULL, 'usa', '2021-02-07 23:43:29.819903', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2462, 'L', 'Calvin Klein', 'T-Shirt', 'White', 201, '517107', 12.99, NULL, 81, NULL, 'a lot of letters on chest
 
-chest: 39
-length: 61', NULL, 'women', '20210108_121321.jpg', NULL, NULL, 'usa', '2021-02-07 23:49:58.65936', NULL, 0.00);
+chest: 48
+length: 67', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-02-08 00:18:07.761037', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2444, '2', 'Calvin Klein', 'Satin Dress', 'Black', 199, '646355', 7.93, NULL, NULL, NULL, 'chest: 46
 hips: 48
 length: 110', NULL, 'women', '1612741718692212138652331151983.jpg', NULL, NULL, 'usa', '2021-02-07 23:48:30.190471', NULL, 0.00);
@@ -8408,161 +8244,135 @@ waist: 38
 Hips: 49
 length to waist: 89
 length to end of pants: 99', NULL, 'women', '16127421739818055168264465895231.jpg', NULL, NULL, 'usa', '2021-02-07 23:56:05.792159', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2459, 'XS', 'Tommy Hilfiger', 'Bodysuit', 'Navy', 201, '808160', 16.99, NULL, NULL, NULL, 'Tommy Jeans on chest
-chest: 40
-length: 67
-arm: 58', NULL, 'women', '16127431187672573158365876917324.jpg', NULL, NULL, 'usa', '2021-02-08 00:12:40.214428', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2452, 'XS', 'Levis', 'Hoodie', 'Black', 200, '007898', 16.18, NULL, NULL, NULL, 'Green Purple Circle
-
-chest: 51
-length: 64
-arm from neck: 69', NULL, 'women', '16127423470952687866028074303583.jpg', NULL, NULL, 'usa', '2021-02-08 00:00:38.159804', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2450, 'S', 'Levis', 'Hoodie', 'Black', 200, '640205', 16.18, NULL, NULL, NULL, 'Green Purple Circle
-
-chest: 55
-length: 63
-arm from neck: 69', NULL, 'women', '16127423470952687866028074303583.jpg', NULL, NULL, 'usa', '2021-02-07 23:58:56.858866', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2453, 'S', 'Calvin Klein', 'Dress', 'Blue', 201, '404339', 24.99, NULL, NULL, NULL, 'chest: 50
-length: 85
-arm: 63', NULL, 'women', '16127427180663977660467234405505.jpg', NULL, NULL, 'usa', '2021-02-08 00:04:51.024993', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2454, 'XS', 'Calvin Klein', 'Dress', 'Blue', 201, '404346', 24.99, NULL, NULL, NULL, 'chest: 48
-length: 83
-arm: 63', NULL, 'women', '16127427180663977660467234405505.jpg', NULL, NULL, 'usa', '2021-02-08 00:06:02.658511', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2455, 'S', 'Calvin Klein', 'Dress', 'Blue', 201, '404339', 24.99, NULL, NULL, NULL, 'chest: 50
-length: 85
-arm: 63', NULL, 'women', '16127427180663977660467234405505.jpg', NULL, NULL, 'usa', '2021-02-08 00:06:32.955495', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2456, 'M', 'Calvin Klein', 'Dress', 'Blue', 201, '404339', 24.99, NULL, NULL, NULL, 'chest: 53
-length: 85
-arm: 64', NULL, 'women', '16127427180663977660467234405505.jpg', NULL, NULL, 'usa', '2021-02-08 00:07:39.551204', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2457, 'XS', 'Tommy Hilfiger', 'Hoodie', 'Navy', 201, '802090', 22.99, NULL, NULL, NULL, 'Tommy Jeans on chest
-chest: 48
-length: 58
-arm: 59', NULL, 'women', '16127430301878363190796987814342.jpg', NULL, NULL, 'usa', '2021-02-08 00:10:18.281368', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2458, 'S', 'Tommy Hilfiger', 'Bodysuit', 'Navy', 201, '808153', 16.99, NULL, NULL, NULL, 'Tommy Jeans on chest
-chest: 43
-length: 69
-arm: 61', NULL, 'women', '16127431187672573158365876917324.jpg', NULL, NULL, 'usa', '2021-02-08 00:11:45.626562', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2460, 'S', 'Calvin Klein', 'T-Shirt', 'White', 201, '412693', 12.99, NULL, NULL, NULL, 'Black + silver logo on chest
-chest: 42
-length: 64
-', NULL, 'women', '16127433227832576163903400965831.jpg', NULL, NULL, 'usa', '2021-02-08 00:14:56.154197', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2461, 'XS', 'Calvin Klein', 'T-Shirt', 'Black', 201, '412907', 12.99, NULL, NULL, NULL, 'White + silver logo on chest
-chest: 44
-length: 61
-', NULL, 'women', '16127434238473819388025990580600.jpg', NULL, NULL, 'usa', '2021-02-08 00:16:42.688082', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2462, 'L', 'Calvin Klein', 'T-Shirt', 'White', 201, '517107', 12.99, NULL, NULL, NULL, 'a lot of letters on chest
-
-chest: 48
-length: 67', NULL, 'women', '16127435014284053042665715719277.jpg', NULL, NULL, 'usa', '2021-02-08 00:18:07.761037', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2463, 'S', 'Calvin Klein', 'T-Shirt', 'Black', 201, '507306', 12.99, NULL, NULL, NULL, 'Circle logo
-
-chest: 43
-length: 64', NULL, 'women', '16127435847697091709814515717732.jpg', NULL, NULL, 'usa', '2021-02-08 00:19:33.456316', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2464, 'XS', 'Calvin Klein', 'Sweat Pants', 'Cream', 201, '474400', 19.99, NULL, NULL, NULL, 'white Calvin klein jeans on side
-
-waist: 36
-Hips: 46
-Length: 94
-Pasadka: 24
-', NULL, 'women', '16127437262031356994283084392005.jpg', NULL, NULL, 'usa', '2021-02-08 00:21:32.960544', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2465, 'M', 'Calvin Klein', 'Sweat Pants', 'Cream', 201, '474387', 19.99, NULL, NULL, NULL, 'white Calvin klein jeans on side
 
 waist: 42
 Hips: 53
 Length: 95
 Pasadka: 28
-', NULL, 'women', '16127437262031356994283084392005.jpg', NULL, NULL, 'usa', '2021-02-08 00:22:26.321271', NULL, 0.00);
+', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-02-08 00:22:26.321271', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2452, 'XS', 'Levis', 'Hoodie', 'Black', 200, '007898', 16.18, NULL, NULL, NULL, 'Green Purple Circle
+
+chest: 51
+length: 64
+arm from neck: 69', NULL, 'women', '16127423470952687866028074303583.jpg', NULL, NULL, 'usa', '2021-02-08 00:00:38.159804', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2445, 'XS', 'Calvin Klein', 'T-Shirt', 'Black', 199, '803668', 9.15, NULL, 82, NULL, 'payetki sign on chest
+
+chest: 40
+length: 62', NULL, 'women', '20210108_121321.jpg', NULL, NULL, 'usa', '2021-02-07 23:49:19.877883', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2458, 'S', 'Tommy Hilfiger', 'Bodysuit', 'Navy', 201, '808153', 16.99, NULL, 81, NULL, 'Tommy Jeans on chest
+chest: 43
+length: 69
+arm: 61', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-02-08 00:11:45.626562', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2453, 'S', 'Calvin Klein', 'Dress', 'Blue', 201, '404339', 24.99, NULL, 82, NULL, 'chest: 50
+length: 85
+arm: 63', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-02-08 00:04:51.024993', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2455, 'S', 'Calvin Klein', 'Dress', 'Blue', 201, '404339', 24.99, NULL, 84, NULL, 'chest: 50
+length: 85
+arm: 63', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-02-08 00:06:32.955495', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2467, 'L', 'Michael Kors', 'Sweat Pants', 'Black, White', 201, '196649', 34.99, NULL, 82, NULL, 'White letters everywhere
+
+waist: 41
+hips: 53
+pasadka: 37
+length: 110', NULL, 'women', '16127439231906900684497442908193.jpg', NULL, NULL, 'usa', '2021-02-08 00:26:06.649782', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2463, 'S', 'Calvin Klein', 'T-Shirt', 'Black', 201, '507306', 12.99, NULL, 85, NULL, 'Circle logo
+
+chest: 43
+length: 64', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-02-08 00:19:33.456316', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2459, 'XS', 'Tommy Hilfiger', 'Bodysuit', 'Navy', 201, '808160', 16.99, NULL, 88, NULL, 'Tommy Jeans on chest
+chest: 40
+length: 67
+arm: 58', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-02-08 00:12:40.214428', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2460, 'S', 'Calvin Klein', 'T-Shirt', 'White', 201, '412693', 12.99, NULL, 85, NULL, 'Black + silver logo on chest
+chest: 42
+length: 64
+', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-02-08 00:14:56.154197', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2464, 'XS', 'Calvin Klein', 'Sweat Pants', 'Cream', 201, '474400', 19.99, NULL, 81, NULL, 'white Calvin klein jeans on side
+
+waist: 36
+Hips: 46
+Length: 94
+Pasadka: 24
+', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-02-08 00:21:32.960544', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2461, 'XS', 'Calvin Klein', 'T-Shirt', 'Black', 201, '412907', 12.99, NULL, 85, NULL, 'White + silver logo on chest
+chest: 44
+length: 61
+', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-02-08 00:16:42.688082', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2454, 'XS', 'Calvin Klein', 'Dress', 'Blue', 201, '404346', 24.99, NULL, 81, NULL, 'chest: 48
+length: 83
+arm: 63', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-02-08 00:06:02.658511', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2442, 'XL', 'Tommy Hilfiger', 'Sweater', 'White', 198, '596442', 15.29, NULL, 77, NULL, 'zipper on neck
+
+chest: 59
+length: 75
+arm: 73', NULL, 'men', 'man-placeholder.jpeg', NULL, NULL, 'usa', '2021-02-07 23:44:43.142292', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2466, 'S', 'Michael Kors', 'Sweat Pants', 'Black, White', 201, '196625', 34.99, NULL, NULL, NULL, 'White letters everywhere
 
 waist: 37
 hips: 47
 pasadka: 32
 length: 107', NULL, 'women', '16127439231906900684497442908193.jpg', NULL, NULL, 'usa', '2021-02-08 00:25:06.042209', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2467, 'L', 'Michael Kors', 'Sweat Pants', 'Black, White', 201, '196649', 34.99, NULL, NULL, NULL, 'White letters everywhere
+INSERT INTO public.clothing VALUES (2456, 'M', 'Calvin Klein', 'Dress', 'Blue', 201, '404322', 24.99, NULL, 84, NULL, 'chest: 53
+length: 85
+arm: 64', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-02-08 00:07:39.551204', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2432, 'S', 'Calvin Klein', 'T-Shirt', 'Black', 197, '803651', 11.08, NULL, 76, NULL, 'payetki sign on chest
 
-waist: 41
-hips: 53
-pasadka: 37
-length: 110', NULL, 'women', '16127439231906900684497442908193.jpg', NULL, NULL, 'usa', '2021-02-08 00:26:06.649782', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2468, 'M', 'Michael Kors', 'Sweat Pants', 'Black, White', 201, '196632', 34.99, NULL, NULL, NULL, 'White letters everywhere
-
-waist: 39
-hips: 50
-pasadka: 36
-length: 108', NULL, 'women', '16127439231906900684497442908193.jpg', NULL, NULL, 'usa', '2021-02-08 00:27:09.211833', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2387, 'XS', 'Karl Lagerfeld', 'Sweat Shirt', 'Blue', 191, 'LORHS082', 24.99, NULL, NULL, NULL, 'golden glasses
-
-chest: 47
-length: 59
-arm: 58', NULL, 'women', '16127449169402883262186200824671.jpg', NULL, NULL, 'usa', '2021-02-07 21:09:03.931673', NULL, 0.00);
+chest: 43
+length: 64', NULL, 'women', '20210108_121321.jpg', NULL, NULL, 'usa', '2021-02-07 23:31:16.857742', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2470, 'S', 'Michael Kors', 'Hoodie', 'White', 201, '451700', 29.99, NULL, NULL, NULL, 'Black MK, gold rivet holes
 
 chest: 52
 length: 63
 arm: 71', NULL, 'women', '16127441634832073716976132155867.jpg', NULL, NULL, 'usa', '2021-02-08 00:29:45.377051', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2469, 'M', 'Michael Kors', 'Hoodie', 'White', 201, '451717', 29.99, NULL, NULL, NULL, 'Black MK, gold rivet holes
+INSERT INTO public.clothing VALUES (1981, 'M', 'DKNY', 'Jacket', 'Black', 152, '051030', 24.99, NULL, 78, NULL, 'With gummy signs
+chest: 56
+length: 69
+arm: 67', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-01-08 11:16:44.429432', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2473, 'S', 'Michael Kors', 'Sweat Pants', 'White', 201, '450642', 29.99, NULL, 84, NULL, 'black mk down sides
 
-chest: 55
-length: 66
-arm: 71', NULL, 'women', '16127441634832073716976132155867.jpg', NULL, NULL, 'usa', '2021-02-08 00:29:09.121508', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2471, 'L', 'Michael Kors', 'Hoodie', 'White', 201, '451724', 29.99, NULL, NULL, NULL, 'Black MK, gold rivet holes
-
-chest: 57
-length: 66
-arm: 73', NULL, 'women', '16127441634832073716976132155867.jpg', NULL, NULL, 'usa', '2021-02-08 00:30:43.406246', NULL, 0.00);
+waist: 36
+hips: 49
+length: 98
+pasadka: 27', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-02-08 00:33:27.475651', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2472, 'XS', 'Michael Kors', 'Sweat Pants', 'White', 201, '450635', 29.99, NULL, NULL, NULL, 'black mk down sides
 
 waist: 34
 hips: 46
 length: 96
 pasadka: 26', NULL, 'women', '16127443805141365644491694923073.jpg', NULL, NULL, 'usa', '2021-02-08 00:32:42.619686', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2473, 'S', 'Michael Kors', 'Sweat Pants', 'White', 201, '450642', 29.99, NULL, NULL, NULL, 'black mk down sides
-
-waist: 36
-hips: 49
-length: 98
-pasadka: 27', NULL, 'women', '16127443805141365644491694923073.jpg', NULL, NULL, 'usa', '2021-02-08 00:33:27.475651', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2474, 'M', 'Michael Kors', 'Sweat Pants', 'White', 201, '450659', 29.99, NULL, NULL, NULL, 'black mk down sides
-
-waist: 39
-hips: 52
-length: 99
-pasadka: 30', NULL, 'women', '16127443805141365644491694923073.jpg', NULL, NULL, 'usa', '2021-02-08 00:34:12.759926', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2475, 'XS', 'Karl Lagerfeld', 'Sweat Shirt', 'Blue', 201, 'LORHS045', 24.99, NULL, NULL, NULL, 'gold 3d circle
+INSERT INTO public.clothing VALUES (2010, 'S', 'Calvin Klein', 'Sweat Shirt', 'Black', 154, '796465', 14.05, NULL, 84, NULL, '"calvin" on shoulder
+chest: 58
+length: 60/70
+arm: 43/66', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-01-08 12:06:07.35519', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2781, 'M', 'Calvin Klein', 'Leggings', 'Black', 226, '394333', 19.99, NULL, 94, NULL, 'silver sign', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 06:13:24.608845', NULL, 0.00);
+INSERT INTO public.clothing VALUES (345, 'L', 'Calvin Klein', 'Belt', 'Black', 29, '192364', 7.99, NULL, 76, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2020-12-21 01:07:56.682306', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2475, 'XS', 'Karl Lagerfeld', 'Sweat Shirt', 'Blue', 201, 'LORHS045', 24.99, NULL, 77, NULL, 'gold 3d circle
 
 chest: 47
 length: 60
-arm: 57', NULL, 'women', '1612744672329393414123576465999.jpg', NULL, NULL, 'usa', '2021-02-08 00:37:30.443449', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2476, 'S', 'Karl Lagerfeld', 'Sweat Shirt', 'Blue', 201, 'LORHS045', 24.99, NULL, NULL, NULL, 'gold 3d circle
+arm: 57', NULL, 'women', '16128229865208216706195263901138.jpg', NULL, NULL, 'usa', '2021-02-08 00:37:30.443449', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2083, 'S', 'Calvin Klein', 'Sweat Shirt', 'Pink', 160, '431854', 19.99, NULL, 77, NULL, 'chest: 51
+length: 57
+arm: 69', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-13 11:48:56.799963', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2476, 'S', 'Karl Lagerfeld', 'Sweat Shirt', 'Blue', 201, 'LORHS045', 24.99, NULL, 82, NULL, 'gold 3d circle
 
 chest: 51
 length: 60
-arm: 58', NULL, 'women', '1612744672329393414123576465999.jpg', NULL, NULL, 'usa', '2021-02-08 00:38:21.895134', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2477, 'M', 'Karl Lagerfeld', 'Sweat Shirt', 'Blue', 201, 'LORHS045', 24.99, NULL, NULL, NULL, 'gold 3d circle
-
-chest: 53
-length: 61
-arm: 59', NULL, 'women', '1612744672329393414123576465999.jpg', NULL, NULL, 'usa', '2021-02-08 00:38:56.327295', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2489, 'L', 'Karl Lagerfeld', 'Sweat Shirt', 'Black, White', NULL, 'LORH7092', 22.99, NULL, NULL, NULL, 'Black sunglasses', NULL, 'women', '16127452354515948737475316405599.jpg', NULL, NULL, 'usa', '2021-02-08 01:04:27.499639', NULL, 0.00);
+arm: 58', NULL, 'women', '16128229865208216706195263901138.jpg', NULL, NULL, 'usa', '2021-02-08 00:38:21.895134', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2490, 'N/A', 'Calvin Klein', 'Backpack', 'White, Brown', 202, '271252', 59.99, NULL, NULL, NULL, 'Brown cover
 
 width: 25
 height: 30
 ', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-08 01:06:39.010361', NULL, NULL);
-INSERT INTO public.clothing VALUES (2478, 'XS', 'Karl Lagerfeld', 'Sweat Shirt', 'Blue', 201, 'LORHS082', 24.99, NULL, NULL, NULL, 'golden glasses
+INSERT INTO public.clothing VALUES (2469, 'M', 'Michael Kors', 'Hoodie', 'White', 201, '451717', 29.99, NULL, 77, NULL, 'Black MK, gold rivet holes
 
-chest: 47
-length: 59
-arm: 58', NULL, 'women', '16127449169402883262186200824671.jpg', NULL, NULL, 'usa', '2021-02-08 00:41:11.444202', NULL, 0.00);
-INSERT INTO public.clothing VALUES (2479, 'XS', 'Tommy Hilfiger', 'Vest Jacket', 'Navy', 201, '086999', 24.99, NULL, NULL, NULL, 'chest: 46
-length: 56', NULL, 'women', '16127450612274052368300008100934.jpg', NULL, NULL, 'usa', '2021-02-08 00:44:06.384975', NULL, 0.00);
+chest: 55
+length: 66
+arm: 71', NULL, 'women', '16127441634832073716976132155867.jpg', NULL, NULL, 'usa', '2021-02-08 00:29:09.121508', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2726, 'N/A', 'Tommy Hilfiger', 'Hat', 'Navy', 225, '521548', 9.54, NULL, NULL, NULL, 'baseball cap', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 00:59:10.145033', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2491, 'M', 'Calvin Klein', 'Shorts', 'Grey', 202, '975664', 12.99, NULL, NULL, NULL, 'waist: 38
 hips: 54', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-08 01:07:32.560363', NULL, NULL);
-INSERT INTO public.clothing VALUES (2480, 'S', 'Karl Lagerfeld', 'Sweat Shirt', 'Black, White', 201, 'LORH7092', 22.99, NULL, NULL, NULL, 'Black sunglasses
-
-chest: 51
-length: 63
-arm: 61', NULL, 'women', '16127452354515948737475316405599.jpg', NULL, NULL, 'usa', '2021-02-08 00:47:07.151223', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2482, 'N/A', 'Levis', 'Wallet', 'Black', 201, '544083', 12.99, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-08 00:49:58.456486', NULL, NULL);
 INSERT INTO public.clothing VALUES (2483, 'S', 'Tommy Hilfiger', 'Jacket', 'Black, Red', NULL, '346102', 25.00, NULL, NULL, NULL, 'Costco
 3 in 1
@@ -8581,11 +8391,8 @@ small ck on chest
 chest: 57
 length: 69
 arm: 66', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-08 00:58:09.368949', NULL, NULL);
-INSERT INTO public.clothing VALUES (2486, 'L', 'Tommy Hilfiger', 'Sweater', 'Tan', 194, '130160', 10.00, NULL, NULL, NULL, 'golfik
-
-chest: 51
-length: 67
-arm: 61', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-08 00:59:17.900876', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2479, 'XS', 'Tommy Hilfiger', 'Vest Jacket', 'Navy', 201, '086999', 24.99, NULL, NULL, NULL, 'chest: 46
+length: 56', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-02-08 00:44:06.384975', NULL, 0.00);
 INSERT INTO public.clothing VALUES (2487, 'S', 'Calvin Klein', 'Sweat Pants', 'Grey', 194, '503773', 19.99, NULL, NULL, NULL, 'waist: 39
 hips: 48
 pasadka: 26
@@ -8596,6 +8403,1837 @@ arm: 60', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-08 01:03:55.950421', 
 INSERT INTO public.clothing VALUES (2492, 'L', 'Calvin Klein', 'Shorts', 'Grey', 202, '975671', 12.99, NULL, NULL, NULL, 'waist: 40
 hips: 58
 length: 49', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-08 01:08:11.576423', NULL, NULL);
+INSERT INTO public.clothing VALUES (2496, 'M', 'Reebok', 'Trucker Jacket', 'Black', NULL, '123456789', 19.99, NULL, NULL, NULL, NULL, NULL, 'women', 'ck_img2.jpeg', NULL, NULL, 'usa', '2021-02-08 06:20:34.336102', NULL, NULL);
+INSERT INTO public.clothing VALUES (2477, 'M', 'Karl Lagerfeld', 'Sweat Shirt', 'Blue', 201, 'LORHS045', 24.99, NULL, 82, NULL, 'gold 3d circle
+
+chest: 53
+length: 61
+arm: 59', NULL, 'women', '16128229865208216706195263901138.jpg', NULL, NULL, 'usa', '2021-02-08 00:38:56.327295', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2471, 'L', 'Michael Kors', 'Hoodie', 'White', 201, '451724', 29.99, NULL, 82, NULL, 'Black MK, gold rivet holes
+
+chest: 57
+length: 66
+arm: 73', NULL, 'women', '16127441634832073716976132155867.jpg', NULL, NULL, 'usa', '2021-02-08 00:30:43.406246', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2422, 'L', 'Tommy Hilfiger', 'Free Sweater', 'Black', 195, '415750', 15.99, NULL, 76, NULL, 'chest: 55
+length: 76
+arm: 74', NULL, 'men', 'IMG_8458.jpg', NULL, NULL, 'usa', '2021-02-07 22:26:48.223497', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2084, 'S', 'Calvin Klein', 'Sweat Pants', 'Mint', NULL, '827336', 24.99, NULL, 76, NULL, 'Black "Calvin" on calf
+Has pockets
+
+Waist: 40
+Hips: 47
+Length: 93
+Pasadka: 25', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-13 11:54:03.434486', NULL, 0.00);
+INSERT INTO public.clothing VALUES (1966, 'S', 'Tommy Hilfiger', 'Free Sweater', 'Black', 150, '415736', 15.99, NULL, 76, NULL, 'chest: 51
+length: 69
+arm: 69', NULL, 'men', 'IMG_8457.jpg', NULL, NULL, 'usa', '2021-01-08 10:32:28.900292', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2387, 'XS', 'Karl Lagerfeld', 'Sweat Shirt', 'Blue', 191, 'LORHS082', 24.99, NULL, NULL, NULL, 'golden glasses
+
+chest: 47
+length: 59
+arm: 58', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-02-07 21:09:03.931673', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2497, '10.5', 'Nike', 'Shoes', 'Navy', NULL, '??????', 0.00, NULL, 76, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-08 23:06:30.984162', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2324, '4', 'Calvin Klein', 'Satin Dress', 'Grey', 185, '652240', 7.96, NULL, 76, NULL, 'chest: 45
+hips: 50
+length: 110
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 14:45:13.399435', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2323, '4', 'Calvin Klein', 'Satin Dress', 'Black', 185, '646362', 7.96, NULL, 76, NULL, 'chest: 45
+hips: 50
+length: 110
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 14:44:40.154555', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2023, 'S', 'Calvin Klein', 'Flying Blouse', 'Black', 155, '483150', 7.99, NULL, 76, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-08 12:19:05.949577', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2498, 'L', 'Calvin Klein', 'Hoodie', 'Blue', NULL, '289169', 23.00, NULL, 77, NULL, 'chest: 53
+length: 68
+arm: 66
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-08 23:30:46.483263', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2172, 'XS', 'Calvin Klein', 'T-Shirt', 'Black', 168, '803668', 12.74, NULL, 77, NULL, 'payetki sign on chest
+
+chest: 40
+length: 62', NULL, 'women', '20210108_121321.jpg', NULL, NULL, 'usa', '2021-01-21 16:56:04.030944', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2447, 'XXS', 'Calvin Klein', 'T-Shirt', 'Black', 199, '803675', 9.15, NULL, 77, NULL, 'payetki sign on chest
+
+chest: 39
+length: 61', NULL, 'women', '20210108_121321.jpg', NULL, NULL, 'usa', '2021-02-07 23:49:58.65936', NULL, 0.00);
+INSERT INTO public.clothing VALUES (479, 'S', 'Calvin Klein', 'Vest Jacket', 'Black, Grey', 37, '067670', 10.49, NULL, 78, NULL, 'women vest
+grey hood
+
+chest: 48
+length: 67/73', NULL, 'women', NULL, NULL, NULL, 'usa', '2020-12-21 01:07:57.849777', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2346, 'N/A', 'Calvin Klein', 'Wallet', 'Black', 187, '734519', 9.99, NULL, 78, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:07:26.642336', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2363, 'M', 'Karl Lagerfeld', 'Hoodie', 'Black', 189, 'Lore7067', 29.99, NULL, 78, NULL, 'zipped
+
+chest: 50
+length: 58
+arm: 60', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:27:31.780369', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2027, 'S', 'Calvin Klein', 'Sweat Pants', 'Black', NULL, '785414', 20.19, NULL, 78, NULL, 'stripe + "calvin" on stripe
+
+waist: 37
+hips: 47
+length: 92
+pasadka: 24', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-08 12:25:53.599038', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2007, 'S', 'Calvin Klein', 'Sweat Shirt', 'Black', 154, '796465', 14.05, NULL, 78, NULL, '"calvin" on shoulder
+chest: 58
+length: 60/70
+arm: 43/66', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-01-08 12:04:39.743902', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2486, 'L', 'Tommy Hilfiger', 'Sweater', 'Tan', 194, '130160', 10.00, NULL, 88, NULL, 'golfik
+
+chest: 51
+length: 67
+arm: 61', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-08 00:59:17.900876', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2784, '4', 'Calvin Klein', 'Dress', 'White', 227, '441068', 29.99, NULL, NULL, NULL, 'chest: 48
+length: 118
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 06:21:03.435358', NULL, NULL);
+INSERT INTO public.clothing VALUES (2783, 'XL', 'Michael Kors', 'Dress Shirt', 'Navy', 226, '056606', 19.99, NULL, 94, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 06:14:10.280727', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2841, 'S', 'Tommy Hilfiger', 'Blazer', 'Navy', NULL, '235902', 24.99, NULL, NULL, NULL, 'на пуговицах', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 03:06:46.637808', NULL, NULL);
+INSERT INTO public.clothing VALUES (2899, '---', 'Tommy Hilfiger', 'Pants', '---', 228, '025658', 11.47, NULL, 94, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:43:41.196499', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2840, 'M', 'Calvin Klein', 'Dress', 'Pink', NULL, '117697', 20.00, NULL, 99, NULL, 'ПОГ 52
+длина 87', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 03:02:47.620575', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2356, 'XS', 'Calvin Klein', 'T-Shirt', 'Black', 188, '855780', 12.74, NULL, 78, NULL, 'Gold stones "calvin klein"
+
+chest: 42
+length: 61', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:13:02.155402', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2499, 'M', 'Calvin Klein', 'Bodysuit', 'White', NULL, '079421', 0.00, NULL, 78, NULL, 'chest: 40
+length 77', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-09 19:40:20.877822', NULL, NULL);
+INSERT INTO public.clothing VALUES (2019, 'XS', 'Calvin Klein', 'Jacket', 'Black', 155, '015313', 20.72, NULL, 66, NULL, 'double sided
+(black on other side)
+
+chest: 51
+length: 60
+arm: 62', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'ukraine', '2021-01-08 12:15:38.325992', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2257, 'XS', 'Calvin Klein', 'Jacket', 'Black', 178, '015313', 14.53, NULL, NULL, NULL, 'double sided
+(black on other side)
+
+chest: 51
+length: 60
+arm: 62', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-01-22 12:50:53.199335', NULL, 0.00);
+INSERT INTO public.clothing VALUES (796, 'XS', 'Calvin Klein', 'Jacket', 'Black', 54, '015313', 17.61, NULL, 58, 1, 'double sided
+(black on other side)
+
+chest: 51
+length: 60
+arm: 62', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'ukraine', '2020-12-21 01:08:00.621427', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2004, 'XS', 'Calvin Klein', 'Jacket', 'Black', 154, '015313', 18.21, NULL, 58, NULL, 'double sided
+(black on other side)
+
+chest: 51
+length: 60
+arm: 62', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'ukraine', '2021-01-08 11:58:39.650258', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2203, 'S', 'DKNY', 'Dress Shirt', 'White', 173, '641862', 14.99, NULL, 79, NULL, 'chest: 52
+length: 66
+arm: 60', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-21 17:35:11.029441', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2368, 'M', 'Karl Lagerfeld', 'Hoodie', 'Black', 189, 'Lorh7081', 24.99, NULL, 79, NULL, 'pictures on front', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:30:11.771886', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2500, 'N/A', 'Michael Kors', 'Backpack', 'Red', NULL, '074299', 0.00, NULL, 79, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-09 19:50:53.137785', NULL, NULL);
+INSERT INTO public.clothing VALUES (2051, 'N/A', 'Michael Kors', 'Fanny Pack', 'White', NULL, '024720', 0.00, NULL, 80, NULL, 'Cream colored', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-08 13:48:21.214345', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2026, 'XS', 'Calvin Klein', 'Sweat Shirt', 'Black', NULL, '796472', 15.99, NULL, 80, NULL, 'stripe + "calvin" on shoulder
+
+chest: 53
+length: 58-67
+arm: 43-66', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-08 12:25:30.416915', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2289, 'N/A', 'Michael Kors', 'Wallet', 'Brown', 182, '096130', 39.99, NULL, 80, NULL, 'MK everywhere
+
+length: 13
+height: 9', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-23 21:39:55.986928', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2501, '???', 'Michael Kors', 'Jeans', 'Blue', NULL, '??????', 20.00, NULL, 80, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-09 19:56:09.171156', NULL, NULL);
+INSERT INTO public.clothing VALUES (2503, '2X36', 'Levis', 'Skirt', 'Blue', 203, '418189', 8.98, NULL, NULL, NULL, 'waist: 34
+hips: 46
+length: 43', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-11 23:35:32.048064', NULL, NULL);
+INSERT INTO public.clothing VALUES (2514, '8', 'Calvin Klein', 'Shoes', 'Cream', NULL, 'Allashoes1', 29.99, NULL, 82, NULL, 'high heels', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-12 02:49:50.360079', NULL, NULL);
+INSERT INTO public.clothing VALUES (2515, '7.5', 'Calvin Klein', 'Shoes', 'Cream', NULL, 'Allashoes2', 29.99, NULL, 82, NULL, 'high heels', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-12 02:50:05.067471', NULL, NULL);
+INSERT INTO public.clothing VALUES (2502, 'S', 'Levis', 'Puffy Jacket', 'Orange', 203, '660661', 41.99, NULL, 81, NULL, 'chest: 57
+length: 56
+arm: 56/70', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-11 23:34:07.081908', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2509, 'S', 'Levis', 'Puffy Jacket', 'Orange', 203, '660661', 41.99, NULL, 81, NULL, 'chest: 57
+length: 56
+arm: 56/70', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-12 01:35:06.111203', NULL, 0.00);
+INSERT INTO public.clothing VALUES (95, 'M', 'Calvin Klein', 'Sweater', 'White', NULL, '792320', 24.99, NULL, NULL, NULL, 'Long neck
+Black "Calvin" on chest
+
+Chest: 64
+Waist: 53
+Length: 61
+Arm: 40', true, 'women', NULL, NULL, NULL, 'ukraine', '2020-12-21 01:07:54.46385', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2510, 'M', 'Calvin Klein', 'Sweat Shirt', 'White', NULL, '792320', 24.99, NULL, 81, NULL, 'one level neck
+
+Long neck, "performance" tag
+large black "Calvin" on chest
+
+Chest: 64
+Waist: 54
+Length: 61
+Arm: 43', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-12 01:39:03.389079', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2080, 'XS', 'Calvin Klein', 'Hoodie', 'White, Cream', 160, '432219', 21.99, NULL, 81, NULL, 'chest: 51
+length: 61
+arm: 65', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-13 11:46:46.731701', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2511, 'XS', 'DKNY', 'Puffy Jacket', 'Black', NULL, '391336', 25.00, NULL, 81, NULL, 'from costco
+
+chest: 50
+length: 84
+arm: 63
+shoulders: 41', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-12 01:46:07.158449', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2512, 'XS', 'DKNY', 'Puffy Jacket', 'Grey', NULL, '391268', 25.00, NULL, 81, NULL, 'from costco
+
+chest: 50
+length: 84
+arm: 63
+shoulders: 41', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-12 01:46:37.494805', NULL, 0.00);
+INSERT INTO public.clothing VALUES (770, '14/16L', 'Calvin Klein', 'Hoodie', 'Pink', NULL, '488588', 13.00, NULL, 81, NULL, 'kids clothes
+14-16 years
+costco
+super furry/fluffy
+
+chest: 44
+length: 61
+arm: 68', NULL, 'women', NULL, NULL, NULL, 'usa', '2020-12-21 01:08:00.381209', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2507, 'L', 'Levis', 'Sherpa', 'White, Blue', 203, '944704', 29.99, NULL, 81, NULL, 'fluffy white on arms/body
+jean chest/neck
+
+chest: 56
+length: 61
+arm: 58', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-11 23:38:55.035006', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2506, 'S', 'Levis', 'Puffy Jacket', 'Orange', 203, '094409', 41.99, NULL, 81, NULL, 'chest: 59
+length: 61
+arm: 58/74', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-11 23:36:53.013478', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2505, 'XS', 'Levis', 'Puffy Jacket', 'Orange', 203, '094393', 41.99, NULL, 81, NULL, 'chest: 55
+length: 56
+arm: 55/70', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-11 23:36:14.740173', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2184, 'M', 'Tommy Hilfiger', 'Windbreaker', 'Blue, Navy', 170, '686348', 32.00, NULL, 81, NULL, 'chest: 51
+length: 65
+arm: 64
+shoulders: 40', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-21 17:16:31.179144', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2513, '6', 'Michael Kors', 'Shoes', 'Pink', NULL, '724129', 29.93, NULL, 81, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-12 02:02:09.609291', NULL, NULL);
+INSERT INTO public.clothing VALUES (263, 'M', 'Calvin Klein', 'Sweat Pants', 'Black', NULL, '957118', 19.99, NULL, 81, NULL, 'Calvin Klein down leg
+
+Waist: 43
+Hips: 51
+Length: 99
+Pasadka: 25', NULL, 'women', NULL, NULL, NULL, 'usa', '2020-12-21 01:07:55.950084', NULL, 0.00);
+INSERT INTO public.clothing VALUES (1335, 'XS', 'Armani Exchange', 'Jean Jacket', 'Black', 60, '579759', 29.99, NULL, 81, 9, 'glittery
+
+chest: 46
+length: 64
+arm: 57
+shoulders: 45', NULL, 'women', NULL, NULL, NULL, 'usa', '2020-12-21 01:19:12.925899', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2269, 'S', 'Tommy Hilfiger', 'Sweat Shirt', 'White', 179, '621991', 10.39, NULL, 82, NULL, 'zipper on neck
+
+chest: 50
+length: 60
+arm: 61', NULL, 'women', 'IMG_8462.jpg', NULL, NULL, 'usa', '2021-01-23 19:32:29.475175', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2103, 'N/A', 'Armani Exchange', 'Bag', 'White', 162, '786539', 39.99, NULL, 82, NULL, 'length: 42
+width: 15
+height: 24', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-16 14:34:42.300828', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2516, 'M', 'Calvin Klein', 'Hoodie', 'Black', NULL, '845433', 14.99, NULL, 82, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-12 02:53:06.640271', NULL, NULL);
+INSERT INTO public.clothing VALUES (2517, 'M', 'Calvin Klein', 'Hoodie', 'Black', NULL, '845433', 14.99, NULL, 82, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-12 02:53:08.001345', NULL, NULL);
+INSERT INTO public.clothing VALUES (2508, 'M', 'Levis', 'Puffy Jacket', 'Navy', 203, '024099', 35.99, NULL, 82, NULL, NULL, NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-11 23:43:34.714799', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2504, '2X36', 'Levis', 'Skirt', 'Blue', 203, '236168', 11.99, NULL, 82, NULL, 'waist: 34
+hips: 46
+length: 41', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-11 23:36:05.018192', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2523, 'L', 'DKNY', 'Puffy Jacket', 'Black', NULL, '391305', 25.00, NULL, 90, NULL, 'from costco
+
+chest: 59
+length: 89
+arm: 65
+shoulders: 46', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-13 02:16:10.374071', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2525, 'XS', 'DKNY', 'Puffy Jacket', 'Grey', NULL, '391268', 25.00, NULL, 100, NULL, 'from costco
+
+chest: 50
+length: 84
+arm: 63
+shoulders: 41', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-13 02:17:35.738118', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2521, 'M', 'DKNY', 'Puffy Jacket', 'Black', NULL, '391312', 25.00, NULL, NULL, NULL, 'from costco
+
+chest: 56
+length: 88
+arm: 66
+shoulders: 43', NULL, 'women', NULL, NULL, NULL, NULL, '2021-02-13 02:14:48.309937', NULL, NULL);
+INSERT INTO public.clothing VALUES (2522, 'S', 'DKNY', 'Puffy Jacket', 'Black', NULL, '391329', 25.00, NULL, NULL, NULL, 'from costco
+
+chest: 53
+length: 87
+arm: 63
+shoulders: 42', NULL, 'women', NULL, NULL, NULL, NULL, '2021-02-13 02:15:16.648173', NULL, NULL);
+INSERT INTO public.clothing VALUES (2520, 'M', 'DKNY', 'Puffy Jacket', 'Black', NULL, '391312', 25.00, NULL, 90, NULL, 'from costco
+
+chest: 56
+length: 88
+arm: 66
+shoulders: 43', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-13 02:14:37.355209', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2526, 'XS', 'Michael Kors', 'Puffy Jacket', 'Black', 204, '101406', 44.99, NULL, NULL, NULL, 'Glossy
+
+chest: 49
+length: 69
+arm: 62
+shoulders: 40', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-13 02:26:48.962824', NULL, NULL);
+INSERT INTO public.clothing VALUES (2528, 'S', 'DKNY', 'Sweat Shirt', 'White', 204, '525464', 17.99, NULL, NULL, NULL, 'black DKNY on chest
+
+chest: 57
+length: 54
+arm: 50/73', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-13 02:29:35.213583', NULL, NULL);
+INSERT INTO public.clothing VALUES (2529, 'M', 'Bebe', 'Hoodie', 'Black', 204, '621910', 16.99, NULL, 84, NULL, 'rose-gold zipper and letters
+
+chest: 50
+length: 62
+arm: 78', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-13 02:31:07.613712', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2524, 'XS', 'DKNY', 'Puffy Jacket', 'Grey', NULL, '391268', 25.00, NULL, 84, NULL, 'from costco
+
+chest: 50
+length: 84
+arm: 63
+shoulders: 41', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-13 02:17:34.753047', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2518, 'S', 'DKNY', 'Puffy Jacket', 'Black', NULL, '391329', 25.00, NULL, 84, NULL, 'from costco
+
+chest: 53
+length: 87
+arm: 63
+shoulders: 42', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-13 02:14:16.17618', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2519, 'S', 'DKNY', 'Puffy Jacket', 'Black', NULL, '391329', 25.00, NULL, 90, NULL, 'from costco
+
+chest: 53
+length: 87
+arm: 63
+shoulders: 42', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-13 02:14:29.596996', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2549, 'M', 'Calvin Klein', 'T-Shirt', 'Black', 207, '534982', 12.99, NULL, 84, NULL, 'white calvin on chest
+chest: 48
+length: 62', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:26:07.389822', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2530, 'M', 'Bebe', 'Sweat Pants', 'Black', 204, '618729', 14.99, NULL, 84, NULL, 'rose-gold letters
+
+waist: 39
+hips: 51
+pasadka: 27
+length: 100', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-13 02:32:09.309843', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2533, 'S', 'Calvin Klein', 'No Fleece Cold Pants', 'Black', 205, '473618', 19.99, NULL, NULL, NULL, 'white calvin klein jeans on  calf
+
+waist: 37
+hips: 47
+pasadka: 25
+length: 95', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-13 02:46:35.146392', NULL, NULL);
+INSERT INTO public.clothing VALUES (2534, 'M', 'Calvin Klein', 'Sweat Pants', 'Blue', 205, '474530', 19.99, NULL, NULL, NULL, 'blue like jeans
+
+waist: 41
+hips: 53
+pasadka: 27
+length: 95
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-13 02:48:16.506146', NULL, NULL);
+INSERT INTO public.clothing VALUES (2536, 'S', 'Michael Kors', 'Puffy Jacket', 'Brown', 206, '280378', 70.00, NULL, NULL, NULL, 'chest: 52
+length: 74
+arm: 64', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:02:16.127362', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2537, 'XS', 'Michael Kors', 'Puffy Jacket', 'White', 206, '280316', 70.00, NULL, NULL, NULL, 'chest: 50
+length: 71
+arm: 60', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:04:22.742717', NULL, NULL);
+INSERT INTO public.clothing VALUES (2538, 'M', 'Michael Kors', 'Windbreaker', 'Black', 206, '938271', 40.00, NULL, NULL, NULL, 'hooded
+short
+white letters
+chest: 56
+length: 53
+arm: 60', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:05:35.780631', NULL, NULL);
+INSERT INTO public.clothing VALUES (2539, 'XS', 'Michael Kors', 'Puffy Jacket', 'Black', 206, '280262', 70.00, NULL, NULL, NULL, 'chest: 50
+length: 71
+arm: 60', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:06:40.244292', NULL, NULL);
+INSERT INTO public.clothing VALUES (2541, 'XS', 'Michael Kors', 'Sweat Pants', 'Black', 207, '450536', 29.99, NULL, NULL, NULL, 'white MK stripe on sides
+waist: 35
+hips: 47
+pasadka: 26
+length: 96', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:17:12.245477', NULL, NULL);
+INSERT INTO public.clothing VALUES (2550, 'M', 'Calvin Klein', 'T-Shirt', 'Blush, Pink', 207, '425341', 12.99, NULL, 85, NULL, 'white calvin on chest
+chest: 48
+length: 62', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:26:37.010539', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2545, 'M', 'Tommy Hilfiger', 'T-Shirt', 'Black', 207, '307364', 12.99, NULL, 83, NULL, 'block letter "tommy hilfiger" on chest
+chest: 52
+length: 63', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:22:30.480575', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2554, 'M', 'Calvin Klein', 'Leggings', 'Black', 207, '423439', 19.99, NULL, NULL, NULL, 'grey letters
+
+waist: 35
+hips: 43
+pasadka: 26
+length: 80', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:32:49.114858', NULL, NULL);
+INSERT INTO public.clothing VALUES (2555, 'M', 'Calvin Klein', 'Leggings', 'Black', 207, '036905', 19.99, NULL, NULL, NULL, 'white words everywhere
+vertical rubber-band on calf
+waist: 35
+hips: 42
+pasadka: 23
+length: 80', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:34:14.314931', NULL, NULL);
+INSERT INTO public.clothing VALUES (2531, 'S', 'Karl Lagerfeld', 'Sweat Shirt', 'Blue', 205, 'LORHS045', 24.99, NULL, 84, NULL, 'gold 3d circle
+
+chest: 51
+length: 60
+arm: 58', NULL, 'women', '16128229865208216706195263901138.jpg', NULL, NULL, 'usa', '2021-02-13 02:43:19.617448', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2564, 'M', 'Calvin Klein', 'Sweat Shirt', 'Black', 208, '782155', 37.62, NULL, 84, NULL, 'zipped
+striped calvin klein on sleeve
+
+chest: 52
+length: 68
+arm: 65', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-15 04:40:41.964555', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2568, '4', 'Tommy Hilfiger', 'Dress', 'Green', 209, '198771', 23.62, NULL, NULL, NULL, 'chest: 46
+length: 100', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:45:47.033661', NULL, NULL);
+INSERT INTO public.clothing VALUES (2569, 'XS', 'Tommy Hilfiger', 'Jacket', 'Cream', 209, '144624', 28.17, NULL, 89, NULL, 'Padded
+chest: 48
+length: 76
+arm: 61
+shoulders: 40', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:46:44.776517', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2570, 'M', 'Michael Kors', 'Polo Shirt', 'Black', 210, '773679', 19.99, NULL, NULL, NULL, 'Chest 53
+length: 70', NULL, 'men', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-02-15 04:51:06.417689', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2567, 'XXXL', 'Tommy Hilfiger', 'T-Shirt', 'White', 209, '079211', 7.58, NULL, 95, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:44:42.632666', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2574, 'S', 'DKNY', 'Hoodie', 'Black', 210, '028247', 19.99, NULL, NULL, NULL, 'DKNY on belly
+chest: 51
+length: 68
+arm: 63', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-15 04:55:25.921835', NULL, NULL);
+INSERT INTO public.clothing VALUES (2575, 'XS', 'Calvin Klein', 'Sweat Shirt', 'Grey', NULL, '826735', 25.00, NULL, NULL, NULL, 'white calvin on chest', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:56:47.93448', NULL, NULL);
+INSERT INTO public.clothing VALUES (2565, 'M', 'Calvin Klein', 'Sweat Pants', 'Black', 208, '718734', 26.69, NULL, 84, NULL, 'Men
+black stripe on side
+white letters
+
+waist: 42
+hips: 52
+length: 104
+pasadka: 28', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-15 04:41:17.642079', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2404, 'S', 'Bebe', 'Sweat Pants', 'Black', 193, '618712', 14.99, NULL, 83, NULL, 'rose-gold letters on leg
+
+waist: 38
+hips: 49
+pasadka: 27
+length: 100', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-02-07 21:53:49.908779', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2576, 'S', 'Bebe', 'Hoodie', 'Black', 204, '621903', 16.99, NULL, 83, NULL, 'rose-gold zipper and letters
+
+chest: 48
+length: 60
+arm: 77', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 20:05:33.996753', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2029, 'S', 'Calvin Klein', 'Sweat Pants', 'Black', NULL, '827190', 29.99, NULL, 83, NULL, '"calvin" on back of calf
+
+waist: 37
+hips: 47
+pasadka: 26
+length: 95', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-08 12:28:01.995377', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2551, 'M', 'Guess', 'T-Shirt', 'Black', 207, '157508', 12.99, NULL, 83, NULL, '3d gold sign
+chest: 44
+length: 60', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:27:55.945942', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2547, 'S', 'Tommy Hilfiger', 'T-Shirt', 'Black', 207, '814321', 12.99, NULL, 83, NULL, 'white line + block letter "tommy hilfiger" on chest
+chest: 46
+length: 60', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:24:10.680106', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2532, 'XS', 'Karl Lagerfeld', 'Sweat Shirt', 'Blue', 205, 'LORHS045', 24.99, NULL, 84, NULL, 'gold 3d circle
+
+chest: 47
+length: 60
+arm: 57', NULL, 'women', '16128229865208216706195263901138.jpg', NULL, NULL, 'usa', '2021-02-13 02:44:11.457604', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2566, 'S', 'Tommy Hilfiger', 'Sweater', 'Navy', 209, '394802', 14.44, NULL, 85, NULL, 'chest: 52
+length: 67
+arm: 68', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:43:58.384003', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2552, 'XL', 'Guess', 'T-Shirt', 'Black', 207, '157522', 12.99, NULL, 85, NULL, '3d gold sign
+chest: 49
+length: 63', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:29:00.052297', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2553, 'S', 'Guess', 'T-Shirt', 'Black', 207, '157515', 12.99, NULL, 85, NULL, '3d gold sign
+chest: 40
+length: 60', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:30:06.34288', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2543, 'M', 'Michael Kors', 'Sweat Pants', 'Black', 207, '450550', 29.99, NULL, 89, NULL, 'white MK stripe on sides
+waist: 39
+hips: 53
+pasadka: 29
+length: 100', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:19:21.266777', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2535, 'S', 'Michael Kors', 'Puffy Jacket', 'Brown', 206, '280378', 70.00, NULL, 90, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:02:05.951915', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2573, 'M', 'Michael Kors', 'Sweat Shirt', 'Black', 210, '504954', 19.99, NULL, 89, NULL, 'kors michael kors on chest
+chest: 55
+length: 69
+arm: 66', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:54:18.870174', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2557, 'S', 'Tommy Hilfiger', 'Hoodie', 'White', 207, '802120', 22.99, NULL, 89, NULL, 'tommy jeans on chest
+chest: 50
+length: 61
+arm: 60
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:36:52.815003', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2544, 'L', 'Tommy Hilfiger', 'T-Shirt', 'Black', 207, '307357', 12.99, NULL, 89, NULL, 'block letter "tommy hilfiger" on chest
+chest: 54
+length: 66', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:21:06.661087', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2572, 'M', 'Michael Kors', 'Sweat Shirt', 'Navy', 210, '504671', 19.99, NULL, 89, NULL, 'kors michael kors on chest
+chest: 55
+length: 69
+arm: 66', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:54:05.619746', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2546, 'M', 'Tommy Hilfiger', 'T-Shirt', 'Black', 207, '307364', 12.99, NULL, 89, NULL, 'block letter "tommy hilfiger" on chest
+chest: 52
+length: 63', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:22:34.493171', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2560, 'S', 'Calvin Klein', 'Panties', 'Orange', 208, '098011', 3.00, NULL, 92, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:39:37.821568', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2558, 'L', 'Calvin Klein', 'Panties', 'Blue', 208, '110256', 3.00, NULL, 92, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:39:05.257713', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2562, 'S', 'Calvin Klein', 'Panties', 'White', 208, '125274', 3.00, NULL, 92, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:40:07.096736', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2563, 'S', 'Calvin Klein', 'Panties', 'Purple', 208, '453155', 3.00, NULL, 92, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:40:21.901037', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2561, 'M', 'Calvin Klein', 'Panties', 'Green', 208, '098226', 3.00, NULL, 92, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:39:54.456007', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2559, 'M', 'Calvin Klein', 'Panties', 'Blue', 208, '094570', 3.00, NULL, 92, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:39:22.152926', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2571, 'L', 'Calvin Klein', 'Sweat Pants', 'Chalk, White', 210, '445547', 19.99, NULL, 93, NULL, 'black gloss calvin klein on side
+waist: 42
+hips: 57
+pasadka: 29
+length: 97', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:52:35.749438', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2540, 'N/A', 'Michael Kors', 'Purse', 'White', 206, '056844', 39.60, NULL, NULL, NULL, 'grey MK everywhere
+
+width: 24
+height: 17', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:07:22.383981', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2577, 'S', 'Calvin Klein', 'Vest Jacket', 'Silver', NULL, '876358', 0.00, NULL, 83, NULL, 'hooded
+
+chest: 54
+length: 66', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 20:13:19.981979', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2542, 'S', 'Michael Kors', 'Sweat Pants', 'Black', 207, '450543', 29.99, NULL, NULL, NULL, 'white MK stripe on sides
+waist: 36
+hips: 50
+pasadka: 28
+length: 99', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:18:13.162681', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2527, 'S', 'DKNY', 'Sweat Shirt', 'Blue', 204, '156045', 19.99, NULL, 83, NULL, 'black line across chest
+white letters on line
+
+chest: 48
+length: 65
+arm to neck: 71', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-13 02:28:43.83951', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2578, 'L', 'DKNY', 'Puffy Jacket', 'Grey', NULL, '??????', 0.00, NULL, 84, NULL, NULL, NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-18 00:50:14.529437', NULL, NULL);
+INSERT INTO public.clothing VALUES (2579, 'M', 'Calvin Klein', 'Hoodie', 'Black', NULL, '845433', 14.99, NULL, 84, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-18 00:55:09.48937', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2580, '6.5', 'Michael Kors', 'Shoes', 'Red, Gold', NULL, '??????', 0.00, NULL, 84, NULL, 'high heels', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-18 01:00:03.38128', NULL, NULL);
+INSERT INTO public.clothing VALUES (2581, 'N/A', 'Tommy Hilfiger', 'Hat', 'White', NULL, '521548', 10.60, NULL, 84, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-18 01:04:10.172445', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2582, '1SZ', 'Calvin Klein', 'Hat', 'Black', NULL, '618676', 14.67, NULL, 84, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-18 01:05:05.051137', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2583, 'Unknown', 'Unknown', 'Unknown', 'Unknown', NULL, '687442', 0.00, NULL, 84, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-18 01:06:28.241932', NULL, NULL);
+INSERT INTO public.clothing VALUES (2585, 'S', 'Calvin Klein', 'Sweat Pants', 'Black', 211, '503858', 19.99, NULL, NULL, NULL, 'lowercase calvin klein on side with white dot
+
+waist: 39
+hips: 49
+pasadka: 24
+length: 93', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-18 02:53:03.572113', NULL, NULL);
+INSERT INTO public.clothing VALUES (2587, 'M', 'Calvin Klein', 'Sweat Pants', 'Black', 211, '503841', 19.99, NULL, NULL, NULL, 'lowercase calvin klein on side with white dot
+
+waist: 40
+hips: 51
+pasadka: 27
+length: 94', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-18 02:54:15.440839', NULL, NULL);
+INSERT INTO public.clothing VALUES (2588, 'M', 'Calvin Klein', 'Hoodie', 'Black', 211, '827848', 24.99, NULL, NULL, NULL, 'pink sign "calvin"
+
+chest: 57
+length: 53
+arm: 69', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-18 02:54:57.958723', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2591, 'S', 'Calvin Klein', 'Windbreaker', 'Black', 211, '415236', 49.99, NULL, NULL, NULL, 'stripe "calvin" on sleeve
+
+chest: 55
+length: 68
+arm: 66
+shoulders: 49', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-18 02:58:08.654509', NULL, NULL);
+INSERT INTO public.clothing VALUES (2590, 'M', 'Calvin Klein', 'Windbreaker', 'Black', 211, '427543', 49.99, NULL, 89, NULL, 'stripe "calvin" on sleeve
+
+chest: 58
+length: 70
+arm: 67
+shoulders: 50', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-18 02:56:58.218093', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2595, 'L', 'Tommy Hilfiger', 'T-Shirt', 'White', 212, '463966', 9.99, NULL, 89, NULL, 'golden sign hilfiger', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-18 03:02:41.335133', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2593, 'S', 'Calvin Klein', 'Hoodie', 'Pink', 211, '437313', 24.99, NULL, NULL, NULL, 'White calvin on chest
+
+chest: 56
+length: 54
+arm: 53/71', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-18 02:59:57.713578', NULL, NULL);
+INSERT INTO public.clothing VALUES (2597, 'XXS', 'Tommy Hilfiger', 'Hoodie', 'Pink', 212, '432160', 28.00, NULL, NULL, NULL, 'chest: 43
+length: 52
+arm: 61', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-18 03:04:16.830946', NULL, NULL);
+INSERT INTO public.clothing VALUES (2598, 'XS', 'Tommy Hilfiger', 'Free Sweater', 'Black', 212, '415729', 15.99, NULL, NULL, NULL, 'chest: 48
+length: 64
+arm: 65', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-18 03:05:12.305907', NULL, NULL);
+INSERT INTO public.clothing VALUES (2601, 'L', 'Calvin Klein', 'Sweat Shirt', 'Black', NULL, '??????', 24.99, NULL, 85, NULL, 'pink letters on chest', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 06:16:00.149769', NULL, NULL);
+INSERT INTO public.clothing VALUES (2602, 'L', 'Calvin Klein', 'Sweat Pants', 'Black', NULL, '??????', 34.99, NULL, 85, NULL, 'pink letters on leg', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 06:16:20.080701', NULL, NULL);
+INSERT INTO public.clothing VALUES (2556, 'XL', 'Calvin Klein', 'Dress', 'Black', 207, '402588', 19.99, NULL, 85, NULL, 'calvin klein stripe on shoulder
+chest: 55
+length: 97
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:35:25.411808', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2603, 'XS', 'Tommy Hilfiger', 'Sweat Shirt', 'Mint', 214, '013163', 31.49, NULL, NULL, NULL, 'circle logo
+chest: 48
+length: 60
+arm: 59', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 06:43:17.564896', NULL, NULL);
+INSERT INTO public.clothing VALUES (2604, 'S', 'Tommy Hilfiger', 'Sweat Shirt', 'White', 214, '013521', 31.49, NULL, NULL, NULL, 'circle logo
+chest: 50
+length: 59
+arm: 60', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 06:44:06.425907', NULL, NULL);
+INSERT INTO public.clothing VALUES (2606, 'XS', 'Tommy Hilfiger', 'Sweat Pants', 'Grey', 214, '006608', 35.99, NULL, 88, NULL, 'waist: 36
+hips: 50
+pasadka: 24
+length: 96', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 06:46:50.353279', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2611, 'XS', 'Tommy Hilfiger', 'Sweat Pants', 'Navy', 214, '006110', 35.99, NULL, 100, NULL, 'waist: 36
+hips: 50
+pasadka: 24
+length: 96', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 06:58:16.707333', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2610, 'M', 'Tommy Hilfiger', 'Sweat Shirt', 'Navy', 214, '013323', 31.49, NULL, NULL, NULL, 'chest: 51
+length: 62
+arm: 60', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 06:56:59.213335', NULL, NULL);
+INSERT INTO public.clothing VALUES (2612, 'XS', 'Tommy Hilfiger', 'Hoodie', 'Navy', 214, '432108', 31.49, NULL, 93, NULL, 'chest: 46
+length: 52
+arm: 61', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 06:59:03.625276', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2619, '4', 'Tommy Hilfiger', 'Dress', 'Salmon', 215, '362270', 29.99, NULL, 94, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 07:20:51.398692', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2615, 'XS', 'Tommy Hilfiger', 'T-Shirt', 'White', 214, '476355', 7.87, NULL, NULL, NULL, 'New york bridge on chest
+chest: 46
+length: 60', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 07:02:56.508314', NULL, NULL);
+INSERT INTO public.clothing VALUES (2616, 'XS', 'Tommy Hilfiger', 'T-Shirt', 'White', 214, '476355', 7.87, NULL, NULL, NULL, 'New york bridge on chest
+chest: 46
+length: 60', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 07:03:00.295728', NULL, NULL);
+INSERT INTO public.clothing VALUES (2617, 'XS', 'Tommy Hilfiger', 'T-Shirt', 'White', 214, '466929', 6.47, NULL, NULL, NULL, 'rhinestone logo
+chest: 41
+length: 63', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 07:03:49.192938', NULL, NULL);
+INSERT INTO public.clothing VALUES (2613, 'S', 'Tommy Hilfiger', 'Hoodie', 'Navy', 214, '432115', 31.49, NULL, NULL, NULL, 'chest: 49
+length: 53
+arm: 63', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 07:01:11.760767', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2622, 'L', 'Levis', 'T-Shirt', 'White', 215, '102415', 9.99, NULL, NULL, NULL, 'Boxed pack of 3', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-22 07:25:03.932952', NULL, NULL);
+INSERT INTO public.clothing VALUES (2623, 'M', 'Levis', 'T-Shirt', 'White, Grey, Navy', 215, '102484', 9.99, NULL, NULL, NULL, 'Boxed pack of 3', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-22 07:25:38.25672', NULL, NULL);
+INSERT INTO public.clothing VALUES (2624, 'L', 'Bebe', 'Hoodie', 'Olive', 215, '621477', 14.99, NULL, NULL, NULL, 'gold sign', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 07:26:23.19314', NULL, NULL);
+INSERT INTO public.clothing VALUES (2625, 'L', 'Bebe', 'Sweat Pants', 'Olive', 215, '618835', 14.99, NULL, NULL, NULL, 'gold sign', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 07:26:59.511437', NULL, NULL);
+INSERT INTO public.clothing VALUES (2626, 'L', 'Calvin Klein', 'Sweat Pants', 'Pink', 215, '445387', 19.99, NULL, NULL, NULL, 'white letters', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 07:27:46.648976', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2600, 'L', 'Tommy Hilfiger', 'Windbreaker', 'Red', NULL, '866542', 29.99, NULL, 89, NULL, 'costco jacket', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-18 03:06:53.734742', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2620, 'L', 'Levis', 'Man Panties', 'Black, Grey', 215, '128286', 9.99, NULL, 91, NULL, 'Boxed pack of 4', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-22 07:22:22.332473', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2592, 'L', 'Calvin Klein', 'Hoodie', 'Grey', 211, '061302', 19.99, NULL, 91, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-18 02:58:43.560031', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2584, 'L', 'Calvin Klein', 'Sweat Pants', 'Black', 211, '503834', 19.99, NULL, 89, NULL, 'lowercase calvin klein on side with white dot
+
+waist: 42
+hips: 52
+pasadka: 26
+length: 96', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-18 02:52:03.14472', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2621, 'M', 'Levis', 'T-Shirt', 'White', 215, '102286', 9.99, NULL, 91, NULL, 'Boxed pack of 3', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-22 07:23:01.152162', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2594, 'XS', 'Tommy Hilfiger', 'Sweat Shirt', 'Purple', 212, '430593', 19.19, NULL, 88, NULL, 'circle sign
+
+chest: 47
+length: 61
+arm: 59', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-18 03:01:50.952635', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2607, 'S', 'Tommy Hilfiger', 'Sweat Pants', 'Navy', 214, '006127', 36.04, NULL, 87, NULL, 'waist: 38
+hips: 53
+pasadka: 25
+length: 95', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 06:51:51.043623', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2605, 'XS', 'Tommy Hilfiger', 'Hoodie', 'Grey', 214, '432313', 31.49, NULL, 88, NULL, 'chest: 48
+length: 53
+arm: 61', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 06:45:29.165505', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2589, 'M', 'Calvin Klein', 'Windbreaker', 'Black', 211, '427543', 49.99, NULL, 88, NULL, 'stripe "calvin" on sleeve
+
+chest: 58
+length: 70
+arm: 67
+shoulders: 50', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-18 02:56:54.577106', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2609, 'XS', 'Tommy Hilfiger', 'Sweat Pants', 'Navy', 214, '006110', 35.99, NULL, 93, NULL, 'waist: 36
+hips: 50
+pasadka: 24
+length: 96', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 06:55:27.059687', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2627, '4', 'Calvin Klein', 'Dress', 'Navy', 215, '462728', 24.99, NULL, 94, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 07:28:37.695878', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2608, 'XS', 'Tommy Hilfiger', 'Hoodie', 'Navy', 214, '432108', 31.49, NULL, 100, NULL, 'chest: 46
+length: 52
+arm: 61', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 06:54:40.941698', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2632, 'N/A', 'Tommy Hilfiger', 'Wallet', 'Black', 215, '425832', 14.99, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 07:34:53.953379', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2633, 'S', 'Calvin Klein', 'Sweat Pants', 'Black', 215, '749607', 19.99, NULL, NULL, NULL, 'non-sewn waist
+long calvin klein sign', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 07:36:11.928436', NULL, NULL);
+INSERT INTO public.clothing VALUES (2634, 'S', 'Calvin Klein', 'Sweater', 'Pink', 215, '228072', 26.99, NULL, NULL, NULL, 'white square logo
+chest: 50
+length: 61
+arm: 58', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 07:40:19.190035', NULL, NULL);
+INSERT INTO public.clothing VALUES (2635, 'S', 'Bebe', 'Sweat Pants', 'Olive', 215, '618811', 14.99, NULL, NULL, NULL, 'gold sign
+waist: 36
+hips: 50
+pasadka: 27
+length: 100', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 07:42:45.941479', NULL, NULL);
+INSERT INTO public.clothing VALUES (2636, 'M', 'Calvin Klein', 'Sweat Pants', 'White', 215, '437146', 24.99, NULL, NULL, NULL, 'black letters on chest
+chest: 57
+length: 55
+arm: 49/69', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 07:44:08.731536', NULL, NULL);
+INSERT INTO public.clothing VALUES (2637, 'M', 'Calvin Klein', 'Sweat Pants', 'Grey', 216, '474486', 19.99, NULL, NULL, NULL, 'white capitalized calvin klein jeans
+waist: 41
+hips: 53
+pasadka: 28
+length: 95', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 07:47:01.47502', NULL, NULL);
+INSERT INTO public.clothing VALUES (2638, 'L', 'Calvin Klein', 'Sweat Pants', 'Grey', 216, '474479', 19.99, NULL, NULL, NULL, 'white capitalized calvin klein jeans', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 07:47:29.108649', NULL, NULL);
+INSERT INTO public.clothing VALUES (2651, '4', 'Armani Exchange', 'Skirt', 'Black, Purple, Seawave', 217, '329917', 19.99, NULL, 94, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-23 20:50:19.651525', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2350, 'N/A', 'Levis', 'Wallet', 'Black', 187, '290089', 12.99, NULL, 91, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-01-31 15:08:51.38697', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2661, '4', 'Armani Exchange', 'Blazer', 'Pink', 217, '365414', 39.99, NULL, 89, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-23 20:58:14.578038', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2630, 'N/A', 'Tommy Hilfiger', 'Wallet', 'Black', 215, '???', 14.99, NULL, 91, NULL, 'silver square metal logo', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 07:33:42.254917', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2644, 'M', 'Armani Exchange', 'Puffy Jacket', 'Green', 217, '337073', 87.00, NULL, 90, NULL, 'Chest: 57
+Waist: 55
+Length: 64
+Arm: 63', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-23 20:43:48.247548', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2662, 'XL', 'Armani Exchange', 'Puffy Jacket', 'Navy', 217, '335598', 87.00, NULL, 90, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-23 20:58:55.457045', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2664, 'L', 'Armani Exchange', 'Puffy Jacket', 'Green', 217, '337066', 87.00, NULL, 88, NULL, 'chest: 63
+length: 67
+arm: 63', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-23 20:59:47.383709', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2646, 'XS', 'Armani Exchange', 'Puffy Jacket', 'Black', 217, '321508', 87.00, NULL, NULL, NULL, 'Long', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-23 20:46:35.829835', NULL, NULL);
+INSERT INTO public.clothing VALUES (2654, 'L', 'Armani Exchange', 'Hoodie', 'Blue', 217, '147485', 39.99, NULL, 94, NULL, 'zipped
+
+chest: 58
+length: 69
+arm: 68
+shoulders: 51
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-23 20:52:24.201696', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2657, 'M', 'Armani Exchange', 'Sweater', 'Navy', 217, '337166', 28.50, NULL, 94, NULL, 'half zipped
+chest: 51
+length: 65
+arm: 66', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-23 20:55:08.352836', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2652, 'M', 'Armani Exchange', 'Sweater', 'Navy', 217, '337166', 28.50, NULL, NULL, NULL, 'half zipped
+chest: 51
+length: 65
+arm: 66', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-23 20:51:46.888158', NULL, NULL);
+INSERT INTO public.clothing VALUES (2649, 'L', 'Armani Exchange', 'Sweater', 'Navy', 217, '336732', 30.00, NULL, NULL, NULL, 'green sign A|X
+chest: 57
+length: 68
+arm: 67', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-23 20:48:25.889054', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2647, 'XL', 'Armani Exchange', 'Sweater', 'Black', 217, '336640', 30.00, NULL, NULL, NULL, 'red sign A|X
+chest: 59
+length: 71
+arm: 68', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-23 20:47:34.591707', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2650, 'L', 'Armani Exchange', 'Sweat Pants', 'Blue', 217, '776745', 29.99, NULL, 94, NULL, 'waist: 45
+hips: 56
+pasadka: 32
+length: 108', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-23 20:48:51.239087', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2641, 'XS', 'Michael Kors', 'Sweat Pants', 'Black', 216, '450536', 29.99, NULL, 94, NULL, 'white MK stripe on sides
+waist: 35
+hips: 47
+pasadka: 26
+length: 96', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 07:50:21.100379', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2656, 'L', 'Armani Exchange', 'Hoodie', 'Blue', 217, '147485', 39.99, NULL, NULL, NULL, 'zipped
+
+chest: 58
+length: 69
+arm: 68
+shoulders: 51
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-23 20:54:18.727551', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2648, 'XL', 'Armani Exchange', 'Sweater', 'Black', 217, '336640', 30.00, NULL, 94, NULL, 'red sign A|X
+chest: 59
+length: 71
+arm: 68', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-23 20:47:36.037387', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2659, '2', 'Armani Exchange', 'Skirt', 'Black, Purple, Seawave', 217, '329900', 19.99, NULL, NULL, NULL, 'waist: 31
+hips: 47
+length: 80', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-23 20:57:11.232812', NULL, NULL);
+INSERT INTO public.clothing VALUES (2663, 'L', 'Armani Exchange', 'Puffy Jacket', 'Green', 217, '337066', 87.00, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-23 20:59:20.010463', NULL, NULL);
+INSERT INTO public.clothing VALUES (2645, 'L', 'Armani Exchange', 'Sweat Pants', 'Blue', 217, '776745', 29.99, NULL, 88, NULL, 'waist: 45
+hips: 56
+pasadka: 32
+length: 108', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-23 20:45:53.192558', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2667, 'M', 'Tommy Hilfiger', 'Hoodie', 'Navy', 218, '432122', 31.49, NULL, 87, NULL, 'chest: 51
+length: 55
+arm: 63', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-25 23:43:40.064202', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2668, 'XS', 'Tommy Hilfiger', 'Sweat Pants', 'Salmon, Pink, Peach', 218, '006530', 35.99, NULL, NULL, NULL, 'waist: 36
+hips: 50
+pasadka: 24
+length: 96', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-25 23:44:43.993093', NULL, NULL);
+INSERT INTO public.clothing VALUES (2670, 'XS', 'Tommy Hilfiger', 'Hoodie', 'Salmon, Pink, Peach', 218, '004239', 31.49, NULL, NULL, NULL, 'chest: 46
+length: 52
+arm: 61', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-25 23:46:54.816982', NULL, NULL);
+INSERT INTO public.clothing VALUES (2671, 'XXS', 'Tommy Hilfiger', 'Hoodie', 'Navy', 219, '432092', 31.49, NULL, NULL, NULL, 'chest: 43
+length: 50
+arm: 61', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-25 23:48:16.217441', NULL, NULL);
+INSERT INTO public.clothing VALUES (2672, 'XXS', 'Tommy Hilfiger', 'Sweat Pants', 'Navy', 219, '006103', 35.99, NULL, NULL, NULL, 'waist: 35
+hips: 48
+pasadka: 21
+length: 93', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-25 23:49:03.585496', NULL, NULL);
+INSERT INTO public.clothing VALUES (2673, 'N/A', 'Tommy Hilfiger', 'Hat', 'White', 219, '52154', 11.92, NULL, NULL, NULL, 'baseball cap', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-25 23:49:45.640469', NULL, NULL);
+INSERT INTO public.clothing VALUES (2674, 'N/A', 'Tommy Hilfiger', 'Hat', 'White', 219, '52154', 11.92, NULL, NULL, NULL, 'baseball cap', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-25 23:49:49.563004', NULL, NULL);
+INSERT INTO public.clothing VALUES (2675, 'N/A', 'Tommy Hilfiger', 'Hat', 'Black', 219, '928915', 13.49, NULL, NULL, NULL, 'baseball cap
+half circle', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-25 23:50:14.061968', NULL, NULL);
+INSERT INTO public.clothing VALUES (2666, 'L', 'Tommy Hilfiger', 'Sweat Pants', 'Navy', 218, '006141', 35.99, NULL, 87, NULL, 'waist: 45
+hips: 58
+pasadka: 28
+length: 97', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-25 23:42:13.255875', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2640, 'M', 'Guess', 'T-Shirt', 'Black', 216, '539459', 12.99, NULL, 88, NULL, 'gold sign
+chest: 51
+length: 69', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-22 07:49:57.491285', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2665, 'S', 'Tommy Hilfiger', 'Hoodie', 'Navy', 218, '432115', 31.49, NULL, 87, NULL, 'chest: 49
+length: 53
+arm: 63', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-25 23:40:25.835231', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2599, 'S', 'Tommy Hilfiger', 'Windbreaker', 'White', NULL, '866511', 29.99, NULL, 89, NULL, 'costco jacket', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-18 03:06:33.727109', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2548, 'L', 'Tommy Hilfiger', 'T-Shirt', 'Black', 207, '814307', 12.99, NULL, 89, NULL, 'white line + block letter "tommy hilfiger" on chest
+chest: 49
+length: 63', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-15 04:24:57.943545', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2639, 'M', 'Michael Kors', 'Jean Jacket', 'Navy', 216, '807690', 34.99, NULL, 89, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 07:48:45.770024', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2643, 'M', 'DKNY', 'Puffy Jacket', 'Green', NULL, '273809', 59.99, NULL, 90, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 20:20:49.480363', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2629, 'N/A', 'Tommy Hilfiger', 'Wallet', 'Black', 215, '425832', 14.99, NULL, 91, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 07:33:14.941917', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2631, 'N/A', 'Tommy Hilfiger', 'Wallet', 'Black', 215, '239293', 14.99, NULL, 93, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 07:34:48.01343', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2653, 'L', 'Armani Exchange', 'Hoodie', 'Blue', 217, '147485', 39.99, NULL, 94, NULL, 'zipped
+
+chest: 58
+length: 69
+arm: 68
+shoulders: 51
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-23 20:52:08.1686', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2655, 'L', 'Armani Exchange', 'Sweat Pants', 'Blue', 217, '064538', 29.99, NULL, 94, NULL, 'waist: 45
+hips: 56
+pasadka: 32
+length: 108', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-23 20:54:05.834349', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2660, '2', 'Armani Exchange', 'Blazer', 'Black', 217, '365728', 72.00, NULL, 94, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-23 20:57:42.430127', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2658, '30', 'Armani Exchange', 'Jeans', 'Black', 217, '458136', 39.99, NULL, 94, NULL, 'stripe on side', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-23 20:55:58.039581', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2628, 'M', 'Tommy Hilfiger', 'Dress', 'Black', 215, '200146', 19.99, NULL, 99, NULL, '3d letters
+chest: 48
+length: 90', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 07:29:40.966352', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2676, 'XS', 'Tommy Hilfiger', 'Sweat Pants', 'Navy', 219, '006110', 36.04, NULL, 100, NULL, 'waist: 36
+hips: 50
+pasadka: 24
+length: 96', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-25 23:50:27.238862', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2679, 'XS', 'Tommy Hilfiger', 'Sweat Shirt', 'White', 219, '013514', 31.49, NULL, 87, NULL, 'circle white logo
+chest: 46
+length: 60
+arm: 58
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-25 23:51:59.740061', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2677, 'M', 'Tommy Hilfiger', 'Hoodie', 'Navy', 219, '432122', 31.49, NULL, 87, NULL, 'chest: 51
+length: 55
+arm: 63', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-25 23:50:42.905015', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2669, 'M', 'Tommy Hilfiger', 'Sweat Pants', 'Navy', 218, '006134', 35.99, NULL, 87, NULL, 'waist: 41
+hips: 56
+pasadka: 26
+length: 96', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-25 23:45:37.251803', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2680, 'S', 'Tommy Hilfiger', 'Blazer', 'Navy', NULL, '438044', 20.00, NULL, 87, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-25 23:57:39.468656', NULL, NULL);
+INSERT INTO public.clothing VALUES (2618, 'XS', 'Tommy Hilfiger', 'T-Shirt', 'White', 214, '466929', 6.47, NULL, 88, NULL, 'rhinestone logo
+chest: 41
+length: 63', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 07:03:53.070325', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2614, 'S', 'Tommy Hilfiger', 'T-Shirt', 'White', 214, '476362', 7.87, NULL, 88, NULL, 'New york bridge on chest
+chest: 48
+length: 61', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-22 07:02:10.738388', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2596, 'XS', 'Tommy Hilfiger', 'T-Shirt', 'White', 212, '463935', 9.99, NULL, 88, NULL, 'golden sign hilfiger
+
+chest: 42
+length: 62', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-18 03:03:12.244892', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2682, 'S', 'Tommy Hilfiger', 'Windbreaker', 'Navy, Red', NULL, '??????', 25.00, NULL, 88, NULL, '3 in one', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-26 00:15:08.265647', NULL, NULL);
+INSERT INTO public.clothing VALUES (2683, 'M', 'Michael Kors', 'Puffy Jacket', 'White', NULL, '??????', 70.00, NULL, 88, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-26 00:23:41.377821', NULL, NULL);
+INSERT INTO public.clothing VALUES (2681, 'XS', 'Tommy Hilfiger', 'Vest Jacket', 'Navy', NULL, '806999', 34.99, NULL, 88, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-25 23:58:44.685011', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2684, 'L', 'Armani Exchange', 'Puffy Jacket', 'Green', 217, '125819', 69.99, NULL, 90, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-27 21:44:09.058004', NULL, NULL);
+INSERT INTO public.clothing VALUES (2685, 'XXL', 'Armani Exchange', 'Windbreaker', 'Black', 217, '933653', 39.99, NULL, 90, NULL, 'A|X on chest', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-27 21:47:02.099525', NULL, NULL);
+INSERT INTO public.clothing VALUES (2586, 'M', 'Calvin Klein', 'Sweat Pants', 'Black', 211, '503841', 19.99, NULL, 89, NULL, 'lowercase calvin klein on side with white dot
+
+waist: 40
+hips: 51
+pasadka: 27
+length: 94', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-18 02:54:14.583881', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2686, '8.5', 'Armani Exchange', 'Shoes', 'Black', NULL, '398780', 29.00, NULL, 91, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-27 21:50:29.689448', NULL, NULL);
+INSERT INTO public.clothing VALUES (2688, 'S', 'Tommy Hilfiger', 'Dress', 'Navy, White, Red', 220, '424370', 22.49, NULL, NULL, NULL, 'large cursive hilfiger block on chest
+chest: 46
+length: 89', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-27 21:58:16.386328', NULL, NULL);
+INSERT INTO public.clothing VALUES (2691, 'N/A', 'Tommy Hilfiger', 'Hat', 'Mint', 220, '066334', 15.74, NULL, NULL, NULL, 'baseball cap', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-27 21:59:43.816048', NULL, NULL);
+INSERT INTO public.clothing VALUES (2692, 'XS', 'Michael Kors', 'Puffy Jacket', 'Black', 221, '272908', 70.00, NULL, NULL, NULL, 'long
+
+chest: 51
+length: 93
+arm: 53/74
+shoulders: 60
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-27 22:12:54.501136', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2693, 'XL', 'Michael Kors', 'Puffy Jacket', 'Black', 221, '336204', 65.00, NULL, 90, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-27 22:13:20.880069', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2694, '2', 'Armani Exchange', 'Blazer', 'Pink', 222, '365407', 39.99, NULL, NULL, NULL, 'chest: 46
+shoulders: 40
+length: 74
+arm: 58', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-27 22:16:42.155398', NULL, NULL);
+INSERT INTO public.clothing VALUES (2718, 'M', 'Karl Lagerfeld', 'T-Shirt', 'Grey', 223, '732867', 16.99, NULL, 95, NULL, 'karl lagerfeld face
+chest: 51
+length: 75
+', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-27 22:51:21.903747', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2696, '2', 'Armani Exchange', 'Blazer', 'Pink', 222, '365407', 39.99, NULL, NULL, NULL, 'chest: 46
+shoulders: 40
+length: 74
+arm: 58', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-27 22:18:25.023304', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2709, 'L', 'Calvin Klein', 'Sweat Shirt', 'Black', 223, '503513', 19.99, NULL, NULL, NULL, 'calvin on chest
+white dot on sleeve
+chest: 63
+length: 49
+arm: 48/74', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-27 22:45:28.218145', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2697, '6', 'Armani Exchange', 'Skirt', 'Black, Purple, Seawave', 222, '329924', 19.99, NULL, NULL, NULL, 'waist: 35
+hips: 50
+length: 82', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-27 22:18:51.790667', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2698, '2', 'Armani Exchange', 'Blazer', 'White', 222, '365322', 39.99, NULL, NULL, NULL, 'chest: 46
+shoulders: 40
+length: 74
+arm: 58', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-27 22:20:31.206321', NULL, NULL);
+INSERT INTO public.clothing VALUES (2700, '6', 'Armani Exchange', 'Blazer', 'Black', 222, '373794', 39.99, NULL, NULL, NULL, 'chest: 52
+length: 76
+arm: 60
+shoulders: 42', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-27 22:22:41.181556', NULL, NULL);
+INSERT INTO public.clothing VALUES (2702, '0', 'Armani Exchange', 'Blazer', 'Black', 222, '343732', 39.99, NULL, NULL, NULL, 'chest: 46
+length: 73
+arm: 58
+shoulders: 40', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-27 22:25:37.367544', NULL, NULL);
+INSERT INTO public.clothing VALUES (2703, 'S', 'Armani Exchange', 'Long Sleeved Shirt', 'Mint', 222, '364653', 29.99, NULL, NULL, NULL, 'chest: 62
+length: 66
+arm: 45/72', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-27 22:26:59.405916', NULL, NULL);
+INSERT INTO public.clothing VALUES (2704, 'S', 'Armani Exchange', 'Long Sleeved Shirt', 'Mint', 222, '364653', 29.99, NULL, NULL, NULL, 'chest: 62
+length: 66
+arm: 45/72', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-27 22:27:00.244531', NULL, NULL);
+INSERT INTO public.clothing VALUES (2705, 'M', 'Armani Exchange', 'Long Sleeved Shirt', 'Mint', 222, '364646', 29.99, NULL, 89, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-27 22:27:18.022566', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2701, 'L', 'Armani Exchange', 'Blazer', 'Black', 222, '405819', 29.99, NULL, 89, NULL, NULL, NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-27 22:24:33.049325', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2699, 'XL', 'Armani Exchange', 'Blazer', 'Black', 222, '405840', 29.99, NULL, 89, NULL, NULL, NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-27 22:20:56.67122', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2706, 'M', 'Armani Exchange', 'Blazer', 'Navy', 222, '405888', 29.99, NULL, NULL, NULL, 'small armani exchange circle on chest
+
+chest: 54
+length: 72
+arm: 64
+shoulders: 48', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-27 22:41:51.521251', NULL, NULL);
+INSERT INTO public.clothing VALUES (2707, 'L', 'Armani Exchange', 'Blazer', 'Black', 222, '405819', 29.99, NULL, NULL, NULL, 'chest: 56
+length: 74
+arm: 66
+shoulders: 49', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-27 22:42:09.12858', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2714, 'M', 'Michael Kors', 'Sweat Shirt', 'Black', 223, '504954', 19.99, NULL, NULL, NULL, 'chest: 55
+length: 69
+arm: 67
+shoulders: 45', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-27 22:48:30.536966', NULL, NULL);
+INSERT INTO public.clothing VALUES (2721, 'M', 'DKNY', 'Leggings', 'Black', 224, '160233', 19.99, NULL, 89, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-27 22:56:08.050744', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2713, 'L', 'Michael Kors', 'Sweat Shirt', 'Black', 223, '504961', 19.99, NULL, NULL, NULL, 'chest: 57
+length: 71
+arm: 70', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-27 22:47:47.091756', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2720, 'M', 'Calvin Klein', 'Sweat Pants', 'Black', 224, '430420', 19.99, NULL, NULL, NULL, 'no fleece
+CK column on calf', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-27 22:55:08.337648', NULL, NULL);
+INSERT INTO public.clothing VALUES (2722, 'S', 'DKNY', 'Leggings', 'Black', 224, '160240', 19.99, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-27 22:56:43.183317', NULL, NULL);
+INSERT INTO public.clothing VALUES (2719, 'XL', 'Michael Kors', 'Sweat Shirt', 'Black', 223, '504978', 19.99, NULL, 91, NULL, NULL, NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-27 22:51:53.8056', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2716, 'XL', 'DKNY', 'Hoodie', 'Grey', 223, '028773', 19.99, NULL, 91, NULL, NULL, NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-27 22:50:01.94192', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2710, 'L', 'Michael Kors', 'Sweat Shirt', 'Navy', 223, '504688', 19.99, NULL, 91, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-27 22:46:09.236929', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2708, 'XL', 'Michael Kors', 'Sweat Shirt', 'White', 223, '505111', 19.99, NULL, 91, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-27 22:44:49.965231', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2711, 'L', 'Michael Kors', 'Polo Shirt', 'Black', 223, '941818', 24.99, NULL, 89, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-27 22:46:38.04553', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2717, 'M', 'Calvin Klein', 'T-Shirt', 'Black', 223, '791423', 12.99, NULL, 89, NULL, 'bluish-golden sign on chest
+chest: 54
+length: 69', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-27 22:50:09.292525', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2715, 'XL', 'Calvin Klein', 'T-Shirt', 'Black', 223, '791447', 12.99, NULL, 89, NULL, 'bluish-gold sign', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-27 22:49:22.058636', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2725, 'N/A', 'Tommy Hilfiger', 'Hat', 'Navy', 225, '521548', 9.54, NULL, NULL, NULL, 'baseball cap', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 00:59:09.414686', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2724, 'N/A', 'Tommy Hilfiger', 'Hat', 'White', 225, '521524', 9.54, NULL, NULL, NULL, 'baseball cap', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 00:58:57.271877', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2723, 'N/A', 'Tommy Hilfiger', 'Hat', 'White', 225, '521524', 9.54, NULL, NULL, NULL, 'baseball cap', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 00:58:55.546714', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2728, 'M', 'Tommy Hilfiger', 'Hoodie', 'Pink, Peach, Salmon', 225, '004253', 9.54, NULL, NULL, NULL, 'chest: 52
+length: 55
+arm: 64', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 01:01:53.490249', NULL, NULL);
+INSERT INTO public.clothing VALUES (2695, '4', 'Armani Exchange', 'Blazer', 'Pink', 222, '365414', 39.99, NULL, 95, NULL, 'chest: 49
+length: 75
+arm: 59
+shoulders: 41', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-27 22:17:27.190231', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2712, 'M', 'Calvin Klein', 'T-Shirt', 'Black', 223, '791423', 12.99, NULL, 95, NULL, 'bluish-golden sign on chest
+chest: 54
+length: 69', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-02-27 22:47:19.429429', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2687, '6', 'Tommy Hilfiger', 'Dress', 'Olive', 220, '198764', 11.24, NULL, 99, NULL, 'chest: 45
+waist: 39
+length: 100', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-27 21:56:52.630409', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2678, 'XS', 'Tommy Hilfiger', 'Hoodie', 'Navy', 219, '432108', 31.49, NULL, 100, NULL, 'chest: 46
+length: 52
+arm: 61', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-25 23:50:59.00407', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2730, 'XS', 'Tommy Hilfiger', 'Sweat Pants', 'Blue', 225, '006257', 28.79, NULL, NULL, NULL, 'blue mesh
+
+waist: 36
+hips: 50
+pasadka: 24
+length: 96', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 01:04:34.027201', NULL, NULL);
+INSERT INTO public.clothing VALUES (2732, 'XS', 'Tommy Hilfiger', 'T-Shirt', 'Navy', 225, '297469', 14.39, NULL, NULL, NULL, 'block letters on chest
+chest: 40
+length: 61
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 01:07:16.643997', NULL, NULL);
+INSERT INTO public.clothing VALUES (2757, 'S', 'Calvin Klein', 'Shorts', 'Grey', 226, '422579', 13.99, NULL, NULL, NULL, 'waist: 37
+hips: 50
+length: 48
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 05:56:13.138245', NULL, NULL);
+INSERT INTO public.clothing VALUES (2739, 'S', 'Tommy Hilfiger', 'Hoodie', 'Grey', 225, '432320', 25.19, NULL, NULL, NULL, 'chest: 52
+length: 56
+arm: 62', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 01:14:13.33848', NULL, NULL);
+INSERT INTO public.clothing VALUES (2740, 'S', 'Tommy Hilfiger', 'Sweat Pants', 'Grey', 225, '006615', 28.94, NULL, NULL, NULL, 'waist: 38
+hips: 54
+pasadka: 25
+length: 96', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 01:15:30.965682', NULL, NULL);
+INSERT INTO public.clothing VALUES (2741, 'XS', 'Tommy Hilfiger', 'Hoodie', 'Blue', 225, '003959', 25.19, NULL, NULL, NULL, 'blue mesh
+
+chest: 47
+length: 56
+arm: 61', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 01:16:55.171755', NULL, NULL);
+INSERT INTO public.clothing VALUES (2744, 'M8-10', 'Tommy Hilfiger', 'Sweat Pants', 'Blue', 225, '930314', 16.91, NULL, NULL, NULL, 'kids clothes
+8-10 years
+
+waist: 30
+hips: 38
+length: 75', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 01:19:21.417599', NULL, NULL);
+INSERT INTO public.clothing VALUES (2745, 'M8-10', 'Tommy Hilfiger', 'Sweat Shirt', 'Blue', 225, '926102', 16.91, NULL, NULL, NULL, 'kids clothes
+8-10 years
+
+chest: 42
+length: 54
+arm: 48', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 01:20:04.201311', NULL, NULL);
+INSERT INTO public.clothing VALUES (2748, 'S', 'Tommy Hilfiger', 'T-Shirt', 'White', 225, '297544', 14.39, NULL, NULL, NULL, 'chest: 44
+length: 66', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 01:22:14.736872', NULL, NULL);
+INSERT INTO public.clothing VALUES (2731, 'S', 'Tommy Hilfiger', 'Sweat Pants', 'Blue', 225, '006264', 28.79, NULL, 92, NULL, 'blue mesh
+
+waist: 37
+hips: 55
+pasadka: 25
+length: 95', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 01:05:46.0759', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2747, 'S', 'Tommy Hilfiger', 'Hoodie', 'Blue', 225, '003966', 25.19, NULL, 92, NULL, 'blue mesh
+chest: 50
+length: 56
+arm: 64', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 01:21:29.850047', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2761, 'M', 'Karl Lagerfeld', 'T-Shirt', 'Peach, Coral, Pink', 226, 'LORH0030', 16.99, NULL, NULL, NULL, 'rhinestones
+
+chest: 51
+length: 66', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 05:58:25.180003', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2746, 'XS', 'Tommy Hilfiger', 'Sweat Pants', 'Grey', 225, '006608', 28.79, NULL, 92, NULL, 'waist: 36
+hips: 50
+pasadka: 24
+length: 96', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 01:20:14.751322', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2742, 'XS', 'Tommy Hilfiger', 'Hoodie', 'Grey', 225, '432313', 25.19, NULL, 92, NULL, 'chest: 48
+length: 53
+arm: 61', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 01:17:11.56848', NULL, 0.00);
+INSERT INTO public.clothing VALUES (342, 'XS', 'Calvin Klein', 'Dress Shirt', 'White', 29, '494675', 11.22, NULL, 92, NULL, 'Female
+Split back
+
+Chest: 47
+Waist: 47
+Length: 73
+Arm: 61', NULL, 'women', NULL, NULL, NULL, 'usa', '2020-12-21 01:07:56.65769', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2738, 'L', 'Tommy Hilfiger', 'Hoodie', 'Navy', 225, '432139', 25.19, NULL, 93, NULL, 'chest: 56
+length: 58
+arm: 64', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 01:12:00.433965', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2737, 'L', 'Tommy Hilfiger', 'Sweat Pants', 'Navy', 225, '006141', 28.79, NULL, 93, NULL, 'waist: 45
+hips: 58
+pasadka: 28
+length: 97', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 01:10:52.557037', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2734, 'M', 'Tommy Hilfiger', 'Sweat Pants', 'Navy', 225, '006134', 28.79, NULL, 93, NULL, 'waist: 41
+hips: 56
+pasadka: 26
+length: 96', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 01:08:06.038523', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2733, 'M', 'Tommy Hilfiger', 'Hoodie', 'Navy', 225, '432122', 25.19, NULL, 93, NULL, 'chest: 51
+length: 55
+arm: 63', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 01:07:37.879567', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2750, 'M', 'Tommy Hilfiger', 'T-Shirt', 'Navy', 225, '297483', 14.39, NULL, 93, NULL, 'chest: 48
+length: 65', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 01:23:13.13392', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2749, 'S', 'Tommy Hilfiger', 'T-Shirt', 'Navy', 225, '297476', 14.39, NULL, 93, NULL, 'chest: 44
+length: 66', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 01:22:34.620362', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2743, 'M', 'Tommy Hilfiger', 'T-Shirt', 'White', 225, '297551', 14.39, NULL, 93, NULL, 'block letters on chest
+
+chest: 46
+length: 66', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 01:18:19.794334', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2751, 'L', 'DKNY', 'Puffy Jacket', 'Grey', NULL, '391237', 20.00, NULL, NULL, NULL, 'from costco
+
+chest: 59
+length: 89
+arm: 65
+shoulders: 46', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 05:51:21.263437', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2480, 'S', 'Karl Lagerfeld', 'Sweat Shirt', 'Black, White', 201, 'LORH7092', 22.99, NULL, NULL, NULL, 'Black sunglasses
+
+chest: 51
+length: 63
+arm: 61', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-02-08 00:47:07.151223', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2489, 'L', 'Karl Lagerfeld', 'Sweat Shirt', 'Black, White', NULL, 'LORH7092', 22.99, NULL, 82, NULL, 'Black sunglasses', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-02-08 01:04:27.499639', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2763, 'M', 'Karl Lagerfeld', 'Sweat Shirt', 'White, Black', 226, 'LORH7092', 22.99, NULL, NULL, NULL, 'with glasses', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 06:02:31.554487', NULL, NULL);
+INSERT INTO public.clothing VALUES (2760, 'XS', 'Michael Kors', 'T-Shirt', 'Black', 226, '452295', 19.99, NULL, 94, NULL, 'white misha korsov sign', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 05:57:40.272666', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2765, 'M', 'Calvin Klein', 'Leggings', 'Black', 226, '282547', 16.99, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 06:03:15.201306', NULL, NULL);
+INSERT INTO public.clothing VALUES (2767, 'M', 'Tommy Hilfiger', 'Hoodie', 'White', 226, '802113', 22.99, NULL, NULL, NULL, 'Tommy jeans sign
+chest: 53
+length: 62
+arm: 63', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 06:04:41.129063', NULL, NULL);
+INSERT INTO public.clothing VALUES (2768, 'L', 'Guess', 'T-Shirt', 'Black', 226, '253941', 12.99, NULL, NULL, NULL, 'guess with city inside
+chest: 54
+length: 72', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-03-01 06:05:34.951425', NULL, NULL);
+INSERT INTO public.clothing VALUES (2769, 'L', 'Guess', 'T-Shirt', 'Black', 226, '971188', 12.99, NULL, NULL, NULL, 'guess with golden city inside
+chest: 55
+length: 71', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-03-01 06:06:20.214041', NULL, NULL);
+INSERT INTO public.clothing VALUES (2770, '3', 'Tommy Hilfiger', 'T-Shirt + Shorts', 'Navy, Red, White', 226, '603998', 16.99, NULL, NULL, NULL, 'kid clothes
+3 years
+
+t-shirt + shorts', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-03-01 06:07:24.884539', NULL, NULL);
+INSERT INTO public.clothing VALUES (2771, 'XS', 'Karl Lagerfeld', 'T-Shirt', 'Peach, Coral, Pink', 226, 'LORH0030', 16.99, NULL, NULL, NULL, 'rhinestones
+
+chest: 43
+length: 63', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 06:07:36.50586', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2772, 'S', 'Calvin Klein', 'Dress', 'Black', 226, '398089', 19.99, NULL, NULL, NULL, 'calvin klein stripe on side', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 06:08:45.897693', NULL, NULL);
+INSERT INTO public.clothing VALUES (2775, 'S', 'Calvin Klein', 'Leggings', 'Black', 226, '282554', 16.99, NULL, 94, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 06:09:35.825248', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2774, 'S', 'Calvin Klein', 'Leggings', 'Black', 226, '282554', 16.99, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 06:09:17.880686', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2752, 'XS', 'DKNY', 'Puffy Jacket', 'Black', NULL, '391336', 20.00, NULL, 99, NULL, 'from costco
+
+chest: 50
+length: 84
+arm: 63
+shoulders: 41', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 05:52:03.748434', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2777, 'S', 'Tommy Hilfiger', 'Sweater', 'White', 226, '805589', 19.99, NULL, NULL, NULL, 'flag on chest', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 06:10:55.804502', NULL, NULL);
+INSERT INTO public.clothing VALUES (2759, 'S', 'Calvin Klein', 'T-Shirt', 'White', 226, '455232', 12.99, NULL, 94, NULL, 'black silver sign', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 05:57:08.808782', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2758, 'S', 'Calvin Klein', 'T-Shirt', 'White', 226, 'KOJHV881', 16.99, NULL, 94, NULL, 'rhinestones', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 05:56:49.121947', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2756, 'M', 'Calvin Klein', 'Shorts', 'Grey', 226, '422562', 13.99, NULL, 94, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 05:55:41.396889', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2754, 'M', 'Calvin Klein', 'T-Shirt', 'White', 226, '412686', 12.99, NULL, 94, NULL, 'white sign', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 05:54:22.430545', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2753, 'M', 'Calvin Klein', 'T-Shirt', 'Black', 226, '412884', 12.99, NULL, 94, NULL, 'white silver sign', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 05:53:56.471954', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2780, 'M', 'Calvin Klein', 'T-Shirt', 'Black', 226, '425303', 12.99, NULL, 94, NULL, 'strange sign', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 06:12:15.537993', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2779, 'S', 'Calvin Klein', 'T-Shirt', 'Pink', 226, '425358', 12.99, NULL, 94, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 06:11:52.919054', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2736, 'M', 'Tommy Hilfiger', 'Hoodie', 'Grey', 225, '432337', 25.19, NULL, 95, NULL, 'chest: 51
+length: 55
+arm: 63', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 01:10:28.07417', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2766, 'XL', 'Michael Kors', 'Cardigan', 'Sand, Tan', 226, '646961', 29.99, NULL, 94, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 06:03:51.39866', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2773, 'M', 'Calvin Klein', 'Leggings', 'Black', 226, '282547', 16.99, NULL, 94, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 06:08:59.661044', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2755, 'L', 'Calvin Klein', 'T-Shirt', 'Black', 226, '394241', 12.99, NULL, 94, NULL, 'silver calvin on chest', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 05:55:10.358107', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2735, 'M', 'Tommy Hilfiger', 'Sweat Pants', 'Grey', 225, '006622', 28.79, NULL, 95, NULL, 'waist: 41
+hips: 56
+pasadka: 26
+length: 96', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 01:09:07.565634', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2762, 'S', 'Karl Lagerfeld', 'Hoodie', 'Black', 226, 'LORE7067', 29.99, NULL, 94, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 06:00:51.459206', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2786, 'N/A', 'Michael Kors', 'Wallet', 'Black', 227, '445057', 19.99, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 06:22:44.996684', NULL, NULL);
+INSERT INTO public.clothing VALUES (2787, 'N/A', 'Tommy Hilfiger', 'Wallet', 'Black', 227, '149137', 14.99, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 06:23:04.970088', NULL, NULL);
+INSERT INTO public.clothing VALUES (2788, 'S', 'Michael Kors', 'Jean Jacket', 'Black', 227, '807683', 34.99, NULL, NULL, NULL, 'golden buttons
+ripped at bottom
+chest: 49
+length: 53
+arm: 58', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 06:24:05.673248', NULL, NULL);
+INSERT INTO public.clothing VALUES (2411, 'L', 'DKNY', 'Sweat Pants', 'Black', 192, '055151', 16.99, NULL, NULL, NULL, 'white DKNY on leg
+
+Waist: 42
+hips: 58
+pasadka: 34
+length: 105', NULL, 'men', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-02-07 22:08:26.182909', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2789, 'XL', 'Armani Exchange', 'Vest Jacket', 'Black', NULL, '114783', 59.99, NULL, 94, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 06:34:34.864813', NULL, NULL);
+INSERT INTO public.clothing VALUES (2776, 'M', 'Calvin Klein', 'Bodic', 'White', 226, '349944', 14.99, NULL, 94, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 06:10:15.156206', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2764, 'M', 'Karl Lagerfeld', 'T-Shirt', 'Peach, Coral, Pink', 226, 'LORH0030', 16.99, NULL, 94, NULL, 'rhinestones
+
+chest: 51
+length: 66', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 06:02:39.56582', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2778, 'M', 'Calvin Klein', 'Leggings', 'Black', 226, '036905', 19.99, NULL, 94, NULL, 'white letters all around', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-01 06:11:26.218084', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2474, 'M', 'Michael Kors', 'Sweat Pants', 'White', 201, '450659', 29.99, NULL, 94, NULL, 'black mk down sides
+
+waist: 39
+hips: 52
+length: 99
+pasadka: 30', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-02-08 00:34:12.759926', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2790, 'N/A', 'Levis', 'Wallet', 'Black', NULL, '544113', 12.99, NULL, NULL, NULL, NULL, NULL, 'men', NULL, NULL, NULL, 'usa', '2021-03-03 20:57:45.011265', NULL, NULL);
+INSERT INTO public.clothing VALUES (2791, 'L', 'Michael Kors', 'T-Shirt', 'Black', NULL, '056491', 16.99, NULL, NULL, NULL, 'Chest 58
+L 71', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-03-03 21:04:36.473948', NULL, NULL);
+INSERT INTO public.clothing VALUES (2793, '8', 'Calvin Klein', 'Jumpsuit', 'Blue', NULL, '198151', 24.99, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-03 21:06:14.601794', NULL, NULL);
+INSERT INTO public.clothing VALUES (2799, 'M', 'U.S. Polo Assn.', 'Polo Shirt', 'Black', NULL, '691941', 12.99, NULL, NULL, NULL, '
+small white horse on a side
+CH 51
+L 71', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-03-03 21:17:26.919361', NULL, NULL);
+INSERT INTO public.clothing VALUES (2801, 'M', 'Calvin Klein', 'Bodic', 'White', NULL, '349941', 14.99, NULL, NULL, NULL, '
+body with black gray sigh
+CH 40
+L 76', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-03 21:21:35.798674', NULL, NULL);
+INSERT INTO public.clothing VALUES (2803, 'M', 'Guess', 'T-Shirt', 'White', NULL, '929878', 12.99, NULL, NULL, NULL, 'red sign guess 
+CH 49
+L 62', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-03 21:24:07.214312', NULL, NULL);
+INSERT INTO public.clothing VALUES (2804, 'M', 'Karl Lagerfeld', 'T-Shirt', 'Blush', NULL, 'LORH0063', 16.99, NULL, NULL, NULL, 'picture of girl in paris', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-03 21:27:14.920392', NULL, NULL);
+INSERT INTO public.clothing VALUES (2806, 'S', 'Michael Kors', 'T-Shirt', 'Clack', NULL, '452301', 19.99, NULL, NULL, NULL, 'white sign MK
+ch 48
+L  61', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-03 21:31:32.215161', NULL, NULL);
+INSERT INTO public.clothing VALUES (2810, 'L', 'Michael Kors', 'T-Shirt', 'Grey', NULL, '525980', 9.99, NULL, NULL, NULL, 'серая лонж', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-03-03 21:48:21.685581', NULL, NULL);
+INSERT INTO public.clothing VALUES (2812, 'M', 'Michael Kors', 'T-Shirt', 'Grey', NULL, '525973', 9.99, NULL, NULL, NULL, 'серая лонж
+ПОГ 53
+дл 73', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-03-03 21:50:01.303263', NULL, NULL);
+INSERT INTO public.clothing VALUES (2839, 'M', 'Calvin Klein', 'Dress', 'Pink', NULL, '117697', 20.00, NULL, 97, NULL, 'ПОГ 52
+длина 87', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 03:02:43.408971', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2814, '4', 'Karl Lagerfeld', 'Jeans', 'Navy', NULL, 'KLP002', 24.99, NULL, NULL, NULL, 'ПОТ 38
+ПОБ 41
+длина 97
+посадка 22', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 01:47:50.888692', NULL, NULL);
+INSERT INTO public.clothing VALUES (2815, '6', 'Karl Lagerfeld', 'Jeans', 'Navy', NULL, 'KLP003', 24.99, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 01:48:35.102175', NULL, NULL);
+INSERT INTO public.clothing VALUES (2818, 'L', 'Michael Kors', 'Jean Jacket', 'Navy', NULL, '807706', 34.99, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 01:51:20.366555', NULL, NULL);
+INSERT INTO public.clothing VALUES (2819, '2', 'Michael Kors', 'Jeans', 'Navy', NULL, '442838', 24.99, NULL, NULL, NULL, 'с двумя пуговицами
+ПОТ 34
+ПОБ 43
+длина 102
+посадка 25', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 01:54:01.329367', NULL, NULL);
+INSERT INTO public.clothing VALUES (2820, 'S', 'Karl Lagerfeld', 'Dress', 'Grey', NULL, 'LD1R9558', 24.99, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 01:55:00.13085', NULL, NULL);
+INSERT INTO public.clothing VALUES (2822, 'M', 'Calvin Klein', 'T-Shirt', 'White', NULL, '455638', 7.99, NULL, NULL, NULL, 'укороченная, буквы в столб маломерит 
+ПОТ 43
+длина 55
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 02:01:08.013657', NULL, NULL);
+INSERT INTO public.clothing VALUES (2824, 'M', 'Calvin Klein', 'T-Shirt', 'White', NULL, '412686', 7.99, NULL, NULL, NULL, 'вырез мысом чёрно серебр лого
+ПОГ 48
+длина 65', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 02:04:54.675996', NULL, NULL);
+INSERT INTO public.clothing VALUES (2827, '26', 'Calvin Klein', 'Jeans', 'Navy', NULL, '744689', 24.99, NULL, NULL, NULL, 'ПОТ 36
+ПОБ 41
+Длина 96
+посадка 23', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 02:10:11.595959', NULL, NULL);
+INSERT INTO public.clothing VALUES (2826, 'M', 'Tommy Hilfiger', 'Skirt', 'Navy', NULL, '795163', 19.99, NULL, NULL, NULL, 'ПОТ 39
+ПОБ 52
+Длина 81', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 02:07:13.878716', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2831, '4', 'Calvin Klein', 'Jumpsuit', 'Black', NULL, '853007', 29.99, NULL, NULL, NULL, 'с белым воротником', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 02:15:22.587271', NULL, NULL);
+INSERT INTO public.clothing VALUES (2833, 'M', 'Calvin Klein', 'Tank Top', 'Black', NULL, '192670', 11.99, NULL, NULL, NULL, 'короткий топик
+ПОГ 39
+длина 43', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 02:54:50.317602', NULL, NULL);
+INSERT INTO public.clothing VALUES (2834, 'Ы', 'Calvin Klein', 'Tank Top', 'Black', NULL, '192687', 11.99, NULL, NULL, NULL, 'короткий топик
+ПОГ 36
+длина 42', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 02:55:42.961809', NULL, NULL);
+INSERT INTO public.clothing VALUES (2805, 'S', 'Calvin Klein', 'Bodic', 'White', NULL, '349951', 14.99, NULL, 95, NULL, 'ch 37
+L 71', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-03 21:28:45.120022', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2809, 'М', 'Calvin Klein', 'Pants', 'Black', NULL, 'KOLVK247', 24.99, NULL, 97, NULL, 'на манжетах с карманами', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-03 21:45:27.904552', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2813, '2', 'Karl Lagerfeld', 'Jeans', 'Navy', NULL, 'KLP001', 24.99, NULL, 96, NULL, 'ПОТ 36
+ПОБ 40
+длина 93
+посадка 21', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 01:44:14.8479', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2816, '10', 'Karl Lagerfeld', 'Jeans', 'Navy', NULL, 'KLP004', 24.99, NULL, 97, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 01:49:00.451944', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2838, 'M', 'Calvin Klein', 'Rain Coat', 'Pearl', NULL, '360895', 40.00, NULL, 97, NULL, 'ПОГ 54
+длина 77
+Рукав 72', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 03:01:34.904131', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2817, 'M', 'Tommy Hilfiger', 'Blazer', 'Navy', NULL, '235896', 24.99, NULL, 97, NULL, 'с пуговицами', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 01:50:18.091471', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2808, 'S', 'Calvin Klein', 'Pants', 'Black', NULL, 'KOLVK247', 24.99, NULL, NULL, NULL, 'на манжетах с карманами', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-03 21:44:39.488433', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2823, 'M', 'Calvin Klein', 'Jacket', 'Blush', NULL, 'KOLck123', 17.99, NULL, 97, NULL, 'персиковый бомбер', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 02:02:40.953869', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2802, 'M', 'Guess', 'T-Shirt', 'White', NULL, '929878', 12.99, NULL, 98, NULL, 'red sign guess
+CH 49
+L 62', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-03 21:23:48.097245', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2800, 'L', 'Calvin Klein', 'T-Shirt', 'Navy', NULL, '344354', 9.99, NULL, 98, NULL, 'lounge', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-03-03 21:19:30.423533', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2821, '4', 'Michael Kors', 'Jeans', 'Navy', NULL, '442845', 24.99, NULL, 98, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 01:55:47.577381', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2795, 'M', 'Michael Kors', 'T-Shirt', 'Black', NULL, '056484', 16.99, NULL, 98, NULL, 'Ch 54
+L 70', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-03-03 21:08:53.77129', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2794, 'M', 'Michael Kors', 'T-Shirt', 'White', NULL, '238262', 14.99, NULL, 98, NULL, NULL, NULL, 'men', NULL, NULL, NULL, 'usa', '2021-03-03 21:07:29.234927', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2811, 'M', 'Michael Kors', 'T-Shirt', 'Grey', NULL, '525973', 9.99, NULL, 98, NULL, 'серая лонж
+ПОГ 53
+дл 73', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-03-03 21:49:56.473068', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2807, '10', 'Tommy Hilfiger', 'Dress', 'Pink', NULL, '374143', 24.99, NULL, 98, NULL, 'с золотыми пуговицами', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-03 21:42:49.736573', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2829, '6', 'Tommy Hilfiger', 'Jeans', 'Navy', NULL, '821022', 14.99, NULL, 98, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 02:12:00.469099', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2828, '29', 'Calvin Klein', 'Jeans', 'Navy', NULL, '848539', 14.99, NULL, 98, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 02:11:16.457918', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2797, 'M', 'Calvin Klein', 'T-Shirt', 'Black', NULL, 'Ck0001', 12.99, NULL, 98, NULL, 'Ch 54
+L 73', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-03-03 21:11:12.16274', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2798, 'XL', 'Calvin Klein', 'T-Shirt', 'Black', NULL, 'Ck0003', 12.99, NULL, 98, NULL, 'CK on the center', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-03-03 21:13:48.518169', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2792, 'L', 'Michael Kors', 'T-Shirt', 'Black', NULL, '056491', 16.99, NULL, 99, NULL, 'Chest 58
+L 71', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-03-03 21:04:44.214362', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2796, 'M', 'Michael Kors', 'T-Shirt', 'Black', NULL, '056484', 16.99, NULL, 99, NULL, 'Ch 54
+L 70', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-03-03 21:08:58.880466', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2830, 'M', 'Calvin Klein', 'Dress', 'Black', NULL, '398072', 19.99, NULL, 99, NULL, 'с полоской с боку
+ПОГ49
+ПОБ 52
+длина 90', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 02:14:11.436368', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2825, 'M', 'Tommy Hilfiger', 'Skirt', 'Navy', NULL, '795163', 19.99, NULL, 98, NULL, 'ПОТ 39
+ПОБ 52
+Длина 81', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 02:07:08.344532', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2842, 'XS', 'Tommy Hilfiger', 'Blazer', 'Blue', NULL, '235834', 24.99, NULL, NULL, NULL, 'with buttons
+
+chest: 43
+length: 57
+arm: 63', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 04:49:22.120299', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2843, 'S', 'Tommy Hilfiger', 'Hoodie', 'Navy, White', NULL, '836156', 24.99, NULL, NULL, NULL, 'with zipper
+chest: 47
+length: 60
+arm: 64', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 04:51:03.635262', NULL, NULL);
+INSERT INTO public.clothing VALUES (2845, 'S', 'Tommy Hilfiger', 'Hoodie', 'Navy', NULL, '802083', 15.99, NULL, NULL, NULL, 'tommy jeans
+chest: 53
+length: 59
+arm: 61', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 04:53:00.062262', NULL, NULL);
+INSERT INTO public.clothing VALUES (2851, 'N/A', 'Tommy Hilfiger', 'Wallet', 'Black', NULL, '239293', 14.99, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 04:55:55.020799', NULL, NULL);
+INSERT INTO public.clothing VALUES (2852, 'N/A', 'Tommy Hilfiger', 'Wallet', 'Black', NULL, '425832', 14.99, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, NULL, '2021-03-04 04:57:30.276515', NULL, NULL);
+INSERT INTO public.clothing VALUES (2856, '8', 'Michael Kors', 'Jeans', 'Black', NULL, '834955', 20.00, NULL, NULL, NULL, 'waist: 38
+hips: 47
+pasadka: 24
+length: 99', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 04:59:37.888123', NULL, NULL);
+INSERT INTO public.clothing VALUES (2858, 'S', 'Calvin Klein', 'Sweat Pants', 'Pink', NULL, '406586', 19.99, NULL, NULL, NULL, 'white dot
+white lace
+
+waist: 37
+hips: 49
+pasadka: 25
+length: 98', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:01:32.638169', NULL, NULL);
+INSERT INTO public.clothing VALUES (2859, 'M', 'Calvin Klein', 'Jumpsuit', 'White', NULL, '117246', 24.99, NULL, NULL, NULL, 'chest: 48
+hips: 54
+length: 82', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:02:25.157358', NULL, NULL);
+INSERT INTO public.clothing VALUES (2860, 'M', 'Calvin Klein', 'Sweat Pants', 'Pink', NULL, '406579', 19.99, NULL, NULL, NULL, 'white dot
+white lace
+
+waist: 40
+hips: 50
+pasadka: 27
+length: 100', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:02:40.973576', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2855, '8', 'Michael Kors', 'Jeans', 'Black', NULL, '834955', 20.00, NULL, 98, NULL, 'waist: 38
+hips: 47
+pasadka: 24
+length: 99', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 04:59:30.593824', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2862, 'M', 'Calvin Klein', 'Hoodie', 'Black', NULL, '479010', 24.99, NULL, NULL, NULL, 'cropped
+cut calvin
+
+chest: 56
+length: 52
+arm: 69', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:05:21.855656', NULL, NULL);
+INSERT INTO public.clothing VALUES (2863, '6', 'Tommy Hilfiger', 'Jeans', 'Blue', NULL, '103092', 14.99, NULL, NULL, NULL, 'circle NY tommy hilfiger
+
+waist: 41
+hips: 47
+pasadka: 22
+length: 93', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:07:53.219636', NULL, NULL);
+INSERT INTO public.clothing VALUES (2866, 'S', 'Tommy Hilfiger', 'Leggings', 'Black', NULL, '829608', 19.99, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:12:17.482655', NULL, NULL);
+INSERT INTO public.clothing VALUES (2867, 'M', 'Calvin Klein', 'Dress', 'Green', NULL, '833771', 19.99, NULL, NULL, NULL, '3d ck
+chest: 47
+hips: 51
+length: 93', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:13:21.286832', NULL, NULL);
+INSERT INTO public.clothing VALUES (2869, 'S', 'Tommy Hilfiger', 'Hoodie', 'Pink', NULL, '774700', 24.99, NULL, NULL, NULL, 'oversized
+large tommy hilfiger on sides
+
+chest: 53
+length: 65
+arm: 64', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:14:40.039789', NULL, NULL);
+INSERT INTO public.clothing VALUES (2870, 'S', 'Tommy Hilfiger', 'Leggings', 'Black', NULL, '827109', 19.99, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:17:27.858631', NULL, NULL);
+INSERT INTO public.clothing VALUES (2871, 'S', 'Tommy Hilfiger', 'Leggings', 'Navy', NULL, '825006', 19.99, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:17:57.763499', NULL, NULL);
+INSERT INTO public.clothing VALUES (2872, 'M', 'Calvin Klein', 'Sweat Pants', 'Blue', NULL, '373161', 19.99, NULL, NULL, NULL, 'small ck on k on calf
+no fleece
+waist: 40
+hips: 53
+pasadka: 30
+length: 98', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:20:03.129796', NULL, NULL);
+INSERT INTO public.clothing VALUES (2873, '6', 'Calvin Klein', 'Dress', 'Navy', NULL, '462711', 24.99, NULL, NULL, NULL, 'metal golden CK thingy
+chest: 46
+waist: 37
+hips: 47
+length: 100', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:21:24.37057', NULL, NULL);
+INSERT INTO public.clothing VALUES (2874, 'XL', 'Michael Kors', 'T-Shirt', 'Black', NULL, '485482', 14.99, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:22:15.330881', NULL, NULL);
+INSERT INTO public.clothing VALUES (2875, 'L', 'Michael Kors', 'T-Shirt', 'Black', NULL, '485475', 14.99, NULL, NULL, NULL, 'michael kors inside michael kors on side
+chest: 56
+length: 73', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:22:59.400549', NULL, NULL);
+INSERT INTO public.clothing VALUES (2877, 'S', 'Calvin Klein', 'Sweat Shirt', 'Black', NULL, '503537', 19.99, NULL, NULL, NULL, 'big letters "calvin"
+white dot on sleeve
+
+chest: 58
+length: 56
+arm: 48/71', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:24:37.376847', NULL, NULL);
+INSERT INTO public.clothing VALUES (2879, '4', 'Tommy Hilfiger', 'Dress', 'Tan', NULL, '171194', 29.99, NULL, NULL, NULL, 'chest: 46
+waist: 36
+hips: 51
+length: 100', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:26:57.165905', NULL, NULL);
+INSERT INTO public.clothing VALUES (2880, 'S', 'Calvin Klein', 'Sweat Pants', 'Dark Tan', NULL, '167296', 19.99, NULL, NULL, NULL, 'waist: 39
+hips: 49
+pasadka: 25
+length: 93
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:27:52.129574', NULL, NULL);
+INSERT INTO public.clothing VALUES (2885, 'S', 'Tommy Hilfiger', 'Hoodie', 'Black', NULL, '774786', 24.99, NULL, NULL, NULL, 'large tommy hilfiger on sides
+oversized
+
+chest: 55
+length: 64
+arm: 61
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:31:44.338594', NULL, NULL);
+INSERT INTO public.clothing VALUES (2886, 'S', 'Tommy Hilfiger', 'Sweat Pants', 'Black', NULL, '774663', 19.99, NULL, NULL, NULL, 'large tommy hilfiger on sides
+
+waist: 38
+hips: 50
+pasadka: 24
+length: 91', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:32:36.030169', NULL, NULL);
+INSERT INTO public.clothing VALUES (2890, 'S', 'Tommy Hilfiger', 'Hoodie', 'Grey', NULL, '774748', 24.99, NULL, NULL, NULL, 'large blue tommy hilfiger on sides
+
+chest: 55
+length: 66
+arm: 62', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:36:24.576051', NULL, NULL);
+INSERT INTO public.clothing VALUES (2891, 'S', 'Tommy Hilfiger', 'Sweat Pants', 'Grey', NULL, '774625', 19.99, NULL, NULL, NULL, 'large blue tommy hilfiger on sides
+
+waist: 38
+hips: 52
+pasadka: 24
+length: 94', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:37:10.840337', NULL, NULL);
+INSERT INTO public.clothing VALUES (2892, '2', 'Michael Kors', 'Jeans', 'Navy', NULL, '443071', 29.99, NULL, NULL, NULL, 'easy skinny
+
+waist: 36
+hips: 45
+pasadka: 21
+length: 95', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:38:12.540658', NULL, NULL);
+INSERT INTO public.clothing VALUES (2884, 'M', 'Tommy Hilfiger', 'Sweat Pants', 'Black', NULL, '774656', 19.99, NULL, 96, NULL, 'large tommy hilfiger on sides
+
+waist: 40
+hips: 53
+pasadka: 25
+length: 92
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:30:59.813139', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2882, 'M', 'Tommy Hilfiger', 'Hoodie', 'Black', NULL, '774779', 24.99, NULL, 96, NULL, 'large tommy hilfiger on sides
+oversized
+
+chest: 55
+length: 64
+arm: 63', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:29:51.479196', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2861, 'S', 'Calvin Klein', 'Windbreaker', 'Silver', NULL, '899418', 16.00, NULL, 97, NULL, 'chest: 53
+length: 81/87', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:03:47.182528', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2865, 'L', 'Calvin Klein', 'Windbreaker', 'Red', NULL, '415120', 49.99, NULL, 98, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:11:45.015443', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2889, 'M', 'Tommy Hilfiger', 'Sweat Pants', 'Grey', NULL, '774618', 19.99, NULL, 98, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:35:43.680148', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2888, 'M', 'Tommy Hilfiger', 'Hoodie', 'Grey', NULL, '774731', 24.99, NULL, 98, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:35:19.071017', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2846, 'XL', 'Calvin Klein', 'Windbreaker', 'Blue', NULL, '389933', 49.99, NULL, 98, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 04:53:37.858406', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2849, 'N/A', 'Tommy Hilfiger', 'Wallet', 'Navy', NULL, '887685', 12.99, NULL, 98, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 04:55:31.452221', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2897, '---', 'Tommy Hilfiger', 'Pants', '---', 228, '162766', 11.47, NULL, 98, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:43:24.027278', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2876, 'M', 'Michael Kors', 'T-Shirt', 'White', NULL, '485697', 14.99, NULL, 98, NULL, 'michael kors inside michael kors on side
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:23:20.004082', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2857, 'L', 'Michael Kors', 'Windbreaker', 'Black', NULL, '273370', 49.99, NULL, 98, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:00:23.925679', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2868, 'M', 'Calvin Klein', 'Dress', 'Green', NULL, '833771', 19.99, NULL, 98, NULL, '3d ck
+chest: 47
+hips: 51
+length: 93', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:13:24.973294', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2854, '10', 'Michael Kors', 'Jeans', 'Black', NULL, '834962', 20.00, NULL, 98, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 04:58:23.414251', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2887, 'L', 'Tommy Hilfiger', 'Sweat Pants', 'Grey', NULL, '774601', 19.99, NULL, 98, NULL, 'blue large tommy hilfiger on sides
+
+waist: 43
+hips: 56
+pasadka: 28
+length: 95', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:34:39.516796', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2883, 'M', 'Tommy Hilfiger', 'Sweat Pants', 'Black', NULL, '774656', 19.99, NULL, 98, NULL, 'large tommy hilfiger on sides
+
+waist: 40
+hips: 53
+pasadka: 25
+length: 92
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:30:56.130506', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2881, 'M', 'Tommy Hilfiger', 'Hoodie', 'Black', NULL, '774779', 24.99, NULL, 98, NULL, 'large tommy hilfiger on sides
+oversized
+
+chest: 55
+length: 64
+arm: 63', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:29:46.918554', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2878, 'XL', 'Michael Kors', 'Sweat Shirt', 'Black', NULL, '937854', 24.00, NULL, 98, NULL, 'metal MK', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:25:27.299157', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2896, '---', 'Tommy Hilfiger', 'Pants', '---', 228, '162728', 11.47, NULL, 98, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:43:11.75116', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2853, 'N/A', 'Tommy Hilfiger', 'Wallet', 'Black', NULL, '305547', 14.99, NULL, 98, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 04:57:50.207127', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2850, 'N/A', 'Tommy Hilfiger', 'Wallet', 'Black', NULL, '239293', 14.99, NULL, 98, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 04:55:49.157244', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2848, '11', 'Tommy Hilfiger', 'Flip Flops', 'Navy', NULL, '817147', 16.99, NULL, 98, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 04:54:59.679648', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2844, 'M', 'Tommy Hilfiger', 'Hoodie', 'Navy, White', NULL, '836149', 24.99, NULL, 99, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 04:51:34.431862', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2864, 'L', 'Calvin Klein', 'Dress', 'Black', NULL, '398065', 19.99, NULL, 99, NULL, 'stripe on side
+
+chest: 53
+hips: 53
+length:  95', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:09:47.989856', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2904, 'S', 'Tommy Hilfiger', 'Sweat Pants', 'Grey', 228, '006615', 28.34, NULL, NULL, NULL, 'waist: 38
+hips: 54
+pasadka: 25
+length: 96', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:45:20.245552', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2905, 'S', 'Tommy Hilfiger', 'Hoodie', 'Grey', 228, '432320', 32.39, NULL, NULL, NULL, 'chest: 52
+length: 56
+arm: 62', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:45:47.458432', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2906, 'M', 'Tommy Hilfiger', 'Sweat Pants', 'Blue, Grey', 228, '006271', 28.34, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:47:14.295316', NULL, NULL);
+INSERT INTO public.clothing VALUES (2908, 'M', 'Calvin Klein', 'Sweat Pants', 'Light Blue', NULL, '337743', 19.99, NULL, NULL, NULL, 'no fleece
+white dot
+
+waist: 41
+hips: 51
+pasadka: 27
+length: 95', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:49:37.081005', NULL, NULL);
+INSERT INTO public.clothing VALUES (2909, 'M', 'Calvin Klein', 'Sweat Shirt', 'Pink', NULL, '503407', 19.99, NULL, NULL, NULL, 'white calvin
+black dot
+
+chest: 63
+length: 58
+arm: 49/75', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:50:55.422488', NULL, NULL);
+INSERT INTO public.clothing VALUES (2910, 'M', 'Calvin Klein', 'Sweat Pants', 'Black', NULL, '169337', 19.99, NULL, NULL, NULL, 'no fleece
+painted letters
+
+waist: 39
+hips: 49
+pasadka: 26
+length: 96', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:53:06.882501', NULL, NULL);
+INSERT INTO public.clothing VALUES (2911, 'M', 'Calvin Klein', 'Sweat Shirt', 'Tan', NULL, '169016', 19.99, NULL, NULL, NULL, 'no fleece
+painted letters
+
+chest: 59
+length: 59
+arm: 48/72
+ ', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:55:08.828822', NULL, NULL);
+INSERT INTO public.clothing VALUES (2913, 'S', 'Calvin Klein', 'Sweat Pants', 'Blue', NULL, '169146', 19.99, NULL, NULL, NULL, 'mesh
+painted letters
+
+waist: 38
+hips: 50
+pasadka: 24
+length: 94 ', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:58:16.381479', NULL, NULL);
+INSERT INTO public.clothing VALUES (2915, 'S', 'Tommy Hilfiger', 'Dress', 'Black', NULL, '738115', 19.99, NULL, NULL, NULL, 'tommy jeans on chest
+
+chest: 45
+hips: 47
+length: 85', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:59:45.223834', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2916, 'M', 'Tommy Hilfiger', 'Dress', 'Black', NULL, '738108', 19.99, NULL, 98, NULL, 'tommy jeans on chest
+
+chest: 48
+hips: 51
+length: 86', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 06:00:48.773186', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2918, 'S', 'Tommy Hilfiger', 'Dress', 'Navy', NULL, '830567', 19.99, NULL, NULL, NULL, 'with a flag
+oversized
+
+chest: 52
+length: 85
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 06:02:10.178597', NULL, NULL);
+INSERT INTO public.clothing VALUES (2919, 'M', 'Tommy Hilfiger', 'Dress', 'Navy', NULL, '830550', 19.99, NULL, NULL, NULL, 'with a flag
+oversized
+
+chest: 54
+length: 86
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 06:02:51.278673', NULL, NULL);
+INSERT INTO public.clothing VALUES (2920, 'M', 'Tommy Hilfiger', 'Dress', 'Navy', NULL, '830550', 19.99, NULL, NULL, NULL, 'with a flag
+oversized
+
+chest: 54
+length: 86
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 06:02:55.231998', NULL, NULL);
+INSERT INTO public.clothing VALUES (2921, 'XS', 'Tommy Hilfiger', 'T-Shirt', 'Pink', NULL, '808528', 12.99, NULL, NULL, NULL, 'with a navy/white flag
+
+
+chest: 44
+length: 60
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 06:04:13.854165', NULL, NULL);
+INSERT INTO public.clothing VALUES (2922, 'XS', 'Tommy Hilfiger', 'T-Shirt', 'White', NULL, '808443', 12.99, NULL, NULL, NULL, 'with a navy/red flag
+
+
+chest: 44
+length: 60
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 06:04:33.105999', NULL, NULL);
+INSERT INTO public.clothing VALUES (2924, 'S', 'Calvin Klein', 'T-Shirt', 'White', NULL, '455591', 12.99, NULL, NULL, NULL, 'red ck on k
+chest: 41
+length: 54
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 06:05:35.303118', NULL, NULL);
+INSERT INTO public.clothing VALUES (2933, 'M', 'Calvin Klein', 'Sweat Shirt', 'Black', NULL, '473700', 19.99, NULL, 99, NULL, 'white & silver letters
+
+chest: 54
+length: 57
+arm: 71', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 06:16:21.130302', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2923, 'S', 'Tommy Hilfiger', 'T-Shirt', 'White', NULL, '808436', 12.99, NULL, 98, NULL, 'with a navy/red flag
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 06:04:56.981983', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2928, 'XS', 'Karl Lagerfeld', 'T-Shirt', 'White', NULL, 'LOORH6009', 16.99, NULL, NULL, NULL, 'flower letters + eiffel tower
+
+chest: 44
+length: 60', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 06:12:02.115801', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2912, 'S', 'Calvin Klein', 'T-Shirt', 'Black', NULL, '791416', 12.99, NULL, 99, NULL, 'greyish/golden letters
+
+chest: 50
+length: 71
+', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-03-04 05:56:08.506333', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2929, 'S', 'Karl Lagerfeld', 'T-Shirt', 'White', NULL, 'LOORH6009', 16.99, NULL, 99, NULL, 'flower letters + eiffel tower
+
+chest: 46
+length: 62', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 06:12:06.33316', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2935, '2', 'DKNY', 'Dress', 'Tan, Sand', NULL, '603655', 19.99, NULL, NULL, NULL, 'chest: 42
+waist: 36
+hips: 51
+length: 99', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 06:18:48.862089', NULL, NULL);
+INSERT INTO public.clothing VALUES (2478, 'XS', 'Karl Lagerfeld', 'Sweat Shirt', 'Blue', 201, 'LORHS082', 24.99, NULL, 77, NULL, 'golden glasses
+
+chest: 47
+length: 59
+arm: 58', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-02-08 00:41:11.444202', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2936, 'M', 'Calvin Klein', 'Pants', 'Cream', NULL, '371327', 19.99, NULL, NULL, NULL, 'calvin klein написан краской', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 21:11:32.55738', NULL, NULL);
+INSERT INTO public.clothing VALUES (2937, 'M', 'Calvin Klein', 'Pants', 'Cream', NULL, '371327', 19.99, NULL, NULL, NULL, 'calvin klein написан краской
+ПОТ 40
+ПОБ 49
+посадка 27
+длина 95', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 21:11:32.563909', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2903, '---', 'Tommy Hilfiger', 'Pants', '---', 228, '044190', 11.47, NULL, 94, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:44:13.466045', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2898, '---', 'Tommy Hilfiger', 'Pants', '---', 228, '025689', 11.47, NULL, 94, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:43:31.644792', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2690, 'XXL', 'Tommy Hilfiger', 'T-Shirt', 'Black', 220, '451123', 8.99, NULL, 95, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-27 21:59:16.014732', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2689, 'XXL', 'Tommy Hilfiger', 'T-Shirt', 'White', 220, '388887', 8.99, NULL, 95, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-02-27 21:58:54.899048', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2832, 'S', 'Calvin Klein', 'Dress Shirt', 'White', NULL, 'MOTAK561', 24.99, NULL, 95, NULL, 'с золотой молнией
+ПОГ 49
+длина 71
+рукав 60', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 02:30:42.730098', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2939, 'S', 'Tommy Hilfiger', 'Blazer', 'Navy', NULL, '235902', 24.99, NULL, 95, NULL, 'на пуговицах', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-06 20:52:35.933912', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2940, 'L', 'Tommy Hilfiger', 'Sweat Pants', 'Grey', NULL, '006639', 32.39, NULL, 96, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-06 21:00:14.516533', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2941, 'L', 'Tommy Hilfiger', 'Hoodie', 'Grey', NULL, '432344', 28.34, NULL, 96, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-06 21:00:29.622026', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2837, 'M', 'Calvin Klein', 'Rain Coat', 'Pearl', NULL, '360895', 40.00, NULL, 96, NULL, 'ПОГ 54
+длина 77
+Рукав 72', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 03:01:30.518523', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2836, 'S', 'Calvin Klein', 'Rain Coat', 'Pearl', NULL, '360901', 40.00, NULL, NULL, NULL, 'ПОГ 52
+длина 75
+Рукав 70', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 02:58:06.712381', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2835, 'S', 'Calvin Klein', 'Rain Coat', 'Pearl', NULL, '360901', 40.00, NULL, NULL, NULL, 'ПОГ 52
+длина 75
+Рукав 70', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 02:58:01.93699', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2938, 'S', 'Calvin Klein', 'Dress Shirt', 'White', NULL, 'MOTAK561', 20.00, NULL, 96, NULL, 'с золотой молнией
+ПОГ 49
+длина 71
+рукав 60', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-06 20:51:50.096424', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2942, 'M', 'Calvin Klein', 'Bodic', 'White', NULL, '349944', 14.99, NULL, 96, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-06 21:06:32.726487', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2917, 'M', 'Tommy Hilfiger', 'Dress', 'Black', NULL, '738108', 19.99, NULL, 96, NULL, 'tommy jeans on chest
+
+chest: 48
+hips: 51
+length: 86', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 06:00:52.401516', NULL, 0.00);
+INSERT INTO public.clothing VALUES (1993, 'S', 'Calvin Klein', 'Belt', 'Brown', 154, '268656', 3.51, NULL, 96, NULL, 'Logo belt
+length: 95', NULL, 'women', 'woman-placeholder.jpg', NULL, NULL, 'usa', '2021-01-08 11:48:38.303382', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2943, 'S', 'Tommy Hilfiger', 'Windbreaker', 'White', NULL, '866511', 29.99, NULL, 97, NULL, 'costco jacket', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-06 21:13:46.173194', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2944, 'M', 'Tommy Hilfiger', 'Windbreaker', 'White, Navy', NULL, '866603', 29.99, NULL, 97, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-06 21:14:44.647766', NULL, NULL);
+INSERT INTO public.clothing VALUES (2914, 'S', 'Tommy Hilfiger', 'Dress', 'Black', NULL, '738115', 19.99, NULL, 98, NULL, 'tommy jeans on chest
+
+chest: 45
+hips: 47
+length: 85', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:59:41.273158', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2900, '---', 'Tommy Hilfiger', 'Pants', '---', 228, '162674', 11.47, NULL, 98, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:43:49.053837', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2901, '---', 'Tommy Hilfiger', 'Pants', '---', 228, '162797', 11.47, NULL, 98, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:43:58.252449', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2902, '---', 'Tommy Hilfiger', 'Pants', '---', 228, '500515', 11.47, NULL, 98, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:44:03.219594', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2934, 'M', 'Calvin Klein', 'Dress', 'Black', NULL, '404599', 19.99, NULL, 98, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 06:17:17.358529', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2932, 'XL', 'Karl Lagerfeld', 'T-Shirt', 'White', NULL, 'LOORH6009', 16.99, NULL, 98, NULL, 'flower letters + eiffel tower', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 06:12:19.810544', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2931, 'L', 'Karl Lagerfeld', 'T-Shirt', 'White', NULL, 'LOORH6009', 16.99, NULL, 98, NULL, 'flower letters + eiffel tower', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 06:12:15.82893', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2926, 'S', 'Karl Lagerfeld', 'T-Shirt', 'Peach, Coral, Pink', NULL, 'LORH0030', 16.99, NULL, 98, NULL, 'rhinestones', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 06:10:28.038573', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2930, 'M', 'Karl Lagerfeld', 'T-Shirt', 'White', NULL, 'LOORH6009', 16.99, NULL, 97, NULL, 'flower letters + eiffel tower', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 06:12:11.83476', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2945, '10', 'Calvin Klein', 'Blazer', 'White', 229, '006723', 19.99, NULL, NULL, NULL, 'белый без пуговицы
+ПОГ 52
+Длина 66
+рукав  56/62
+плечи 42', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-06 23:18:43.945884', NULL, NULL);
+INSERT INTO public.clothing VALUES (2948, 'S', 'Calvin Klein', 'Sweat Shirt', 'Light Blue', 229, '204205', 19.99, NULL, NULL, NULL, 'белый calvin klein jeans на груди
+ПОГ 54
+ДЛ 52
+рукав 49/73', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-06 23:24:16.276838', NULL, NULL);
+INSERT INTO public.clothing VALUES (2949, 'M', 'Tommy Hilfiger', 'Sweat Shirt', 'White', 229, '830284', 16.00, NULL, NULL, NULL, 'с флагом и вышитыми буквами
+ПОГ 52
+дл 61
+рук 62', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-06 23:26:41.149838', NULL, NULL);
+INSERT INTO public.clothing VALUES (2953, 'M', 'Michael Kors', 'T-Shirt', 'White', 229, '436578', 19.99, NULL, NULL, NULL, 'с золотыми буквами\
+ПОГ 50
+дл 64', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-06 23:35:55.483825', NULL, NULL);
+INSERT INTO public.clothing VALUES (2955, 'S', 'Calvin Klein', 'Hoodie', 'Light Blue', 229, '454303', 19.99, NULL, NULL, NULL, 'розовый чёрный СК на груди
+ПОГ 58
+дл 49
+рук 48/72', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-06 23:39:45.49539', NULL, NULL);
+INSERT INTO public.clothing VALUES (2956, '8', 'Tommy Hilfiger', 'Flip Flops', 'Navy White', 229, '566649', 14.99, NULL, NULL, NULL, 'меховой верх
+стелька 24.5', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-06 23:41:28.512153', NULL, NULL);
+INSERT INTO public.clothing VALUES (2957, 'S', 'Michael Kors', 'Hoodie', 'Black', 229, '440919', 29.99, NULL, NULL, NULL, 'с белым МК на груди
+ПОГ 56
+дл 65
+рук 49/71', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-06 23:43:46.500392', NULL, NULL);
+INSERT INTO public.clothing VALUES (2958, 'S', 'Calvin Klein', 'Sweat Shirt', 'White', 229, '204243', 19.99, NULL, NULL, NULL, 'calvin klein jean черный на груди печатные буквы
+ПОГ 54
+дл 55
+рук 49/73', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-06 23:46:28.494764', NULL, NULL);
+INSERT INTO public.clothing VALUES (2961, 'S', 'Calvin Klein', 'Belt', 'Brown', 229, '268779', 12.99, NULL, NULL, NULL, 'коричневый
+94 см', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-06 23:50:04.521261', NULL, NULL);
+INSERT INTO public.clothing VALUES (2960, 'M', 'Calvin Klein', 'Belt', 'Gray Black', 229, '286643', 12.99, NULL, NULL, NULL, 'двухстор чёрно серый
+101 см', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-06 23:48:19.40866', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2963, 'S', 'Michael Kors', 'Belt', 'Brown', 229, '388217', 16.99, NULL, NULL, NULL, 'коричневый
+92 см', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-06 23:52:39.78407', NULL, NULL);
+INSERT INTO public.clothing VALUES (2964, 'S', 'Michael Kors', 'Belt', 'Brown', 229, '388217', 16.99, NULL, NULL, NULL, 'коричневый
+92 см', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-06 23:58:04.202617', NULL, NULL);
+INSERT INTO public.clothing VALUES (2965, 'S', 'Karl Lagerfeld', 'Hoodie', 'White', 230, 'LORH7081', 14.99, NULL, NULL, NULL, 'печатные буквы karl lagerfeld paris
+
+ПОГ 53
+дл 58
+рук  61', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-07 00:03:12.309467', NULL, NULL);
+INSERT INTO public.clothing VALUES (2967, '4/27', 'Calvin Klein', 'Jeans', 'Navy', 230, '080212', 14.99, NULL, NULL, NULL, 'с пуговицами наружу
+ПОТ 34
+ПОБ 42
+посадка 26
+дл 95', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-07 00:08:05.946389', NULL, NULL);
+INSERT INTO public.clothing VALUES (2968, '4/27', 'Calvin Klein', 'Jeans', 'Grey', 230, '017102', 14.99, NULL, NULL, NULL, 'серые
+ПОТ 34
+ПОБ 41
+посадка 25
+дл 89', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-07 00:09:45.731722', NULL, NULL);
+INSERT INTO public.clothing VALUES (2971, 'S', 'Calvin Klein', 'Pants', 'Black', 230, '336883', 24.99, NULL, NULL, NULL, 'на шнурке укороченные
+ПОТ 35
+ПОБ 52
+дл 82
+пос 25', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-07 00:16:02.093684', NULL, NULL);
+INSERT INTO public.clothing VALUES (2973, 'M', 'Karl Lagerfeld', 'T-Shirt', 'Black', 230, 'LORH7052', 19.99, NULL, NULL, NULL, 'c паетками
+ПОГ  51
+ДЛ 63', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-07 00:18:19.085438', NULL, NULL);
+INSERT INTO public.clothing VALUES (2974, '2/26', 'Levis', 'Shorts', 'Blue', 230, 'Levis01', 12.00, NULL, NULL, NULL, 'высокая талия широкий пояс
+ПОТ 33
+ПОБ 51
+ пос 34
+ дл 37', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-07 00:22:16.967005', NULL, NULL);
+INSERT INTO public.clothing VALUES (2977, 'S', 'Calvin Klein', 'Dress', 'White', 230, '595679', 24.99, NULL, NULL, NULL, ' рефлёная ткань с капюшоном
+
+ПОГ 42
+дл 88
+рук 65', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-07 00:29:07.251915', NULL, NULL);
+INSERT INTO public.clothing VALUES (2979, 'S', 'DKNY', 'Hoodie', 'Black', 230, '918159', 24.99, NULL, NULL, NULL, 'ПОГ 50
+дл 54
+рук 71', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-07 00:32:16.519345', NULL, NULL);
+INSERT INTO public.clothing VALUES (2980, 'Xs', 'Calvin Klein', 'T-Shirt', 'Purple', 230, '455294', 12.99, NULL, NULL, NULL, 'ПОГ 44
+дл 62
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-07 00:33:52.481905', NULL, NULL);
+INSERT INTO public.clothing VALUES (2981, 'M', 'Calvin Klein', 'T-Shirt', 'Black', 230, '793342', 12.99, NULL, NULL, NULL, 'ПОГ 51
+дл 66
+', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-03-07 00:35:10.03892', NULL, NULL);
+INSERT INTO public.clothing VALUES (2982, 'L', 'Calvin Klein', 'T-Shirt', 'Black', 230, '793342', 12.99, NULL, NULL, NULL, 'ПОГ 54
+дл 71
+', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-03-07 00:36:23.646757', NULL, NULL);
+INSERT INTO public.clothing VALUES (2983, 'L', 'Calvin Klein', 'T-Shirt', 'Black', 230, '793342', 12.99, NULL, NULL, NULL, 'ПОГ 54
+дл 71
+', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-03-07 00:36:27.905556', NULL, NULL);
+INSERT INTO public.clothing VALUES (2984, 'L', 'DKNY', 'Dress', 'Black', 230, '366218', 24.99, NULL, NULL, NULL, '
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-07 00:39:31.175937', NULL, NULL);
+INSERT INTO public.clothing VALUES (2985, '4', 'Tommy Hilfiger', 'Jeans', 'Navy', 230, '815502', 14.99, NULL, NULL, NULL, '
+с метал знаком сзади
+ПОТ 37
+ПОБ 45
+пос 25
+дл 96', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-07 00:42:14.658077', NULL, NULL);
+INSERT INTO public.clothing VALUES (2986, 'Xs', 'Karl Lagerfeld', 'T-Shirt', 'Black', 230, 'LORH7052', 16.99, NULL, NULL, NULL, 'с серебр паетками
+ПОГ 44
+дл
+61', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-07 01:05:33.225031', NULL, NULL);
+INSERT INTO public.clothing VALUES (2987, 'S', 'DKNY', 'Puffy Jacket', 'Black', NULL, '391329', 20.00, NULL, NULL, NULL, 'from costco
+
+chest: 53
+length: 87
+arm: 63
+shoulders: 42', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-07 01:08:49.623795', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2988, 'M', 'DKNY', 'Puffy Jacket', 'Black', NULL, '391312', 20.00, NULL, NULL, NULL, 'from costco
+
+chest: 56
+length: 88
+arm: 66
+shoulders: 43', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-07 01:09:09.853086', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2978, 'S', 'Tommy Hilfiger', 'Bodic', 'Navy', 230, '808153', 11.99, NULL, 99, NULL, 'ПОГ 43
+дл 65
+рук 59', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-07 00:30:40.69716', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2990, 'M', 'Calvin Klein', 'Sweat Shirt', 'Light Pink', 230, '503407', 19.99, NULL, NULL, NULL, 'с белыми буквами на гр
+ПОГ 60
+дл 60
+рук 50/74', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-07 01:12:54.374328', NULL, NULL);
+INSERT INTO public.clothing VALUES (2991, 'S', 'Calvin Klein', 'Sweat Shirt', 'Light Pink', 230, '503414', 19.99, NULL, NULL, NULL, 'с белыми буквами на гр
+ПОГ 57
+дл 57
+рук 49/72', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-07 01:14:16.211938', NULL, NULL);
+INSERT INTO public.clothing VALUES (2993, '7', 'Tommy Hilfiger', 'Flip Flops', 'Black', 231, '810391', 12.99, NULL, NULL, NULL, 'c золотым кружочком
+через палец
+стелька 24.5 см', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-07 01:16:49.818272', NULL, NULL);
+INSERT INTO public.clothing VALUES (2927, 'XL', 'Karl Lagerfeld', 'T-Shirt', 'Peach, Coral, Pink', NULL, 'LORH0030', 16.99, NULL, 98, NULL, 'rhinestones', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 06:10:48.689926', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2994, 'L', 'Tommy Hilfiger', 'Hoodie', 'Grey', NULL, '774724', 24.99, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-07 23:00:58.732062', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2995, 'N/A', 'Levis', 'Wallet', 'Black', NULL, '544143', 12.99, NULL, 98, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-07 23:12:08.871258', NULL, NULL);
+INSERT INTO public.clothing VALUES (2966, 'Ь', 'Karl Lagerfeld', 'Bodic', 'Navy', 230, '808146', 11.99, NULL, 99, NULL, 'ПОГ 45
+дл 66', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-07 00:05:01.981817', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2954, 'M', 'Calvin Klein', 'Sweat Shirt', 'Light Blue', 229, '204199', 19.99, NULL, 99, NULL, 'светло голубой с calvin klein jeans на груди
+ПОГ 57
+дл 53
+рук 48/73', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-06 23:38:01.701749', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2989, 'M', 'Michael Kors', 'Sweat Shirt', 'Black', 231, '937830', 24.00, NULL, 99, NULL, 'с серебр буквами
+ПОГ 53
+дл 70
+рук 51/69', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-07 01:10:25.185959', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2970, 'M', 'Calvin Klein', 'T-Shirt', 'Purple', 230, '412129', 12.99, NULL, 99, NULL, 'ПОГ 48
+дл 64', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-07 00:13:38.035059', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2969, 'Xs', 'Tommy Hilfiger', 'Blazer', 'Navy', 230, '235919', 24.99, NULL, 99, NULL, 'с пуговицами вдоль
+ПОГ 43
+дл 54
+рук 60
+плечи 38', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-07 00:12:02.587849', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2972, 'M', 'Karl Lagerfeld', 'T-Shirt', 'Black', 230, 'LORH7052', 19.99, NULL, 99, NULL, 'c паетками
+ПОГ  51
+ДЛ 63', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-07 00:17:49.576881', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2975, '6', 'Karl Lagerfeld', 'Jeans', 'Blue', 230, 'KLP006', 24.99, NULL, 99, NULL, 'с полоской с боку
+ПОТ 38
+ПОБ 42
+пос 23
+дл 97', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-07 00:24:49.437031', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2962, 'M', 'Calvin Klein', 'Belt', 'Brown', 229, '268762', 12.99, NULL, 99, NULL, 'коричневый
+101 см', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-06 23:50:49.177019', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2959, 'S', 'Calvin Klein', 'Belt', 'Grey, Black', 229, '286650', 12.99, NULL, 99, NULL, 'двухстор чёрно серый
+94 см', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-06 23:47:41.564135', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2996, '7.5', 'Calvin Klein', 'Shoes', 'Yellow', NULL, '382982', 29.93, NULL, 98, NULL, 'pumps', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-07 23:14:40.585793', NULL, NULL);
+INSERT INTO public.clothing VALUES (2847, '11', 'Tommy Hilfiger', 'Flip Flops', 'Navy', NULL, '817147', 16.99, NULL, 98, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 04:54:58.650957', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2997, 'N/A', 'Tommy Hilfiger', 'Purse', 'Navy', NULL, '644011', 22.99, NULL, 98, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-07 23:16:07.768012', NULL, NULL);
+INSERT INTO public.clothing VALUES (2992, '8', 'Tommy Hilfiger', 'Flip Flops', 'Black', 231, '810414', 12.99, NULL, 98, NULL, 'c золотым кружочком
+через палец
+стелька 25 см', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-07 01:16:05.494758', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2907, 'M', 'Calvin Klein', 'Sweat Pants', 'Light Blue', NULL, '337743', 19.99, NULL, 99, NULL, 'no fleece
+white dot
+
+waist: 41
+hips: 51
+pasadka: 27
+length: 95', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-04 05:49:30.84842', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2998, 'L', 'Calvin Klein', 'T-Shirt', 'Black', NULL, '793359', 12.99, NULL, 99, NULL, 'grey ck
+
+chest: 57
+length: 71', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-03-08 00:20:41.120017', NULL, NULL);
+INSERT INTO public.clothing VALUES (2999, 'M', 'Calvin Klein', 'Polo Shirt', 'Black', NULL, '294514', 19.99, NULL, 99, NULL, 'ck on shoulder
+
+chest: 52
+length: 71', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-03-08 00:23:43.858786', NULL, 0.00);
+INSERT INTO public.clothing VALUES (3000, 'S', 'Calvin Klein', 'Polo Shirt', 'Black', NULL, '294507', 19.99, NULL, 99, NULL, 'ck on shoulder
+
+chest: 50
+length: 70', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-03-08 00:24:54.835549', NULL, NULL);
+INSERT INTO public.clothing VALUES (3001, 'S', 'Karl Lagerfeld', 'Hoodie', 'Black', NULL, 'LORE7067', 20.99, NULL, 99, NULL, 'chest: 46
+length: 59
+arm: 60', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-08 00:25:28.349211', NULL, 0.00);
+INSERT INTO public.clothing VALUES (2976, '6', 'Michael Kors', 'Jeans', 'Blue', 230, '443095', 29.99, NULL, 99, NULL, 'с накладными карманами с боку
+ПОТ 38
+ПОБ 49
+дл 98
+пос 23', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-07 00:26:47.301055', NULL, 0.00);
+INSERT INTO public.clothing VALUES (3002, 'N/A', 'Calvin Klein', 'Backpack', 'White', NULL, '348190', 59.99, NULL, 99, NULL, 'monogram
+
+height: 36
+width: 31', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-08 00:40:40.648083', NULL, NULL);
+INSERT INTO public.clothing VALUES (3003, 'S', 'Calvin Klein', 'Sweat Pants', 'Cream, White', NULL, '??????', 19.99, NULL, 81, NULL, 'black letters on leg', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-09 21:06:42.775605', NULL, NULL);
+INSERT INTO public.clothing VALUES (3004, '9', 'Calvin Klein', 'Shoes', 'Tan', 232, 'CKS001', 29.99, NULL, NULL, NULL, 'high heels', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-10 00:09:37.851849', NULL, NULL);
+INSERT INTO public.clothing VALUES (3005, '8', 'Calvin Klein', 'Shoes', 'Black', 232, 'CKS002', 19.99, NULL, NULL, NULL, 'flippy floppy high heels
+shiny
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-10 00:10:32.92948', NULL, NULL);
+INSERT INTO public.clothing VALUES (3006, '7.5', 'Calvin Klein', 'Shoes', 'Black', 232, 'CKS002', 19.99, NULL, NULL, NULL, 'flippy floppy high heels
+shiny
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-10 00:10:52.761688', NULL, NULL);
+INSERT INTO public.clothing VALUES (3007, 'S', 'Calvin Klein', 'Sweat Pants', 'White', 232, '232376', 19.99, NULL, NULL, NULL, 'white sewn-in sign
+black dot
+
+waist: 38
+hips: 49
+pasadka: 24
+length: 91', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-10 00:12:39.333902', NULL, NULL);
+INSERT INTO public.clothing VALUES (3008, 'S', 'Calvin Klein', 'Sweat Pants', 'Pink', 232, '232499', 19.99, NULL, NULL, NULL, 'pink sewn-in sign
+white dot
+
+waist: 38
+hips: 49
+pasadka: 24
+length: 91', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-10 00:13:14.908727', NULL, 0.00);
+INSERT INTO public.clothing VALUES (3009, 'S', 'Guess', 'T-Shirt', 'White', 232, '079412', 12.99, NULL, NULL, NULL, 'triangle question mark
+
+chest: 42
+length: 62', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-10 00:14:05.702657', NULL, NULL);
+INSERT INTO public.clothing VALUES (3010, 'S', 'Calvin Klein', 'Sweat Pants', 'Black', 232, '941582', 19.99, NULL, NULL, NULL, 'waist: 39
+hips: 47
+pasadka: 23
+length: 93', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-10 00:14:26.610521', NULL, 0.00);
+INSERT INTO public.clothing VALUES (3011, 'L', 'DKNY', 'Windbreaker', 'Blue', 232, '119323', 39.99, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-10 00:15:24.238133', NULL, NULL);
+INSERT INTO public.clothing VALUES (3012, 'XL', 'Levis', 'Bomber Jacket', 'Black', 232, '624069', 39.99, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-10 00:15:55.993669', NULL, NULL);
+INSERT INTO public.clothing VALUES (3013, 'M', 'Calvin Klein', 'Windbreaker', 'Blue', 232, '389957', 49.99, NULL, NULL, NULL, 'sign calvin on back
+
+chest: 59
+length: 71
+arm: 66
+shoulders: 50', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-10 00:16:59.051493', NULL, 0.00);
+INSERT INTO public.clothing VALUES (3014, 'M10/12', 'Calvin Klein', 'T-Shirt', 'White', 232, '681576', 7.99, NULL, NULL, NULL, 'kid clothes
+black square sign
+
+chest: 42
+length: 58', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-10 00:18:03.300685', NULL, NULL);
+INSERT INTO public.clothing VALUES (3015, '6', 'Tommy Hilfiger', 'T-Shirt', 'Navy', 232, '753556', 7.99, NULL, NULL, NULL, 'kid clothes
+red/white square
+tommy hilfiger in square
+6 years
+
+chest: 37
+length: 49', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-10 00:19:12.206636', NULL, NULL);
+INSERT INTO public.clothing VALUES (3016, '7', 'Tommy Hilfiger', 'T-Shirt', 'Navy', 232, '753563', 7.99, NULL, NULL, NULL, 'kid clothes
+red/white square
+tommy hilfiger in square
+7 years
+
+chest: 38
+length: 51', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-10 00:19:45.459638', NULL, NULL);
+INSERT INTO public.clothing VALUES (3017, '10/12', 'Calvin Klein', 'T-Shirt', 'Mint', 232, '682054', 7.99, NULL, NULL, NULL, 'kid clothes
+chest: 43
+length: 60', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-10 00:20:28.306471', NULL, 0.00);
+INSERT INTO public.clothing VALUES (3018, '8', 'Calvin Klein', 'T-Shirt', 'Mint', 232, '682061', 7.99, NULL, NULL, NULL, 'kid clothes
+chest: 39
+length: 53', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-10 00:21:24.546712', NULL, NULL);
+INSERT INTO public.clothing VALUES (3019, '14/16', 'Calvin Klein', 'T-Shirt', 'Black', 232, '687981', 7.99, NULL, NULL, NULL, 'kid clothes
+grey gummy sign
+chest: 45
+length: 63', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-10 00:22:18.290979', NULL, NULL);
+INSERT INTO public.clothing VALUES (3020, '10/12', 'Calvin Klein', 'T-Shirt', 'Black', 232, '681538', 7.99, NULL, NULL, NULL, 'kid clothes
+grey square, white/red logo inside
+chest: 42
+length: 59', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-10 00:23:10.177948', NULL, NULL);
+INSERT INTO public.clothing VALUES (3021, '14/16', 'Calvin Klein', 'T-Shirt', 'White', 232, '688100', 7.99, NULL, NULL, NULL, 'kid clothes
+grey square
+chest: 47
+length: 62', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-10 00:24:01.898686', NULL, NULL);
+INSERT INTO public.clothing VALUES (3022, '10/12', 'DKNY', 'T-Shirt', 'White', 232, '567955', 6.99, NULL, NULL, NULL, 'kid clothes
+black square
+chest: 44
+length: 60', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-10 00:24:41.826995', NULL, NULL);
+INSERT INTO public.clothing VALUES (3023, 'M', 'Calvin Klein', 'Sweat Pants', 'White', 232, '232369', 19.99, NULL, NULL, NULL, 'white sewn-in logo
+waist: 41
+hips: 51
+pasadka: 25
+length: 93', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-10 00:26:23.211524', NULL, NULL);
+INSERT INTO public.clothing VALUES (3024, 'M', 'DKNY', 'Windbreaker', 'Grey', 232, '666397', 39.99, NULL, NULL, NULL, 'black hood/chest
+chest: 58
+length: 71
+arm: 67
+shoulders:  48', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-10 00:27:42.822497', NULL, NULL);
+INSERT INTO public.clothing VALUES (3028, 'M', 'Calvin Klein', 'Dress', 'Black', 233, '398072', 19.99, NULL, NULL, NULL, 'с полоской с боку
+ПОГ49
+ПОБ 52
+длина 90', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-10 00:31:20.776586', NULL, 0.00);
+INSERT INTO public.clothing VALUES (3029, 'L', 'Calvin Klein', 'T-Shirt', 'Black', 233, '426061', 12.99, NULL, NULL, NULL, 'grey/silver logo
+
+chest: 59
+length: 73', NULL, 'men', NULL, NULL, NULL, 'usa', '2021-03-10 00:32:15.544556', NULL, NULL);
+INSERT INTO public.clothing VALUES (3027, '8', 'Calvin Klein', 'T-Shirt', 'White', 232, '681583', 7.99, NULL, NULL, NULL, 'kid clothes
+black square on chest
+chest: 38
+length: 54', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-10 00:29:44.586461', NULL, 0.00);
+INSERT INTO public.clothing VALUES (3030, 'S', 'Tommy Hilfiger', 'Dress', 'White', 233, '830536', 12.00, NULL, NULL, NULL, 'with flag
+
+chest: 51
+length: 86
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-10 00:32:36.423322', NULL, 0.00);
+INSERT INTO public.clothing VALUES (3031, 'M', 'Tommy Hilfiger', 'Dress', 'White', 233, '830529', 12.00, NULL, NULL, NULL, 'flag on chest
+chest: 57
+length: 87', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-10 00:33:01.298742', NULL, 0.00);
+INSERT INTO public.clothing VALUES (3026, '14/16', 'Calvin Klein', 'T-Shirt', 'Black', 232, '688520', 7.99, NULL, NULL, NULL, 'kid clothes
+blue calvin
+yellow klein
+white jeans
+chest: 46
+length: 62
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-10 00:29:11.553123', NULL, 0.00);
+INSERT INTO public.clothing VALUES (3025, '14/16', 'Calvin Klein', 'T-Shirt', 'White', 232, '681569', 7.99, NULL, NULL, NULL, 'kid clothes
+black square on chest
+chest: 47
+length: 64
+', NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-10 00:28:33.313003', NULL, 0.00);
+INSERT INTO public.clothing VALUES (3032, '10', 'Tommy Hilfiger', 'Flip Flops', 'Navy', 233, '527494', 16.99, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-10 00:34:22.722022', NULL, NULL);
+INSERT INTO public.clothing VALUES (3033, '10', 'Tommy Hilfiger', 'Flip Flops', 'Navy', 233, '527494', 16.99, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-10 00:34:23.539849', NULL, NULL);
+INSERT INTO public.clothing VALUES (3034, '9', 'Tommy Hilfiger', 'Flip Flops', 'Navy', 233, '527470', 16.99, NULL, NULL, NULL, NULL, NULL, 'women', NULL, NULL, NULL, 'usa', '2021-03-10 00:34:37.553616', NULL, NULL);
 
 
 --
@@ -8658,7 +10296,6 @@ INSERT INTO public.packages VALUES (23, 'USPS 7.1', 45.36, '2020-12-01', NULL, '
 INSERT INTO public.packages VALUES (24, 'USPS 8.1', 42.21, '2020-12-01', NULL, '2020-12-21 01:07:53.421056', NULL);
 INSERT INTO public.packages VALUES (25, 'USPS 10', 40.95, '2020-12-01', NULL, '2020-12-21 01:07:53.42867', NULL);
 INSERT INTO public.packages VALUES (26, 'USPS 14', 41.89, '2020-12-01', NULL, '2020-12-21 01:07:53.435941', NULL);
-INSERT INTO public.packages VALUES (27, 'USPS 9', 43.15, '2020-12-01', NULL, '2020-12-21 01:07:53.443176', NULL);
 INSERT INTO public.packages VALUES (28, 'USPS 11', 45.04, '2020-12-01', NULL, '2020-12-21 01:07:53.449582', NULL);
 INSERT INTO public.packages VALUES (29, 'USPS 12', 0.00, '2020-12-01', NULL, '2020-12-21 01:07:53.45787', NULL);
 INSERT INTO public.packages VALUES (30, 'USPS 22', 0.00, '2020-12-03', NULL, '2020-12-21 01:07:53.465089', NULL);
@@ -8691,26 +10328,52 @@ INSERT INTO public.packages VALUES (55, 'Alla 6', 0.00, '2020-12-29', NULL, '202
 INSERT INTO public.packages VALUES (56, 'Alla 2021 1', 0.00, '2021-01-08', NULL, '2021-01-08 13:40:51.002971', NULL);
 INSERT INTO public.packages VALUES (7, 'Zhenya Misha 7', 150.00, '2020-11-21', NULL, '2020-12-21 01:07:53.29577', NULL);
 INSERT INTO public.packages VALUES (8, 'USPS 17', 41.89, '2020-11-23', NULL, '2020-12-21 01:07:53.303089', NULL);
-INSERT INTO public.packages VALUES (57, 'Dnipro 2 2021', 0.00, '2021-01-16', NULL, '2021-01-16 14:48:46.420635', NULL);
-INSERT INTO public.packages VALUES (58, 'usps 3 2021', 0.00, '2021-01-16', NULL, '2021-01-16 15:52:32.272346', NULL);
 INSERT INTO public.packages VALUES (59, 'usps 1 2021', 40.95, '2021-01-10', NULL, '2021-01-17 18:55:34.01657', NULL);
-INSERT INTO public.packages VALUES (63, 'Dnipro 3 2021', 0.00, '2021-01-18', NULL, '2021-01-18 15:30:45.257425', NULL);
 INSERT INTO public.packages VALUES (61, 'USPS Alla 2 2021', 44.41, '2021-01-17', NULL, '2021-01-17 19:04:23.894934', NULL);
 INSERT INTO public.packages VALUES (62, 'usps 2 2021', 49.45, '2021-01-17', NULL, '2021-01-17 19:07:36.600329', NULL);
 INSERT INTO public.packages VALUES (64, 'Alla 19', 0.00, '2021-01-19', NULL, '2021-01-19 12:47:17.369361', NULL);
-INSERT INTO public.packages VALUES (65, 'Dnipro 4 2021', 0.00, '2021-01-22', NULL, '2021-01-22 11:36:23.375985', NULL);
-INSERT INTO public.packages VALUES (66, 'USPS 5 2021', 0.00, '2021-01-22', NULL, '2021-01-22 12:37:54.257278', NULL);
 INSERT INTO public.packages VALUES (60, 'Dnipro 1 2021', 108.00, '2021-01-17', NULL, '2021-01-17 19:00:26.432837', NULL);
 INSERT INTO public.packages VALUES (67, 'Alla 20', 0.00, '2021-01-24', NULL, '2021-01-23 19:25:02.159415', NULL);
 INSERT INTO public.packages VALUES (68, 'Alla 21', 0.00, '2021-01-25', NULL, '2021-01-23 20:19:04.961467', NULL);
-INSERT INTO public.packages VALUES (69, 'Dnipro 5 2021', 0.00, '2021-01-18', NULL, '2021-01-23 21:15:29.923941', NULL);
-INSERT INTO public.packages VALUES (70, 'USPS 6 2021', 0.00, '2021-01-26', NULL, '2021-01-26 16:12:12.472901', NULL);
-INSERT INTO public.packages VALUES (71, 'Dnipro 6 2021', 0.00, '2021-01-27', NULL, '2021-01-27 15:17:00.567442', NULL);
-INSERT INTO public.packages VALUES (72, 'Dnipro 7 By Sea 2021', 0.00, '2021-01-27', NULL, '2021-01-27 15:58:18.979294', NULL);
-INSERT INTO public.packages VALUES (73, 'USPS 7 2021', 0.00, '2021-01-29', NULL, '2021-01-29 11:25:52.306414', NULL);
 INSERT INTO public.packages VALUES (6, 'Dnipro 6 By Sea', 86.30, '2020-11-19', NULL, '2020-12-21 01:07:53.288019', NULL);
-INSERT INTO public.packages VALUES (74, 'Dnipro 8 2021', 0.00, '2021-02-02', NULL, '2021-01-31 18:24:27.487895', NULL);
 INSERT INTO public.packages VALUES (75, 'USPS 4 2021', 51.03, '2021-01-26', NULL, '2021-02-02 23:05:17.513861', NULL);
+INSERT INTO public.packages VALUES (27, 'USPS 9 2020', 43.15, '2020-12-01', NULL, '2020-12-21 01:07:53.443176', NULL);
+INSERT INTO public.packages VALUES (79, 'USPS Alla 3 2021', 0.00, '2021-02-06', NULL, '2021-02-09 19:45:14.922657', NULL);
+INSERT INTO public.packages VALUES (80, 'USPS Alla 4 2021', 0.00, '2021-02-03', NULL, '2021-02-09 19:51:23.506028', NULL);
+INSERT INTO public.packages VALUES (82, 'Alla 22', 0.00, '2021-02-12', NULL, '2021-02-12 02:40:40.015775', NULL);
+INSERT INTO public.packages VALUES (89, 'Alla 23 Dnipro', 0.00, '2021-03-01', NULL, '2021-02-27 21:31:09.731547', NULL);
+INSERT INTO public.packages VALUES (86, 'Delete', 0.00, '2021-02-22', NULL, '2021-02-22 20:09:22.800884', NULL);
+INSERT INTO public.packages VALUES (90, 'Alla Winter', 0.00, '2021-03-01', NULL, '2021-02-27 21:37:40.517428', NULL);
+INSERT INTO public.packages VALUES (91, 'Alla 24 Dnipro', 0.00, '2021-03-01', NULL, '2021-02-27 21:47:38.122478', NULL);
+INSERT INTO public.packages VALUES (92, 'Alla 5 USPS', 0.00, '2021-03-01', NULL, '2021-03-01 01:23:53.807978', NULL);
+INSERT INTO public.packages VALUES (94, 'Alla 25 Dnipro', 0.00, '2021-03-01', NULL, '2021-03-01 06:30:24.427395', NULL);
+INSERT INTO public.packages VALUES (95, 'USPS 15 2021', 0.00, '2021-03-06', NULL, '2021-03-06 20:48:46.380381', NULL);
+INSERT INTO public.packages VALUES (96, 'USPS 16 2021', 0.00, '2021-03-06', NULL, '2021-03-06 21:00:52.916764', NULL);
+INSERT INTO public.packages VALUES (97, 'Alla 6 USPS', 0.00, '2021-03-06', NULL, '2021-03-06 21:12:12.464671', NULL);
+INSERT INTO public.packages VALUES (98, 'Alla 26 Dnipro by air', 0.00, '2021-03-08', NULL, '2021-03-07 22:10:04.758253', NULL);
+INSERT INTO public.packages VALUES (99, 'Dnipro 14 2021', 0.00, '2021-03-08', NULL, '2021-03-07 23:25:21.965124', NULL);
+INSERT INTO public.packages VALUES (57, 'Dnipro 2 2021', 169.10, '2021-01-16', NULL, '2021-01-16 14:48:46.420635', NULL);
+INSERT INTO public.packages VALUES (63, 'Dnipro 3 2021', 157.27, '2021-01-18', NULL, '2021-01-18 15:30:45.257425', NULL);
+INSERT INTO public.packages VALUES (65, 'Dnipro 4 2021', 159.09, '2021-01-22', NULL, '2021-01-22 11:36:23.375985', NULL);
+INSERT INTO public.packages VALUES (69, 'Dnipro 5 2021', 173.64, '2021-01-18', NULL, '2021-01-23 21:15:29.923941', NULL);
+INSERT INTO public.packages VALUES (71, 'Dnipro 6 2021', 95.35, '2021-01-27', NULL, '2021-01-27 15:17:00.567442', NULL);
+INSERT INTO public.packages VALUES (72, 'Dnipro 7 By Sea 2021', 109.39, '2021-01-27', NULL, '2021-01-27 15:58:18.979294', NULL);
+INSERT INTO public.packages VALUES (74, 'Dnipro 8 2021', 170.11, '2021-02-02', NULL, '2021-01-31 18:24:27.487895', NULL);
+INSERT INTO public.packages VALUES (76, 'Dnipro 9', 96.06, '2021-02-08', NULL, '2021-02-08 22:54:52.250851', NULL);
+INSERT INTO public.packages VALUES (81, 'Dnipro 10 2021', 159.33, '2021-02-12', NULL, '2021-02-12 01:34:29.910726', NULL);
+INSERT INTO public.packages VALUES (84, 'Dnipro 11 2021', 149.72, '2021-02-17', NULL, '2021-02-18 00:47:59.860444', NULL);
+INSERT INTO public.packages VALUES (88, 'Dnipro 12 2021', 100.89, '2021-02-25', NULL, '2021-02-26 00:01:57.026169', NULL);
+INSERT INTO public.packages VALUES (58, 'usps 3 2021', 49.14, '2021-01-16', NULL, '2021-01-16 15:52:32.272346', NULL);
+INSERT INTO public.packages VALUES (66, 'USPS 5 2021', 46.30, '2021-01-22', NULL, '2021-01-22 12:37:54.257278', NULL);
+INSERT INTO public.packages VALUES (70, 'USPS 6 2021', 43.15, '2021-01-26', NULL, '2021-01-26 16:12:12.472901', NULL);
+INSERT INTO public.packages VALUES (73, 'USPS 7 2021', 42.21, '2021-01-29', NULL, '2021-01-29 11:25:52.306414', NULL);
+INSERT INTO public.packages VALUES (78, 'USPS 8 2021', 45.99, '2021-02-02', NULL, '2021-02-09 19:30:39.480455', NULL);
+INSERT INTO public.packages VALUES (77, 'USPS  9 2021', 47.88, '2021-02-08', NULL, '2021-02-08 23:25:48.153008', NULL);
+INSERT INTO public.packages VALUES (83, 'USPS 10 2021', 48.19, '2021-02-15', NULL, '2021-02-15 19:54:21.784251', NULL);
+INSERT INTO public.packages VALUES (85, 'USPS 11 2021', 46.62, '2021-02-19', NULL, '2021-02-22 06:12:13.798916', NULL);
+INSERT INTO public.packages VALUES (87, 'USPS 13 2021', 45.96, '2021-02-25', NULL, '2021-02-25 23:52:55.316399', NULL);
+INSERT INTO public.packages VALUES (93, 'USPS 14 2021', 46.62, '2021-03-01', NULL, '2021-03-01 01:36:59.265695', NULL);
+INSERT INTO public.packages VALUES (100, 'USPS 12 2021', 43.47, '2021-03-03', NULL, '2021-03-09 20:53:37.648942', NULL);
 
 
 --
@@ -8918,6 +10581,37 @@ INSERT INTO public.receipts VALUES (199, 'Calvin Klein', 8.13, '2021-02-02', '20
 INSERT INTO public.receipts VALUES (200, 'Levis', 7.75, '2021-02-06', '2021-02-07 23:51:19.464467');
 INSERT INTO public.receipts VALUES (201, 'Ross', 7.75, '2021-02-06', '2021-02-08 00:03:16.522723');
 INSERT INTO public.receipts VALUES (202, 'Ross', 8.00, '2021-02-04', '2021-02-08 01:05:14.918519');
+INSERT INTO public.receipts VALUES (203, 'Levis', 8.13, '2021-02-09', '2021-02-11 23:31:59.114165');
+INSERT INTO public.receipts VALUES (204, 'Burlington', 8.00, '2021-02-07', '2021-02-13 02:23:09.422016');
+INSERT INTO public.receipts VALUES (205, 'Ross', 8.75, '2021-02-08', '2021-02-13 02:33:37.092477');
+INSERT INTO public.receipts VALUES (206, 'Michael Kors', 8.00, '2021-02-13', '2021-02-15 04:01:15.085878');
+INSERT INTO public.receipts VALUES (207, 'Ross', 7.75, '2021-02-14', '2021-02-15 04:14:08.93386');
+INSERT INTO public.receipts VALUES (208, 'Calvin Klein', 7.75, '2021-02-13', '2021-02-15 04:38:30.346139');
+INSERT INTO public.receipts VALUES (209, 'Tommy Hilfiger', 7.75, '2021-02-13', '2021-02-15 04:42:36.855011');
+INSERT INTO public.receipts VALUES (210, 'Marshalls', 7.75, '2021-02-13', '2021-02-15 04:50:13.249532');
+INSERT INTO public.receipts VALUES (211, 'Burlington', 8.13, '2021-02-16', '2021-02-18 02:48:43.100095');
+INSERT INTO public.receipts VALUES (212, 'Tommy Hilfiger', 8.13, '2021-02-16', '2021-02-18 03:00:29.564656');
+INSERT INTO public.receipts VALUES (213, 'Armani Exchange', 9.25, '2021-02-20', '2021-02-22 00:22:19.672231');
+INSERT INTO public.receipts VALUES (214, 'Tommy Hilfiger', 8.13, '2021-02-21', '2021-02-22 06:39:57.339579');
+INSERT INTO public.receipts VALUES (215, 'Burlington', 8.13, '2021-02-19', '2021-02-22 07:16:57.407045');
+INSERT INTO public.receipts VALUES (216, 'Ross', 8.75, '2021-02-19', '2021-02-22 07:45:01.257778');
+INSERT INTO public.receipts VALUES (217, 'Armani Exchange', 9.00, '2021-02-21', '2021-02-23 20:42:17.795156');
+INSERT INTO public.receipts VALUES (218, 'Tommy Hilfiger', 7.75, '2021-02-23', '2021-02-25 23:37:44.924163');
+INSERT INTO public.receipts VALUES (219, 'Tommy Hilfiger', 8.13, '2021-02-24', '2021-02-25 23:47:19.001938');
+INSERT INTO public.receipts VALUES (220, 'Tommy Hilfiger', 7.75, '2021-02-23', '2021-02-27 21:55:18.517937');
+INSERT INTO public.receipts VALUES (221, 'Michael Kors', 9.25, '2021-02-24', '2021-02-27 22:02:00.817469');
+INSERT INTO public.receipts VALUES (222, 'Armani Exchange', 9.13, '2021-02-26', '2021-02-27 22:15:38.694145');
+INSERT INTO public.receipts VALUES (223, 'Marshalls', 7.75, '2021-02-22', '2021-02-27 22:44:05.909595');
+INSERT INTO public.receipts VALUES (224, 'Burlington', 8.75, '2021-02-22', '2021-02-27 22:53:53.793987');
+INSERT INTO public.receipts VALUES (225, 'Tommy Hilfiger', 8.12, '2021-02-26', '2021-03-01 00:57:36.808833');
+INSERT INTO public.receipts VALUES (226, 'Ross', 7.75, '2021-02-23', '2021-03-01 05:52:39.052112');
+INSERT INTO public.receipts VALUES (227, 'Ross', 9.25, '2021-02-24', '2021-03-01 06:20:12.01698');
+INSERT INTO public.receipts VALUES (228, 'Tommy Hilfiger', 8.13, '2021-03-02', '2021-03-04 05:41:16.718093');
+INSERT INTO public.receipts VALUES (229, 'TJ Maxx', 8.25, '2021-03-03', '2021-03-06 23:15:31.481164');
+INSERT INTO public.receipts VALUES (230, 'Ross', 7.75, '2021-03-04', '2021-03-06 23:59:46.408366');
+INSERT INTO public.receipts VALUES (231, 'Marshalls', 7.75, '2021-03-04', '2021-03-07 01:07:58.078532');
+INSERT INTO public.receipts VALUES (232, 'Burlington', 8.75, '2021-03-07', '2021-03-10 00:08:47.772837');
+INSERT INTO public.receipts VALUES (233, 'TJ Maxx', 8.25, '2021-03-08', '2021-03-10 00:30:42.818207');
 
 
 --
@@ -8931,7 +10625,7 @@ INSERT INTO public.users VALUES (1, 'nastyaluchshaya', '$2b$10$KYbiyzrgF7dvJq4Dp
 -- Name: clothing_id_seq; Type: SEQUENCE SET; Schema: public; Owner: aaron
 --
 
-SELECT pg_catalog.setval('public.clothing_id_seq', 2492, true);
+SELECT pg_catalog.setval('public.clothing_id_seq', 3034, true);
 
 
 --
@@ -8952,14 +10646,14 @@ SELECT pg_catalog.setval('public.orders_id_seq', 18, true);
 -- Name: packages_id_seq; Type: SEQUENCE SET; Schema: public; Owner: aaron
 --
 
-SELECT pg_catalog.setval('public.packages_id_seq', 75, true);
+SELECT pg_catalog.setval('public.packages_id_seq', 100, true);
 
 
 --
 -- Name: receipts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: aaron
 --
 
-SELECT pg_catalog.setval('public.receipts_id_seq', 202, true);
+SELECT pg_catalog.setval('public.receipts_id_seq', 233, true);
 
 
 --

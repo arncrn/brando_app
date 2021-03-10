@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col">
+    <div class="input-group mt-3">
+      <span class="input-group-text" id="basic-addon1">Customer Name:</span>
+      <input type="text" id="order-filter" class="form-control">
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Customer</th>
+          <th scope="col">Number of Items</th>
+          <th scope="col">Sold Total</th>
+          <th scope="col">Cost Of Goods</th>
+          <th scope="col">Profit</th>
+          <th scope="col">Date sent</th>
+          <th scope="col">Status</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each orders}}
+          <tr data-order-id={{id}} id={{id}}>
+            <th>{{id}}</th>
+            <td class="order-target"><a class="order-link" href="/orders/view/{{id}}">#{{customer_id}}: {{name}}</a></td>
+            <td>{{item_count}}</td>
+            <td>${{sold_total}}</td>
+            <td>${{cogs}}</td>
+            <td>{{total_profit}}</td>
+            <td>{{date_sent}}</td>
+            <td>{{status}}</td>
+            <td></td>
+            <td><button class="edit-order">Edit</button></td>
+          </tr>
+        {{/each}}
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th>${{totalRevenue}}</th>
+          <th>${{totalCogs}}</th>
+          <th>${{totalProfit}}</th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div class="row">
+
+<script src="/js/edit-order.js"></script>
+{{!-- <script src="/js/filter-pkg-by-name.js"></script> --}}

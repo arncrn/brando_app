@@ -1,0 +1,49 @@
+<div class="row justify-content-center">
+  <div class="col">
+    <h1>Create Customer</h1>
+    <form action="/customers/add" method="post" enctype="multipart/form-data">
+
+      <div class="col-9">
+        <div class="input-group">
+          <span class="input-group-text" id="customer-name">Name</span>
+          <input type="text" name="name" class="form-control required"  aria-describedby="customer-name"> 
+        </div>
+      </div>
+
+      <div class="col-9">
+        <div class="input-group">
+          <span class="input-group-text" id="customer-email">Email</span>
+          <input type="text" name="email" class="form-control"  aria-describedby="customer-email"> 
+        </div>
+      </div>
+
+      <div class="col-9">
+        <div class="input-group">
+          <span class="input-group-text" id="customer-phone">Phone</span>
+          <input type="text" name="phone" class="form-control"  aria-describedby="customer-phone"> 
+        </div>
+      </div>
+
+      <div class="col-9">
+        <div class="input-group">
+          <span class="input-group-text" id="customer-address">Address</span>
+          <input type="text" name="address" class="form-control"  aria-describedby="customer-address"> 
+        </div>
+      </div>
+
+      <div class="col-9">
+        <div class="input-group">
+          <span class="input-group-text" id="customer-extra-info">Extra info</span>
+          <input type="text" name="extra_info" class="form-control"  aria-describedby="customer-extra-info"> 
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col offset-2">
+          <button type="submit" class="btn btn-primary px-5 py-3 submit">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

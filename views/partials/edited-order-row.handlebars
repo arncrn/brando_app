@@ -1,0 +1,10 @@
+<th>{{order.id}}</th>
+<td class="order-target"><a class="order-link" href="/orders/view/{{order.id}}">#{{order.customer_id}}: {{order.name}}</a></td>
+<td>{{order.item_count}}</td>
+<td>${{order.sold_total}}</td>
+<td>${{order.cogs}}</td>
+<td>{{order.total_profit}}</td>
+<td>{{order.date_sent}}</td>
+<td>{{order.status}}</td>
+<td></td>
+<td><button class="edit-order">Edit</button></td>
