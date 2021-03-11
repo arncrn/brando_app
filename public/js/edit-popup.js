@@ -185,13 +185,13 @@ document.addEventListener('click', (event) => {
       popupDisplay.soldPriceUSD.addEventListener('input', event => {
         let regex = /[^0-9.]/g;
         let soldPrice = event.target.value.replace(regex, '');
-        popupDisplay.soldPriceUAH.value = (+soldPrice * 28.6).toFixed(2);
+        popupDisplay.soldPriceUAH.value = (+soldPrice * 28).toFixed(2);
       });
 
       popupDisplay.soldPriceUAH.addEventListener('input', event => {
         let regex = /[^0-9.]/g;
         let soldPrice = event.target.value.replace(regex, '');
-        popupDisplay.soldPriceUSD.value = (+soldPrice / 28.6).toFixed(2);
+        popupDisplay.soldPriceUSD.value = (+soldPrice / 28).toFixed(2);
       })
 
       popupDisplay.form.addEventListener('submit', event => {
