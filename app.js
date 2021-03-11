@@ -622,7 +622,7 @@ app.post("/customers/add", upload.none(), requiresAuthentication, async (req, re
     customerData[key] = customerData[key] || null;
   }
 
-  const createdcustomer= await dataApp.createcustomer(customerData);
+  const createdcustomer= await dataApp.createCustomer(customerData);
 
   if (createdcustomer) {
     res.redirect("/customers/view");
@@ -770,7 +770,7 @@ app.get('/item/:itemId', requiresAuthentication, async (req, res) => {
     item.shipping_cost = shippingCost;
   }
 
-  item.sold_price_uah = ((+item.sold_price || 0) * 28.6).toFixed(2);
+  item.sold_price_uah = ((+item.sold_price || 0) * 28).toFixed(2);
   item.location = item.location || package.location;
   item.package_name = package.package_name;
   item.customer_name = customer.name;
