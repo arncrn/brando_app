@@ -53,6 +53,8 @@
           <div class="package-name"><p>{{package_name}}</p></div>
           <div class="purchase-price"><p>${{total_price}}</p></div>
         </div>
+
+
         <div class="right-click-options row" id="right-click-option-{{id}}">
           <div class="col-6">
             <button class="btn-success duplicate">Duplicate</button>
@@ -61,6 +63,28 @@
             <button class="btn-danger delete">Delete</button>
           </div>
         </div>
+
+        <div class="row package-wrapper" id="package-wrapper-{{id}}">
+          <div class="col-12">
+            <button class="btn-success quick-package-button">Add To Package</button>
+          </div>
+        </div>
+
+        <div class="row sell-wrapper" id="sell-wrapper-{{id}}">
+          <div class="col-12 input-group">
+            <span class="input-group-text">Sold USD:</span>
+            <input type="text" name="usd-price" class="from-control convert-value" value="{{sold_price}}">
+            <span class="input-group-text">Sold UAH:</span>
+            <input type="text" name="uah-price" class="from-control convert-value">
+          </div>
+          <div class="col-12">
+            <button class="btn-danger custom-sell">Sell</button>
+          </div>
+          <div class="col-12">
+            <button class="btn-success sell-to-alla">Sell To Alla</button>
+          </div>
+        </div>
+
           <button class="edit">Edit</button>
         <div class="card-body">
           <pre class="card-text">{{extra_info}}</pre>
@@ -71,6 +95,7 @@
   </div>
 </div>
 
+{{!-- <script src="/js/add-to-package.js"></script> --}}
 <script src="/js/edit-popup.js"></script>
 <script src="/js/right-click.js"></script>
 <script src="/js/filter-by-tag.js"></script>

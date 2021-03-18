@@ -34,6 +34,27 @@
       <button class="btn-danger delete">Delete</button>
     </div>
   </div>
+
+  <div class="row package-wrapper" id="package-wrapper-{{item.id}}">
+          <div class="col-12">
+            <button class="btn-success quick-package-button">Add To Package</button>
+          </div>
+        </div>
+
+        <div class="row sell-wrapper" id="sell-wrapper-{{item.id}}">
+          <div class="col-12 input-group">
+            <span class="input-group-text">Sold USD:</span>
+            <input type="text" name="usd-price" class="from-control convert-value" value="{{item.sold_price}}">
+            <span class="input-group-text">Sold UAH:</span>
+            <input type="text" name="uah-price" class="from-control convert-value">
+          </div>
+          <div class="col-12">
+            <button class="btn-danger custom-sell">Sell</button>
+          </div>
+          <div class="col-12">
+            <button class="btn-success sell-to-alla">Sell To Alla</button>
+          </div>
+        </div>
   <button class="edit">Edit</button>
   <div class="card-body">
     <pre class="card-text">{{item.extra_info}}</pre>

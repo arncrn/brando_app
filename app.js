@@ -12,6 +12,8 @@ const dataApp = new pgPersistence();
 const port = config.PORT;
 const host = config.HOST;
 
+const UAH_CONVERSION = 28;
+
 const aws = require('aws-sdk');
 const AWS_BUCKET = config.AWS_BUCKET;
 aws.config.region = 'us-west-1'
@@ -36,6 +38,32 @@ let storage = multer.diskStorage({
 const upload = multer({
   storage: storage,
 });
+
+const returnUpdatedItem = async (res, itemId) => {
+  let item = await dataApp.findItemById(itemId);
+  let taxPercent = item.tax || 8;
+  let taxAmount = +item.purchase_price * (taxPercent / 100);
+  let totalPrice = (+item.purchase_price + taxAmount).toFixed(2);
+  Object.assign(item, {total_price: totalPrice});
+  res.render('partials/item-structure', {
+    layout: false,
+    item: item,
+    helpers: {
+      greaterThanZero: function (soldPrice) {
+        return +soldPrice > 0;
+      },
+      isArray: function(element) {
+        return Array.isArray(element);
+      },
+      joinArray: function(element) {
+        return element.join(', ');
+      },
+      isForMen: function(gender) {
+        return gender == 'men';
+      }
+    }
+  });
+}
 
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
@@ -231,6 +259,13 @@ app.get("/packages", requiresAuthentication, (req, res) => {
   res.render('package-home');
 })
 
+app.get("/singlepackage/:pkgId", requiresAuthentication, async (req, res) => {
+  let pkgId = req.params.pkgId;
+  let pkg = await dataApp.findPackageById(pkgId);
+
+  res.send(pkg);
+})
+
 app.get("/packages/view", requiresAuthentication, async (req, res) => {
   let pkgs = await dataApp.getPackages();
   let items = await dataApp.getAllItems();
@@ -409,11 +444,11 @@ app.get("/orders/view", requiresAuthentication, async (req, res) => {
   let totalRevenue = 0;
   let totalProfit = 0;
 
-  orders.sort((a, b) => {
-    if (a.name > b.name) return 1;
-    if (a.name < b.name) return -1;
-    return 0;
-  })
+  // orders.sort((a, b) => {
+  //   if (a.name > b.name) return 1;
+  //   if (a.name < b.name) return -1;
+  //   return 0;
+  // })
 
   pkgs.forEach(pkg => {
     itemsInPackage = items.filter(item => item.package_id === pkg.id)
@@ -438,7 +473,7 @@ app.get("/orders/view", requiresAuthentication, async (req, res) => {
     itemsInOrder.forEach(item => {
       item.tax = +item.tax || 8;
       let taxAmount = (Number(item.tax) / 100) * Number(item.purchase_price);
-      let shippingCost = Number(pkgPrices[item.package_id]) || 0
+      let shippingCost = Number(pkgPrices[item.package_id] || item.shipping_cost) || 0
       let cogs = (taxAmount + shippingCost + Number(item.purchase_price));
       let profit = (Number(item.sold_price) - cogs)
 
@@ -770,7 +805,7 @@ app.get('/item/:itemId', requiresAuthentication, async (req, res) => {
     item.shipping_cost = shippingCost;
   }
 
-  item.sold_price_uah = ((+item.sold_price || 0) * 28).toFixed(2);
+  item.sold_price_uah = ((+item.sold_price || 0) * UAH_CONVERSION).toFixed(2);
   item.location = item.location || package.location;
   item.package_name = package.package_name;
   item.customer_name = customer.name;
@@ -795,14 +830,38 @@ app.get('/item/:itemId', requiresAuthentication, async (req, res) => {
   })
 });
 
+app.post('/addtopackage/:itemId', requiresAuthentication, async (req, res) => {
+  let itemId = req.params.itemId;
+  let pkgId = req.body.pkgId;
+  if (!pkgId) return res.sendStatus(204);
+
+  let updatedItem = await dataApp.updateItemPackage(itemId, pkgId);
+  
+  if (updatedItem) {
+    returnUpdatedItem(res, itemId);
+  } else {
+    res.sendStatus(204);
+  }
+})
+
+app.post('/sellitem/:itemId', requiresAuthentication, async (req, res) => {
+  let itemId = req.params.itemId;
+  let soldPrice = req.body.soldPrice;
+  let customer = req.body.customer;
+  let order = req.body.order;
+
+  if (!order) {
+    order = await dataApp.findOrderByCustomerName(customer);
+  }
+
+  await dataApp.updateItemSoldPrice(itemId, soldPrice);
+  await dataApp.updateItemOrder(itemId, order.id);
+  returnUpdatedItem(res, itemId);
+})
+
 app.post('/edititem', requiresAuthentication, upload.single('brandomania-picture'), async (req, res) => {
   let dataObj = req.body;
   let itemId = dataObj.id;
-  // if (req.file) {
-  //   console.log(req.file);
-  //   let file = req.file;
-  //   dataObj.picture = file.originalname;
-  // }
 
   if (dataObj.picture) {
     let urlParts = dataObj.picture.split("/");
@@ -829,29 +888,7 @@ app.post('/edititem', requiresAuthentication, upload.single('brandomania-picture
   let successfulDatabaseUpdate = await dataApp.updateItem(itemId, dataObj);
 
   if (successfulDatabaseUpdate) {
-    let item = await dataApp.findItemById(itemId);
-    let taxPercent = item.tax || 8;
-    let taxAmount = +item.purchase_price * (taxPercent / 100);
-    let totalPrice = (+item.purchase_price + taxAmount).toFixed(2);
-    Object.assign(item, {total_price: totalPrice});
-    res.render('partials/item-structure', {
-      layout: false,
-      item: item,
-      helpers: {
-        greaterThanZero: function (soldPrice) {
-          return +soldPrice > 0;
-        },
-        isArray: function(element) {
-          return Array.isArray(element);
-        },
-        joinArray: function(element) {
-          return element.join(', ');
-        },
-        isForMen: function(gender) {
-          return gender == 'men';
-        }
-      }
-    });
+    returnUpdatedItem(res, itemId);
   }
 })
 
