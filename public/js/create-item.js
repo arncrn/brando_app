@@ -31,7 +31,7 @@ class CreateItem {
     let newElement = this.convertHtmlStringToDomElement(responseHTML);
     newElement.classList.add('glowing');
     this.form.classList.add('glowing');
-    this.newItemContainer.appendChild(newElement);
+    this.newItemContainer.insertAdjacentElement('afterbegin', newElement);
     setTimeout(() => {
       let glowingItems = document.querySelectorAll('.glowing');
       [...glowingItems].forEach(item => item.classList.remove("glowing"));
