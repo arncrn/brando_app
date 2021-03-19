@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
   const filter = document.getElementById("package-filter");
-  console.log(filter.textContent);
   filter.addEventListener('input', (event) => {
     let pkgs = document.querySelectorAll('[data-pkg-id]');
     pkgs.forEach(pkg => {

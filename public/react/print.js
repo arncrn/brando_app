@@ -4,10 +4,13 @@ const {useState, useEffect} = React;
 const Print = () => {
   const [items, setItems] = useState([]);
   const [sumOfItems, setSumOfItems] = useState(0);
+  const [pkg, setPkg] = useState({});
 
   useEffect(async () => {
     const pkgId = document.querySelector('[data-pkg-id]').dataset.pkgId;
     let response = await (await fetch(`/api/packageitems/${pkgId}`)).json();
+    let pkgResponse = await (await fetch(`/singlepackage/${pkgId}`)).json();
+    setPkg(pkgResponse);
     setItems(response.items);
     setSumOfItems(response.sumOfItems);
   }, [])
@@ -26,8 +29,14 @@ const Print = () => {
     Tax: ${item.tax_amount}
     Total: ${item.total_price}`;
   }
+  
+  let pricePerItem = 0;
+  if (items.length > 0) {
+    pricePerItem = (Number(pkg.price) / Number(items.length)).toFixed(2);
+  }
 
-  return (
+  console.log(pricePerItem);
+  return ( 
     <main>
       <table>
         <thead>
@@ -39,6 +48,7 @@ const Print = () => {
             <th>Colors</th>
             <th>Tag Number</th>
             <th>Purchase Price</th>
+            <th>Shipping Cost</th>
             <th>Extra Details</th>
           </tr>
         </thead>
@@ -53,6 +63,7 @@ const Print = () => {
                 <td>{item.colors}</td>
                 <td>{item.tag_number}</td>
                 <td>${formatPrice(item)}</td>
+                <td>${Number(item.shipping_cost) || pricePerItem}</td>
                 <td>{formatText(item.extra_info)}</td>
               </tr>
             );
