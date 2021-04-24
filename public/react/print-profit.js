@@ -4,14 +4,20 @@ const {useState, useEffect} = React;
 const Print = () => {
   const [items, setItems] = useState([]);
   const [sumOfItems, setSumOfItems] = useState(0);
-  const [totalShipping, setTotalShipping] = useState(0);
+  const [shippingCost, setShippingCost] = useState(0);
+  const [revenue, setRevenue] = useState(0);
+  const [profit, setProfit] = useState(0);
 
   useEffect(async () => {
-    const pkgId = document.querySelector('[data-pkg-id]').dataset.pkgId;
-    let response = await (await fetch(`/api/packageitems/${pkgId}`)).json();
+    // const pkgId = document.querySelector('[data-pkg-id]').dataset.pkgId;
+    const orderId = document.querySelector('[data-order-id]').dataset.orderId;
+
+    let response = await (await fetch(`/api/orderitems/${orderId}`)).json();
     setItems(response.items);
     setSumOfItems(response.sumOfItems);
-    setTotalShipping(response.totalShipping);
+    setShippingCost(response.shippingCost);
+    setProfit(response.profit);
+    setRevenue(response.revenue);
   }, [])
 
   const formatText = (extraInfo) => {
@@ -42,6 +48,8 @@ const Print = () => {
             <th>Tag Number</th>
             <th>Purchase Price</th>
             <th>Shipping Cost</th>
+            <th>Sold For</th>
+            <th>Profit</th>
             <th>Extra Details</th>
           </tr>
         </thead>
@@ -56,7 +64,9 @@ const Print = () => {
                 <td>{item.colors}</td>
                 <td>{item.tag_number}</td>
                 <td>${formatPrice(item)}</td>
-                <td>${item.shipping_cost}</td>
+                <th>${item.shipping_cost}</th>
+                <th>${item.sold_price}</th>
+                <th>${item.profit}</th>
                 <td>{formatText(item.extra_info)}</td>
               </tr>
             );
@@ -69,7 +79,9 @@ const Print = () => {
             <td></td>
             <td></td>
             <td><strong>${sumOfItems}</strong></td>
-            <td><strong>${totalShipping}</strong></td>
+            <td><strong>${shippingCost}</strong></td>
+            <td><strong>${revenue}</strong></td>
+            <td><strong>${profit}</strong></td>
           </tr>
         </tbody>
         <tfoot></tfoot>

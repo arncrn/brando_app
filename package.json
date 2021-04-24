@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npx nodemon app.js",
     "backup": "pg_dump -d brandomania3 --inserts > backup.sql",
-    "backup:heroku": "dropdb brandomania && heroku pg:pull DATABASE_URL brandomania",
+    "backup:heroku": "dropdb brandomania && heroku pg:pull DATABASE_URL brandomania --app pacific-everglades-84945",
     "sql-file:heroku": "pg_dump -d brandomania --inserts > heroku.sql"
   },
   "author": "",

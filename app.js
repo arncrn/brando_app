@@ -374,9 +374,12 @@ app.get("/packages/print/:pkgId", requiresAuthentication, async (req, res) => {
 
 app.get('/api/packageitems/:pkgId', async (req, res) => {
   const pkgId = req.params.pkgId;
+  const pkg = await dataApp.findPackageById(pkgId);
   const items = await dataApp.getPackageItems(pkgId);
   // const receipts = await dataApp.getReceipts();
   let sumOfItems = 0;
+  let totalShipping = 0;
+  let pricePerItem = (Number(pkg.price) / items.length).toFixed(2);
 
   items.forEach(item => {
     item.tax = +item.tax || 8;
@@ -384,14 +387,18 @@ app.get('/api/packageitems/:pkgId', async (req, res) => {
     let totalPrice = taxAmount + Number(item.purchase_price);
     item.total_price = totalPrice.toFixed(2);
     item.tax_amount = taxAmount.toFixed(2);
+    item.shipping_cost = item.shipping_cost || pricePerItem;
+    totalShipping += Number(item.shipping_cost);
     sumOfItems += totalPrice;
   })
 
   res.json({
     items: items,
     sumOfItems: sumOfItems.toFixed(2),
+    totalShipping: totalShipping.toFixed(2)
   })
 })
+
 
 
 //====================================orders===================================
@@ -438,7 +445,8 @@ app.get("/orders/view", requiresAuthentication, async (req, res) => {
     itemsInOrder.forEach(item => {
       item.tax = +item.tax || 8;
       let taxAmount = (Number(item.tax) / 100) * Number(item.purchase_price);
-      let shippingCost = Number(pkgPrices[item.package_id]) || 0
+      // let shippingCost = Number(pkgPrices[item.package_id]) || 0
+      let shippingCost = Number(item.shipping_cost) || (Number(pkgPrices[item.package_id]) || 0);
       let cogs = (taxAmount + shippingCost + Number(item.purchase_price));
       let profit = (Number(item.sold_price) - cogs)
 
@@ -468,6 +476,50 @@ app.get("/orders/view", requiresAuthentication, async (req, res) => {
     totalRevenue: totalRevenue.toFixed(2),
     totalCogs: totalCogs.toFixed(2), 
     totalProfit: totalProfit.toFixed(2),
+  })
+})
+
+app.get("/orders/print/:orderId", requiresAuthentication, async (req, res) => {
+  const orderId = req.params.orderId;
+  const order = await dataApp.findOrderById(orderId);
+  const customer = await dataApp.findCustomerById(order.customer_id);
+  const orderItems = await dataApp.getOrderItems(orderId);
+  const items = await dataApp.getAllItems();
+  let pkgs = await dataApp.getPackages();
+  let pkgPrices = {};
+
+  order.name = customer.name
+  order.revenue = 0;
+  order.cogs = 0;
+  order.profit = 0;
+  
+
+  pkgs.forEach(pkg => {
+    itemsInPackage = items.filter(item => item.package_id === pkg.id)
+
+    if (Number(pkg.price) && itemsInPackage.length > 0) {
+      let pricePerItem = (+pkg.price / itemsInPackage.length)
+      pkgPrices[pkg.id] = pricePerItem.toFixed(2);
+    } 
+  })
+
+  orderItems.forEach(item => {
+    item.tax = +item.tax || 8;
+    let taxAmount = (Number(item.tax) / 100) * Number(item.purchase_price);
+    let shippingCost = Number(item.shipping_cost) || (Number(pkgPrices[item.package_id]) || 0);
+    let cogs = (taxAmount + shippingCost + Number(item.purchase_price));
+    order.cogs += cogs;
+    order.profit += (Number(item.sold_price) - cogs);
+    order.revenue += Number(item.sold_price);
+  });
+
+  order.cogs = order.cogs.toFixed(2);
+  order.profit = order.profit.toFixed(2);
+  order.revenue = order.revenue.toFixed(2);
+
+  res.render("print-order", {
+    layout: false,
+    order
   })
 })
 
@@ -595,6 +647,52 @@ app.post("/orders/edit/:orderId", requiresAuthentication, async(req, res) => {
       order: order,
     })
   }
+})
+
+
+app.get('/api/orderitems/:orderId', async (req, res) => {
+  const orderId = req.params.orderId;
+  const order = await dataApp.findOrderById(orderId);
+  const orderItems = await dataApp.getOrderItems(orderId);
+  const items = await dataApp.getAllItems();
+  let pkgs = await dataApp.getPackages();
+  let pkgPrices = {};
+
+  pkgs.forEach(pkg => {
+    itemsInPackage = items.filter(item => item.package_id === pkg.id)
+
+    if (Number(pkg.price) && itemsInPackage.length > 0) {
+      let pricePerItem = (+pkg.price / itemsInPackage.length)
+      pkgPrices[pkg.id] = pricePerItem.toFixed(2);
+    } 
+  })
+
+  let sumOfItems = 0;
+  let shippingCost = 0;
+  let revenue = 0;
+  let profit = 0;
+
+  orderItems.forEach(item => {
+    item.tax = +item.tax || 8;
+    let taxAmount = (Number(item.tax) / 100) * Number(item.purchase_price);
+    let totalPrice = taxAmount + Number(item.purchase_price);
+    item.total_price = totalPrice.toFixed(2);
+    item.tax_amount = taxAmount.toFixed(2);
+    item.shipping_cost = Number(item.shipping_cost) || (Number(pkgPrices[item.package_id]) || 0);
+    item.profit = (Number(item.sold_price) - totalPrice - Number(item.shipping_cost)).toFixed(2);
+    sumOfItems += totalPrice;
+    revenue += Number(item.sold_price);
+    profit += Number(item.profit);
+    shippingCost += item.shipping_cost;
+  })
+
+  res.json({
+    items: orderItems,
+    sumOfItems: sumOfItems.toFixed(2),
+    shippingCost: shippingCost.toFixed(2),
+    revenue: revenue.toFixed(2),
+    profit: profit.toFixed(2),
+  })
 })
 
 
