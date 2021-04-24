@@ -1,4 +1,5 @@
 const NEEDED_VALUES = ['size', 'brand', 'type', 'colors', 'tag_number', 'gender', 'location', 'purchase_price'];
+const UAH_CONVERSION = 28;
 
 class PopupDisplay {
   constructor() {
@@ -185,13 +186,13 @@ document.addEventListener('click', (event) => {
       popupDisplay.soldPriceUSD.addEventListener('input', event => {
         let regex = /[^0-9.]/g;
         let soldPrice = event.target.value.replace(regex, '');
-        popupDisplay.soldPriceUAH.value = (+soldPrice * 28.6).toFixed(2);
+        popupDisplay.soldPriceUAH.value = (+soldPrice * UAH_CONVERSION).toFixed(2);
       });
 
       popupDisplay.soldPriceUAH.addEventListener('input', event => {
         let regex = /[^0-9.]/g;
         let soldPrice = event.target.value.replace(regex, '');
-        popupDisplay.soldPriceUSD.value = (+soldPrice / 28.6).toFixed(2);
+        popupDisplay.soldPriceUSD.value = (+soldPrice / UAH_CONVERSION).toFixed(2);
       })
 
       popupDisplay.form.addEventListener('submit', event => {

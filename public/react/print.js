@@ -9,6 +9,8 @@ const Print = () => {
   useEffect(async () => {
     const pkgId = document.querySelector('[data-pkg-id]').dataset.pkgId;
     let response = await (await fetch(`/api/packageitems/${pkgId}`)).json();
+    let pkgResponse = await (await fetch(`/singlepackage/${pkgId}`)).json();
+    setPkg(pkgResponse);
     setItems(response.items);
     setSumOfItems(response.sumOfItems);
     setTotalShipping(response.totalShipping);
@@ -28,8 +30,14 @@ const Print = () => {
     Tax: ${item.tax_amount}
     Total: ${item.total_price}`;
   }
+  
+  let pricePerItem = 0;
+  if (items.length > 0) {
+    pricePerItem = (Number(pkg.price) / Number(items.length)).toFixed(2);
+  }
 
-  return (
+  console.log(pricePerItem);
+  return ( 
     <main>
       <table>
         <thead>

@@ -42,7 +42,17 @@ a, a:hover {
   width: 100%; 
 } */
 
-.right-click-options {
+
+/* working */
+#sell-options, #uah-usd, #quick-package {
+  display: none;
+}
+
+.sell-wrapper input {
+  font-size: 1rem;
+}
+
+.right-click-options, .package-wrapper, .sell-wrapper {
   display: none; 
   /* position: absolute;
   top: 20%;
@@ -51,7 +61,7 @@ a, a:hover {
   bottom: 3rem;
 }
 
-.right-click-options button {
+.right-click-options button, .package-wrapper button, .sell-wrapper button {
   width: 100%;
   height: 3rem;
 }
@@ -189,10 +199,10 @@ a, a:hover {
   padding: .3rem .3rem;
 }
 
-.card-img-top {
+/* .card-img-top { */
   /* -webkit-user-select: none; disable selection/Copy of UIWebView */
   /* -webkit-touch-callout: none; disable the IOS popup when long-press on a link */
-}
+/* } */
 
 pre {
   white-space: pre-wrap;       /* Since CSS 2.1 */
