@@ -942,7 +942,7 @@ app.post('/addtopackage/:itemId', requiresAuthentication, async (req, res) => {
 
 app.post('/sellitem/:itemId', requiresAuthentication, async (req, res) => {
   let itemId = req.params.itemId;
-  let soldPrice = req.body.soldPrice;
+  let soldPrice = req.body.soldPrice || 0;
   let customer = req.body.customer;
   let order = req.body.order;
 
@@ -954,6 +954,15 @@ app.post('/sellitem/:itemId', requiresAuthentication, async (req, res) => {
   await dataApp.updateItemOrder(itemId, order.id);
   await dataApp.updateItemLocation(itemId, 'ukraine');
   await dataApp.updateItemInStock(itemId, false);
+  returnUpdatedItem(res, itemId);
+})
+
+app.post('/unsellitem/:itemId', requiresAuthentication, async (req, res) => {
+  //working
+  let itemId = req.params.itemId;
+  await dataApp.updateItemSoldPrice(itemId, 0);
+  await dataApp.removeItemFromOrder(itemId);
+  await dataApp.updateItemInStock(itemId, true);
   returnUpdatedItem(res, itemId);
 })
 

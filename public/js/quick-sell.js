@@ -57,13 +57,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (e.target.classList.contains('not-sold')) {
-      console.log('not sold');
+      let itemId = e.target.parentNode.parentNode.id.split('-')[2];
+      let itemToReplace = document.querySelector(`[data-item-id="${itemId}"]`);
+      fetch(`/unsellitem/${itemId}`, {
+        method: "POST",
+      })
+        .then(response => response.text())
+        .then(data => {
+          itemToReplace.innerHTML = data;
+        })
     }
-    
+
     if (e.target.classList.contains('custom-sell')) {
       let person = e.target.id;
       let sellingMonth = customer;
-      if (person )
+
       if (person !== 'nastia') {
         sellingMonth = capitalize(person) + ' ' + customer;
       }
@@ -72,13 +80,12 @@ document.addEventListener('DOMContentLoaded', () => {
       let sellingPrice = parentDiv.querySelector('input').value;
       let itemId = parentDiv.id.split('-')[2];
       let itemToReplace = document.querySelector(`[data-item-id="${itemId}"]`);
-
       fetch(`/sellitem/${itemId}`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({soldPrice: sellingPrice, sellingMonth}),
+        body: JSON.stringify({soldPrice: sellingPrice, customer: sellingMonth}),
       })
         .then(response => response.text())
         .then(data => {
