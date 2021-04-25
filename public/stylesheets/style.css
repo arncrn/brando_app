@@ -52,7 +52,7 @@ a, a:hover {
   font-size: 1rem;
 }
 
-.right-click-options, .package-wrapper, .sell-wrapper {
+.right-click-options, .package-wrapper, .sell-wrapper, .inventory-wrapper {
   display: none; 
   /* position: absolute;
   top: 20%;
@@ -61,7 +61,7 @@ a, a:hover {
   bottom: 3rem;
 }
 
-.right-click-options button, .package-wrapper button, .sell-wrapper button {
+.right-click-options button, .package-wrapper button, .sell-wrapper button, .inventory-wrapper button {
   width: 100%;
   height: 3rem;
 }

@@ -957,8 +957,17 @@ app.post('/sellitem/:itemId', requiresAuthentication, async (req, res) => {
   returnUpdatedItem(res, itemId);
 })
 
+app.post('/updateinventory/:itemId', requiresAuthentication, async (req, res) => {
+  let itemId = req.params.itemId;
+  let location = req.body.location === 'none' ? 'usa' : req.body.location;
+  let inStock = req.body.inStock;
+
+  await dataApp.updateItemLocation(itemId, location);
+  await dataApp.updateItemInStock(itemId, inStock);
+  returnUpdatedItem(res, itemId);
+})
+
 app.post('/unsellitem/:itemId', requiresAuthentication, async (req, res) => {
-  //working
   let itemId = req.params.itemId;
   await dataApp.updateItemSoldPrice(itemId, 0);
   await dataApp.removeItemFromOrder(itemId);

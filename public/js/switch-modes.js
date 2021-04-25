@@ -15,6 +15,11 @@ const displayInsertBoxes = (chosenWrapper, {currencyConversion, sellOptions, qui
       sellOptions.style.display = 'none';
       quickPackage.style.display = 'block';
       break;
+    case 'inventory-wrapper':
+      currencyConversion.style.display = 'none';
+      sellOptions.style.display = 'none';
+      quickPackage.style.display = 'none';
+      break;
   }
 }
 
