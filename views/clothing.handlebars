@@ -42,6 +42,9 @@
           {{else}}
             <img src="/images/locations/usa.png" class="country-img" alt="USA">
           {{/if}}
+          {{#if (isInStock in_stock)}}
+            <div class="instock">IN STOCK</div>
+          {{/if}}
           {{#if (greaterThanZero sold_price)}}
             <div class="sold"><p>SOLD</p></div>
           {{/if}}
@@ -52,6 +55,7 @@
           <div class="item-colors"><p>{{colors}}</p></div>
           <div class="package-name"><p>{{package_name}}</p></div>
           <div class="purchase-price"><p>${{total_price}}</p></div>
+          <div class="receipt-number"><p>{{store}}</p></div>
         </div>
 
 

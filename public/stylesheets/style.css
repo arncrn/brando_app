@@ -67,12 +67,21 @@ a, a:hover {
 }
 
 .item-size, .tag-number, .brand-name, .purchase-price, .item-type, 
-.package-name, .item-colors {
+.package-name, .item-colors, .receipt-number {
   background-color: white;
   font-size: .8rem;
   position: absolute;
   text-align: center;
   height: .8rem;
+}
+
+.instock {
+  position: relative;
+  color: green;
+  left: 35%;
+  top: -3rem;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 .country-img {
@@ -126,6 +135,11 @@ a, a:hover {
 
 .purchase-price {
   top: 7.5rem;
+  right: 0;
+}
+
+.receipt-number {
+  top: 9rem;
   right: 0;
 }
 

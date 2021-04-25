@@ -48,6 +48,9 @@ const returnUpdatedItem = async (res, itemId) => {
     layout: false,
     item: item,
     helpers: {
+      isInStock: function(bool) {
+        return bool === true;
+      },
       greaterThanZero: function (soldPrice) {
         return +soldPrice > 0;
       },
@@ -178,6 +181,9 @@ app.get("/receipts/view/:receiptId", requiresAuthentication, async (req, res) =>
     items: items,
     filters: [receiptId, receipt.store],
     helpers: {
+      isInStock: function(bool) {
+        return bool === true;
+      },
       greaterThanZero: function (soldPrice) {
         return +soldPrice > 0;
       },
@@ -317,6 +323,9 @@ app.get("/packages/view/:pkgId", requiresAuthentication, async (req, res) => {
     items: items,
     filters: [pkg.package_name],
     helpers: {
+      isInStock: function(bool) {
+        return bool === true;
+      },
       greaterThanZero: function (soldPrice) {
         return +soldPrice > 0;
       },
@@ -570,6 +579,9 @@ app.get("/orders/view/:orderId", requiresAuthentication, async (req, res) => {
     items: items,
     filters: [order.customer_id, order.name],
     helpers: {
+      isInStock: function(bool) {
+        return bool === true;
+      },
       greaterThanZero: function (soldPrice) {
         return +soldPrice > 0;
       },
@@ -857,6 +869,9 @@ app.post('/newitem', requiresAuthentication, upload.single('brandomania-picture'
         id: itemId,
         item: item,
         helpers: {
+          isInStock: function(bool) {
+            return bool === true;
+          },
           greaterThanZero: function (soldPrice) {
             return +soldPrice > 0;
           },
@@ -1023,6 +1038,9 @@ app.post('/duplicateitem/:itemId', requiresAuthentication, async (req, res) => {
       id: item.id,
       item: item,
       helpers: {
+        isInStock: function(bool) {
+          return bool === true;
+        },
         greaterThanZero: function (soldPrice) {
           return +soldPrice > 0;
         },
@@ -1056,6 +1074,9 @@ app.get('/findtag', requiresAuthentication, async (req, res) => {
     items: items,
     filters: req.query,
     helpers: {
+      isInStock: function(bool) {
+        return bool === true;
+      },
       greaterThanZero: function (soldPrice) {
         return +soldPrice > 0;
       },
@@ -1137,6 +1158,9 @@ app.get("/view/:gender/filtered", requiresAuthentication, async (req, res) => {
     items: items,
     filters: queryObj,
     helpers: {
+      isInStock: function(bool) {
+        return bool === true;
+      },
       greaterThanZero: function (soldPrice) {
         return +soldPrice > 0;
       },
