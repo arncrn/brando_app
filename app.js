@@ -952,6 +952,8 @@ app.post('/sellitem/:itemId', requiresAuthentication, async (req, res) => {
 
   await dataApp.updateItemSoldPrice(itemId, soldPrice);
   await dataApp.updateItemOrder(itemId, order.id);
+  await dataApp.updateItemLocation(itemId, 'ukraine');
+  await dataApp.updateItemInStock(itemId, false);
   returnUpdatedItem(res, itemId);
 })
 

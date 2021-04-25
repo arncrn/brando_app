@@ -54,9 +54,20 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(data => {
           itemToReplace.innerHTML = data;
         });
-      
     }
+
+    if (e.target.classList.contains('not-sold')) {
+      console.log('not sold');
+    }
+    
     if (e.target.classList.contains('custom-sell')) {
+      let person = e.target.id;
+      let sellingMonth = customer;
+      if (person )
+      if (person !== 'nastia') {
+        sellingMonth = capitalize(person) + ' ' + customer;
+      }
+
       let parentDiv = e.target.parentNode.parentNode;
       let sellingPrice = parentDiv.querySelector('input').value;
       let itemId = parentDiv.id.split('-')[2];
@@ -67,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({soldPrice: sellingPrice, customer}),
+        body: JSON.stringify({soldPrice: sellingPrice, sellingMonth}),
       })
         .then(response => response.text())
         .then(data => {
@@ -77,5 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 })
 
-
+const capitalize = (name) => {
+  return name[0].toUpperCase() + name.slice(1);
+}
 
