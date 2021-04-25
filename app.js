@@ -947,8 +947,9 @@ app.post('/addtopackage/:itemId', requiresAuthentication, async (req, res) => {
   if (!pkgId) return res.sendStatus(204);
 
   let updatedItem = await dataApp.updateItemPackage(itemId, pkgId);
+  let updatedLocation = await dataApp.updateItemLocation(itemId, 'ukraine');
   
-  if (updatedItem) {
+  if (updatedItem && updatedLocation) {
     returnUpdatedItem(res, itemId);
   } else {
     res.sendStatus(204);
