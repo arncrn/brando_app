@@ -1083,6 +1083,7 @@ app.get("/view/:gender", requiresAuthentication, async (req, res, next) => {
       break;
     case 'all': items = await dataApp.getAllItems();
       break;
+    case 'instock': items = await dataApp.getInStockItems();
   }
 
   let brandItems = dataApp.filterForBrands(items)
