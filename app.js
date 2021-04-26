@@ -30,7 +30,7 @@ let storage = multer.diskStorage({
   filename: function (req, file, cb) {
     if (file) {
       cb(null, file.originalname);
-    } 
+    }
   }
 })
 
@@ -43,24 +43,27 @@ const returnUpdatedItem = async (res, itemId) => {
   let taxPercent = item.tax || 8;
   let taxAmount = +item.purchase_price * (taxPercent / 100);
   let totalPrice = (+item.purchase_price + taxAmount).toFixed(2);
-  Object.assign(item, {total_price: totalPrice});
+  Object.assign(item, { total_price: totalPrice });
   res.render('partials/item-structure', {
     layout: false,
     item: item,
     helpers: {
-      isInStock: function(bool) {
+      isInStock: function (bool) {
         return bool === true;
+      },
+      sellPending: function (bool) {
+        return bool;
       },
       greaterThanZero: function (soldPrice) {
         return +soldPrice > 0;
       },
-      isArray: function(element) {
+      isArray: function (element) {
         return Array.isArray(element);
       },
-      joinArray: function(element) {
+      joinArray: function (element) {
         return element.join(', ');
       },
-      isForMen: function(gender) {
+      isForMen: function (gender) {
         return gender == 'men';
       }
     }
@@ -134,7 +137,7 @@ app.post('/login', async (req, res) => {
     req.session.signedIn = true;
     res.redirect('/clothing');
   } else {
-    res.render('layouts/login', {layout: null});
+    res.render('layouts/login', { layout: null });
   }
 })
 
@@ -170,30 +173,33 @@ app.get("/receipts/view", requiresAuthentication, async (req, res) => {
 app.get("/receipts/view/:receiptId", requiresAuthentication, async (req, res) => {
   const receiptId = req.params.receiptId;
   const receipt = await dataApp.findReceiptById(receiptId);
-  
+
   let items = (await dataApp.getReceiptItems(receiptId)).map(item => {
     let taxPercent = item.tax || 8;
     let taxAmount = +item.purchase_price * (taxPercent / 100);
     let totalPrice = (+item.purchase_price + taxAmount).toFixed(2);
-    return Object.assign(item, {total_price: totalPrice});
+    return Object.assign(item, { total_price: totalPrice });
   });
   res.render('clothing', {
     items: items,
     filters: [receiptId, receipt.store],
     helpers: {
-      isInStock: function(bool) {
+      isInStock: function (bool) {
         return bool === true;
+      },
+      sellPending: function (bool) {
+        return bool;
       },
       greaterThanZero: function (soldPrice) {
         return +soldPrice > 0;
       },
-      isArray: function(element) {
+      isArray: function (element) {
         return Array.isArray(element);
       },
-      joinArray: function(element) {
+      joinArray: function (element) {
         return element.join(', ');
       },
-      isForMen: function(gender) {
+      isForMen: function (gender) {
         return gender == 'men';
       }
     }
@@ -233,7 +239,7 @@ app.get("/receipts/edit/:receiptId", requiresAuthentication, async (req, res) =>
   });
 })
 
-app.post("/receipts/edit/:receiptId", requiresAuthentication, async(req, res) => {
+app.post("/receipts/edit/:receiptId", requiresAuthentication, async (req, res) => {
   let receiptId = req.params.receiptId;
 
   let successfulUpdate = await dataApp.updateReceipt(req.body);
@@ -244,7 +250,7 @@ app.post("/receipts/edit/:receiptId", requiresAuthentication, async(req, res) =>
     receipt.total_price = itemsOnReceipt.reduce((sum, item) => {
       return sum + (((+receipt.tax / 100) * +item.purchase_price) + +item.purchase_price)
     }, 0).toFixed(2);
-    
+
     receipt.number_of_items = itemsOnReceipt.length;
 
     if (receipt.purchase_date) {
@@ -291,7 +297,7 @@ app.get("/packages/view", requiresAuthentication, async (req, res) => {
     if (Number(pkg.price) > 0) {
       totalShippingCost += Number(pkg.price);
     }
-    
+
     pkg.item_count = itemsInPackage.length;
     if (pkg.date_sent) {
       pkg.date_sent = pkg.date_sent.toDateString();
@@ -312,30 +318,33 @@ app.get("/packages/view", requiresAuthentication, async (req, res) => {
 app.get("/packages/view/:pkgId", requiresAuthentication, async (req, res) => {
   const pkgId = req.params.pkgId;
   const pkg = await dataApp.findPackageById(pkgId);
-  
+
   let items = (await dataApp.getPackageItems(pkgId)).map(item => {
     let taxPercent = item.tax || 8;
     let taxAmount = +item.purchase_price * (taxPercent / 100);
     let totalPrice = (+item.purchase_price + taxAmount).toFixed(2);
-    return Object.assign(item, {total_price: totalPrice});
+    return Object.assign(item, { total_price: totalPrice });
   });
   res.render('clothing', {
     items: items,
     filters: [pkg.package_name],
     helpers: {
-      isInStock: function(bool) {
+      isInStock: function (bool) {
         return bool === true;
+      },
+      sellPending: function (bool) {
+        return bool;
       },
       greaterThanZero: function (soldPrice) {
         return +soldPrice > 0;
       },
-      isArray: function(element) {
+      isArray: function (element) {
         return Array.isArray(element);
       },
-      joinArray: function(element) {
+      joinArray: function (element) {
         return element.join(', ');
       },
-      isForMen: function(gender) {
+      isForMen: function (gender) {
         return gender == 'men';
       }
     }
@@ -375,7 +384,7 @@ app.get("/packages/edit/:pkgId", requiresAuthentication, async (req, res) => {
   });
 })
 
-app.post("/packages/edit/:pkgId", requiresAuthentication, async(req, res) => {
+app.post("/packages/edit/:pkgId", requiresAuthentication, async (req, res) => {
   let pkgId = req.params.pkgId;
   let successfulUpdate = await dataApp.updatePackage(req.body);
   if (successfulUpdate) {
@@ -385,7 +394,7 @@ app.post("/packages/edit/:pkgId", requiresAuthentication, async(req, res) => {
     pkg.price_per_item = pkg.price && itemsInPackage.length > 0
       ? (+pkg.price / itemsInPackage.length).toFixed(2)
       : 0;
-    
+
     pkg.item_count = itemsInPackage.length;
 
     if (pkg.date_sent) {
@@ -405,8 +414,8 @@ app.get("/packages/print/:pkgId", requiresAuthentication, async (req, res) => {
   const items = await dataApp.getPackageItems(pkgId);
 
   const pricePerItem = pkg.price && items.length > 0
-      ? (+pkg.price / items.length).toFixed(2)
-      : 0;
+    ? (+pkg.price / items.length).toFixed(2)
+    : 0;
 
   res.render("print-package", {
     layout: false,
@@ -471,7 +480,7 @@ app.get("/orders/view", requiresAuthentication, async (req, res) => {
     if (Number(pkg.price) && itemsInPackage.length > 0) {
       let pricePerItem = (+pkg.price / itemsInPackage.length)
       pkgPrices[pkg.id] = pricePerItem.toFixed(2);
-    } 
+    }
   })
 
   orders.forEach(order => {
@@ -516,7 +525,7 @@ app.get("/orders/view", requiresAuthentication, async (req, res) => {
   res.render("orders", {
     orders,
     totalRevenue: totalRevenue.toFixed(2),
-    totalCogs: totalCogs.toFixed(2), 
+    totalCogs: totalCogs.toFixed(2),
     totalProfit: totalProfit.toFixed(2),
   })
 })
@@ -534,7 +543,7 @@ app.get("/orders/print/:orderId", requiresAuthentication, async (req, res) => {
   order.revenue = 0;
   order.cogs = 0;
   order.profit = 0;
-  
+
 
   pkgs.forEach(pkg => {
     itemsInPackage = items.filter(item => item.package_id === pkg.id)
@@ -542,7 +551,7 @@ app.get("/orders/print/:orderId", requiresAuthentication, async (req, res) => {
     if (Number(pkg.price) && itemsInPackage.length > 0) {
       let pricePerItem = (+pkg.price / itemsInPackage.length)
       pkgPrices[pkg.id] = pricePerItem.toFixed(2);
-    } 
+    }
   })
 
   orderItems.forEach(item => {
@@ -568,30 +577,33 @@ app.get("/orders/print/:orderId", requiresAuthentication, async (req, res) => {
 app.get("/orders/view/:orderId", requiresAuthentication, async (req, res) => {
   const orderId = req.params.orderId;
   const order = await dataApp.findOrderById(orderId);
-  
+
   let items = (await dataApp.getOrderItems(orderId)).map(item => {
     let taxPercent = item.tax || 8;
     let taxAmount = +item.purchase_price * (taxPercent / 100);
     let totalPrice = (+item.purchase_price + taxAmount).toFixed(2);
-    return Object.assign(item, {total_price: totalPrice});
+    return Object.assign(item, { total_price: totalPrice });
   });
   res.render('clothing', {
     items: items,
     filters: [order.customer_id, order.name],
     helpers: {
-      isInStock: function(bool) {
+      isInStock: function (bool) {
         return bool === true;
+      },
+      sellPending: function (bool) {
+        return bool;
       },
       greaterThanZero: function (soldPrice) {
         return +soldPrice > 0;
       },
-      isArray: function(element) {
+      isArray: function (element) {
         return Array.isArray(element);
       },
-      joinArray: function(element) {
+      joinArray: function (element) {
         return element.join(', ');
       },
-      isForMen: function(gender) {
+      isForMen: function (gender) {
         return gender == 'men';
       }
     }
@@ -609,7 +621,7 @@ app.post("/orders/add", upload.none(), requiresAuthentication, async (req, res) 
     orderData[key] = orderData[key] || null;
   }
 
-  const createdOrder= await dataApp.createOrder(orderData);
+  const createdOrder = await dataApp.createOrder(orderData);
 
   if (createdOrder) {
     res.redirect("/orders/view");
@@ -631,7 +643,7 @@ app.get("/orders/edit/:orderId", requiresAuthentication, async (req, res) => {
   });
 })
 
-app.post("/orders/edit/:orderId", requiresAuthentication, async(req, res) => {
+app.post("/orders/edit/:orderId", requiresAuthentication, async (req, res) => {
   let orderId = req.params.orderId;
   let successfulUpdate = await dataApp.updateOrder(req.body);
 
@@ -656,7 +668,7 @@ app.post("/orders/edit/:orderId", requiresAuthentication, async(req, res) => {
       if (Number(pkg.price) && itemsInPackage.length > 0) {
         let pricePerItem = (+pkg.price / itemsInPackage.length)
         pkgPrices[pkg.id] = pricePerItem.toFixed(2);
-      } 
+      }
     })
 
     itemsInOrder.forEach(item => {
@@ -672,7 +684,7 @@ app.post("/orders/edit/:orderId", requiresAuthentication, async(req, res) => {
       order.sold_total += Number(item.sold_price) || 0;
       order.cogs += cogs;
       order.total_profit += profit;
-    })  
+    })
 
     order.item_count = itemsInOrder.length;
 
@@ -709,7 +721,7 @@ app.get('/api/orderitems/:orderId', async (req, res) => {
     if (Number(pkg.price) && itemsInPackage.length > 0) {
       let pricePerItem = (+pkg.price / itemsInPackage.length)
       pkgPrices[pkg.id] = pricePerItem.toFixed(2);
-    } 
+    }
   })
 
   let sumOfItems = 0;
@@ -765,7 +777,7 @@ app.post("/customers/add", upload.none(), requiresAuthentication, async (req, re
     customerData[key] = customerData[key] || null;
   }
 
-  const createdcustomer= await dataApp.createCustomer(customerData);
+  const createdcustomer = await dataApp.createCustomer(customerData);
 
   if (createdcustomer) {
     res.redirect("/customers/view");
@@ -784,13 +796,13 @@ app.get("/customers/edit/:customerId", requiresAuthentication, async (req, res) 
   });
 })
 
-app.post("/customers/edit/:customerId", requiresAuthentication, async(req, res) => {
+app.post("/customers/edit/:customerId", requiresAuthentication, async (req, res) => {
   let customerId = req.params.customerId;
   let successfulUpdate = await dataApp.updateCustomer(req.body);
 
   if (successfulUpdate) {
     let customer = await dataApp.findCustomerById(customerId);
-    
+
 
     res.render(`partials/edited-customer-row`, {
       layout: false,
@@ -843,9 +855,9 @@ app.post('/newitem', requiresAuthentication, upload.single('brandomania-picture'
       let formattedImgName = urlParts[urlParts.length - 1];
       dataObj.picture = formattedImgName;
     }
-    
 
-    for(prop in dataObj) {
+
+    for (prop in dataObj) {
       if (dataObj[prop] === '') {
         dataObj[prop] = null;
       } else if (prop !== "extra_info" && prop !== 'gender' && prop !== 'location' && prop !== 'picture') {
@@ -862,26 +874,29 @@ app.post('/newitem', requiresAuthentication, upload.single('brandomania-picture'
       let taxPercent = item.tax || 8;
       let taxAmount = +item.purchase_price * (taxPercent / 100);
       let totalPrice = (+item.purchase_price + taxAmount).toFixed(2);
-      Object.assign(item, {total_price: totalPrice});
+      Object.assign(item, { total_price: totalPrice });
 
       res.render('partials/item-structure', {
         layout: 'item-structure-wrapper',
         id: itemId,
         item: item,
         helpers: {
-          isInStock: function(bool) {
+          isInStock: function (bool) {
             return bool === true;
+          },
+          sellPending: function (bool) {
+            return bool;
           },
           greaterThanZero: function (soldPrice) {
             return +soldPrice > 0;
           },
-          isArray: function(element) {
+          isArray: function (element) {
             return Array.isArray(element);
           },
-          joinArray: function(element) {
+          joinArray: function (element) {
             return element.join(', ');
           },
-          isForMen: function(gender) {
+          isForMen: function (gender) {
             return gender == 'men';
           }
         }
@@ -909,9 +924,9 @@ app.get('/item/:itemId', requiresAuthentication, async (req, res) => {
   item.tax_percent = +receipt.tax || 8;
   item.tax_amount = +((item.tax_percent / 100) * +item.purchase_price).toFixed(2);
   item.total_price = (+item.purchase_price + item.tax_amount).toFixed(2);
-  item.purchase_date = receipt.purchase_date ? 
-                       new Date(receipt.purchase_date).toLocaleDateString() : 
-                       new Date(item.date_created).toLocaleDateString();
+  item.purchase_date = receipt.purchase_date ?
+    new Date(receipt.purchase_date).toLocaleDateString() :
+    new Date(item.date_created).toLocaleDateString();
   if (!(+item.shipping_cost)) {
     item.shipping_cost = shippingCost;
   }
@@ -930,10 +945,10 @@ app.get('/item/:itemId', requiresAuthentication, async (req, res) => {
       isForMen: function (gender) {
         return gender === 'men';
       },
-      isTraveling: function(location) {
+      isTraveling: function (location) {
         return location === 'traveling'
-      }, 
-      isInUkraine: function(location) {
+      },
+      isInUkraine: function (location) {
         if (!location) return false;
         return location.toLowerCase() === 'ukraine';
       },
@@ -948,7 +963,7 @@ app.post('/addtopackage/:itemId', requiresAuthentication, async (req, res) => {
 
   let updatedItem = await dataApp.updateItemPackage(itemId, pkgId);
   let updatedLocation = await dataApp.updateItemLocation(itemId, 'ukraine');
-  
+
   if (updatedItem && updatedLocation) {
     returnUpdatedItem(res, itemId);
   } else {
@@ -958,7 +973,13 @@ app.post('/addtopackage/:itemId', requiresAuthentication, async (req, res) => {
 
 app.post('/sellitem/:itemId', requiresAuthentication, async (req, res) => {
   let itemId = req.params.itemId;
-  let soldPrice = req.body.soldPrice || 0;
+  let soldPrice = req.body.soldPrice || '0';
+  let pending = soldPrice.endsWith('?');
+
+  if (pending) {
+    soldPrice = soldPrice.slice(0, -1);
+  }
+
   let customer = req.body.customer;
   let order = req.body.order;
 
@@ -967,6 +988,7 @@ app.post('/sellitem/:itemId', requiresAuthentication, async (req, res) => {
   }
 
   await dataApp.updateItemSoldPrice(itemId, soldPrice);
+  await dataApp.updateItemPending(itemId, pending);
   await dataApp.updateItemOrder(itemId, order.id);
   await dataApp.updateItemLocation(itemId, 'ukraine');
   await dataApp.updateItemInStock(itemId, false);
@@ -1008,7 +1030,7 @@ app.post('/edititem', requiresAuthentication, upload.single('brandomania-picture
     }
   }
 
-  for(prop in dataObj) {
+  for (prop in dataObj) {
     if (dataObj[prop] === '') {
       dataObj[prop] = null;
     } else if (prop !== "extra_info" && prop !== 'gender' && prop !== 'location' && prop !== 'picture') {
@@ -1033,25 +1055,28 @@ app.post('/duplicateitem/:itemId', requiresAuthentication, async (req, res) => {
     let taxPercent = item.tax || 8;
     let taxAmount = +item.purchase_price * (taxPercent / 100);
     let totalPrice = (+item.purchase_price + taxAmount).toFixed(2);
-    Object.assign(item, {total_price: totalPrice});
+    Object.assign(item, { total_price: totalPrice });
     res.render('partials/item-structure', {
       layout: 'item-structure-wrapper',
       id: item.id,
       item: item,
       helpers: {
-        isInStock: function(bool) {
-          return bool === true;
+        isInStock: function (bool) {
+          return bool;
+        },
+        sellPending: function (bool) {
+          return bool;
         },
         greaterThanZero: function (soldPrice) {
           return +soldPrice > 0;
         },
-        isArray: function(element) {
+        isArray: function (element) {
           return Array.isArray(element);
         },
-        joinArray: function(element) {
+        joinArray: function (element) {
           return element.join(', ');
         },
-        isForMen: function(gender) {
+        isForMen: function (gender) {
           return gender == 'men';
         }
       }
@@ -1069,25 +1094,28 @@ app.get('/findtag', requiresAuthentication, async (req, res) => {
     let taxPercent = item.tax || 8;
     let taxAmount = +item.purchase_price * (taxPercent / 100);
     let totalPrice = (+item.purchase_price + taxAmount).toFixed(2);
-    return Object.assign(item, {total_price: totalPrice});
+    return Object.assign(item, { total_price: totalPrice });
   });
   res.render('clothing', {
     items: items,
     filters: req.query,
     helpers: {
-      isInStock: function(bool) {
+      isInStock: function (bool) {
         return bool === true;
+      },
+      sellPending: function (bool) {
+        return bool;
       },
       greaterThanZero: function (soldPrice) {
         return +soldPrice > 0;
       },
-      isArray: function(element) {
+      isArray: function (element) {
         return Array.isArray(element);
       },
-      joinArray: function(element) {
+      joinArray: function (element) {
         return element.join(', ');
       },
-      isForMen: function(gender) {
+      isForMen: function (gender) {
         return gender == 'men';
       }
     }
@@ -1106,7 +1134,7 @@ app.post('/deleteitem/:itemId', requiresAuthentication, async (req, res) => {
 
 app.get("/clothing", requiresAuthentication, (req, res) => {
   res.render('home');
-}); 
+});
 
 app.get("/clothing/view", requiresAuthentication, (req, res) => {
   res.render('gender-select');
@@ -1148,30 +1176,33 @@ app.get("/view/:gender/filtered", requiresAuthentication, async (req, res) => {
 
   app.locals.queryParams = queryObj;
   let filterString = buildFilterString(queryObj, gender);
-  
+
   let items = (await dataApp.getFilteredItems(filterString)).map(item => {
     let taxPercent = item.tax || 8;
     let taxAmount = +item.purchase_price * (taxPercent / 100);
     let totalPrice = (+item.purchase_price + taxAmount).toFixed(2);
-    return Object.assign(item, {total_price: totalPrice});
+    return Object.assign(item, { total_price: totalPrice });
   });
   res.render('clothing', {
     items: items,
     filters: queryObj,
     helpers: {
-      isInStock: function(bool) {
+      isInStock: function (bool) {
         return bool === true;
+      },
+      sellPending: function (bool) {
+        return bool;
       },
       greaterThanZero: function (soldPrice) {
         return +soldPrice > 0;
       },
-      isArray: function(element) {
+      isArray: function (element) {
         return Array.isArray(element);
       },
-      joinArray: function(element) {
+      joinArray: function (element) {
         return element.join(', ');
       },
-      isForMen: function(gender) {
+      isForMen: function (gender) {
         return gender == 'men';
       }
     }

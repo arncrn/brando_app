@@ -16,13 +16,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       uahInput.addEventListener('input', (e) => {
+        let lastChar = e.target.value.endsWith('?') ? '?' : '';
         let soldPrice = e.target.value.replace(regex, '');
-        usdInput.value = (+soldPrice / uahConversion).toFixed(2);
+        usdInput.value = (+soldPrice / uahConversion).toFixed(2) + lastChar;
       })
 
       usdInput.addEventListener('input', (e) => {
+        let lastChar = e.target.value.endsWith('?') ? '?' : '';
         let soldPrice = e.target.value.replace(regex, '');
-        uahInput.value = (+soldPrice * uahConversion).toFixed(2);
+        uahInput.value = (+soldPrice * uahConversion).toFixed(2) + lastChar;
       })
     }
   })

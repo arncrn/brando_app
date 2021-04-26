@@ -18,9 +18,17 @@
     {{#if (isInStock item.in_stock)}}
       <div class="instock">IN STOCK</div>
     {{/if}}
-    {{#if (greaterThanZero item.sold_price)}}
-      <div class="sold"><p>SOLD</p></div>
+
+    {{#if (sellPending item.pending)}}
+      <div class="pending"><p>PENDING</p></div>
+    {{else}}
+      {{#if (greaterThanZero item.sold_price)}}
+        <div class="sold"><p>SOLD</p></div>
+      {{/if}}
     {{/if}}
+    {{!-- {{#if (greaterThanZero item.sold_price)}}
+      <div class="sold"><p>SOLD</p></div>
+    {{/if}} --}}
     <div class="item-size"><p>{{item.size}}</p></div>
     <div class="tag-number"><p>{{item.tag_number}}</p></div>
     <div class="brand-name"><p>{{item.brand}}</p></div>

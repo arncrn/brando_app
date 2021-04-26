@@ -156,6 +156,19 @@ a, a:hover {
   height: 3rem;
 }
 
+.pending {
+  text-align: center;
+  position: absolute;
+  top: 10%;
+  border: 2px solid green;
+  margin-top: 5rem;
+  transform: rotate(0.1turn);
+  color: green;
+  font-size: 2rem;
+  width: 100%;
+  height: 3rem;
+}
+
 .custom-modal {
   z-index: 3;
   position: fixed;

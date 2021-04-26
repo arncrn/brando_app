@@ -65,7 +65,7 @@ const Print = () => {
                 <td>{item.tag_number}</td>
                 <td>${formatPrice(item)}</td>
                 <th>${item.shipping_cost}</th>
-                <th>${item.sold_price}</th>
+                <th>${item.pending ? 'PENDING' : item.sold_price}</th>
                 <th>${item.profit}</th>
                 <td>{formatText(item.extra_info)}</td>
               </tr>
