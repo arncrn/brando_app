@@ -5,6 +5,7 @@ const Print = () => {
   const [items, setItems] = useState([]);
   const [sumOfItems, setSumOfItems] = useState(0);
   const [totalShipping, setTotalShipping] = useState(0);
+  const [pkg, setPkg] = useState({});
 
   useEffect(async () => {
     const pkgId = document.querySelector('[data-pkg-id]').dataset.pkgId;
@@ -36,7 +37,6 @@ const Print = () => {
     pricePerItem = (Number(pkg.price) / Number(items.length)).toFixed(2);
   }
 
-  console.log(pricePerItem);
   return ( 
     <main>
       <table>
