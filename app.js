@@ -1137,21 +1137,39 @@ app.get("/clothing", requiresAuthentication, (req, res) => {
 });
 
 app.get("/clothing/view", requiresAuthentication, (req, res) => {
-  res.render('gender-select');
+  res.render('inventory-select');
 });
 
-app.get("/view/:gender", requiresAuthentication, async (req, res, next) => {
+app.get("/clothing/view/:inventory", requiresAuthentication, (req, res) => {
+  let inventory = req.params.inventory;
+  res.render('gender-select', {
+    inventory
+  })
+});
+
+app.get("/clothing/view/:inventory/:gender", requiresAuthentication, async (req, res) => {
+  let inventory = req.params.inventory;
   let gender = req.params.gender;
   let items;
 
-  switch (gender) {
-    case 'women': items = await dataApp.getWomensClothing();
-      break;
-    case 'men': items = await dataApp.getMensClothing();
-      break;
-    case 'all': items = await dataApp.getAllItems();
-      break;
-    case 'instock': items = await dataApp.getInStockItems();
+  if (gender === 'women') {
+    if (inventory === 'instock') {
+      items = await dataApp.getInStockWomensClothing();
+    } else {
+      items = await dataApp.getAllWomensClothing();
+    }
+  } else if (gender === 'men') {
+    if (inventory === 'instock') {
+      items = await dataApp.getInStockMensClothing();
+    } else {
+      items = await dataApp.getAllMensClothing();
+    }
+  } else {
+    if (inventory === 'instock') {
+      items = await dataApp.getInStockItems();
+    } else {
+      items = await dataApp.getAllItems();
+    }
   }
 
   let brandItems = dataApp.filterForBrands(items)
@@ -1166,16 +1184,17 @@ app.get("/view/:gender", requiresAuthentication, async (req, res, next) => {
     colorsItems: colorsItems,
     sizeItems: sizeItems,
     locationItems: locationItems,
-    gender: gender
+    gender: gender,
+    inventory: inventory,
   });
 });
 
-app.get("/view/:gender/filtered", requiresAuthentication, async (req, res) => {
+app.get("/clothing/view/:inventory/:gender/filtered", requiresAuthentication, async (req, res) => {
   let queryObj = req.query;
   let gender = req.params.gender;
+  let inventory = req.params.inventory;
 
-  app.locals.queryParams = queryObj;
-  let filterString = buildFilterString(queryObj, gender);
+  let filterString = buildFilterString(queryObj, gender, inventory);
 
   let items = (await dataApp.getFilteredItems(filterString)).map(item => {
     let taxPercent = item.tax || 8;
