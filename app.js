@@ -945,8 +945,8 @@ app.get('/item/:itemId', requiresAuthentication, async (req, res) => {
       isForMen: function (gender) {
         return gender === 'men';
       },
-      isTraveling: function (location) {
-        return location === 'traveling'
+      isWithJenia: function (location) {
+        return location === 'jenia';
       },
       isInUkraine: function (location) {
         if (!location) return false;

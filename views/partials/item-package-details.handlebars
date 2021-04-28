@@ -4,18 +4,18 @@
     <div class="input-group">
       <span class="input-group-text" id="item-location">Location:</span>
       <select class="form-select" name="location" aria-label="item-location" aria-describedby="item-location">
-        {{#if (isTraveling item.location)}}
+        {{#if (isWithJenia item.location)}}
           <option value="usa">USA</option>
           <option value="ukraine">Ukraine</option>
-          <option value="traveling" selected>Traveling</option>
+          <option value="jenia" selected>Jenia</option>
         {{else}} {{#if (isInUkraine item.location)}}
           <option value="usa">USA</option>
           <option value="ukraine" selected>Ukraine</option>
-          <option value="traveling">Traveling</option>
+          <option value="jenia">Jenia</option>
         {{else}}
           <option value="usa" selected>USA</option>
           <option value="ukraine">Ukraine</option>
-          <option value="traveling">Traveling</option>
+          <option value="jenia">Jenia</option>
         {{/if}}{{/if}}
       </select>
     </div>
