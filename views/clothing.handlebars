@@ -12,6 +12,20 @@
   </div>
 
   <div class="row">
+    <div class="col">
+      <div>
+
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" name="pending-filter" type="checkbox" id="pending-filter">
+          <label class="form-check-label " for="pending-filter">Pending Items</label>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
     <div class="col mt-3">
       {{#each filters as |filter|}}
         {{#if (isArray filter)}}
