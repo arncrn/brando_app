@@ -1010,6 +1010,7 @@ app.post('/unsellitem/:itemId', requiresAuthentication, async (req, res) => {
   await dataApp.updateItemSoldPrice(itemId, 0);
   await dataApp.removeItemFromOrder(itemId);
   await dataApp.updateItemInStock(itemId, true);
+  await dataApp.updateItemPending(itemId, false);
   returnUpdatedItem(res, itemId);
 })
 
