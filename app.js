@@ -1156,18 +1156,24 @@ app.get("/clothing/view/:inventory/:gender", requiresAuthentication, async (req,
   if (gender === 'women') {
     if (inventory === 'instock') {
       items = await dataApp.getInStockWomensClothing();
+    } else if (inventory === 'pending') {
+      items = await dataApp.getPendingWomensClothing();
     } else {
       items = await dataApp.getAllWomensClothing();
     }
   } else if (gender === 'men') {
     if (inventory === 'instock') {
       items = await dataApp.getInStockMensClothing();
+    } else if (inventory === 'pending') {
+      items = await dataApp.getPendingMensClothing();
     } else {
       items = await dataApp.getAllMensClothing();
     }
   } else {
     if (inventory === 'instock') {
       items = await dataApp.getInStockItems();
+    } else if (inventory === 'pending') {
+      items = await dataApp.getPendingItems();
     } else {
       items = await dataApp.getAllItems();
     }
@@ -1196,7 +1202,7 @@ app.get("/clothing/view/:inventory/:gender/filtered", requiresAuthentication, as
   let inventory = req.params.inventory;
 
   let filterString = buildFilterString(queryObj, gender, inventory);
-
+  console.log(filterString);
   let items = (await dataApp.getFilteredItems(filterString)).map(item => {
     let taxPercent = item.tax || 8;
     let taxAmount = +item.purchase_price * (taxPercent / 100);
