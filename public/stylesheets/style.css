@@ -198,6 +198,13 @@ a, a:hover {
   height: 3rem;
 }
 
+.copy-button {
+  position: relative;
+  bottom: 2.5rem;
+  z-index: 1;
+  height: 3rem;
+}
+
 .glowing {
   background-color: lightgoldenrodyellow;
 }

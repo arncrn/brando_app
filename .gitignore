@@ -4,3 +4,4 @@ session-store.db
 backup.sql
 .env
 rootkey.csv
+heroku.sql
