@@ -8,31 +8,36 @@ const pgPersistence = require('./lib/pg-persistence.js');
 const buildFilterString = require('./lib/build-filter-string.js');
 const formatDate = require('./lib/format-date.js')
 const capitalize = require('./lib/capitalize.js');
+const processImage = require('./lib/process-image.js');
+const { ConfigurationOptions } = require("aws-sdk");
 const dataApp = new pgPersistence();
 const port = config.PORT;
 const host = config.HOST;
 
 const UAH_CONVERSION = 28;
 
-const aws = require('aws-sdk');
-const AWS_BUCKET = config.AWS_BUCKET;
-aws.config.region = 'us-west-1'
+// const aws = require('aws-sdk');
+// const AWS_BUCKET = config.AWS_BUCKET;
+const cloudfrontUrl = `https://${config.AWS_CLOUDFRONT}`
+// aws.config.region = 'us-west-1'
 
 const app = express();
 const LokiStore = store(session);
 
-const path = require("path");
+// const path = require("path");
 
-let storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join(__dirname + '/public/images/clothing'));
-  },
-  filename: function (req, file, cb) {
-    if (file) {
-      cb(null, file.originalname);
-    }
-  }
-})
+// let storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, path.join(__dirname + '/public/images/clothing'));
+//   },
+//   filename: function (req, file, cb) {
+//     if (file) {
+//       cb(null, file.originalname);
+//     }
+//   }
+// })
+
+const storage = multer.memoryStorage();
 
 const upload = multer({
   storage: storage,
@@ -817,45 +822,38 @@ app.post("/customers/edit/:customerId", requiresAuthentication, async (req, res)
 
 // for uploading images to amazon'a aws s3
 // https://devcenter.heroku.com/articles/s3-upload-node
+// app.get(`/sign-s3`, (req, res) => {
+//   const s3 = new aws.S3();
+//   const fileName = req.query['file-name'];
+//   const fileType = req.query['file-type'];
+//   const s3Params = {
+//     Bucket: AWS_BUCKET,
+//     Key: fileName,
+//     Expires: 60,
+//     ContentType: fileType,
+//     ACL: 'public-read'
+//   };
 
-app.get(`/sign-s3`, (req, res) => {
-  const s3 = new aws.S3();
-  const fileName = req.query['file-name'];
-  const fileType = req.query['file-type'];
-  const s3Params = {
-    Bucket: AWS_BUCKET,
-    Key: fileName,
-    Expires: 60,
-    ContentType: fileType,
-    ACL: 'public-read'
-  };
-
-  s3.getSignedUrl('putObject', s3Params, (err, data) => {
-    if (err) {
-      console.log(err);
-      return res.end();
-    }
-    const returnData = {
-      signedRequest: data,
-      url: `https://${AWS_BUCKET}.s3.amazonaws.com/${fileName}`
-    }
-    res.send(JSON.stringify(returnData));
-  })
-})
+//   s3.getSignedUrl('putObject', s3Params, (err, data) => {
+//     if (err) {
+//       console.log(err);
+//       return res.end();
+//     }
+//     const returnData = {
+//       signedRequest: data,
+//       url: `https://${AWS_BUCKET}.s3.amazonaws.com/${fileName}`
+//     }
+//     res.send(JSON.stringify(returnData));
+//   })
+// })
 
 app.post('/newitem', requiresAuthentication, upload.single('brandomania-picture'), async (req, res) => {
   try {
     let dataObj = req.body;
-    // if (req.file) {
-    //   let file = req.file;
-    //   dataObj.picture = file.originalname;
-    // }
-    if (dataObj.picture) {
-      let urlParts = dataObj.picture.split("/");
-      let formattedImgName = urlParts[urlParts.length - 1];
-      dataObj.picture = formattedImgName;
+    if (req.file) {
+      let file = req.file;
+      dataObj.picture = await processImage(file, dataObj.tag_number, dataObj.type, dataObj.brand);
     }
-
 
     for (prop in dataObj) {
       if (dataObj[prop] === '') {

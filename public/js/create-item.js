@@ -22,9 +22,11 @@ class CreateItem {
   }
 
   displayImagePreview(file) {
+    //working
     this.removeImagePreview();
     if (!file || !file.type.startsWith('image/')) return;
-    getSignedRequest(file);
+    // getSignedRequest(file);
+    showImage(file);
   }
 
   insertItemIntoPage(responseHTML) {
@@ -90,39 +92,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // for uploading images to amazon's aws s3
 // https://devcenter.heroku.com/articles/s3-upload-node
-function getSignedRequest(file) {
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', `/sign-s3?file-name=${file.name}&file-type=${file.type}`);
-  xhr.onreadystatechange = () => {
-    if(xhr.readyState === 4){
-      if(xhr.status === 200){
-        const response = JSON.parse(xhr.response);
-        uploadFile(file, response.signedRequest, response.url);
-      }
-      else{
-        alert('Could not get signed URL.');
-      }
-    }
-  };
-  xhr.send();
-}
+// function getSignedRequest(file) {
+  //working
+  // const xhr = new XMLHttpRequest();
+  // xhr.open('GET', `/sign-s3?file-name=${file.name}&file-type=${file.type}`);
+  // xhr.onreadystatechange = () => {
+  //   if(xhr.readyState === 4){
+  //     if(xhr.status === 200){
+  //       const response = JSON.parse(xhr.response);
+  //       uploadFile(file, response.signedRequest, response.url);
+  //     }
+  //     else{
+  //       alert('Could not get signed URL.');
+  //     }
+  //   }
+  // };
+  // xhr.send();
+// }
 
 // for uploading images to amazon's aws s3
 // https://devcenter.heroku.com/articles/s3-upload-node
-function uploadFile(file, signedRequest, url){
-  const xhr = new XMLHttpRequest();
-  xhr.open('PUT', signedRequest);
-  xhr.onreadystatechange = () => {
-    if(xhr.readyState === 4){
-      if(xhr.status === 200){
-        document.getElementById('preview').src = url;
+// function uploadFile(file, signedRequest, url){
+  //working
+  // const xhr = new XMLHttpRequest();
+  // xhr.open('PUT', signedRequest);
+  // xhr.onreadystatechange = () => {
+  //   if(xhr.readyState === 4){
+  //     if(xhr.status === 200){
+        // document.getElementById('preview').src = url;
         // let previewBox = document.getElementById('preview');
-        document.getElementById('clothing-picture').value = url;
-      }
-      else{
-        alert('Could not upload file.');
-      }
-    }
-  };
-  xhr.send(file);
+        // document.getElementById('clothing-picture').value = url;
+  //     }
+  //     else{
+  //       alert('Could not upload file.');
+  //     }
+  //   }
+  // };
+  // xhr.send(file);
+// }
+
+function showImage(file) {
+  document.getElementById('preview').src = URL.createObjectURL(file);
 }
