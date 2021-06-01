@@ -18,7 +18,6 @@ const UAH_CONVERSION = 28;
 
 // const aws = require('aws-sdk');
 // const AWS_BUCKET = config.AWS_BUCKET;
-const cloudfrontUrl = `https://${config.AWS_CLOUDFRONT}`
 // aws.config.region = 'us-west-1'
 
 const app = express();
