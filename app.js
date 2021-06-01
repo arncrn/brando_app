@@ -1014,12 +1014,17 @@ app.post('/unsellitem/:itemId', requiresAuthentication, async (req, res) => {
 app.post('/edititem', requiresAuthentication, upload.single('brandomania-picture'), async (req, res) => {
   let dataObj = req.body;
   let itemId = dataObj.id;
+  // working
 
-  if (dataObj.picture) {
-    let urlParts = dataObj.picture.split("/");
-    let formattedImgName = urlParts[urlParts.length - 1];
-    dataObj.picture = formattedImgName;
+  if (req.file) {
+    let file = req.file;
+    dataObj.picture = await processImage(file, dataObj.tag_number, dataObj.type, dataObj.brand);
   }
+  // if (dataObj.picture) {
+  //   let urlParts = dataObj.picture.split("/");
+  //   let formattedImgName = urlParts[urlParts.length - 1];
+  //   dataObj.picture = formattedImgName;
+  // }
 
   for (prop in dataObj) {
     if (['purchase_price', 'shipping_cost', 'sold_price'].includes(prop)) {
