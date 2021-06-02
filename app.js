@@ -1240,9 +1240,11 @@ app.get("/clothing/view/:inventory/:gender/filtered", requiresAuthentication, as
 app.get("/clothing/add", requiresAuthentication, async (req, res) => {
   let brands = await dataApp.getBrands();
   let types = await dataApp.getTypes();
+  let colors = await dataApp.getColors();
   res.render('create-item', {
     brands,
-    types
+    types,
+    colors
   });
 })
 

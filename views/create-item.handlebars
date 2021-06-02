@@ -72,7 +72,12 @@
       <div class="col-9">
         <div class="input-group">
           <span class="input-group-text" id="edit-colors">colors:</span>
-          <input type="text" class="form-control required" name="colors" placeholder="color1, color2, color3" aria-label="edit-colors" aria-describedby="edit-colors">
+          <input type="text" class="form-control required" name="colors" list="colorOptions" placeholder="color1, color2, color3" aria-label="edit-colors" aria-describedby="edit-colors">
+          <datalist id="colorOptions">
+            {{#each colors as |color|}}
+            <option value="{{color}}">
+            {{/each}}
+          </datalist>
         </div>
       </div>
 
