@@ -98,7 +98,6 @@ app.use(session({
 
 app.use((req, res, next) => {
   res.locals.signedIn = req.session.signedIn;
-  // console.log(req);
   next();
 })
 
