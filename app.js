@@ -98,13 +98,21 @@ app.use(session({
 
 app.use((req, res, next) => {
   res.locals.signedIn = req.session.signedIn;
+  // console.log(req);
   next();
 })
 
-const requiresAuthentication = (req, res, next) => {
+const requiresAuthentication = async (req, res, next) => {
   if (!res.locals.signedIn) {
-    console.log("Unauthorized");
-    res.status(401).send("Unauthorized")
+    let loginStatus = await dataApp.checkLoginStatus(req.sessionID);
+    if (loginStatus) {
+      req.session.signedIn = true;
+      res.locals.signedIn = true;
+      next();
+    } else {
+      console.log("Unauthorized");
+      res.status(401).send("Unauthorized")
+    }
   } else {
     next();
   }
@@ -138,6 +146,7 @@ app.post('/login', async (req, res) => {
 
   if (loggedInSuccess) {
     // req.session.username = username;
+    await dataApp.loginUser(username, req.sessionID);
     req.session.signedIn = true;
     res.redirect('/clothing');
   } else {
