@@ -6,6 +6,7 @@ const Print = () => {
   const [sumOfItems, setSumOfItems] = useState(0);
   const [totalShipping, setTotalShipping] = useState(0);
   const [pkg, setPkg] = useState({});
+  const [allowImages, setAllowImages] = useState(false);
 
   useEffect(async () => {
     const pkgId = document.querySelector('[data-pkg-id]').dataset.pkgId;
@@ -39,6 +40,7 @@ const Print = () => {
 
   return ( 
     <main>
+      <button onClick={() => setAllowImages(!allowImages)}>Toggle Images</button>
       <table>
         <thead>
           <tr>
@@ -51,6 +53,7 @@ const Print = () => {
             <th>Purchase Price</th>
             <th>Shipping Cost</th>
             <th>Extra Details</th>
+            {allowImages && <th>Image</th>}
           </tr>
         </thead>
         <tbody>
@@ -66,6 +69,10 @@ const Print = () => {
                 <td>${formatPrice(item)}</td>
                 <td>${item.shipping_cost}</td>
                 <td>{formatText(item.extra_info)}</td>
+                {allowImages &&
+                <td>
+                  {item.picture && <img height="150px" src={`https://d2hcaqfu7kwyzt.cloudfront.net/${item.picture}`} />}
+                </td>}
               </tr>
             );
           })}

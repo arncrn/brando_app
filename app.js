@@ -97,13 +97,16 @@ app.use(session({
 }));
 
 app.use((req, res, next) => {
-  res.locals.signedIn = req.session.signedIn;
+  // res.locals.signedIn = req.session.signedIn;
+  // console.log('here');
   next();
 })
 
 const requiresAuthentication = async (req, res, next) => {
+  console.log('hello!')
   if (!res.locals.signedIn) {
     let loginStatus = await dataApp.checkLoginStatus(req.sessionID);
+    console.log(loginStatus);
     if (loginStatus) {
       req.session.signedIn = true;
       res.locals.signedIn = true;
