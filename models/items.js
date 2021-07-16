@@ -277,7 +277,7 @@ const destroy = async (id) => {
 
 // const getColors = async () => {
 //   let colorObj = {};
-//   let items = await getAllItems();
+//   let items = await getAll();
 //   items.forEach(item => {
 //     let colors = item.colors.split(', ');
 //     colors.forEach(color => {
@@ -292,7 +292,7 @@ const destroy = async (id) => {
 
 const getBrands = async () => {
   let brandObj = {};
-  let items = await getAllItems();
+  let items = await getAll();
   items.forEach(item => {
     let brand = item.brand;
     if (!brandObj[brand]) {
@@ -305,7 +305,7 @@ const getBrands = async () => {
 
 const getTypes = async () => {
   let typeObj = {};
-  let items = await getAllItems();
+  let items = await getAll();
   items.forEach(item => {
     let type = item.type;
     if (!typeObj[type]) {
@@ -318,7 +318,7 @@ const getTypes = async () => {
 
 const getColors = async () => {
   let colorObj = {};
-  let items = await getAllItems();
+  let items = await getAll();
   items.forEach(item => {
     let colors = item.colors.split(', ');
     colors.forEach(color => {
