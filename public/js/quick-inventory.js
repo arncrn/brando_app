@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let inStock = true;
       if (location === 'none') inStock = false;
       
-      fetch(`/updateinventory/${itemId}`, {
+      fetch(`/clothing/updateinventory/${itemId}`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',

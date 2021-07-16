@@ -10,8 +10,8 @@ const Print = () => {
 
   useEffect(async () => {
     const pkgId = document.querySelector('[data-pkg-id]').dataset.pkgId;
-    let response = await (await fetch(`/api/packageitems/${pkgId}`)).json();
-    let pkgResponse = await (await fetch(`/singlepackage/${pkgId}`)).json();
+    let response = await (await fetch(`/packages/packageitems/${pkgId}`)).json();
+    let pkgResponse = await (await fetch(`/packages/singlepackage/${pkgId}`)).json();
     setPkg(pkgResponse);
     setItems(response.items);
     setSumOfItems(response.sumOfItems);

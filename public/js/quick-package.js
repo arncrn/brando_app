@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let itemId = e.target.parentNode.parentNode.id.split('-')[2];
       let itemToReplace = document.querySelector(`[data-item-id="${itemId}"]`);
 
-      fetch(`/addtopackage/${itemId}`, {
+      fetch(`/clothing/addtopackage/${itemId}`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',

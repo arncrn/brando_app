@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let formData = new FormData(form);
 
     let XHR = new XMLHttpRequest();
-    XHR.open('POST', '/newitem');
+    XHR.open('POST', '/clothing/newitem');
 
     XHR.addEventListener('load', (event) => {
       let response = event.target.response;

@@ -12,7 +12,7 @@ const Print = () => {
     // const pkgId = document.querySelector('[data-pkg-id]').dataset.pkgId;
     const orderId = document.querySelector('[data-order-id]').dataset.orderId;
 
-    let response = await (await fetch(`/api/orderitems/${orderId}`)).json();
+    let response = await (await fetch(`/orders/orderitems/${orderId}`)).json();
     setItems(response.items);
     setSumOfItems(response.sumOfItems);
     setShippingCost(response.shippingCost);

@@ -166,7 +166,7 @@ document.addEventListener('click', (event) => {
     let itemId = popupDisplay.findItemId(event.target);
     let xhr = new XMLHttpRequest();
 
-    xhr.open('GET', `/item/${itemId}`);
+    xhr.open('GET', `/clothing/item/${itemId}`);
     xhr.addEventListener('load', event => {
       //working
       let response = event.target.response;
@@ -215,7 +215,7 @@ document.addEventListener('click', (event) => {
         let formData = new FormData(form);
 
         let XHR = new XMLHttpRequest();
-        XHR.open('POST', `/edititem`);
+        XHR.open('POST', `/clothing/edititem`);
         XHR.addEventListener('load', event => {
           let request = event.target;
           if (request.status === 200) {

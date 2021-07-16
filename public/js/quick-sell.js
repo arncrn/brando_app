@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let purchasePrice = itemToReplace.querySelector('.purchase-price').textContent.replace(regex, '');
       let soldPrice = (Number(purchasePrice) + (Number(purchasePrice * .25))).toFixed(2);
       
-      fetch(`/sellitem/${itemId}`, {
+      fetch(`/clothing/sellitem/${itemId}`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target.classList.contains('not-sold')) {
       let itemId = e.target.parentNode.parentNode.id.split('-')[2];
       let itemToReplace = document.querySelector(`[data-item-id="${itemId}"]`);
-      fetch(`/unsellitem/${itemId}`, {
+      fetch(`/clothing/unsellitem/${itemId}`, {
         method: "POST",
       })
         .then(response => response.text())
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let sellingPrice = parentDiv.querySelector('input').value;
       let itemId = parentDiv.id.split('-')[2];
       let itemToReplace = document.querySelector(`[data-item-id="${itemId}"]`);
-      fetch(`/sellitem/${itemId}`, {
+      fetch(`/clothing/sellitem/${itemId}`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',

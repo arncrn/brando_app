@@ -5,11 +5,12 @@
   "main": "app.js",
   "scripts": {
     "heroku-postbuild": "npm install --production",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx nodemon app.js",
+    "start": "NODE_ENV=production node index.js",
+    "dev": "NODE_ENV=development nodemon index.js",
     "backup": "pg_dump -d brandomania3 --inserts > backup.sql",
     "backup:heroku": "dropdb brandomania && heroku pg:pull DATABASE_URL brandomania --app pacific-everglades-84945",
-    "sql-file:heroku": "pg_dump -d brandomania --inserts > heroku.sql"
+    "sql-file:heroku": "pg_dump -d brandomania --inserts > heroku.sql",
+    "test": "NODE_ENV=test jest --verbose --runInBand"
   },
   "author": "",
   "license": "ISC",
@@ -30,10 +31,15 @@
     "pg": "^8.5.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.6"
+    "jest": "^27.0.6",
+    "nodemon": "^2.0.6",
+    "supertest": "^6.1.3"
   },
   "engines": {
     "node": "12.19.0",
     "npm": "6.14.8"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }

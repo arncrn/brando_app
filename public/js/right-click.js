@@ -79,7 +79,7 @@ class RightClick {
 
   duplicateItem() {
     let XHR = new XMLHttpRequest();
-    XHR.open('POST', `/duplicateitem/${this.itemId}`);
+    XHR.open('POST', `/clothing/duplicateitem/${this.itemId}`);
     XHR.addEventListener('load', event => {
       let request = event.target;
       this.insertItemIntoPage(request.response);
@@ -93,7 +93,7 @@ class RightClick {
 
   deleteItem() {
     let XHR = new XMLHttpRequest();
-    XHR.open('POST', `/deleteitem/${this.itemId}`);
+    XHR.open('POST', `/clothing/deleteitem/${this.itemId}`);
     XHR.addEventListener('load', event => {
       let request = event.target;
       this.removeItemFromPage();
