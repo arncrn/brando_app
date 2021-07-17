@@ -1,4 +1,5 @@
 const { dbQuery } = require("../lib/db-query");
+const bcrypt = require('bcrypt');
 
 const authenticate = async (username, password) => {
   const FIND_HASHED_PASSWORD = "SELECT password FROM users" +
