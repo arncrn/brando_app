@@ -104,7 +104,7 @@ packageRouter.post("/add", upload.none(), requiresAuthentication, async (req, re
   const createdPackage = await Packages.create(packageData);
 
   if (createdPackage) {
-    res.redirect("/view");
+    res.redirect("/packages/view");
   } else {
     res.render("create-package");
   }

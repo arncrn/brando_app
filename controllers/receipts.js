@@ -81,7 +81,7 @@ receiptRouter.post("/add", upload.none(), requiresAuthentication, async (req, re
   const createdReceipt = await Receipts.create(receiptData);
 
   if (createdReceipt) {
-    res.redirect("/view");
+    res.redirect("/receipts/view");
   } else {
     res.render("create-receipt");
   }

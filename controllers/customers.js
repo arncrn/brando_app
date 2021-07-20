@@ -27,7 +27,7 @@ customerRouter.post("/add", upload.none(), requiresAuthentication, async (req, r
   const createdcustomer = await Customers.create(customerData);
 
   if (createdcustomer) {
-    res.redirect("/view");
+    res.redirect("/customers/view");
   } else {
     res.render("create-customer");
   }

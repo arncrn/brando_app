@@ -176,7 +176,7 @@ orderRouter.post("/add", upload.none(), requiresAuthentication, async (req, res)
   const createdOrder = await Orders.create(orderData);
 
   if (createdOrder) {
-    res.redirect("/view");
+    res.redirect("/orders/view");
   } else {
     res.render("create-order");
   }

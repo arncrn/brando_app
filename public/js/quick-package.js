@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (timeout) {clearTimeout(timeout)};
     timeout = setTimeout(() => {
       let pkgId = pkgInput.value.replace(regex, '') || 0;
-      fetch(`/singlepackage/${pkgId}`)
+      fetch(`/packages/singlepackage/${pkgId}`)
         .then(response => response.json())
         .then(pkgData => {
           if (pkgData) {
