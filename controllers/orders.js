@@ -47,7 +47,7 @@ orderRouter.get("/view", requiresAuthentication, async (req, res) => {
     itemsInOrder = items.filter(item => item.order_id === order.id);
     order.item_count = itemsInOrder.length;
     itemsInOrder.forEach(item => {
-      item.tax = item.tax === undefined ? 8 : +item.tax;
+      item.tax = undefined || !item.receipt_id ? 8 : item.tax;
       let taxAmount = (Number(item.tax) / 100) * Number(item.purchase_price);
       let shippingCost = Number(item.shipping_cost) || (Number(pkgPrices[item.package_id]) || 0);
       let cogs = (taxAmount + shippingCost + Number(item.purchase_price));
@@ -107,7 +107,7 @@ orderRouter.get("/print/:orderId", requiresAuthentication, async (req, res) => {
   })
 
   orderItems.forEach(item => {
-    item.tax = item.tax === undefined ? 8 : +item.tax;
+    item.tax = undefined || !item.receipt_id ? 8 : item.tax;
     let taxAmount = (Number(item.tax) / 100) * Number(item.purchase_price);
     let shippingCost = Number(item.shipping_cost) || (Number(pkgPrices[item.package_id]) || 0);
     let cogs = (taxAmount + shippingCost + Number(item.purchase_price));
@@ -131,7 +131,7 @@ orderRouter.get("/view/:orderId", requiresAuthentication, async (req, res) => {
   const order = await Orders.findById(orderId);
 
   let items = (await Orders.getOrderItems(orderId)).map(item => {
-    let taxPercent = item.tax === undefined ? 8 : +item.tax;
+    let taxPercent = undefined || !item.receipt_id ? 8 : item.tax;
     let taxAmount = +item.purchase_price * (taxPercent / 100);
     let totalPrice = (+item.purchase_price + taxAmount).toFixed(2);
     return Object.assign(item, { total_price: totalPrice });
@@ -224,7 +224,7 @@ orderRouter.post("/edit/:orderId", requiresAuthentication, async (req, res) => {
     })
 
     itemsInOrder.forEach(item => {
-      item.tax = item.tax === undefined ? 8 : +item.tax;
+      item.tax = undefined || !item.receipt_id ? 8 : item.tax;
       let taxAmount = (Number(item.tax) / 100) * Number(item.purchase_price);
       let shippingCost = Number(pkgPrices[item.package_id]) || 0
       let cogs = (taxAmount + shippingCost + Number(item.purchase_price));
@@ -282,7 +282,7 @@ orderRouter.get('/orderitems/:orderId', async (req, res) => {
   let profit = 0;
 
   orderItems.forEach(item => {
-    item.tax = item.tax === undefined ? 8 : +item.tax;
+    item.tax = undefined || !item.receipt_id ? 8 : item.tax;
     let taxAmount = (Number(item.tax) / 100) * Number(item.purchase_price);
     let totalPrice = taxAmount + Number(item.purchase_price);
     item.total_price = totalPrice.toFixed(2);

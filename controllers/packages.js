@@ -59,7 +59,7 @@ packageRouter.get("/view/:pkgId", requiresAuthentication, async (req, res) => {
   const pkg = await Packages.findById(pkgId);
 
   let items = (await Clothing.findInPackage(pkgId)).map(item => {
-    let taxPercent = item.tax === undefined ? 8 : +item.tax;
+    let taxPercent = undefined || !item.receipt_id ? 8 : item.tax;
     let taxAmount = +item.purchase_price * (taxPercent / 100);
     let totalPrice = (+item.purchase_price + taxAmount).toFixed(2);
     return Object.assign(item, { total_price: totalPrice });
@@ -173,7 +173,7 @@ packageRouter.get('/packageitems/:pkgId', async (req, res) => {
   let pricePerItem = (Number(pkg.price) / items.length).toFixed(2);
 
   items.forEach(item => {
-    item.tax = item.tax === undefined ? 8 : +item.tax;
+    item.tax = undefined || !item.receipt_id ? 8 : item.tax;
     let taxAmount = (Number(item.tax) / 100) * Number(item.purchase_price);
     let totalPrice = taxAmount + Number(item.purchase_price);
     item.total_price = totalPrice.toFixed(2);

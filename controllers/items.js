@@ -26,8 +26,9 @@ const helpers = {
 
 
 const calculateTotalPrice = (item) => {
-  let taxPercent = item.tax === undefined ? 8 : item.tax;
-  let taxAmount = +item.purchase_price * (taxPercent / 100);
+  item.tax = item.tax === undefined || !item.receipt_id ? 8 : item.tax;
+  // let taxPercent = item.tax === undefined || !item.receipt_id ? 8 : item.tax;
+  let taxAmount = +item.purchase_price * (item.tax / 100);
   return (+item.purchase_price + taxAmount).toFixed(2);
 }
 
@@ -103,8 +104,10 @@ itemRouter.get('/item/:itemId', requiresAuthentication, async (req, res) => {
   let packageItems = await Clothing.findInPackage(item.package_id); // will be handled in package delivery
   let shippingCost = ((+pkg.price / packageItems.length) || 0).toFixed(2); // will be on the item after package delivery
   
+  item.tax = undefined || !item.receipt_id ? 8 : item.tax;
   item.tax_amount = +((item.tax / 100) * +item.purchase_price).toFixed(2); 
   item.total_price = calculateTotalPrice(item);
+  console.log(item.tax)
   item.purchase_date = receipt.purchase_date ?
     new Date(receipt.purchase_date).toLocaleDateString() :
     new Date(item.date_created).toLocaleDateString();
@@ -228,6 +231,7 @@ itemRouter.get('/findtag', requiresAuthentication, async (req, res) => {
 
   items = items.map(item => {
     item.total_price = calculateTotalPrice(item);
+    console.log(item.tax);
     return item;
   });
   res.render('clothing', {

@@ -36,7 +36,7 @@ receiptRouter.get("/view/:receiptId", requiresAuthentication, async (req, res) =
   const receipt = await Receipts.findById(receiptId);
 
   let items = (await Clothing.findInReceipt(receiptId)).map(item => {
-    let taxPercent = item.tax === undefined ? 8 : +item.tax;
+    let taxPercent = undefined || !item.receipt_id ? 8 : item.tax;
     let taxAmount = +item.purchase_price * (taxPercent / 100);
     let totalPrice = (+item.purchase_price + taxAmount).toFixed(2);
     return Object.assign(item, { total_price: totalPrice });
