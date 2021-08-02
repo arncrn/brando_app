@@ -4,6 +4,8 @@ const Clothing = require('../models/items');
 const upload = require('../lib/useMulter');
 const requiresAuthentication = require("../utils/middleware.js").requiresAuthentication;
 const formatDate = require('../lib/format-date.js')
+const setTaxPercent = require('../lib/set-tax-percent');
+const calculateTaxAmount = require('../lib/calculate-tax-amount');
 
 packageRouter.get("/", requiresAuthentication, (req, res) => {
   res.render('package-home');
@@ -59,8 +61,8 @@ packageRouter.get("/view/:pkgId", requiresAuthentication, async (req, res) => {
   const pkg = await Packages.findById(pkgId);
 
   let items = (await Clothing.findInPackage(pkgId)).map(item => {
-    let taxPercent = undefined || !item.receipt_id ? 8 : item.tax;
-    let taxAmount = +item.purchase_price * (taxPercent / 100);
+    setTaxPercent(item);
+    let taxAmount = calculateTaxAmount(item);
     let totalPrice = (+item.purchase_price + taxAmount).toFixed(2);
     return Object.assign(item, { total_price: totalPrice });
   });
@@ -173,8 +175,8 @@ packageRouter.get('/packageitems/:pkgId', async (req, res) => {
   let pricePerItem = (Number(pkg.price) / items.length).toFixed(2);
 
   items.forEach(item => {
-    item.tax = undefined || !item.receipt_id ? 8 : item.tax;
-    let taxAmount = (Number(item.tax) / 100) * Number(item.purchase_price);
+    setTaxPercent(item);
+    let taxAmount = calculateTaxAmount(item);
     let totalPrice = taxAmount + Number(item.purchase_price);
     item.total_price = totalPrice.toFixed(2);
     item.tax_amount = taxAmount.toFixed(2);

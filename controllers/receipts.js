@@ -4,6 +4,8 @@ const Clothing = require('../models/items');
 const upload = require('../lib/useMulter');
 const requiresAuthentication = require("../utils/middleware.js").requiresAuthentication;
 const formatDate = require('../lib/format-date.js')
+const setTaxPercent = require('../lib/set-tax-percent');
+const calculateTaxAmount = require('../lib/calculate-tax-amount');
 
 receiptRouter.get("/", requiresAuthentication, (req, res) => {
   res.render('receipt-home');
@@ -36,8 +38,8 @@ receiptRouter.get("/view/:receiptId", requiresAuthentication, async (req, res) =
   const receipt = await Receipts.findById(receiptId);
 
   let items = (await Clothing.findInReceipt(receiptId)).map(item => {
-    let taxPercent = undefined || !item.receipt_id ? 8 : item.tax;
-    let taxAmount = +item.purchase_price * (taxPercent / 100);
+    setTaxPercent(item);
+    let taxAmount = calculateTaxAmount(item);
     let totalPrice = (+item.purchase_price + taxAmount).toFixed(2);
     return Object.assign(item, { total_price: totalPrice });
   });

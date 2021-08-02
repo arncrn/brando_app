@@ -10,6 +10,8 @@ const requiresAuthentication = require("../utils/middleware.js").requiresAuthent
 const buildFilterString = require('../lib/build-filter-string.js');
 const capitalize = require('../lib/capitalize.js');
 const processImage = require('../lib/process-image.js');
+const setTaxPercent = require('../lib/set-tax-percent');
+const calculateTaxAmount = require('../lib/calculate-tax-amount');
 
 const UAH_CONVERSION = 28;
 
@@ -26,9 +28,9 @@ const helpers = {
 
 
 const calculateTotalPrice = (item) => {
-  item.tax = item.tax === undefined || !item.receipt_id ? 8 : item.tax;
-  // let taxPercent = item.tax === undefined || !item.receipt_id ? 8 : item.tax;
-  let taxAmount = +item.purchase_price * (item.tax / 100);
+  setTaxPercent(item);
+  let taxAmount = calculateTaxAmount(item);
+  // let taxAmount = +item.purchase_price * (item.tax / 100);
   return (+item.purchase_price + taxAmount).toFixed(2);
 }
 
@@ -104,10 +106,9 @@ itemRouter.get('/item/:itemId', requiresAuthentication, async (req, res) => {
   let packageItems = await Clothing.findInPackage(item.package_id); // will be handled in package delivery
   let shippingCost = ((+pkg.price / packageItems.length) || 0).toFixed(2); // will be on the item after package delivery
   
-  item.tax = undefined || !item.receipt_id ? 8 : item.tax;
-  item.tax_amount = +((item.tax / 100) * +item.purchase_price).toFixed(2); 
+  setTaxPercent(item);
+  item.tax_amount = calculateTaxAmount(item); 
   item.total_price = calculateTotalPrice(item);
-  console.log(item.tax)
   item.purchase_date = receipt.purchase_date ?
     new Date(receipt.purchase_date).toLocaleDateString() :
     new Date(item.date_created).toLocaleDateString();
@@ -157,7 +158,7 @@ itemRouter.post('/sellitem/:itemId', requiresAuthentication, async (req, res) =>
   let order = req.body.order;
 
   if (!order) {
-    order = await Orders.findOrderByCustomerName(customer);
+    order = await Orders.findByCustomerName(customer);
   }
 
   await Clothing.updateSoldPrice(itemId, soldPrice);
@@ -190,7 +191,6 @@ itemRouter.post('/unsellitem/:itemId', requiresAuthentication, async (req, res) 
 itemRouter.post('/edititem', requiresAuthentication, upload.single('brandomania-picture'), async (req, res) => {
   let dataObj = req.body;
   let itemId = dataObj.id;
-  // working
 
   if (req.file) {
     let file = req.file;
