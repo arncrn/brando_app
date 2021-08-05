@@ -18,6 +18,8 @@ class PopupDisplay {
     this.soldPriceUAH;
     this.form;
 
+    this.newImageUrl = '';
+
     this.previewBox; 
     this.form; 
     this.imageInput;
@@ -34,6 +36,7 @@ class PopupDisplay {
     this.removeImagePreview();
     if (!file || !file.type.startsWith('image/')) return;
     // getSignedRequest(file);
+    this.newImageUrl = URL.createObjectURL(file);
     showImage(file);
   }
 
@@ -221,6 +224,9 @@ document.addEventListener('click', (event) => {
           if (request.status === 200) {
             let itemToReplace = document.querySelector(`[data-item-id="${itemId}"]`);
             itemToReplace.innerHTML = request.response;
+            if (popupDisplay.newImageUrl) {
+              itemToReplace.querySelector('img').src = popupDisplay.newImageUrl;
+            }
             popupDisplay.forceCloseModal();
             popupDisplay.displayFlashMessage();
           }

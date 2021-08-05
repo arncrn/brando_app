@@ -22,7 +22,6 @@ class CreateItem {
   }
 
   displayImagePreview(file) {
-    //working
     this.removeImagePreview();
     if (!file || !file.type.startsWith('image/')) return;
     // getSignedRequest(file);
@@ -34,6 +33,9 @@ class CreateItem {
     newElement.classList.add('glowing');
     this.form.classList.add('glowing');
     this.newItemContainer.insertAdjacentElement('afterbegin', newElement);
+    if (this.previewBox.src) {
+      this.newItemContainer.querySelector('img').src = this.previewBox.src;
+    }
     setTimeout(() => {
       let glowingItems = document.querySelectorAll('.glowing');
       [...glowingItems].forEach(item => item.classList.remove("glowing"));

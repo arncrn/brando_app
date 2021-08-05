@@ -12,6 +12,9 @@ const capitalize = require('../lib/capitalize.js');
 const processImage = require('../lib/process-image.js');
 const setTaxPercent = require('../lib/set-tax-percent');
 const calculateTaxAmount = require('../lib/calculate-tax-amount');
+const { GetBucketInventoryConfigurationCommand } = require('@aws-sdk/client-s3');
+
+
 
 const UAH_CONVERSION = 28;
 
@@ -24,6 +27,10 @@ const helpers = {
   isForMen: (gender) => gender === 'men',
   isWithJenia: (location) => location === 'jenia',
   isInUkraine: (location) => location && location.toLowerCase() === 'ukraine',
+}
+
+const removeSpaces = (string) => {
+  return string.split(' ').join('-').toLowerCase();
 }
 
 
@@ -54,23 +61,41 @@ const modifyProperties = (dataObj) => {
     if (dataObj[prop] === '') {
       dataObj[prop] = null;
     } else if (prop !== "extra_info" && prop !== 'gender' && prop !== 'location' && prop !== 'picture') {
+      console.log(prop);
       dataObj[prop] = capitalize(dataObj[prop]);
     } else if (prop == "size") {
       dataObj[prop] = dataObj[prop].toUpperCase();
     }
-
   }
 }
 
 
 
+itemRouter.get('/imagetest', (req, res) => {
+  let image = `<img src="../resources/images/Image5.jpg" onerror="this.src='/images/clothing/man-placeholder.jpeg'" />`
+  res.send(image);
+})
+
+
+
 itemRouter.post('/newitem', requiresAuthentication, upload.single('brandomania-picture'), async (req, res) => {
+  // working
+  // give all items a picture string
+  // if there is no picture file uploaded // recieves a 404 on found-picture
+  //   it recieves a default picture of a male/female picture
+  // display the provided picture before it is uploaded to S3
+
+
   try {
     let dataObj = req.body;
-    if (req.file) {
-      let file = req.file;
-      dataObj.picture = await processImage(file, dataObj.tag_number, dataObj.type, dataObj.brand);
+    let tagNumber = dataObj.tag_number;
+    let file = req.file;
+
+    if (tagNumber.includes('?')) {
+      tagNumber = Math.floor(Math.random() * 1000);
     }
+
+    dataObj.picture = `${removeSpaces(dataObj.brand)}-${removeSpaces(dataObj.type)}-${tagNumber}.png`
 
     modifyProperties(dataObj);
 
@@ -86,6 +111,8 @@ itemRouter.post('/newitem', requiresAuthentication, upload.single('brandomania-p
         item: item,
         helpers
       });
+
+      await processImage(file, dataObj.picture);
     }
 
   } catch (err) {
@@ -191,19 +218,17 @@ itemRouter.post('/unsellitem/:itemId', requiresAuthentication, async (req, res) 
 itemRouter.post('/edititem', requiresAuthentication, upload.single('brandomania-picture'), async (req, res) => {
   let dataObj = req.body;
   let itemId = dataObj.id;
+  let file = req.file;
 
-  if (req.file) {
-    let file = req.file;
-    dataObj.picture = await processImage(file, dataObj.tag_number, dataObj.type, dataObj.brand);
-  }
+  dataObj.picture = `${removeSpaces(dataObj.brand)}-${removeSpaces(dataObj.type)}-${dataObj.tag_number}.png`;
 
   modifyProperties(dataObj);
-
 
   let successfulDatabaseUpdate = await Clothing.update(itemId, dataObj);
 
   if (successfulDatabaseUpdate) {
-    returnUpdatedItem(res, itemId);
+    await returnUpdatedItem(res, itemId);
+    await processImage(file, dataObj.picture);
   }
 })
 

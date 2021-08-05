@@ -41,7 +41,13 @@
     {{#each items}}
     <div class="col-sm-9 col-md-4" data-item-id="{{id}}">
       <div class="card item-block" style="font-size: 10px">
-        {{#if picture}}
+        {{#if (isForMen gender)}}
+          <img src="https://d2hcaqfu7kwyzt.cloudfront.net/{{picture}}" onerror="this.src='/images/clothing/man-placeholder.jpeg'" />
+        {{else}}
+          <img src="https://d2hcaqfu7kwyzt.cloudfront.net/{{picture}}" onerror="this.src='/images/clothing/woman-placeholder.jpg'" />
+        {{/if}}
+        
+        {{!-- {{#if picture}}
           <img src="https://d2hcaqfu7kwyzt.cloudfront.net/{{picture}}" class="card-img-top" alt="{{picture}}">
         {{else}} 
           {{#if (isForMen gender)}}
@@ -49,7 +55,7 @@
           {{else}}
             <img src="/images/clothing/woman-placeholder.jpg" class="card-img-top" alt="...">
           {{/if}}
-        {{/if}}
+        {{/if}} --}}
         <div class='card-img-overlay detail-overlay'>
           {{#if location}}
             <img src="/images/locations/{{location}}.png" class="country-img" alt="{{location}}">
