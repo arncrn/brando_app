@@ -92,10 +92,10 @@ itemRouter.post('/newitem', requiresAuthentication, upload.single('brandomania-p
     let file = req.file;
 
     if (tagNumber.includes('?')) {
-      tagNumber = Math.floor(Math.random() * 1000);
+      tagNumber = String(Math.floor(Math.random() * 1000));
     }
 
-    dataObj.picture = `${removeSpaces(dataObj.brand)}-${removeSpaces(dataObj.type)}-${tagNumber}.png`
+    dataObj.picture = `${removeSpaces(dataObj.brand)}-${removeSpaces(dataObj.type)}-${tagNumber.toLowerCase()}.png`
 
     modifyProperties(dataObj);
 
@@ -220,7 +220,7 @@ itemRouter.post('/edititem', requiresAuthentication, upload.single('brandomania-
   let itemId = dataObj.id;
   let file = req.file;
 
-  dataObj.picture = `${removeSpaces(dataObj.brand)}-${removeSpaces(dataObj.type)}-${dataObj.tag_number}.png`;
+  dataObj.picture = `${removeSpaces(dataObj.brand)}-${removeSpaces(dataObj.type)}-${dataObj.tag_number.toLowerCase()}.png`;
 
   modifyProperties(dataObj);
 
