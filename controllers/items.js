@@ -14,8 +14,6 @@ const setTaxPercent = require('../lib/set-tax-percent');
 const calculateTaxAmount = require('../lib/calculate-tax-amount');
 const { GetBucketInventoryConfigurationCommand } = require('@aws-sdk/client-s3');
 
-
-
 const UAH_CONVERSION = 28;
 
 const helpers = {
@@ -61,7 +59,6 @@ const modifyProperties = (dataObj) => {
     if (dataObj[prop] === '') {
       dataObj[prop] = null;
     } else if (prop !== "extra_info" && prop !== 'gender' && prop !== 'location' && prop !== 'picture') {
-      console.log(prop);
       dataObj[prop] = capitalize(dataObj[prop]);
     } else if (prop == "size") {
       dataObj[prop] = dataObj[prop].toUpperCase();
@@ -71,10 +68,6 @@ const modifyProperties = (dataObj) => {
 
 
 
-itemRouter.get('/imagetest', (req, res) => {
-  let image = `<img src="../resources/images/Image5.jpg" onerror="this.src='/images/clothing/man-placeholder.jpeg'" />`
-  res.send(image);
-})
 
 
 
@@ -112,7 +105,9 @@ itemRouter.post('/newitem', requiresAuthentication, upload.single('brandomania-p
         helpers
       });
 
-      processImage(file, dataObj.picture);
+      setTimeout(() => {
+        processImage(file, dataObj.picture);
+      }, 3000)
     }
 
   } catch (err) {
@@ -227,8 +222,15 @@ itemRouter.post('/edititem', requiresAuthentication, upload.single('brandomania-
   let successfulDatabaseUpdate = await Clothing.update(itemId, dataObj);
 
   if (successfulDatabaseUpdate) {
+    // console.time('Function #1')
     returnUpdatedItem(res, itemId);
-    processImage(file, dataObj.picture);
+    // console.timeEnd('Function #1');
+    // console.time('Function #2');
+  // working
+    setTimeout(() => {
+      processImage(file, dataObj.picture);
+    }, 3000)
+    // console.timeEnd('Function #2');
   }
 })
 
@@ -256,7 +258,6 @@ itemRouter.get('/findtag', requiresAuthentication, async (req, res) => {
 
   items = items.map(item => {
     item.total_price = calculateTotalPrice(item);
-    console.log(item.tax);
     return item;
   });
   res.render('clothing', {
@@ -345,7 +346,7 @@ itemRouter.get("/view/:inventory/:gender/filtered", requiresAuthentication, asyn
   let inventory = req.params.inventory;
 
   let filterString = buildFilterString(queryObj, gender, inventory);
-  console.log(filterString);
+  // console.log(filterString);
   let items = (await Clothing.getFiltered(filterString)).map(item => {
     item.total_price = calculateTotalPrice(item);
     return item;
