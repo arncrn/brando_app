@@ -112,7 +112,7 @@ itemRouter.post('/newitem', requiresAuthentication, upload.single('brandomania-p
         helpers
       });
 
-      await processImage(file, dataObj.picture);
+      processImage(file, dataObj.picture);
     }
 
   } catch (err) {
@@ -227,8 +227,8 @@ itemRouter.post('/edititem', requiresAuthentication, upload.single('brandomania-
   let successfulDatabaseUpdate = await Clothing.update(itemId, dataObj);
 
   if (successfulDatabaseUpdate) {
-    await returnUpdatedItem(res, itemId);
-    await processImage(file, dataObj.picture);
+    returnUpdatedItem(res, itemId);
+    processImage(file, dataObj.picture);
   }
 })
 

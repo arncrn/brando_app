@@ -42,9 +42,9 @@
     <div class="col-sm-9 col-md-4" data-item-id="{{id}}">
       <div class="card item-block" style="font-size: 10px">
         {{#if (isForMen gender)}}
-          <img src="https://d2hcaqfu7kwyzt.cloudfront.net/{{picture}}" onerror="this.src='/images/clothing/man-placeholder.jpeg'" />
+          <img src="https://d2hcaqfu7kwyzt.cloudfront.net/{{picture}}" class="card-img-top" alt="{{picture}}" onerror="this.src='/images/clothing/man-placeholder.jpeg'" />
         {{else}}
-          <img src="https://d2hcaqfu7kwyzt.cloudfront.net/{{picture}}" onerror="this.src='/images/clothing/woman-placeholder.jpg'" />
+          <img src="https://d2hcaqfu7kwyzt.cloudfront.net/{{picture}}" class="card-img-top" alt="{{picture}}" onerror="this.src='/images/clothing/woman-placeholder.jpg'" />
         {{/if}}
         
         {{!-- {{#if picture}}
