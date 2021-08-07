@@ -14,6 +14,8 @@ const setTaxPercent = require('../lib/set-tax-percent');
 const calculateTaxAmount = require('../lib/calculate-tax-amount');
 const { GetBucketInventoryConfigurationCommand } = require('@aws-sdk/client-s3');
 
+const processImageQueue = require("../queue");
+
 const UAH_CONVERSION = 28;
 
 const helpers = {
@@ -110,8 +112,22 @@ itemRouter.post('/newitem', requiresAuthentication, upload.single('brandomania-p
         helpers
       });
 
+      let queueData = {
+        originalName: file.originalname,
+        newName: dataObj.picture
+      }
+
+      let queueOptions = {
+        delay: 10000,
+        attempts: 2,
+        removeOnComplete: true
+      }
+
       if (file) {
-        processImage(file.originalname, dataObj.picture);
+        processImageQueue.add(queueData, queueOptions);
+        processImageQueue.process(job => {
+          processImage(job.data.originalName, job.data.newName);
+        })
       }
     }
 
@@ -216,27 +232,44 @@ itemRouter.post('/unsellitem/:itemId', requiresAuthentication, async (req, res) 
 })
 
 itemRouter.post('/edititem', requiresAuthentication, upload.single('brandomania-picture'), async (req, res) => {
-  let dataObj = req.body;
-  let itemId = dataObj.id;
-  let file = req.file;
+  try {
+    let dataObj = req.body;
+    let itemId = dataObj.id;
+    let file = req.file;
 
-  dataObj.picture = `${removeSpaces(dataObj.brand)}-${removeSpaces(dataObj.type)}-${dataObj.tag_number.toLowerCase()}.png`;
+    dataObj.picture = `${removeSpaces(dataObj.brand)}-${removeSpaces(dataObj.type)}-${dataObj.tag_number.toLowerCase()}.png`;
 
-  modifyProperties(dataObj);
+    modifyProperties(dataObj);
 
-  let successfulDatabaseUpdate = await Clothing.update(itemId, dataObj);
+    let successfulDatabaseUpdate = await Clothing.update(itemId, dataObj);
 
-  if (successfulDatabaseUpdate) {
-    // console.time('Function #1')
-    returnUpdatedItem(res, itemId);
-    // console.timeEnd('Function #1');
-    // console.time('Function #2');
-  // working
-    if (file) {
-      processImage(file.originalname, dataObj.picture);
+    if (successfulDatabaseUpdate) {
+      // console.time('Function #1')
+      returnUpdatedItem(res, itemId);
+      // console.timeEnd('Function #1');
+      // console.time('Function #2');
+    // working
+      let queueData = {
+        originalName: file.originalname,
+        newName: dataObj.picture
+      }
+
+      let queueOptions = {
+        delay: 10000,
+        attempts: 2,
+        removeOnComplete: true
+      }
+
+      if (file) {
+        processImageQueue.add(queueData, queueOptions);
+        console.log(queueData);
+        processImageQueue.process(job => {
+          processImage(job.data.originalName, job.data.newName);
+        })
+      }
     }
-      
-    // console.timeEnd('Function #2');
+  } catch (error) {
+    console.log(error);
   }
 })
 
