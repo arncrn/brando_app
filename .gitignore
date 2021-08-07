@@ -5,4 +5,3 @@ backup.sql
 .env
 rootkey.csv
 heroku.sql
-save-image.js

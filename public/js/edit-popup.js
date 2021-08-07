@@ -1,3 +1,5 @@
+// addPhoto is set globally by public/js/save-image.js (aka bundled-save-image.js)
+
 const NEEDED_VALUES = ['size', 'brand', 'type', 'colors', 'tag_number', 'gender', 'location', 'purchase_price'];
 const UAH_CONVERSION = 28;
 
@@ -37,6 +39,7 @@ class PopupDisplay {
     if (!file || !file.type.startsWith('image/')) return;
     // getSignedRequest(file);
     this.newImageUrl = URL.createObjectURL(file);
+    addPhoto("unprocessed");
     showImage(file);
   }
 

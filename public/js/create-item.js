@@ -1,3 +1,5 @@
+// addPhoto is set globally by public/js/save-image.js (aka bundled-save-image.js)
+
 const REQUIRED_VALUES = ['size', 'brand', 'type', 'colors', 'tag_number', 'gender', 'location', 'purchase_price'];
 
 class CreateItem {
@@ -25,6 +27,7 @@ class CreateItem {
     this.removeImagePreview();
     if (!file || !file.type.startsWith('image/')) return;
     // getSignedRequest(file);
+    addPhoto("unprocessed");
     showImage(file);
   }
 

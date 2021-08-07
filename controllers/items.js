@@ -67,6 +67,11 @@ const modifyProperties = (dataObj) => {
 }
 
 
+itemRouter.post('/imagetest', (req, res) => {
+  res.render('tester');
+})
+
+
 
 
 
@@ -105,9 +110,9 @@ itemRouter.post('/newitem', requiresAuthentication, upload.single('brandomania-p
         helpers
       });
 
-      setTimeout(() => {
-        processImage(file, dataObj.picture);
-      }, 3000)
+      if (file) {
+        processImage(file.originalname, dataObj.picture);
+      }
     }
 
   } catch (err) {
@@ -227,9 +232,10 @@ itemRouter.post('/edititem', requiresAuthentication, upload.single('brandomania-
     // console.timeEnd('Function #1');
     // console.time('Function #2');
   // working
-    setTimeout(() => {
-      processImage(file, dataObj.picture);
-    }, 3000)
+    if (file) {
+      processImage(file.originalname, dataObj.picture);
+    }
+      
     // console.timeEnd('Function #2');
   }
 })
