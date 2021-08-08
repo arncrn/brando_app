@@ -18,6 +18,7 @@
   "dependencies": {
     "@aws-sdk/client-cognito-identity": "^3.25.0",
     "@aws-sdk/client-s3": "^3.17.0",
+    "@aws-sdk/client-sqs": "^3.25.0",
     "@aws-sdk/credential-provider-cognito-identity": "^3.25.0",
     "aws-sdk": "2.x",
     "babel-cli": "^6.26.0",

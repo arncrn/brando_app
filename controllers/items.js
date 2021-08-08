@@ -12,9 +12,7 @@ const capitalize = require('../lib/capitalize.js');
 const processImage = require('../lib/process-image.js');
 const setTaxPercent = require('../lib/set-tax-percent');
 const calculateTaxAmount = require('../lib/calculate-tax-amount');
-const { GetBucketInventoryConfigurationCommand } = require('@aws-sdk/client-s3');
-
-const processImageQueue = require("../queue");
+const sendMessageToQueue = require('../lib/send-message-to-queue');
 
 const UAH_CONVERSION = 28;
 
@@ -112,22 +110,13 @@ itemRouter.post('/newitem', requiresAuthentication, upload.single('brandomania-p
         helpers
       });
 
-      let queueData = {
-        originalName: file.originalname,
-        newName: dataObj.picture
-      }
-
-      let queueOptions = {
-        delay: 10000,
-        attempts: 2,
-        removeOnComplete: true
-      }
-
       if (file) {
-        processImageQueue.add(queueData, queueOptions);
-        processImageQueue.process(job => {
-          processImage(job.data.originalName, job.data.newName);
-        })
+        let queueData = {
+          originalName: file.originalname,
+          newName: dataObj.picture
+        }
+
+        await sendMessageToQueue(queueData);
       }
     }
 
@@ -249,23 +238,14 @@ itemRouter.post('/edititem', requiresAuthentication, upload.single('brandomania-
       // console.timeEnd('Function #1');
       // console.time('Function #2');
     // working
-      let queueData = {
-        originalName: file.originalname,
-        newName: dataObj.picture
-      }
-
-      let queueOptions = {
-        delay: 10000,
-        attempts: 2,
-        removeOnComplete: true
-      }
 
       if (file) {
-        processImageQueue.add(queueData, queueOptions);
-        console.log(queueData);
-        processImageQueue.process(job => {
-          processImage(job.data.originalName, job.data.newName);
-        })
+        let queueData = {
+          originalName: file.originalname,
+          newName: dataObj.picture
+        }
+
+        await sendMessageToQueue(queueData);
       }
     }
   } catch (error) {
