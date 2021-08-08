@@ -77,13 +77,6 @@ itemRouter.post('/imagetest', (req, res) => {
 
 
 itemRouter.post('/newitem', requiresAuthentication, upload.single('brandomania-picture'), async (req, res) => {
-  // working
-  // give all items a picture string
-  // if there is no picture file uploaded // recieves a 404 on found-picture
-  //   it recieves a default picture of a male/female picture
-  // display the provided picture before it is uploaded to S3
-
-
   try {
     let dataObj = req.body;
     let tagNumber = dataObj.tag_number;
@@ -97,6 +90,15 @@ itemRouter.post('/newitem', requiresAuthentication, upload.single('brandomania-p
 
     modifyProperties(dataObj);
 
+    if (file) {
+      let queueData = {
+        originalName: file.originalname,
+        newName: dataObj.picture
+      }
+
+      await sendMessageToQueue(queueData);
+    }
+
     let itemId = await Clothing.create(dataObj);
 
     if (itemId) {
@@ -109,15 +111,6 @@ itemRouter.post('/newitem', requiresAuthentication, upload.single('brandomania-p
         item: item,
         helpers
       });
-
-      if (file) {
-        let queueData = {
-          originalName: file.originalname,
-          newName: dataObj.picture
-        }
-
-        await sendMessageToQueue(queueData);
-      }
     }
 
   } catch (err) {
@@ -231,22 +224,17 @@ itemRouter.post('/edititem', requiresAuthentication, upload.single('brandomania-
     modifyProperties(dataObj);
 
     let successfulDatabaseUpdate = await Clothing.update(itemId, dataObj);
+    if (file) {
+      let queueData = {
+        originalName: file.originalname,
+        newName: dataObj.picture
+      }
+
+      await sendMessageToQueue(queueData);
+    }
 
     if (successfulDatabaseUpdate) {
-      // console.time('Function #1')
       returnUpdatedItem(res, itemId);
-      // console.timeEnd('Function #1');
-      // console.time('Function #2');
-    // working
-
-      if (file) {
-        let queueData = {
-          originalName: file.originalname,
-          newName: dataObj.picture
-        }
-
-        await sendMessageToQueue(queueData);
-      }
     }
   } catch (error) {
     console.log(error);
