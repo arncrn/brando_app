@@ -96,7 +96,7 @@ itemRouter.post('/newitem', requiresAuthentication, upload.single('brandomania-p
         newName: dataObj.picture
       }
 
-      await sendMessageToQueue(queueData);
+      sendMessageToQueue(queueData);
     }
 
     let itemId = await Clothing.create(dataObj);
@@ -230,7 +230,7 @@ itemRouter.post('/edititem', requiresAuthentication, upload.single('brandomania-
         newName: dataObj.picture
       }
 
-      await sendMessageToQueue(queueData);
+      sendMessageToQueue(queueData);
     }
 
     if (successfulDatabaseUpdate) {
