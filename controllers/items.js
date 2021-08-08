@@ -217,7 +217,9 @@ itemRouter.post('/unsellitem/:itemId', requiresAuthentication, async (req, res) 
 
 itemRouter.post('/edititem', requiresAuthentication, upload.single('brandomania-picture'), async (req, res) => {
   try {
+    // working
     let dataObj = req.body;
+    let originalName = dataObj.pictureName;
     console.log(originalName);
     let itemId = dataObj.id;
 
