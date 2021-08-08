@@ -1,3 +1,5 @@
+// remove upload
+
 const itemRouter = require('express').Router();
 const Clothing = require('../models/items');
 const Receipts = require('../models/receipts');
@@ -9,7 +11,6 @@ const upload = require('../lib/useMulter');
 const requiresAuthentication = require("../utils/middleware.js").requiresAuthentication;
 const buildFilterString = require('../lib/build-filter-string.js');
 const capitalize = require('../lib/capitalize.js');
-const processImage = require('../lib/process-image.js');
 const setTaxPercent = require('../lib/set-tax-percent');
 const calculateTaxAmount = require('../lib/calculate-tax-amount');
 const sendMessageToQueue = require('../lib/send-message-to-queue');
@@ -79,8 +80,9 @@ itemRouter.post('/imagetest', (req, res) => {
 itemRouter.post('/newitem', requiresAuthentication, upload.single('brandomania-picture'), async (req, res) => {
   try {
     let dataObj = req.body;
+    let originalName = dataObj.pictureName;
     let tagNumber = dataObj.tag_number;
-    let file = req.file;
+    // let file = req.file;
 
     if (tagNumber.includes('?')) {
       tagNumber = String(Math.floor(Math.random() * 1000));
@@ -90,9 +92,9 @@ itemRouter.post('/newitem', requiresAuthentication, upload.single('brandomania-p
 
     modifyProperties(dataObj);
 
-    if (file) {
+    if (originalName) {
       let queueData = {
-        originalName: file.originalname,
+        originalName: originalName,
         newName: dataObj.picture
       }
 
@@ -216,17 +218,17 @@ itemRouter.post('/unsellitem/:itemId', requiresAuthentication, async (req, res) 
 itemRouter.post('/edititem', requiresAuthentication, upload.single('brandomania-picture'), async (req, res) => {
   try {
     let dataObj = req.body;
+    console.log(originalName);
     let itemId = dataObj.id;
-    let file = req.file;
 
     dataObj.picture = `${removeSpaces(dataObj.brand)}-${removeSpaces(dataObj.type)}-${dataObj.tag_number.toLowerCase()}.png`;
 
     modifyProperties(dataObj);
 
     let successfulDatabaseUpdate = await Clothing.update(itemId, dataObj);
-    if (file) {
+    if (originalName) {
       let queueData = {
-        originalName: file.originalname,
+        originalName: originalName,
         newName: dataObj.picture
       }
 

@@ -1,19 +1,20 @@
 <div class="row justify-content-center" id="image-display" style="display: none">
   <div class="col-9 mt-2">
     {{#if item.picture}}
-      <img src="https://d2hcaqfu7kwyzt.cloudfront.net/{{item.picture}}" class="custom-img-fluid" alt="{{item.picture}}">
+      <img src="https://d2hcaqfu7kwyzt.cloudfront.net/{{item.picture}}" class="custom-img-fluid" alt="{{item.picture}}" style="max-width: 200px;">
     {{else}} 
       {{#if (isForMen item.gender)}}
-        <img src="/images/clothing/man-placeholder.jpeg" class="custom-img-fluid" alt="{{item.picture}}">
+        <img src="/images/clothing/man-placeholder.jpeg" class="custom-img-fluid" alt="{{item.picture}}" style="max-width: 200px;">
       {{else}}
-        <img src="/images/clothing/woman-placeholder.jpg" class="custom-img-fluid" alt="{{item.picture}}">
+        <img src="/images/clothing/woman-placeholder.jpg" class="custom-img-fluid" alt="{{item.picture}}" style="max-width: 200px;">
       {{/if}}
     {{/if}}
     <div class="col-9 mb-3">
       <span class="input-group-text">Picture</span>
-      <div id="preview-container"><img id="preview"></div>
-      <input type="file" class="form-control" name="brandomania-picture" id="picture-uploader" accept="image/png, image/jpeg, image/jpg"/>
-      <input type="text" id="edit-clothing-picture" name="picture" value="{{item.picture}}" style="visibility: hidden;">
+      <div id="preview-container"><img id="preview" style="max-width: 200px;"></div>
+      <input type="file" class="form-control" id="picture-uploader" accept="image/png, image/jpeg, image/jpg"/>
+      <input type="text" id="clothing-picture" name="pictureName" style="display: none">
+      <input type="text" id="edit-clothing-picture" name="picture" value="{{item.picture}}" style="visibility: hidden">
       {{!-- <input type="hidden" id="clothing-picture" name="picture"> --}}
     </div>
   </div>

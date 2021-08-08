@@ -26,6 +26,7 @@ class PopupDisplay {
     this.form; 
     this.imageInput;
     this.newItemContainer;
+    this.imageName;
   }
 
   removeImagePreview() {
@@ -39,6 +40,7 @@ class PopupDisplay {
     if (!file || !file.type.startsWith('image/')) return;
     // getSignedRequest(file);
     this.newImageUrl = URL.createObjectURL(file);
+    this.imageName.value = file.name;
     addPhoto("unprocessed");
     showImage(file);
   }
@@ -113,6 +115,7 @@ class PopupDisplay {
     this.previewBox = this.modalContainer.querySelector('#preview');
     this.imageInput = this.modalContainer.querySelector('#picture-uploader');
     this.newItemContainer = this.modalContainer.querySelector('#item-container');
+    this.imageName = document.querySelector('#clothing-picture');
   }
 
   hideAllTabs() {

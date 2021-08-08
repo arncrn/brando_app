@@ -14,6 +14,7 @@ class CreateItem {
     this.previewBox = document.querySelector('#preview');
     this.form = document.querySelector('form');
     this.imageInput = document.querySelector('#picture-uploader');
+    this.imageName = document.querySelector('#clothing-picture');
     this.newItemContainer = document.querySelector('#item-container');
   }
 
@@ -26,7 +27,8 @@ class CreateItem {
   displayImagePreview(file) {
     this.removeImagePreview();
     if (!file || !file.type.startsWith('image/')) return;
-    // getSignedRequest(file);
+
+    this.imageName.value = file.name;
     addPhoto("unprocessed");
     showImage(file);
   }
@@ -66,7 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
   itemCreator.form.addEventListener('submit', (event) => {
     event.preventDefault();
     let form = itemCreator.form;
-    
     for (let i = 0; i < form.elements.length; i += 1) {
       let element = form.elements[i];
       if (REQUIRED_VALUES.includes(element.name)) {
