@@ -26,6 +26,8 @@ const helpers = {
   isForMen: (gender) => gender === 'men',
   isWithJenia: (location) => location === 'jenia',
   isInUkraine: (location) => location && location.toLowerCase() === 'ukraine',
+  isWithAlla: (location) => location === 'alla',
+  isTraveling: (location) => location === 'traveling'
 }
 
 const removeSpaces = (string) => {
