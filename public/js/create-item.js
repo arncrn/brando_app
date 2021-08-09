@@ -10,6 +10,10 @@ class CreateItem {
     this.newItemContainer;
   }
 
+  generateRandomName(extension) {
+    return "image" + Math.floor(Math.random() * 100000) + `.${extension}`;
+  }
+
   getElements() {
     this.previewBox = document.querySelector('#preview');
     this.form = document.querySelector('form');
@@ -27,9 +31,9 @@ class CreateItem {
   displayImagePreview(file) {
     this.removeImagePreview();
     if (!file || !file.type.startsWith('image/')) return;
-
-    this.imageName.value = file.name;
-    addPhoto("unprocessed");
+    let extension = file.name.split('.')[1];
+    this.imageName.value = this.generateRandomName(extension);
+    addPhoto("unprocessed", this.imageName.value);
     showImage(file);
   }
 
@@ -99,7 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // for uploading images to amazon's aws s3
 // https://devcenter.heroku.com/articles/s3-upload-node
 // function getSignedRequest(file) {
-  //working
   // const xhr = new XMLHttpRequest();
   // xhr.open('GET', `/sign-s3?file-name=${file.name}&file-type=${file.type}`);
   // xhr.onreadystatechange = () => {
@@ -119,7 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // for uploading images to amazon's aws s3
 // https://devcenter.heroku.com/articles/s3-upload-node
 // function uploadFile(file, signedRequest, url){
-  //working
   // const xhr = new XMLHttpRequest();
   // xhr.open('PUT', signedRequest);
   // xhr.onreadystatechange = () => {

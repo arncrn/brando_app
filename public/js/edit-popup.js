@@ -29,6 +29,10 @@ class PopupDisplay {
     this.imageName;
   }
 
+  generateRandomName(extension) {
+    return "image" + Math.floor(Math.random() * 100000) + `.${extension}`;
+  }
+
   removeImagePreview() {
     while(this.previewBox.firstChild) {
       this.previewBox.removeChild(this.previewBox.firstChild); // might need to bind?
@@ -40,8 +44,9 @@ class PopupDisplay {
     if (!file || !file.type.startsWith('image/')) return;
     // getSignedRequest(file);
     this.newImageUrl = URL.createObjectURL(file);
-    this.imageName.value = file.name;
-    addPhoto("unprocessed");
+    let extension = file.name.split('.')[1];
+    this.imageName.value = this.generateRandomName(extension);
+    addPhoto("unprocessed", this.imageName.value);
     showImage(file);
   }
 
