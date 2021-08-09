@@ -7,6 +7,7 @@ const Print = () => {
   const [shippingCost, setShippingCost] = useState(0);
   const [revenue, setRevenue] = useState(0);
   const [profit, setProfit] = useState(0);
+  const [allowImages, setAllowImages] = useState(false);
 
   useEffect(async () => {
     // const pkgId = document.querySelector('[data-pkg-id]').dataset.pkgId;
@@ -37,6 +38,7 @@ const Print = () => {
 
   return (
     <main>
+      <button onClick={() => setAllowImages(!allowImages)}>Toggle Images</button>
       <table>
         <thead>
           <tr>
@@ -51,6 +53,7 @@ const Print = () => {
             <th>Sold For</th>
             <th>Profit</th>
             <th>Extra Details</th>
+            {allowImages && <th>Image</th>}
           </tr>
         </thead>
         <tbody>
@@ -68,6 +71,10 @@ const Print = () => {
                 <th>${item.pending ? 'PENDING' : item.sold_price}</th>
                 <th>${item.profit}</th>
                 <td>{formatText(item.extra_info)}</td>
+                {allowImages &&
+                <td>
+                  {item.picture && <img height="150px" src={`https://d2hcaqfu7kwyzt.cloudfront.net/${item.picture}`} />}
+                </td>}
               </tr>
             );
           })}
