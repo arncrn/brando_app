@@ -4,7 +4,7 @@ const { CognitoIdentityClient } = require("@aws-sdk/client-cognito-identity");
 const {
   fromCognitoIdentityPool,
 } = require("@aws-sdk/credential-provider-cognito-identity");
-const { S3Client, PutObjectCommand, DeleteObjectCommand, GetObjectCommand} = require("@aws-sdk/client-s3");
+const { S3Client, PutObjectCommand, DeleteObjectCommand, GetObjectCommand, waitUntilBucketExists} = require("@aws-sdk/client-s3");
 const Jimp = require('jimp');
 const getStream = require('get-stream');
 
@@ -32,7 +32,13 @@ const deleteRawImage = async (key) => {
   }
 }
 
-const getRawImage = async (photoKey) => {
+const wait = (seconds) => {
+  return new Promise(resolve => setTimeout(resolve, seconds * 1000));
+}
+
+const getRawImage = async (photoKey, modifiedPictureName, tries = 0) => {
+  tries += 1;
+  console.log("tries:", tries);
   // Set the AWS Region
   const REGION = "us-west-1"; //REGION
 
@@ -53,10 +59,21 @@ const getRawImage = async (photoKey) => {
   };
   try {
     const data = await s3.send(new GetObjectCommand(downloadParams));
+
+    // while data does not contain what I want
+    // use exponential backoff to keep recalling this function
+
     let buffer = await getStream.buffer(data.Body);
     return buffer;
   } catch (err) {
-    console.log("couldn't get the image:", err);
+    if (tries > 4) {
+      throw new Error(`couldn't get the image: ${photoKey}, ${modifiedPictureName}, ${err}`)
+    }
+    await wait(5);
+    getRawImage(photoKey, modifiedPictureName, tries);
+    
+    // console.log("couldn't get the image:", photoKey, modifiedPictureName, err);
+    // throw new Error(`couldn't get the image: ${photoKey}, ${modifiedPictureName}, ${err}`)
   }
 }
 
@@ -105,7 +122,7 @@ const processImage = async (fileName, modifiedPictureName) => {
   try {
     const albumPhotosKey = "unprocessed/";
     const photoKey = albumPhotosKey + fileName;
-    let bufferData = await getRawImage(photoKey);
+    let bufferData = await getRawImage(photoKey, modifiedPictureName);
     let modifiedImage = await modifyImage(bufferData, modifiedPictureName);
     if (modifiedImage) await deleteRawImage(photoKey);
   } catch (error) {
