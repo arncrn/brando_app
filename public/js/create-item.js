@@ -2,6 +2,10 @@
 
 const REQUIRED_VALUES = ['size', 'brand', 'type', 'colors', 'tag_number', 'gender', 'location', 'purchase_price'];
 
+const removeSpaces = (string) => {
+  return string.split(' ').join('-').toLowerCase();
+}
+
 class CreateItem {
   constructor() {
     this.previewBox;
@@ -10,15 +14,15 @@ class CreateItem {
     this.newItemContainer;
   }
 
-  generateRandomName(extension) {
-    return "image" + Math.floor(Math.random() * 100000) + `.${extension}`;
-  }
+  // generateRandomName(extension) {
+  //   return "image" + Math.floor(Math.random() * 100000) + `.${extension}`;
+  // }
 
   getElements() {
     this.previewBox = document.querySelector('#preview');
     this.form = document.querySelector('form');
     this.imageInput = document.querySelector('#picture-uploader');
-    this.imageName = document.querySelector('#clothing-picture');
+    // this.imageName = document.querySelector('#clothing-picture');
     this.newItemContainer = document.querySelector('#item-container');
   }
 
@@ -31,9 +35,9 @@ class CreateItem {
   displayImagePreview(file) {
     this.removeImagePreview();
     if (!file || !file.type.startsWith('image/')) return;
-    let extension = file.name.split('.')[1];
-    this.imageName.value = this.generateRandomName(extension);
-    addPhoto("unprocessed", this.imageName.value);
+    // let extension = file.name.split('.')[1];
+    // this.imageName.value = this.generateRandomName(extension);
+    // addPhoto("unprocessed", this.imageName.value);
     showImage(file);
   }
 
@@ -72,14 +76,27 @@ document.addEventListener('DOMContentLoaded', () => {
   itemCreator.form.addEventListener('submit', (event) => {
     event.preventDefault();
     let form = itemCreator.form;
+
+    let brand = '';
+    let tagNumber = '';
+    let type = '';
     for (let i = 0; i < form.elements.length; i += 1) {
       let element = form.elements[i];
+      if (element.name === 'brand') brand = removeSpaces(element.value);
+      if (element.name === 'tag_number') tagNumber = removeSpaces(element.value);
+      if (element.name === 'type') type = removeSpaces(element.value);
       if (REQUIRED_VALUES.includes(element.name)) {
         if (!element.value) {
           alert(`Missing ${element.name}`);
           return;
         } 
       }
+    }
+
+    let file = itemCreator.imageInput.files[0];
+    if (file) {
+      let imageName = `${brand}-${type}-${tagNumber}.png`;
+      addPhoto("unprocessed", imageName);
     }
    
     let formData = new FormData(form);

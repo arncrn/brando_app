@@ -3,6 +3,10 @@
 const NEEDED_VALUES = ['size', 'brand', 'type', 'colors', 'tag_number', 'gender', 'location', 'purchase_price'];
 const UAH_CONVERSION = 28;
 
+const removeSpaces = (string) => {
+  return string.split(' ').join('-').toLowerCase();
+}
+
 class PopupDisplay {
   constructor() {
     this.modalContainer = document.getElementById('modal-container');
@@ -29,10 +33,6 @@ class PopupDisplay {
     this.imageName;
   }
 
-  generateRandomName(extension) {
-    return "image" + Math.floor(Math.random() * 100000) + `.${extension}`;
-  }
-
   removeImagePreview() {
     while(this.previewBox.firstChild) {
       this.previewBox.removeChild(this.previewBox.firstChild); // might need to bind?
@@ -44,9 +44,6 @@ class PopupDisplay {
     if (!file || !file.type.startsWith('image/')) return;
     // getSignedRequest(file);
     this.newImageUrl = URL.createObjectURL(file);
-    let extension = file.name.split('.')[1];
-    this.imageName.value = this.generateRandomName(extension);
-    addPhoto("unprocessed", this.imageName.value);
     showImage(file);
   }
 
@@ -214,8 +211,14 @@ document.addEventListener('click', (event) => {
         event.preventDefault();
         let form = popupDisplay.form;
         let formObj = {}
+        let brand = '';
+        let tagNumber = '';
+        let type = '';
         for (let i = 0; i < form.elements.length; i += 1) {
           let element = form.elements[i];
+          if (element.name === 'brand') brand = removeSpaces(element.value);
+          if (element.name === 'tag_number') tagNumber = removeSpaces(element.value);
+          if (element.name === 'type') type = removeSpaces(element.value);
           formObj[element.name] = element.value;
           if (NEEDED_VALUES.includes(element.name)) {
             if (!element.value) {
@@ -223,6 +226,12 @@ document.addEventListener('click', (event) => {
               return;
             } 
           }
+        }
+
+        let file = popupDisplay.imageInput.files[0];
+        if (file) {
+          let imageName = `${brand}-${type}-${tagNumber}.png`;
+          addPhoto("unprocessed", imageName);
         }
 
         let itemId = formObj.id;

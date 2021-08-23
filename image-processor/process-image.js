@@ -1,139 +1,95 @@
+// https://docs.aws.amazon.com/lambda/latest/dg/with-s3-tutorial.html
 require("dotenv").config();
-
-const { CognitoIdentityClient } = require("@aws-sdk/client-cognito-identity");
-const {
-  fromCognitoIdentityPool,
-} = require("@aws-sdk/credential-provider-cognito-identity");
 const { S3Client, PutObjectCommand, DeleteObjectCommand, GetObjectCommand, waitUntilBucketExists} = require("@aws-sdk/client-s3");
 const Jimp = require('jimp');
 const getStream = require('get-stream');
 
-const deleteRawImage = async (key) => {
-  // Set the AWS Region
-  const REGION = "us-west-1"; //REGION
-
-  // Initialize the Amazon Cognito credentials provider
-  const s3 = new S3Client({
-    region: REGION,
-    credentials: fromCognitoIdentityPool({
-      client: new CognitoIdentityClient({ region: REGION }),
-      identityPoolId: "us-west-1:74f56e69-c9db-44f4-8973-56cea2805c31", // IDENTITY_POOL_ID
-    }),
-  });
-
-  const deleteParams = {
-    Bucket: "brandorawpictures",
-    Key: key,
-  };
-  try {
-    const data = await s3.send(new DeleteObjectCommand(deleteParams));
-  } catch (err) {
-    console.log("couldn't delete image:", err);
-  }
-}
-
-const wait = (seconds) => {
-  return new Promise(resolve => setTimeout(resolve, seconds * 1000));
-}
-
-const getRawImage = async (photoKey, modifiedPictureName, tries = 0) => {
-  tries += 1;
-  console.log("tries:", tries);
-  // Set the AWS Region
-  const REGION = "us-west-1"; //REGION
-
-  // Initialize the Amazon Cognito credentials provider
-  const s3 = new S3Client({
-    region: REGION,
-    credentials: fromCognitoIdentityPool({
-      client: new CognitoIdentityClient({ region: REGION }),
-      identityPoolId: "us-west-1:74f56e69-c9db-44f4-8973-56cea2805c31", // IDENTITY_POOL_ID
-    }),
-  });
-
-  const albumBucketName = "brandorawpictures"; //BUCKET_NAME
-
-  const downloadParams = {
-    Bucket: albumBucketName,
-    Key: photoKey,
-  };
-  try {
-    const data = await s3.send(new GetObjectCommand(downloadParams));
-
-    // while data does not contain what I want
-    // use exponential backoff to keep recalling this function
-
-    let buffer = await getStream.buffer(data.Body);
-    return buffer;
-  } catch (err) {
-    if (tries > 4) {
-      throw new Error(`couldn't get the image: ${photoKey}, ${modifiedPictureName}, ${err}`)
-    }
-    await wait(5);
-    getRawImage(photoKey, modifiedPictureName, tries);
-    
-    // console.log("couldn't get the image:", photoKey, modifiedPictureName, err);
-    // throw new Error(`couldn't get the image: ${photoKey}, ${modifiedPictureName}, ${err}`)
-  }
-}
-
-const sendToS3 = async (file, fileName) => {
-  const s3 = new S3Client({
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-    region: process.env.AWS_REGION,
-  });
-
-  const params = {
-    Bucket: process.env.AWS_BUCKET_NAME,
-    Key:  fileName,
-    Body: file,
-    ContentType: 'image/png',
-    ACL: 'public-read'
-  }
-
-  const command = new PutObjectCommand(params);
-
-  try {
-    await s3.send(command);
-    return true;
-  } catch (err) {
-    console.log("image did not upload", err);
-    return false;
-  }
-}
-
-const modifyImage = async (image, pictureName) => {
+const modifyImage = async (image) => {
   if (!image) return false;
   const file = await Jimp.read(Buffer.from(image.buffer, 'base64'))
     .then(async image => {
-      // image.resize(Jimp.AUTO, 900);
-      // image.resize(Jimp.AUTO, 460);
       image.scaleToFit(500, 900);
       image.quality(80);
       return image.getBufferAsync(Jimp.MIME_PNG);
     });
   
-    await sendToS3(file, pictureName);
-    return true;
+    return file;
 }
 
-const processImage = async (fileName, modifiedPictureName) => {
+const getImage = async (s3, bucket, key) => {
+  const downloadParams = {
+    Bucket: bucket,
+    Key: key,
+  };
   try {
-    const albumPhotosKey = "unprocessed/";
-    const photoKey = albumPhotosKey + fileName;
-    let bufferData = await getRawImage(photoKey, modifiedPictureName);
-    let modifiedImage = await modifyImage(bufferData, modifiedPictureName);
-    if (modifiedImage) await deleteRawImage(photoKey);
-  } catch (error) {
-    console.log("process-image:", error);
+    const { Body } = await s3.send(new GetObjectCommand(downloadParams));
+    const buffer = await getStream.buffer(Body);
+    return buffer;
+  } catch (err) {
+    console.log(err);
+    const message = `Error getting object ${key} from bucket ${bucket}.`;
+    console.log(message);
+    throw new Error(message);
+  }
+}
+
+const uploadImage = async (s3, pictureName, modifiedImage) => {
+  const uploadParams = {
+    Bucket: process.env.AWS_BUCKET_NAME,
+    Key:  pictureName,
+    Body: modifiedImage,
+    ContentType: 'image/png',
+    ACL: 'public-read'
+  }
+
+  try {
+    await s3.send(new PutObjectCommand(uploadParams));
+    return true
+  } catch (err) {
+    console.log(err);
+    const message = `Error uploading object ${pictureName} from bucket ${process.env.AWS_BUCKET_NAME}.`;
+    console.log(message);
+    throw new Error(message);
+  }
+}
+
+const deleteImage = async (s3, bucket, key) => {
+  const deleteParams = {
+    Bucket: bucket,
+    Key: key,
+  };
+  try {
+    await s3.send(new DeleteObjectCommand(deleteParams));
+  } catch (err) {
+    console.log(err);
+    const message = `Error deleting object ${key} from bucket ${bucket}.`;
+    console.log(message);
+    throw new Error(message);
   }
 }
 
 exports.handler = async (event) => {
-  const data = JSON.parse(event.Records[0].body);
-  await processImage(data.originalName, data.newName);
-  console.log('done');
-}
+  const s3 = new S3Client({
+    region: "us-west-1",
+  });
+    // Get the object from the event, modify it, and reupload it to a separate bucket
+    const bucket = event.Records[0].s3.bucket.name;
+    const key = decodeURIComponent(event.Records[0].s3.object.key.replace(/\+/g, ' '));
+    const pictureName = key.split('/')[1];
 
-// processImage("me.jpg", "tester.png");
+    try {
+        const buffer = await getImage(s3, bucket, key);
+        const modifiedImage = await modifyImage(buffer);
+        const uploadedSuccess = await uploadImage(s3, pictureName, modifiedImage);
+        if (uploadedSuccess) {
+          await deleteImage(s3, bucket, key);
+        }
+
+        return key;
+    } catch (err) {
+        console.log(err);
+        const message = `Something went wrong`;
+        console.log(message);
+        throw new Error(message);
+    }
+};
