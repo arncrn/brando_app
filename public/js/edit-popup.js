@@ -3,9 +3,6 @@
 const NEEDED_VALUES = ['size', 'brand', 'type', 'colors', 'tag_number', 'gender', 'location', 'purchase_price'];
 const UAH_CONVERSION = 28;
 
-const removeSpaces = (string) => {
-  return string.split(' ').join('-').toLowerCase();
-}
 
 class PopupDisplay {
   constructor() {
@@ -208,6 +205,10 @@ document.addEventListener('click', (event) => {
       })
 
       popupDisplay.form.addEventListener('submit', event => {
+        const removeSpaces = (string) => {
+          return string.split(' ').join('-').toLowerCase();
+        }
+        
         event.preventDefault();
         let form = popupDisplay.form;
         let formObj = {}

@@ -2,10 +2,6 @@
 
 const REQUIRED_VALUES = ['size', 'brand', 'type', 'colors', 'tag_number', 'gender', 'location', 'purchase_price'];
 
-const removeSpaces = (string) => {
-  return string.split(' ').join('-').toLowerCase();
-}
-
 class CreateItem {
   constructor() {
     this.previewBox;
@@ -75,6 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   itemCreator.form.addEventListener('submit', (event) => {
     event.preventDefault();
+    const removeSpaces = (string) => {
+      return string.split(' ').join('-').toLowerCase();
+    }
     let form = itemCreator.form;
 
     let brand = '';

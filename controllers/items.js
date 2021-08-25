@@ -75,10 +75,6 @@ itemRouter.post('/imagetest', (req, res) => {
 })
 
 
-
-
-
-
 itemRouter.post('/newitem', requiresAuthentication, upload.single('brandomania-picture'), async (req, res) => {
   try {
     let dataObj = req.body;

@@ -17,6 +17,8 @@ const modifyImage = async (image) => {
 }
 
 const getImage = async (s3, bucket, key) => {
+  console.log('Bucket:', bucket);
+  console.log('Key:', key);
   const downloadParams = {
     Bucket: bucket,
     Key: key,
