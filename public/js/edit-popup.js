@@ -204,7 +204,7 @@ document.addEventListener('click', (event) => {
         popupDisplay.soldPriceUSD.value = (+soldPrice / UAH_CONVERSION).toFixed(2);
       })
 
-      popupDisplay.form.addEventListener('submit', event => {
+      popupDisplay.form.addEventListener('submit', async (event) => {
         const removeSpaces = (string) => {
           return string.split(' ').join('-').toLowerCase();
         }
@@ -228,11 +228,16 @@ document.addEventListener('click', (event) => {
             } 
           }
         }
-
+    
         let file = popupDisplay.imageInput.files[0];
         if (file) {
           let imageName = `${brand}-${type}-${tagNumber}.png`;
-          addPhoto("unprocessed", imageName);
+          try {
+            await addPhoto("unprocessed", imageName);
+          } catch (error) {
+            console.log("the image did not upload:", error);
+            alert("the image did not upload:", error);
+          }
         }
 
         let itemId = formObj.id;

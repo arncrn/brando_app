@@ -36,10 +36,11 @@ const addPhoto = async (albumName, pictureName) => {
       Body: file
     };
     try {
-      await s3.send(new PutObjectCommand(uploadParams));
+      let savedImage = await s3.send(new PutObjectCommand(uploadParams));
+      return savedImage;
       // alert("Successfully uploaded photo.");
     } catch (err) {
-      // return alert("There was an error uploading your photo: ", err.message);
+      return alert("There was an error uploading your photo: ", err);
     }
   } catch (err) {
     if (!files.length) {
