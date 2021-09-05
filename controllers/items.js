@@ -13,7 +13,7 @@ const buildFilterString = require('../lib/build-filter-string.js');
 const capitalize = require('../lib/capitalize.js');
 const setTaxPercent = require('../lib/set-tax-percent');
 const calculateTaxAmount = require('../lib/calculate-tax-amount');
-const sendMessageToQueue = require('../lib/send-message-to-queue');
+// const sendMessageToQueue = require('../lib/send-message-to-queue');
 
 const UAH_CONVERSION = 28;
 
@@ -75,14 +75,10 @@ itemRouter.post('/imagetest', (req, res) => {
 })
 
 
-
-
-
-
 itemRouter.post('/newitem', requiresAuthentication, upload.single('brandomania-picture'), async (req, res) => {
   try {
     let dataObj = req.body;
-    let originalName = dataObj.pictureName;
+    // let originalName = dataObj.pictureName;
     let tagNumber = dataObj.tag_number;
     // let file = req.file;
 
@@ -94,14 +90,14 @@ itemRouter.post('/newitem', requiresAuthentication, upload.single('brandomania-p
 
     modifyProperties(dataObj);
 
-    if (originalName) {
-      let queueData = {
-        originalName: originalName,
-        newName: dataObj.picture
-      }
+    // if (originalName) {
+    //   let queueData = {
+    //     originalName: originalName,
+    //     newName: dataObj.picture
+    //   }
 
-      sendMessageToQueue(queueData);
-    }
+      // sendMessageToQueue(queueData);
+    // }
 
     let itemId = await Clothing.create(dataObj);
 
@@ -221,8 +217,8 @@ itemRouter.post('/edititem', requiresAuthentication, upload.single('brandomania-
   try {
     // working
     let dataObj = req.body;
-    let originalName = dataObj.pictureName;
-    console.log(originalName);
+    // let originalName = dataObj.pictureName;
+    // console.log(originalName);
     let itemId = dataObj.id;
 
     dataObj.picture = `${removeSpaces(dataObj.brand)}-${removeSpaces(dataObj.type)}-${dataObj.tag_number.toLowerCase()}.png`;
@@ -230,14 +226,14 @@ itemRouter.post('/edititem', requiresAuthentication, upload.single('brandomania-
     modifyProperties(dataObj);
 
     let successfulDatabaseUpdate = await Clothing.update(itemId, dataObj);
-    if (originalName) {
-      let queueData = {
-        originalName: originalName,
-        newName: dataObj.picture
-      }
+    // if (originalName) {
+    //   let queueData = {
+    //     originalName: originalName,
+    //     newName: dataObj.picture
+    //   }
 
-      sendMessageToQueue(queueData);
-    }
+    //   sendMessageToQueue(queueData);
+    // }
 
     if (successfulDatabaseUpdate) {
       returnUpdatedItem(res, itemId);
