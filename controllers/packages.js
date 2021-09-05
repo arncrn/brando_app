@@ -149,7 +149,7 @@ packageRouter.post("/edit/:pkgId", requiresAuthentication, async (req, res) => {
   }
 })
 
-packageRouter.get("/print/:pkgId", requiresAuthentication, async (req, res) => {
+packageRouter.get("/print/:pkgId", async (req, res) => {
   const pkgId = req.params.pkgId;
   const pkg = await Packages.findById(pkgId);
   const items = await Clothing.findInPackage(pkgId);
