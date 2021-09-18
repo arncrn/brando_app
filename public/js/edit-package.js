@@ -33,13 +33,30 @@ document.addEventListener("DOMContentLoaded", () => {
               row.innerHTML = event.target.response;
             })
             postRequest.send(JSON.stringify(updateData))
-          }
+          } 
         })
       })
   
       request.send()
     } 
+
+    if (target.classList.contains("update")) {
+      const target = event.target;
+      const row = target.parentNode.parentNode;
+      if (!row) return;
+
+      const pkgId = row.id;
+      const pricePerItem = row.querySelector('.priceperitem')
+                              .textContent
+                              .substring(1);
+
+      const postRequest = new XMLHttpRequest();
+      postRequest.open("POST", `/packages/items/${pkgId}/shippingcost`);
+      postRequest.setRequestHeader("Content-Type", "application/json");
+      postRequest.addEventListener('load', event => {
+        row.innerHTML = originialInnerHTML;
+      })
+      postRequest.send(JSON.stringify({pricePerItem}));
+    }
   })
-
 })
-

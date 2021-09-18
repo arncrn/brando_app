@@ -191,6 +191,12 @@ packageRouter.get('/packageitems/:pkgId', async (req, res) => {
     totalShipping: totalShipping.toFixed(2)
   })
 })
+packageRouter.post('/items/:pkgId/shippingcost', async (req, res) => {
+  const pkgId = req.params.pkgId;
+  const pricePerItem = req.body.pricePerItem;
+  await Clothing.updateGroupShippingCost(pkgId, pricePerItem);
+  res.sendStatus(200).end();
+})
 
 
 module.exports = packageRouter;

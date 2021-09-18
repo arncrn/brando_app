@@ -183,8 +183,10 @@ const duplicate = async (itemId) => {
   FROM clothing WHERE id = $1 RETURNING id`;
 
   let result = await dbQuery(DUPLICATE_ITEM, itemId);
+  let id = result.rows[0].id;
+  await updateInStock(id, true);
 
-  return result.rows[0].id;
+  return id;
 }
 
 const updateSize = async (id, size) => {
@@ -266,6 +268,12 @@ const updatePending = async (id, boolean) => {
   const UPDATE_ITEM_PENDING = "UPDATE clothing SET pending = $1 WHERE clothing.id = $2";
   let result = await dbQuery(UPDATE_ITEM_PENDING, boolean, id);
   return result.rowCount > 0;
+}
+const updateGroupShippingCost = async (pkgId, shippingCost) => {
+  //working
+  const UPDATE_SHIPPING_COST = "UPDATE clothing SET shipping_cost = $1 WHERE package_id = $2 AND shipping_cost <= 0 OR shipping_cost IS NULL";
+  let result = await dbQuery(UPDATE_SHIPPING_COST, shippingCost, pkgId);
+  return result.rowCount;
 }
 
 const destroy = async (id) => {
@@ -366,6 +374,7 @@ module.exports = {
   updateLocation,
   updateInStock,
   updatePending,
+  updateGroupShippingCost,
   destroy,
   getColors,
   getBrands,

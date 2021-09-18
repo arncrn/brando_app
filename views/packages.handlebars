@@ -29,9 +29,10 @@
             <td class="package-target"><a class="package-link" href="/packages/view/{{id}}">{{package_name}}</a></td>
             <td>{{item_count}}</td>
             <td>${{price}}</td>
-            <td>${{price_per_item}}</td>
+            <td class="priceperitem">${{price_per_item}}</td>
             <td>{{date_sent}}</td>
             <td>{{tracking_number}}</td>
+            <td><button class="update">Update Items</button></td>
             <td><button class="edit-pkg">Edit</button></td>
             <td><a href="/packages/print/{{id}}"><button class="print-pkg">Print</button></a></td>
           </tr>
