@@ -271,8 +271,7 @@ const updatePending = async (id, boolean) => {
 }
 const updateGroupShippingCost = async (pkgId, shippingCost) => {
   //working
-  // const UPDATE_SHIPPING_COST = "UPDATE clothing SET shipping_cost = $1 WHERE package_id = $2 AND (shipping_cost <= 0 OR shipping_cost IS NULL)";
-  const UPDATE_SHIPPING_COST = "UPDATE clothing SET shipping_cost = $1 WHERE package_id = $2"
+  const UPDATE_SHIPPING_COST = "UPDATE clothing SET shipping_cost = $1 WHERE package_id = $2 AND (shipping_cost <= 0 OR shipping_cost IS NULL)";
   let result = await dbQuery(UPDATE_SHIPPING_COST, shippingCost, pkgId);
   return result.rowCount;
 }
