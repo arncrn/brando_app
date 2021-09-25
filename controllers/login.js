@@ -20,17 +20,22 @@ loginRouter.get('/login', (req, res) => {
 })
 
 loginRouter.post('/login', async (req, res) => {
-  let username = req.body.username.toLowerCase();
-  let password = req.body.password;
-  let loggedInSuccess = await Login.authenticate(username, password);
+  try {
+    let username = req.body.username.toLowerCase();
+    let password = req.body.password;
+    let loggedInSuccess = await Login.authenticate(username, password);
 
-  if (loggedInSuccess) {
-    // req.session.username = username;
-    await Login.loginUser(username, req.sessionID);
-    req.session.signedIn = true;
-    res.redirect('/clothing');
-  } else {
-    res.render('layouts/login', { layout: null });
+    if (loggedInSuccess) {
+      // req.session.username = username;
+      // await Login.loginUser(username, req.sessionID);
+      req.session.signedIn = true;
+      // res.redirect('/clothing');
+      res.sendStatus(200).end();
+    } else {
+      res.render('layouts/login', { layout: null });
+    }
+  } catch (err) {
+    console.log(err);
   }
 })
 

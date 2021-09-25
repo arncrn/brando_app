@@ -12,6 +12,8 @@ const customerRouter = require("./controllers/customers");
 const itemRouter = require("./controllers/items");
 
 const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 const LokiStore = store(session);
 
 app.engine('handlebars', exphbs());
@@ -22,7 +24,7 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(session({
+let sessionMiddleware = session({
   cookie: {
     httpOnly: true,
     maxAge: 31 * 24 * 60 * 60 * 1000,
@@ -34,10 +36,30 @@ app.use(session({
   saveUninitialized: true,
   secret: config.SECRET,
   store: new LokiStore({}),
-}));
+})
+app.use(sessionMiddleware);
+
+io.use((socket, next) => {
+  sessionMiddleware(socket.request, socket.request.res, next);
+})
+
+io.on('connection', (socket) => {
+  socket.emit('loginCheck');
+  socket.on('loginResponse', (response) => {
+    socket.request.session.signedIn = response;
+    socket.request.session.save();
+  })
+})
+
+
 
 app.use((req, res, next) => {
-  res.locals.signedIn = req.session.signedIn;
+  const signedIn = req.session.signedIn;
+  if (signedIn === 'true' || signedIn === true) {
+    res.locals.signedIn = true;
+  } else {
+    res.locals.signedIn = false;
+  }
 
   next();
 })
@@ -49,4 +71,4 @@ app.use('/orders', orderRouter);
 app.use("/customers", customerRouter);
 app.use("/clothing", itemRouter);
 
-module.exports = app;
+module.exports = http;

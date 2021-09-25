@@ -10,25 +10,25 @@ const authenticate = async (username, password) => {
   return bcrypt.compare(password, result.rows[0].password);
 }
 
-const loginUser = async (username, sessionID) => {
-  const LOGIN_USER = `UPDATE users 
-    SET signed_in = true, session_id = ARRAY_APPEND(session_id, $2)
-    WHERE username = $1`;
-  let result = await dbQuery(LOGIN_USER, username, sessionID);
+// const loginUser = async (username, sessionID) => {
+//   const LOGIN_USER = `UPDATE users 
+//     SET signed_in = true, session_id = ARRAY_APPEND(session_id, $2)
+//     WHERE username = $1`;
+//   let result = await dbQuery(LOGIN_USER, username, sessionID);
 
-  return result.rowCount > 0;
-}
+//   return result.rowCount > 0;
+// }
 
-const checkLoginStatus = async (sessionID) => {
-  // "@>" checks if one array contains the values that are in another array
-  const CHECK_STATUS = "SELECT signed_in FROM users WHERE session_id @> ARRAY[$1]";
-  let result = await dbQuery(CHECK_STATUS, sessionID);
-  if (result.rowCount === 0) return false;
-  return result.rows[0].signed_in;
-}
+// const checkLoginStatus = async (sessionID) => {
+//   // "@>" checks if one array contains the values that are in another array
+//   const CHECK_STATUS = "SELECT signed_in FROM users WHERE session_id @> ARRAY[$1]";
+//   let result = await dbQuery(CHECK_STATUS, sessionID);
+//   if (result.rowCount === 0) return false;
+//   return result.rows[0].signed_in;
+// }
 
 module.exports = {
   authenticate,
-  loginUser,
-  checkLoginStatus
+  // loginUser,
+  // checkLoginStatus
 };
