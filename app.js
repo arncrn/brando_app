@@ -24,6 +24,8 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+let globalSignedIn = false;
+
 let sessionMiddleware = session({
   cookie: {
     httpOnly: true,
@@ -47,6 +49,7 @@ io.on('connection', (socket) => {
   socket.emit('loginCheck');
   socket.on('loginResponse', (response) => {
     socket.request.session.signedIn = response;
+    globalSignedIn = response;
     socket.request.session.save();
   })
 })
@@ -54,7 +57,7 @@ io.on('connection', (socket) => {
 
 
 app.use((req, res, next) => {
-  const signedIn = req.session.signedIn;
+  const signedIn = req.session.signedIn || globalSignedIn;
   if (signedIn === 'true' || signedIn === true) {
     res.locals.signedIn = true;
   } else {
