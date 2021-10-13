@@ -153,6 +153,7 @@ packageRouter.get("/print/:pkgId", async (req, res) => {
   const pkgId = req.params.pkgId;
   const pkg = await Packages.findById(pkgId);
   const items = await Clothing.findInPackage(pkgId);
+  console.log(items.length);
 
   const pricePerItem = pkg.price && items.length > 0
     ? (+pkg.price / items.length).toFixed(2)

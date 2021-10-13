@@ -1,3 +1,4 @@
+// @ts-check
 // remove upload
 
 const itemRouter = require('express').Router();
@@ -241,6 +242,13 @@ itemRouter.post('/edititem', requiresAuthentication, upload.single('brandomania-
   } catch (error) {
     console.log(error);
   }
+});
+
+itemRouter.post('/updatesoldlink/:itemId', requiresAuthentication, async (req, res) => {
+  const itemId = req.params.itemId;
+  const soldTo = req.body.soldTo;
+  await Clothing.editSoldTo(itemId, soldTo);
+  res.sendStatus(200).end();
 })
 
 itemRouter.post('/duplicateitem/:itemId', requiresAuthentication, async (req, res) => {

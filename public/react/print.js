@@ -7,7 +7,8 @@ const Print = () => {
   const [totalShipping, setTotalShipping] = useState(0);
   const [pkg, setPkg] = useState({});
   const [allowImages, setAllowImages] = useState(false);
-
+  const [visibleEditButton, setVisibleEditButton] = useState(false);
+  
   useEffect(async () => {
     const pkgId = document.querySelector('[data-pkg-id]').dataset.pkgId;
     let response = await (await fetch(`/packages/packageitems/${pkgId}`)).json();
@@ -18,6 +19,8 @@ const Print = () => {
     setTotalShipping(response.totalShipping);
   }, [])
 
+
+  
   const formatText = (extraInfo) => {
     if (extraInfo === null) {
       return;
@@ -26,21 +29,33 @@ const Print = () => {
       return (<p key={idx}>{text}</p>);
     });
   }
-
+  
   const formatPrice = (item) => {
     return `Price: ${item.purchase_price}
     Tax: ${item.tax_amount}
     Total: ${item.total_price}`;
   }
   
+  const updateSoldToValue = (itemId, linkValue) => {
+    let updatedItems = items.map(item => {
+      if (item.id === itemId) {
+        return {...item, sold_to: linkValue}
+      }
+      return item;
+    })
+    setItems(updatedItems);
+  };
+  
   let pricePerItem = 0;
   if (items.length > 0) {
     pricePerItem = (Number(pkg.price) / Number(items.length)).toFixed(2);
   }
 
+  
   return ( 
     <main>
       <button onClick={() => setAllowImages(!allowImages)}>Toggle Images</button>
+      <button onClick={() => setVisibleEditButton(!visibleEditButton)}>Set Customers</button>
       <table>
         <thead>
           <tr>
@@ -54,6 +69,7 @@ const Print = () => {
             <th>Shipping Cost</th>
             <th>Extra Details</th>
             {allowImages && <th>Image</th>}
+            <th>Customer</th>
           </tr>
         </thead>
         <tbody>
@@ -73,6 +89,12 @@ const Print = () => {
                 <td>
                   {item.picture && <img height="150px" src={`https://d2hcaqfu7kwyzt.cloudfront.net/${item.picture}`} />}
                 </td>}
+                <SoldLink 
+                  soldTo={item.sold_to} 
+                  visibleEditButton={visibleEditButton}
+                  itemId={item.id}
+                  updateSoldToValue={updateSoldToValue}
+                />
               </tr>
             );
           })}
@@ -93,5 +115,61 @@ const Print = () => {
   )
 }
 
-const domContainer = document.querySelector('#print');
-ReactDOM.render(e(Print), domContainer);
+const EditButton = ({editEnabled, setEditEnabled, handleSave}) => {
+  return (
+    !editEnabled ?
+      <td><button onClick={() => setEditEnabled(true)}>Edit Link</button></td> :
+      <React.Fragment>
+        <td><button onClick={handleSave}>Save</button></td>
+        <td><button onClick={() => setEditEnabled(false)}>Cancel</button></td>
+      </React.Fragment>
+  )
+}
+
+
+const SoldLink = ({soldTo, visibleEditButton, itemId, updateSoldToValue}) => {
+  const [editEnabled, setEditEnabled] = useState(false);
+  const [linkValue, setLinkValue] = useState(soldTo || "");
+
+  const changeInputValue = ({target}) => {
+    setLinkValue(target.value);
+  }
+
+  const handleSave = () => {
+    fetch(`/clothing/updatesoldlink/${itemId}`, {
+      method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      body: JSON.stringify({soldTo: linkValue}),
+    }).then(() => {
+      updateSoldToValue(itemId, linkValue);
+      setEditEnabled(false);
+    })
+  }
+
+  const linkDisplay = () => {
+    return (
+      editEnabled ?
+      <td><input type="text" value={linkValue} onChange={changeInputValue}/></td> :
+      <td><a href={soldTo || "#"} target="_blank">{soldTo || ""}</a></td>
+    )
+  }
+  
+  return (
+      <React.Fragment>
+        {linkDisplay()}
+        {
+          visibleEditButton &&
+          <EditButton 
+            editEnabled={editEnabled}
+            setEditEnabled={setEditEnabled}
+            handleSave={handleSave}
+          />
+        }
+      </React.Fragment>
+    )
+}
+    
+    const domContainer = document.querySelector('#print');
+    ReactDOM.render(e(Print), domContainer);

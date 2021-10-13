@@ -3,7 +3,7 @@ const { dbQuery } = require("../lib/db-query");
 const FIND_ITEM_TEXT = `SELECT clothing.id, size, brand, type, colors, receipt_id,
 tag_number, purchase_price, sold_price, package_id, order_id, extra_info, 
 seen, gender, style, picture, material, clothing.location, date_sold, clothing.date_created,
-clothing.shipping_cost, in_stock, pending, receipts.tax, receipts.store, packages.package_name
+clothing.shipping_cost, in_stock, pending, sold_to, receipts.tax, receipts.store, packages.package_name
 FROM clothing 
 LEFT JOIN receipts ON receipt_id = receipts.id
 LEFT JOIN packages ON package_id = packages.id`; 
@@ -340,6 +340,13 @@ const getColors = async () => {
   return Object.keys(colorObj);
 }
 
+const editSoldTo = async (itemId, soldTo) => {
+  const UPDATE_SOLD_TO = "UPDATE clothing SET sold_to = $1 WHERE id = $2";
+  let result = await dbQuery(UPDATE_SOLD_TO, soldTo, itemId);
+
+  return result.rowCount > 0;
+};
+
 module.exports = {
   toggleSeen,
   findById,
@@ -380,4 +387,5 @@ module.exports = {
   getColors,
   getBrands,
   getTypes,
+  editSoldTo
 }
