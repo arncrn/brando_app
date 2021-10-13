@@ -142,17 +142,18 @@ const create = async (dataObj) => {
   let location = dataObj.location;
   let dateSold = dataObj.date_sold;
   let shippingCost = dataObj.shipping_cost
+  let soldTo = dataObj.sold_to;
   
 
   const CREATE_ITEM = `INSERT INTO clothing
   (size, brand, type, tag_number, purchase_price, receipt_id, sold_price, package_id, order_id, 
-    extra_info, colors, gender, picture, style, material, location, date_sold, shipping_cost, in_stock)
-  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19)
+    extra_info, colors, gender, picture, style, material, location, date_sold, shipping_cost, in_stock, sold_to)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20)
   RETURNING id`;
 
   try {
     result = await dbQuery(CREATE_ITEM, size, brand, type, tagNumber, purchasePrice, receiptId, soldPrice, packageId, orderId, 
-      extra_info, colors, gender, picture, style, material, location, dateSold, shippingCost, true);
+      extra_info, colors, gender, picture, style, material, location, dateSold, shippingCost, true, soldTo);
   } catch (error) {
     console.log(error);
     return false;
@@ -165,13 +166,13 @@ const update = async (itemId, dataObj) => {
   const UPDATE_ITEM = `UPDATE clothing SET tag_number = $1, gender = $2, size = $3, brand = $4, 
   colors = $5, type = $6, receipt_id = $7, purchase_price = $8, shipping_cost = $9, sold_price = $10,
   location = $11, package_id = $12, order_id = $13, material = $14, 
-  style = $15, extra_info = $16, date_sold = $17, picture = $18
-  WHERE id = $19`;
+  style = $15, extra_info = $16, date_sold = $17, picture = $18, sold_to = $19
+  WHERE id = $20`;
 
   let result = await dbQuery(UPDATE_ITEM, dataObj.tag_number, dataObj.gender, dataObj.size, 
     dataObj.brand, dataObj.colors, dataObj.type, dataObj.receipt_id, dataObj.purchase_price,
     dataObj.shipping_cost, dataObj.sold_price, dataObj.location, dataObj.package_id, dataObj.order_id,
-    dataObj.material, dataObj.style, dataObj.extra_info, dataObj.date_sold, dataObj.picture, itemId);
+    dataObj.material, dataObj.style, dataObj.extra_info, dataObj.date_sold, dataObj.picture, dataObj.sold_to, itemId);
 
   return result.rowCount > 0;
 }
