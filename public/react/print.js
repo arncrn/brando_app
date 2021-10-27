@@ -54,6 +54,7 @@ const Print = () => {
                 idx={idx} 
                 allowImages={allowImages} 
                 visibleEditButton={visibleEditButton}
+                setItems={setItems}
               />
             );
           })}
@@ -138,7 +139,7 @@ const ClothingImage = ({picture, id, updateArrived}) => {
   )
 }
 
-const TableRow = ({item, idx, allowImages, visibleEditButton}) => {
+const TableRow = ({item, idx, allowImages, visibleEditButton, setItems}) => {
   const [arrived, setArrived] = useState(item.arrived);
 
   const formatText = (extraInfo) => {
