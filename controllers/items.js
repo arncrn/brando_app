@@ -251,6 +251,13 @@ itemRouter.post('/updatesoldlink/:itemId', requiresAuthentication, async (req, r
   res.sendStatus(200).end();
 })
 
+itemRouter.post('/updatearrived/:itemId', requiresAuthentication, async (req, res) => {
+  const itemId = req.params.itemId;
+  const arrived = req.body.arrived;
+  await Clothing.editArrived(itemId, arrived);
+  res.sendStatus(200).end();
+})
+
 itemRouter.post('/duplicateitem/:itemId', requiresAuthentication, async (req, res) => {
   let itemId = req.params.itemId;
   let duplicateId = await Clothing.duplicate(itemId);
@@ -267,7 +274,8 @@ itemRouter.post('/duplicateitem/:itemId', requiresAuthentication, async (req, re
   } else {
     res.status(404);
   }
-})
+});
+
 
 itemRouter.get('/findtag', requiresAuthentication, async (req, res) => {
   let tagNumber = req.query.tagNumber;

@@ -17,34 +17,7 @@ const Print = () => {
     setItems(response.items);
     setSumOfItems(response.sumOfItems);
     setTotalShipping(response.totalShipping);
-  }, [])
-
-
-  
-  const formatText = (extraInfo) => {
-    if (extraInfo === null) {
-      return;
-    }
-    return extraInfo.split("\r\n").map((text, idx) => {
-      return (<p key={idx}>{text}</p>);
-    });
-  }
-  
-  const formatPrice = (item) => {
-    return `Price: ${item.purchase_price}
-    Tax: ${item.tax_amount}
-    Total: ${item.total_price}`;
-  }
-  
-  const updateSoldToValue = (itemId, linkValue) => {
-    let updatedItems = items.map(item => {
-      if (item.id === itemId) {
-        return {...item, sold_to: linkValue}
-      }
-      return item;
-    })
-    setItems(updatedItems);
-  };
+  }, []);
   
   let pricePerItem = 0;
   if (items.length > 0) {
@@ -75,27 +48,13 @@ const Print = () => {
         <tbody>
           {items.map((item, idx) => {
             return (
-              <tr key={item.id}>
-                <th>{idx + 1}</th>
-                <td>{item.brand}</td>
-                <td>{item.type}</td>
-                <td>{item.size}</td>
-                <td>{item.colors}</td>
-                <td>{item.tag_number}</td>
-                <td>${formatPrice(item)}</td>
-                <td>${item.shipping_cost}</td>
-                <td>{formatText(item.extra_info)}</td>
-                {allowImages &&
-                <td>
-                  {item.picture && <img height="150px" src={`https://d2hcaqfu7kwyzt.cloudfront.net/${item.picture}`} />}
-                </td>}
-                <SoldLink 
-                  soldTo={item.sold_to} 
-                  visibleEditButton={visibleEditButton}
-                  itemId={item.id}
-                  updateSoldToValue={updateSoldToValue}
-                />
-              </tr>
+              <TableRow 
+                key={item.id}
+                item={item} 
+                idx={idx} 
+                allowImages={allowImages} 
+                visibleEditButton={visibleEditButton}
+              />
             );
           })}
           <tr>
@@ -170,6 +129,89 @@ const SoldLink = ({soldTo, visibleEditButton, itemId, updateSoldToValue}) => {
       </React.Fragment>
     )
 }
+
+const ClothingImage = ({picture, id, updateArrived}) => {
+  return (
+    <td onClick={() => updateArrived(id)}>
+      {picture && <img height="150px" src={`https://d2hcaqfu7kwyzt.cloudfront.net/${picture}`} />}
+    </td>
+  )
+}
+
+const TableRow = ({item, idx, allowImages, visibleEditButton}) => {
+  const [arrived, setArrived] = useState(item.arrived);
+
+  const formatText = (extraInfo) => {
+    if (extraInfo === null) {
+      return;
+    }
+    return extraInfo.split("\r\n").map((text, idx) => {
+      return (<p key={idx}>{text}</p>);
+    });
+  }
+  
+  const formatPrice = (item) => {
+    return `Price: ${item.purchase_price}
+    Tax: ${item.tax_amount}
+    Total: ${item.total_price}`;
+  }
+  
+  const updateSoldToValue = (itemId, linkValue) => {
+    let updatedItems = items.map(item => {
+      if (item.id === itemId) {
+        return {...item, sold_to: linkValue}
+      }
+      return item;
+    })
+    setItems(updatedItems);
+  };
+
+  const updateArrived = (id) => {
+    fetch(`/clothing/updatearrived/${id}`, {
+      method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      body: JSON.stringify({itemId: id, arrived: !arrived}),
+    }).then(() => {
+      setArrived(!arrived);
+    })
+  }
+
+  const arrivedStyle = {
+    backgroundColor: arrived ? 'cyan' : null
+  }
+
+  return (
+    <tr style={arrivedStyle}>
+      <th>{idx + 1}</th>
+      <td>{item.brand}</td>
+      <td>{item.type}</td>
+      <td>{item.size}</td>
+      <td>{item.colors}</td>
+      <td>{item.tag_number}</td>
+      <td>${formatPrice(item)}</td>
+      <td>${item.shipping_cost}</td>
+      <td>{formatText(item.extra_info)}</td>
+      {
+        allowImages &&
+        <ClothingImage 
+          picture={item.picture} 
+          updateArrived={updateArrived}
+          id={item.id}
+        />
+      }
+      <SoldLink 
+        soldTo={item.sold_to} 
+        visibleEditButton={visibleEditButton}
+        itemId={item.id}
+        updateSoldToValue={updateSoldToValue}
+      />
+    </tr>
+  )
+}
     
-    const domContainer = document.querySelector('#print');
-    ReactDOM.render(e(Print), domContainer);
+const domContainer = document.querySelector('#print');
+ReactDOM.render(e(Print), domContainer);
+
+// ALTER TABLE clothing ADD COLUMN arrived boolean DEFAULT false;
