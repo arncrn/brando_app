@@ -141,6 +141,7 @@ const ClothingImage = ({picture, id, updateArrived}) => {
 
 const TableRow = ({item, idx, allowImages, visibleEditButton, setItems}) => {
   const [arrived, setArrived] = useState(item.arrived);
+  const sold = item.sold_price > 0;
 
   const formatText = (extraInfo) => {
     if (extraInfo === null) {
@@ -179,12 +180,19 @@ const TableRow = ({item, idx, allowImages, visibleEditButton, setItems}) => {
     })
   }
 
-  const arrivedStyle = {
-    backgroundColor: arrived ? 'cyan' : null
+  const setBackgroundColor = () => {
+    let bgColor = null;
+    if (sold) {
+      bgColor = 'red';
+    } else if (arrived) {
+      bgColor = 'cyan';
+    }
+
+    return {backgroundColor: bgColor};
   }
 
   return (
-    <tr style={arrivedStyle}>
+    <tr style={setBackgroundColor()}>
       <th>{idx + 1}</th>
       <td>{item.brand}</td>
       <td>{item.type}</td>

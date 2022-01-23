@@ -1,4 +1,4 @@
-// @ts-check
+
 // remove upload
 
 const itemRouter = require('express').Router();
