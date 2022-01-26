@@ -55,6 +55,7 @@ const Print = () => {
                 allowImages={allowImages} 
                 visibleEditButton={visibleEditButton}
                 setItems={setItems}
+                packageName={pkg.package_name}
               />
             );
           })}
@@ -139,7 +140,7 @@ const ClothingImage = ({picture, id, updateArrived}) => {
   )
 }
 
-const TableRow = ({item, idx, allowImages, visibleEditButton, setItems}) => {
+const TableRow = ({item, idx, allowImages, visibleEditButton, setItems, packageName}) => {
   const [arrived, setArrived] = useState(item.arrived);
   const sold = item.sold_price > 0;
 
@@ -180,9 +181,16 @@ const TableRow = ({item, idx, allowImages, visibleEditButton, setItems}) => {
     })
   }
 
+  const isAllaPackage = () => {
+    return packageName.match(/alla/i);
+  }
+
   const setBackgroundColor = () => {
     let bgColor = null;
-    if (sold) {
+
+    if (isAllaPackage()) {
+      bgColor = null;
+    } else if (sold) {
       bgColor = 'red';
     } else if (arrived) {
       bgColor = 'cyan';
