@@ -43,10 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({pkgId: pkg.id}),
+        body: JSON.stringify({pkgId: pkg.id, pkgName: pkg.name}),
       })
       .then(response => {
-        console.log(response);
         if (response.status === 204) {
           alert("That package doesn't exist");
           return false;

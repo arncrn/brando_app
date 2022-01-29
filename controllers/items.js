@@ -159,10 +159,17 @@ itemRouter.get('/item/:itemId', requiresAuthentication, async (req, res) => {
 itemRouter.post('/addtopackage/:itemId', requiresAuthentication, async (req, res) => {
   let itemId = req.params.itemId;
   let pkgId = req.body.pkgId;
+  let pkgName = req.body.pkgName;
+  let updatedLocation;
   if (!pkgId) return res.sendStatus(204);
 
   let updatedItem = await Clothing.updatePackage(itemId, pkgId);
-  let updatedLocation = await Clothing.updateLocation(itemId, 'ukraine');
+
+  if (pkgName.match(/(jen|zhen)/i)) {
+    updatedLocation = await Clothing.updateLocation(itemId, 'jenia');
+  } else {
+    updatedLocation = await Clothing.updateLocation(itemId, 'ukraine');
+  }
 
   if (updatedItem && updatedLocation) {
     returnUpdatedItem(res, itemId);
