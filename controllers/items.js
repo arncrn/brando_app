@@ -168,7 +168,7 @@ itemRouter.post('/addtopackage/:itemId', requiresAuthentication, async (req, res
   if (pkgName.match(/(jen|zhen)/i)) {
     updatedLocation = await Clothing.updateLocation(itemId, 'jenia');
   } else {
-    updatedLocation = await Clothing.updateLocation(itemId, 'ukraine');
+    updatedLocation = await Clothing.updateLocation(itemId, 'traveling');
   }
 
   if (updatedItem && updatedLocation) {
