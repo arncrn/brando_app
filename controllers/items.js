@@ -164,11 +164,11 @@ itemRouter.post('/addtopackage/:itemId', requiresAuthentication, async (req, res
   if (!pkgId) return res.sendStatus(204);
 
   let updatedItem = await Clothing.updatePackage(itemId, pkgId);
-
-  if (pkgName.match(/(jen|zhen)/i)) {
-    updatedLocation = await Clothing.updateLocation(itemId, 'jenia');
-  } else if (pkgName.match(/alla/i)) {
+  
+  if (pkgName.match(/alla/i)) {
     updatedLocation = await Clothing.updateLocation(itemId, 'alla');
+  } else if (pkgName.match(/(jen|zhen)/i)) {
+    updatedLocation = await Clothing.updateLocation(itemId, 'jenia');
   } else {
     updatedLocation = await Clothing.updateLocation(itemId, 'traveling');
   }
