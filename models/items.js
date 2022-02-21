@@ -177,6 +177,21 @@ const update = async (itemId, dataObj) => {
   return result.rowCount > 0;
 }
 
+const updatePartial = async (itemId, dataObj) => {
+  const UPDATE_ITEM = `UPDATE clothing SET tag_number = $1, gender = $2, size = $3, brand = $4, 
+  colors = $5, type = $6, receipt_id = $7, purchase_price = $8, shipping_cost = $9, sold_price = $10,
+  location = $11, package_id = $12, order_id = $13, material = $14, 
+  style = $15, extra_info = $16, date_sold = $17, sold_to = $18
+  WHERE id = $19`;
+
+  let result = await dbQuery(UPDATE_ITEM, dataObj.tag_number, dataObj.gender, dataObj.size, 
+    dataObj.brand, dataObj.colors, dataObj.type, dataObj.receipt_id, dataObj.purchase_price,
+    dataObj.shipping_cost, dataObj.sold_price, dataObj.location, dataObj.package_id, dataObj.order_id,
+    dataObj.material, dataObj.style, dataObj.extra_info, dataObj.date_sold, dataObj.sold_to, itemId);
+
+  return result.rowCount > 0;
+}
+
 const duplicate = async (itemId) => {
   const DUPLICATE_ITEM = `INSERT INTO clothing (size, brand, type, colors, tag_number, purchase_price, extra_info, 
   gender, picture, style, material, in_stock)
@@ -374,6 +389,7 @@ module.exports = {
   findInReceipt,
   create,
   update,
+  updatePartial,
   duplicate,
   updateSize,
   updateBrand,

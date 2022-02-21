@@ -81,13 +81,16 @@ itemRouter.post('/newitem', requiresAuthentication, upload.single('brandomania-p
     let dataObj = req.body;
     // let originalName = dataObj.pictureName;
     let tagNumber = dataObj.tag_number;
+    // let brand = dataObj.brand;
     // let file = req.file;
+
+    let {brand, type, colors} = dataObj;
 
     if (tagNumber.includes('?')) {
       tagNumber = String(Math.floor(Math.random() * 1000));
     }
-
-    dataObj.picture = `${removeSpaces(dataObj.brand)}-${removeSpaces(dataObj.type)}-${tagNumber.toLowerCase()}.png`
+    // ! add color to picture name?
+    dataObj.picture = `${removeSpaces(brand)}-${removeSpaces(type)}-${removeSpaces(colors)}-${tagNumber.toLowerCase()}.png`
 
     modifyProperties(dataObj);
 
@@ -225,25 +228,33 @@ itemRouter.post('/unsellitem/:itemId', requiresAuthentication, async (req, res) 
 
 itemRouter.post('/edititem', requiresAuthentication, upload.single('brandomania-picture'), async (req, res) => {
   try {
-    // working
     let dataObj = req.body;
-    // let originalName = dataObj.pictureName;
-    // console.log(originalName);
     let itemId = dataObj.id;
+    let {brand, type, colors} = dataObj;
 
-    dataObj.picture = `${removeSpaces(dataObj.brand)}-${removeSpaces(dataObj.type)}-${dataObj.tag_number.toLowerCase()}.png`;
+    // ! add color to picture?
+    dataObj.picture = `${removeSpaces(brand)}-${removeSpaces(type)}-${removeSpaces(colors)}-${dataObj.tag_number.toLowerCase()}.png`;
 
     modifyProperties(dataObj);
 
     let successfulDatabaseUpdate = await Clothing.update(itemId, dataObj);
-    // if (originalName) {
-    //   let queueData = {
-    //     originalName: originalName,
-    //     newName: dataObj.picture
-    //   }
 
-    //   sendMessageToQueue(queueData);
-    // }
+    if (successfulDatabaseUpdate) {
+      returnUpdatedItem(res, itemId);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+itemRouter.post('/editpartial', requiresAuthentication, async (req, res) => {
+  try {
+    let dataObj = req.body;
+    let itemId = dataObj.id;
+
+    modifyProperties(dataObj);
+
+    let successfulDatabaseUpdate = await Clothing.updatePartial(itemId, dataObj);
 
     if (successfulDatabaseUpdate) {
       returnUpdatedItem(res, itemId);

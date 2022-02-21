@@ -215,11 +215,14 @@ document.addEventListener('click', (event) => {
         let brand = '';
         let tagNumber = '';
         let type = '';
+        let colors = '';
+        let shouldUpdateImage = false;
         for (let i = 0; i < form.elements.length; i += 1) {
           let element = form.elements[i];
           if (element.name === 'brand') brand = removeSpaces(element.value);
           if (element.name === 'tag_number') tagNumber = removeSpaces(element.value);
           if (element.name === 'type') type = removeSpaces(element.value);
+          if (element.name === 'colors') colors = removeSpaces(element.value);
           formObj[element.name] = element.value;
           if (NEEDED_VALUES.includes(element.name)) {
             if (!element.value) {
@@ -231,7 +234,9 @@ document.addEventListener('click', (event) => {
     
         let file = popupDisplay.imageInput.files[0];
         if (file) {
-          let imageName = `${brand}-${type}-${tagNumber}.png`;
+          // ! add color to image name?
+          let imageName = `${brand}-${type}-${colors}-${tagNumber}.png`;
+          shouldUpdateImage = true;
           try {
             await addPhoto("unprocessed", imageName);
           } catch (error) {
@@ -239,12 +244,14 @@ document.addEventListener('click', (event) => {
             alert("the image did not upload:", error);
           }
         }
-
+        
         let itemId = formObj.id;
         let formData = new FormData(form);
 
+        let postUrl = shouldUpdateImage ? '/clothing/edititem' : '/clothing/editpartial';
+
         let XHR = new XMLHttpRequest();
-        XHR.open('POST', `/clothing/edititem`);
+        XHR.open('POST', postUrl);
         XHR.addEventListener('load', event => {
           let request = event.target;
           if (request.status === 200) {

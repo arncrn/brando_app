@@ -79,11 +79,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let brand = '';
     let tagNumber = '';
     let type = '';
+    let colors = '';
     for (let i = 0; i < form.elements.length; i += 1) {
       let element = form.elements[i];
       if (element.name === 'brand') brand = removeSpaces(element.value);
       if (element.name === 'tag_number') tagNumber = removeSpaces(element.value);
       if (element.name === 'type') type = removeSpaces(element.value);
+      if (element.name === 'colors') colors = removeSpaces(element.value);
       if (REQUIRED_VALUES.includes(element.name)) {
         if (!element.value) {
           alert(`Missing ${element.name}`);
@@ -94,7 +96,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let file = itemCreator.imageInput.files[0];
     if (file) {
-      let imageName = `${brand}-${type}-${tagNumber}.png`;
+      // ! add color to image name?
+      // let imageName = `${brand}-${type}-${tagNumber}.png`;
+      let imageName = `${brand}-${type}-${colors}-${tagNumber}.png`;
       addPhoto("unprocessed", imageName);
     }
    
