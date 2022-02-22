@@ -247,7 +247,7 @@ itemRouter.post('/edititem', requiresAuthentication, upload.single('brandomania-
   }
 });
 
-itemRouter.post('/editpartial', requiresAuthentication, async (req, res) => {
+itemRouter.post('/editpartial', requiresAuthentication, upload.single('brandomania-picture'), async (req, res) => {
   try {
     let dataObj = req.body;
     let itemId = dataObj.id;
