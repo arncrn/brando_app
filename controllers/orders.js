@@ -13,6 +13,77 @@ orderRouter.get("/", requiresAuthentication, (req, res) => {
   res.render('order-home');
 })
 
+orderRouter.get("/monthly-profit", (req, res) => {
+  res.render('monthly-profit');
+})
+
+orderRouter.get("/monthly-profits/data", async (req, res) => {
+  const orders = await Orders.getAll();
+  const items = await Clothing.getAll();
+  const pkgs = await Packages.getAll();
+  let pkgPrices = {};
+  let totalCogs = 0;
+  let totalRevenue = 0;
+  let totalProfit = 0;
+
+  pkgs.forEach(pkg => {
+    itemsInPackage = items.filter(item => item.package_id === pkg.id)
+
+    if (Number(pkg.price) && itemsInPackage.length > 0) {
+      let pricePerItem = (+pkg.price / itemsInPackage.length)
+      pkgPrices[pkg.id] = pricePerItem.toFixed(2);
+    }
+  })
+
+  orders.forEach(order => {
+    if (order.date_sent) order.date_sent = formatDate(order.date_sent.toLocaleDateString())
+    order.tax_total = 0;
+    order.shipping_total = 0;
+    order.base_cost = 0;
+    order.sold_total = 0;
+    order.cogs = 0;
+    order.total_profit = 0;
+
+    itemsInOrder = items.filter(item => item.order_id === order.id);
+    order.item_count = itemsInOrder.length;
+    itemsInOrder.forEach(item => {
+      setTaxPercent(item);
+      let taxAmount = calculateTaxAmount(item);
+      let shippingCost = Number(item.shipping_cost) || (Number(pkgPrices[item.package_id]) || 0);
+      let cogs = (taxAmount + shippingCost + Number(item.purchase_price));
+      let profit = (Number(item.sold_price) - cogs)
+
+      order.tax_total += taxAmount;
+      order.shipping_total += shippingCost;
+      order.base_cost += Number(item.purchase_price);
+      order.sold_total += Number(item.sold_price) || 0;
+      order.cogs += cogs;
+      order.total_profit += profit;
+
+      totalCogs += cogs;
+      totalRevenue += Number(item.sold_price) || 0;
+      totalProfit += profit;
+    })
+
+    order.tax_total = order.tax_total.toFixed(2);
+    order.shipping_total = order.shipping_total.toFixed(2);
+    order.base_cost = order.base_cost.toFixed(2);
+    order.sold_total = order.sold_total.toFixed(2);
+    order.cogs = order.cogs.toFixed(2);
+    order.total_profit = order.total_profit.toFixed(2);
+  })
+
+  res.send(orders).end();
+
+
+  // res.render("orders", {
+  //   orders,
+  //   totalRevenue: totalRevenue.toFixed(2),
+  //   totalCogs: totalCogs.toFixed(2),
+  //   totalProfit: totalProfit.toFixed(2),
+  // })
+});
+
 orderRouter.get("/view", requiresAuthentication, async (req, res) => {
   let orders = await Orders.getAll();
   let items = await Clothing.getAll();
