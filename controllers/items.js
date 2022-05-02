@@ -193,7 +193,20 @@ itemRouter.post('/sellitem/:itemId', requiresAuthentication, async (req, res) =>
   }
 
   let customer = req.body.customer;
+  const person = req.body.person;
   let order = req.body.order;
+
+  let newLocation;
+
+  if (person === 'nastia') {
+    newLocation = 'ukraine';
+  } else if (person === 'alla' || undefined) {
+    newLocation = 'alla';
+  } else if (person === 'jenia') {
+    newLocation = 'jenia';
+  } else {
+    newLocation = 'ukraine';
+  }
 
   if (!order) {
     order = await Orders.findByCustomerName(customer);
@@ -202,7 +215,7 @@ itemRouter.post('/sellitem/:itemId', requiresAuthentication, async (req, res) =>
   await Clothing.updateSoldPrice(itemId, soldPrice);
   await Clothing.updatePending(itemId, pending);
   await Clothing.updateOrder(itemId, order.id);
-  await Clothing.updateLocation(itemId, 'ukraine');
+  await Clothing.updateLocation(itemId, newLocation);
   await Clothing.updateInStock(itemId, false);
   returnUpdatedItem(res, itemId);
 })

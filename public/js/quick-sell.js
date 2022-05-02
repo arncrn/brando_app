@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({soldPrice: soldPrice, customer: "Alla", order}),
+        body: JSON.stringify({soldPrice: soldPrice, customer: "Alla", order, person: 'alla'}),
       })
         .then(response => response.text())
         .then(data => {
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({soldPrice: sellingPrice, customer: sellingMonth}),
+        body: JSON.stringify({soldPrice: sellingPrice, customer: sellingMonth, person: person}),
       })
         .then(response => response.text())
         .then(data => {
