@@ -23,3 +23,10 @@ TEST
 - view men items
 - view female items
 - filter for colors, location, type, brand
+
+alfred@cabrilomortgage.com
+2 bank statements
+1 month paystub
+2 monthstock statements
+front/back drivers license
+unfreeze credit report
