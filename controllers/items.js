@@ -1,4 +1,3 @@
-
 // remove upload
 
 const itemRouter = require('express').Router();
@@ -28,8 +27,9 @@ const helpers = {
   isWithJenia: (location) => location === 'jenia',
   isInUkraine: (location) => location && location.toLowerCase() === 'ukraine',
   isWithAlla: (location) => location === 'alla',
-  isTraveling: (location) => location === 'traveling'
-}
+  isTraveling: (location) => location === 'traveling',
+  isInBox: (location) => location === 'box',
+};
 
 const removeSpaces = (string) => {
   return string.split(' ').join('-').toLowerCase();
@@ -169,7 +169,7 @@ itemRouter.post('/addtopackage/:itemId', requiresAuthentication, async (req, res
   let updatedItem = await Clothing.updatePackage(itemId, pkgId);
   
   if (pkgName.match(/box/i)) {
-    updatedLocation = await Clothing.updateLocation(itemId, 'usa');
+    updatedLocation = await Clothing.updateLocation(itemId, 'box');
   } else if (pkgName.match(/alla/i)) {
     updatedLocation = await Clothing.updateLocation(itemId, 'alla');
   } else if (pkgName.match(/(jen|zhen)/i)) {
