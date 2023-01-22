@@ -188,9 +188,7 @@ const TableRow = ({item, idx, allowImages, visibleEditButton, setItems, packageN
   const setBackgroundColor = () => {
     let bgColor = null;
 
-    if (isAllaPackage()) {
-      bgColor = null;
-    } else if (sold) {
+   if (sold) {
       bgColor = 'red';
     } else if (arrived) {
       bgColor = 'cyan';
