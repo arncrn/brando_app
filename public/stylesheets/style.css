@@ -143,6 +143,23 @@ a, a:hover {
   right: 0;
 }
 
+div.reserved {
+  position: absolute;
+  top: 20%;
+  height: 50px;
+  width: 80%;
+}
+
+.reserved button {
+  width: 100%;
+  height: 100%;
+  background-color:rgba(164, 58, 176);
+}
+
+.reserved a {
+  font-size: 2rem;
+}
+
 .sold {
   text-align: center;
   position: absolute;

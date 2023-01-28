@@ -66,17 +66,22 @@
             <div class="instock">IN STOCK</div>
           {{/if}}
 
-          {{#if (sellPending pending)}}
-            <div class="pending"><p>PENDING</p></div>
+          {{#if sold_to}}
+            <div class="reserved">
+              <button>
+                <a href={{sold_to}} target="_blank">RESERVED</a>
+              </button>
+            </div>
           {{else}}
-            {{#if (greaterThanZero sold_price)}}
-              <div class="sold"><p>SOLD</p></div>
+            {{#if (sellPending pending)}}
+                <div class="pending"><p>PENDING</p></div>
+            {{else}}
+                {{#if (greaterThanZero sold_price)}}
+                  <div class="sold"><p>SOLD</p></div>
+                {{/if}}
             {{/if}}
           {{/if}}
 
-          {{!-- {{#if (greaterThanZero sold_price)}}
-            <div class="sold"><p>SOLD</p></div>
-          {{/if}} --}}
           <div class="item-size"><p>{{size}}</p></div>
           <div class="tag-number"><p>{{tag_number}}</p></div>
           <div class="brand-name"><p>{{brand}}</p></div>
