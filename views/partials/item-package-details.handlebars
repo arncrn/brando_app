@@ -4,36 +4,36 @@
     <div class="input-group">
       <span class="input-group-text" id="item-location">Location:</span>
       <select class="form-select" name="location" aria-label="item-location" aria-describedby="item-location">
-        {{#if (isWithJenia item.location)}}
-          <option value="usa">USA</option>
-          <option value="ukraine">Ukraine</option>
-          <option value="jenia" selected>Jenia</option>
-          <option value="alla">Alla</option>
-          <option value="traveling">Traveling</option>
-        {{else}} {{#if (isInUkraine item.location)}}
+        {{#if (isInUkraine item.location)}}
           <option value="usa">USA</option>
           <option value="ukraine" selected>Ukraine</option>
-          <option value="jenia">Jenia</option>
           <option value="alla">Alla</option>
           <option value="traveling">Traveling</option>
+          <option value="box">Box</option>
         {{else}} {{#if (isWithAlla item.location)}}
           <option value="usa">USA</option>
           <option value="ukraine">Ukraine</option>
-          <option value="jenia">Jenia</option>
           <option value="alla" selected>Alla</option>
           <option value="traveling">Traveling</option>
+          <option value="box">Box</option>
         {{else}} {{#if (isTraveling item.location)}}
           <option value="usa">USA</option>
           <option value="ukraine">Ukraine</option>
-          <option value="jenia">Jenia</option>
           <option value="alla">Alla</option>
           <option value="traveling" selected>Traveling</option>
+          <option value="box">Box</option>
+        {{else}} {{#if (isInBox item.location)}}
+        <option value="usa">USA</option>
+          <option value="ukraine">Ukraine</option>
+          <option value="alla">Alla</option>
+          <option value="traveling">Traveling</option>
+          <option value="box" selected>Box</option>
         {{else}}
           <option value="usa" selected>USA</option>
           <option value="ukraine">Ukraine</option>
-          <option value="jenia">Jenia</option>
           <option value="alla">Alla</option>
           <option value="traveling">Traveling</option>
+          <option value="box">Box</option>
         {{/if}}{{/if}}{{/if}}{{/if}}
       </select>
     </div>

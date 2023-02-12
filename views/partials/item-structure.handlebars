@@ -6,15 +6,6 @@
   {{/if}}
 
 
-  {{!-- {{#if item.picture}}
-    <img src="https://d2hcaqfu7kwyzt.cloudfront.net/{{item.picture}}" class="card-img-top" alt="{{item.picture}}">
-  {{else}} 
-    {{#if (isForMen item.gender)}}
-      <img src="/images/clothing/man-placeholder.jpeg" class="card-img-top" alt="...">
-    {{else}}
-      <img src="/images/clothing/woman-placeholder.jpg" class="card-img-top" alt="...">
-    {{/if}}
-  {{/if}} --}}
   <div class='card-img-overlay detail-overlay'>
     {{#if item.location}}
       <img src="/images/locations/{{item.location}}.png" class="country-img" alt="{{item.location}}">
@@ -73,9 +64,6 @@
       <button class="btn-success quick-inventory-button">USA</button>
     </div>
     <div class="col-12">
-      <button class="btn-success quick-inventory-button">Jenia</button>
-    </div>
-    <div class="col-12">
       <button class="btn-success quick-inventory-button">Alla</button>
     </div>
     <div class="col-12">
@@ -101,15 +89,7 @@
     </div>
 
     <div class="col-12">
-      <button id="jenia" class="btn-success custom-sell">Sold By Jenia</button>
-    </div>
-
-    <div class="col-12">
       <button id="alla" class="btn-success custom-sell">Sold By Alla</button>
-    </div>
-
-    <div class="col-12">
-      <button class="btn-success sell-to-alla">Sell To Alla</button>
     </div>
 
     <div class="col-12">

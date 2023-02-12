@@ -34,28 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   document.addEventListener('click', (e) => {
-    if (e.target.classList.contains('sell-to-alla')) {
-      const ALLA_ORDER_ID = 9;
-      let order = {id: ALLA_ORDER_ID};
-      let regex = /[^0-9.]/g;
-      let itemId = e.target.parentNode.parentNode.id.split('-')[2];
-      let itemToReplace = document.querySelector(`[data-item-id="${itemId}"]`);
-      let purchasePrice = itemToReplace.querySelector('.purchase-price').textContent.replace(regex, '');
-      let soldPrice = (Number(purchasePrice) + (Number(purchasePrice * .25))).toFixed(2);
-      
-      fetch(`/clothing/sellitem/${itemId}`, {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({soldPrice: soldPrice, customer: "Alla", order, person: 'alla'}),
-      })
-        .then(response => response.text())
-        .then(data => {
-          itemToReplace.innerHTML = data;
-        });
-    }
-
     if (e.target.classList.contains('not-sold')) {
       let itemId = e.target.parentNode.parentNode.id.split('-')[2];
       let itemToReplace = document.querySelector(`[data-item-id="${itemId}"]`);
@@ -72,8 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
       let person = e.target.id;
       let sellingMonth = customer;
 
-      if (person !== 'nastia') {
-        sellingMonth = capitalize(person) + ' ' + customer;
+      if (person === 'alla') {
+        sellingMonth = 'Nastia-Alla' + ' ' + customer;
       }
 
       let parentDiv = e.target.parentNode.parentNode;
@@ -94,8 +72,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })
 })
-
-const capitalize = (name) => {
-  return name[0].toUpperCase() + name.slice(1);
-}
-

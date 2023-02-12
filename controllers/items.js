@@ -1,5 +1,3 @@
-// remove upload
-
 const itemRouter = require('express').Router();
 const Clothing = require('../models/items');
 const Receipts = require('../models/receipts');
@@ -13,7 +11,6 @@ const buildFilterString = require('../lib/build-filter-string.js');
 const capitalize = require('../lib/capitalize.js');
 const setTaxPercent = require('../lib/set-tax-percent');
 const calculateTaxAmount = require('../lib/calculate-tax-amount');
-// const sendMessageToQueue = require('../lib/send-message-to-queue');
 
 const UAH_CONVERSION = 28;
 
@@ -24,7 +21,6 @@ const helpers = {
   isArray: (element) => Array.isArray(element),
   joinArray: (element) => element.join(', '),
   isForMen: (gender) => gender === 'men',
-  isWithJenia: (location) => location === 'jenia',
   isInUkraine: (location) => location && location.toLowerCase() === 'ukraine',
   isWithAlla: (location) => location === 'alla',
   isTraveling: (location) => location === 'traveling',
@@ -39,7 +35,6 @@ const removeSpaces = (string) => {
 const calculateTotalPrice = (item) => {
   setTaxPercent(item);
   let taxAmount = calculateTaxAmount(item);
-  // let taxAmount = +item.purchase_price * (item.tax / 100);
   return (+item.purchase_price + taxAmount).toFixed(2);
 }
 
@@ -79,29 +74,16 @@ itemRouter.post('/imagetest', (req, res) => {
 itemRouter.post('/newitem', requiresAuthentication, upload.single('brandomania-picture'), async (req, res) => {
   try {
     let dataObj = req.body;
-    // let originalName = dataObj.pictureName;
     let tagNumber = dataObj.tag_number;
-    // let brand = dataObj.brand;
-    // let file = req.file;
 
     let {brand, type, colors} = dataObj;
 
     if (tagNumber.includes('?')) {
       tagNumber = String(Math.floor(Math.random() * 1000));
     }
-    // ! add color to picture name?
     dataObj.picture = `${removeSpaces(brand)}-${removeSpaces(type)}-${removeSpaces(colors)}-${tagNumber.toLowerCase()}.png`
 
     modifyProperties(dataObj);
-
-    // if (originalName) {
-    //   let queueData = {
-    //     originalName: originalName,
-    //     newName: dataObj.picture
-    //   }
-
-      // sendMessageToQueue(queueData);
-    // }
 
     let itemId = await Clothing.create(dataObj);
 
@@ -172,8 +154,6 @@ itemRouter.post('/addtopackage/:itemId', requiresAuthentication, async (req, res
     updatedLocation = await Clothing.updateLocation(itemId, 'box');
   } else if (pkgName.match(/alla/i)) {
     updatedLocation = await Clothing.updateLocation(itemId, 'alla');
-  } else if (pkgName.match(/(jen|zhen)/i)) {
-    updatedLocation = await Clothing.updateLocation(itemId, 'jenia');
   } else {
     updatedLocation = await Clothing.updateLocation(itemId, 'traveling');
   }
@@ -204,8 +184,6 @@ itemRouter.post('/sellitem/:itemId', requiresAuthentication, async (req, res) =>
     newLocation = 'ukraine';
   } else if (person === 'alla' || undefined) {
     newLocation = 'alla';
-  } else if (person === 'jenia') {
-    newLocation = 'jenia';
   } else {
     newLocation = 'ukraine';
   }
