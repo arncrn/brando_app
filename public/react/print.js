@@ -24,6 +24,15 @@ const Print = () => {
     pricePerItem = (Number(pkg.price) / Number(items.length)).toFixed(2);
   }
 
+  const updateSoldToValue = (itemId, linkValue, soldPrice) => {
+    let updatedItems = items.map(item => {
+      if (item.id === itemId) {
+        return {...item, sold_to: linkValue, sold_price: soldPrice}
+      }
+      return item;
+    })
+    setItems(updatedItems);
+  };
   
   return ( 
     <main>
@@ -40,6 +49,7 @@ const Print = () => {
             <th>Tag Number</th>
             <th>Purchase Price</th>
             <th>Shipping Cost</th>
+            <th>Selling Price</th>
             <th>Extra Details</th>
             {allowImages && <th>Image</th>}
             <th>Customer</th>
@@ -56,6 +66,7 @@ const Print = () => {
                 visibleEditButton={visibleEditButton}
                 setItems={setItems}
                 packageName={pkg.package_name}
+                updateSoldToValue={updateSoldToValue}
               />
             );
           })}
@@ -87,33 +98,28 @@ const EditButton = ({editEnabled, setEditEnabled, handleSave}) => {
   )
 }
 
-
-const SoldLink = ({soldTo, visibleEditButton, itemId, updateSoldToValue}) => {
-  const [editEnabled, setEditEnabled] = useState(false);
-  const [linkValue, setLinkValue] = useState(soldTo || "");
-
+const SoldPrice = ({price, setPrice, editEnabled}) => {
   const changeInputValue = ({target}) => {
-    setLinkValue(target.value);
+    setPrice(target.value);
   }
 
-  const handleSave = () => {
-    fetch(`/clothing/updatesoldlink/${itemId}`, {
-      method: "POST",
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      body: JSON.stringify({soldTo: linkValue}),
-    }).then(() => {
-      updateSoldToValue(itemId, linkValue);
-      setEditEnabled(false);
-    })
+  return (
+    editEnabled ?
+    <td><input type="text" value={price} onChange={changeInputValue}/></td> :
+    <td>{price ? `$${price}` : ""}</td>
+  )
+}
+
+const SoldLink = ({visibleEditButton, itemId, handleSave, linkValue, setLinkValue, editEnabled}) => {
+  const changeInputValue = ({target}) => {
+    setLinkValue(target.value);
   }
 
   const linkDisplay = () => {
     return (
       editEnabled ?
       <td><input type="text" value={linkValue} onChange={changeInputValue}/></td> :
-      <td><a href={soldTo || "#"} target="_blank">{soldTo || ""}</a></td>
+      <td><a href={linkValue || "#"} target="_blank">{linkValue || ""}</a></td>
     )
   }
   
@@ -125,7 +131,7 @@ const SoldLink = ({soldTo, visibleEditButton, itemId, updateSoldToValue}) => {
           <EditButton 
             editEnabled={editEnabled}
             setEditEnabled={setEditEnabled}
-            handleSave={handleSave}
+            handleSave={() => handleSave(itemId)}
           />
         }
       </React.Fragment>
@@ -140,8 +146,12 @@ const ClothingImage = ({picture, id, updateArrived}) => {
   )
 }
 
-const TableRow = ({item, idx, allowImages, visibleEditButton, setItems, packageName}) => {
+const TableRow = ({item, idx, allowImages, visibleEditButton, packageName, updateSoldToValue}) => {
   const [arrived, setArrived] = useState(item.arrived);
+  const [editEnabled, setEditEnabled] = useState(false);
+  const [linkValue, setLinkValue] = useState(item.sold_to || "");
+  const [price, setPrice] = useState(item.sold_price || "");
+
   const sold = item.sold_price > 0;
 
   const formatText = (extraInfo) => {
@@ -158,16 +168,6 @@ const TableRow = ({item, idx, allowImages, visibleEditButton, setItems, packageN
     Tax: ${item.tax_amount}
     Total: ${item.total_price}`;
   }
-  
-  const updateSoldToValue = (itemId, linkValue) => {
-    let updatedItems = items.map(item => {
-      if (item.id === itemId) {
-        return {...item, sold_to: linkValue}
-      }
-      return item;
-    })
-    setItems(updatedItems);
-  };
 
   const updateArrived = (id) => {
     fetch(`/clothing/updatearrived/${id}`, {
@@ -179,6 +179,47 @@ const TableRow = ({item, idx, allowImages, visibleEditButton, setItems, packageN
     }).then(() => {
       setArrived(!arrived);
     })
+  }
+
+  const handleSave = (itemId) => {
+    fetch(`/clothing/updatesoldlink/${itemId}`, {
+      method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      body: JSON.stringify({soldTo: linkValue}),
+    })
+    .then(saveSoldPrice(itemId))
+    .then(() => {
+      updateSoldToValue(itemId, linkValue, price);
+      setEditEnabled(false);
+    });
+  }
+
+  const saveSoldPrice = (itemId) => {
+    const customer = window.localStorage.getItem('customer');;
+    let person;
+    let sellingMonth;
+
+    if (isAllaPackage()) {
+      person = 'alla';
+      sellingMonth = 'Nastia-Alla' + ' ' + customer; 
+    } else {
+      person = 'nastia';
+      sellingMonth = customer;
+    }
+
+    const uahUsdConversion = window.localStorage.getItem('uahUsdConverion') || 28;
+    const convertedPrice = String(price / uahUsdConversion);
+
+    fetch(`/clothing/sellitem/${itemId}`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({soldPrice: convertedPrice, customer: sellingMonth, person: person}),
+    })
+      .then(response => response.text());
   }
 
   const isAllaPackage = () => {
@@ -207,6 +248,11 @@ const TableRow = ({item, idx, allowImages, visibleEditButton, setItems, packageN
       <td>{item.tag_number}</td>
       <td>${formatPrice(item)}</td>
       <td>${item.shipping_cost}</td>
+      <SoldPrice
+        setPrice={setPrice}
+        price={price}
+        editEnabled={editEnabled}
+      />
       <td>{formatText(item.extra_info)}</td>
       {
         allowImages &&
@@ -217,10 +263,12 @@ const TableRow = ({item, idx, allowImages, visibleEditButton, setItems, packageN
         />
       }
       <SoldLink 
-        soldTo={item.sold_to} 
         visibleEditButton={visibleEditButton}
         itemId={item.id}
-        updateSoldToValue={updateSoldToValue}
+        handleSave={handleSave}
+        linkValue={linkValue}
+        setLinkValue={setLinkValue}
+        editEnabled={editEnabled}
       />
     </tr>
   )
