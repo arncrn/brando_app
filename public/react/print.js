@@ -110,7 +110,7 @@ const SoldPrice = ({price, setPrice, editEnabled}) => {
   )
 }
 
-const SoldLink = ({visibleEditButton, itemId, handleSave, linkValue, setLinkValue, editEnabled}) => {
+const SoldLink = ({visibleEditButton, itemId, handleSave, linkValue, setLinkValue, editEnabled, setEditEnabled}) => {
   const changeInputValue = ({target}) => {
     setLinkValue(target.value);
   }
@@ -269,6 +269,7 @@ const TableRow = ({item, idx, allowImages, visibleEditButton, packageName, updat
         linkValue={linkValue}
         setLinkValue={setLinkValue}
         editEnabled={editEnabled}
+        setEditEnabled={setEditEnabled}
       />
     </tr>
   )
