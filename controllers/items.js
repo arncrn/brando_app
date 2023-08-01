@@ -257,6 +257,13 @@ itemRouter.post('/editpartial', requiresAuthentication, upload.single('brandoman
   }
 });
 
+itemRouter.post('/editExtraInfo/:itemId', requiresAuthentication, async (req, res) => {
+  const itemId = req.params.itemId;
+  const extraInfo = req.body.extraInfo;
+  await Clothing.updateExtraInfo(itemId, extraInfo);
+  res.sendStatus(200).end();
+});
+
 itemRouter.post('/updatesoldlink/:itemId', requiresAuthentication, async (req, res) => {
   const itemId = req.params.itemId;
   const soldTo = req.body.soldTo;

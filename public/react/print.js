@@ -1,6 +1,15 @@
 const e = React.createElement;
 const {useState, useEffect} = React;
 
+const formatText = (extraInfo) => {
+  if (extraInfo === null) {
+    return;
+  }
+  return extraInfo.split("\r\n").map((text, idx) => {
+    return (<p key={idx}>{text}</p>);
+  });
+}
+
 const Print = () => {
   const [items, setItems] = useState([]);
   const [sumOfItems, setSumOfItems] = useState(0);
@@ -110,6 +119,18 @@ const SoldPrice = ({price, setPrice, editEnabled}) => {
   )
 }
 
+const ExtraInfoText = ({setExtraInfo, extraInfo, editEnabled}) => {
+  const changeInputValue = ({target}) => {
+    setExtraInfo(target.value);
+  }
+
+  return (
+    editEnabled ?
+    <td><input type="text" value={extraInfo} onChange={changeInputValue}/></td> :
+    <td>{formatText(extraInfo)}</td> 
+  );
+}
+
 const SoldLink = ({visibleEditButton, itemId, handleSave, linkValue, setLinkValue, editEnabled, setEditEnabled}) => {
   const changeInputValue = ({target}) => {
     setLinkValue(target.value);
@@ -151,17 +172,9 @@ const TableRow = ({item, idx, allowImages, visibleEditButton, packageName, updat
   const [editEnabled, setEditEnabled] = useState(false);
   const [linkValue, setLinkValue] = useState(item.sold_to || "");
   const [price, setPrice] = useState(item.sold_price || "");
+  const [extraInfo, setExtraInfo] = useState(item.extra_info || "");
 
   const sold = item.sold_price > 0;
-
-  const formatText = (extraInfo) => {
-    if (extraInfo === null) {
-      return;
-    }
-    return extraInfo.split("\r\n").map((text, idx) => {
-      return (<p key={idx}>{text}</p>);
-    });
-  }
   
   const formatPrice = (item) => {
     return `Price: ${item.purchase_price}
@@ -190,9 +203,20 @@ const TableRow = ({item, idx, allowImages, visibleEditButton, packageName, updat
       body: JSON.stringify({soldTo: linkValue}),
     })
     .then(saveSoldPrice(itemId))
+    .then(saveExtraInfo(itemId))
     .then(() => {
       updateSoldToValue(itemId, linkValue, price);
       setEditEnabled(false);
+    });
+  }
+
+  const saveExtraInfo = (itemId) => {
+    fetch(`/clothing/editExtraInfo/${itemId}`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({extraInfo: extraInfo}),
     });
   }
 
@@ -200,6 +224,10 @@ const TableRow = ({item, idx, allowImages, visibleEditButton, packageName, updat
     const customer = window.localStorage.getItem('customer');;
     let person;
     let sellingMonth;
+
+    if (price === undefined) {
+      return;
+    }
 
     if (isAllaPackage()) {
       person = 'alla';
@@ -253,7 +281,11 @@ const TableRow = ({item, idx, allowImages, visibleEditButton, packageName, updat
         price={price}
         editEnabled={editEnabled}
       />
-      <td>{formatText(item.extra_info)}</td>
+      <ExtraInfoText 
+        editEnabled={editEnabled}
+        extraInfo={extraInfo}
+        setExtraInfo={setExtraInfo}
+      />
       {
         allowImages &&
         <ClothingImage 
