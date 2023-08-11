@@ -14,6 +14,8 @@ const Print = () => {
   const [items, setItems] = useState([]);
   const [sumOfItems, setSumOfItems] = useState(0);
   const [totalShipping, setTotalShipping] = useState(0);
+  const [totalSelling, setTotalSelling] = useState(0);
+  const [totalProfit, setTotalProfit] = useState(0);
   const [pkg, setPkg] = useState({});
   const [allowImages, setAllowImages] = useState(false);
   const [visibleEditButton, setVisibleEditButton] = useState(false);
@@ -26,6 +28,8 @@ const Print = () => {
     setItems(response.items);
     setSumOfItems(response.sumOfItems);
     setTotalShipping(response.totalShipping);
+    setTotalSelling(response.totalSelling);
+    setTotalProfit(response.totalProfit);
   }, []);
   
   let pricePerItem = 0;
@@ -88,6 +92,11 @@ const Print = () => {
             <td></td>
             <td><strong>${sumOfItems}</strong></td>
             <td><strong>${totalShipping}</strong></td>
+            <td><strong>${totalSelling}</strong></td>
+          </tr>
+          <tr>
+            <th>Total Profit:</th>
+            <td colspan="100%">{totalProfit}</td>
           </tr>
         </tbody>
         <tfoot></tfoot>

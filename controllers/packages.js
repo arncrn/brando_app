@@ -173,6 +173,7 @@ packageRouter.get('/packageitems/:pkgId', async (req, res) => {
 
   let sumOfItems = 0;
   let totalShipping = 0;
+  let totalSelling = 0;
   let pricePerItem = (Number(pkg.price) / items.length).toFixed(2);
 
   items.forEach(item => {
@@ -183,13 +184,16 @@ packageRouter.get('/packageitems/:pkgId', async (req, res) => {
     item.tax_amount = taxAmount.toFixed(2);
     item.shipping_cost = item.shipping_cost || pricePerItem;
     totalShipping += Number(item.shipping_cost);
+    totalSelling += (Number(item.sold_price) || 0);
     sumOfItems += totalPrice;
   })
 
   res.json({
     items: items,
     sumOfItems: sumOfItems.toFixed(2),
-    totalShipping: totalShipping.toFixed(2)
+    totalShipping: totalShipping.toFixed(2),
+    totalSelling: totalSelling.toFixed(2),
+    totalProfit: (totalSelling - sumOfItems).toFixed(2)
   })
 })
 packageRouter.post('/items/:pkgId/shippingcost', async (req, res) => {
