@@ -15,6 +15,9 @@ const calculateTaxAmount = require('../lib/calculate-tax-amount');
 const UAH_CONVERSION = 28;
 
 const helpers = {
+  reserved: (soldTo, soldPrice) => {
+    return soldTo && !Number(soldPrice) > 0
+  },
   isInStock: (bool) => bool === true,
   sellPending: (bool) => bool === true,
   greaterThanZero: (soldPrice) => Number(soldPrice) > 0,

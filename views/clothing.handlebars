@@ -66,7 +66,7 @@
             <div class="instock">IN STOCK</div>
           {{/if}}
 
-          {{#if sold_to}}
+          {{#if (reserved sold_to sold_price)}}
             <div class="reserved">
               <button>
                 <a href={{sold_to}} target="_blank">RESERVED</a>
