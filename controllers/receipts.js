@@ -47,6 +47,9 @@ receiptRouter.get("/view/:receiptId", requiresAuthentication, async (req, res) =
     items: items,
     filters: [receiptId, receipt.store],
     helpers: {
+      reserved: (soldTo, soldPrice) => {
+        return soldTo && !Number(soldPrice) > 0
+      },
       isInStock: function (bool) {
         return bool === true;
       },

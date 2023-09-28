@@ -213,6 +213,9 @@ orderRouter.get("/view/:orderId", requiresAuthentication, async (req, res) => {
     items: items,
     filters: [order.customer_id, order.name],
     helpers: {
+      reserved: (soldTo, soldPrice) => {
+        return soldTo && !Number(soldPrice) > 0
+      },
       isInStock: function (bool) {
         return bool === true;
       },

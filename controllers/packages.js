@@ -70,6 +70,9 @@ packageRouter.get("/view/:pkgId", requiresAuthentication, async (req, res) => {
     items: items,
     filters: [pkg.package_name],
     helpers: {
+      reserved: (soldTo, soldPrice) => {
+        return soldTo && !Number(soldPrice) > 0
+      },
       isInStock: function (bool) {
         return bool === true;
       },
