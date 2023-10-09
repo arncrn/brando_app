@@ -54,6 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
         sellingMonth = 'Nastia-Alla' + ' ' + customer;
       }
 
+      if (person === 'irina') {
+        sellingMonth = `Nastia-Irina ${customer}`;
+      }
+
       let parentDiv = e.target.parentNode.parentNode;
       let sellingPrice = parentDiv.querySelector('input').value;
       let itemId = parentDiv.id.split('-')[2];

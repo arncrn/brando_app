@@ -185,7 +185,10 @@ itemRouter.post('/sellitem/:itemId', requiresAuthentication, async (req, res) =>
 
   if (person === 'nastia') {
     newLocation = 'ukraine';
-  } else if (person === 'alla' || undefined) {
+  } else if (person === 'irina') {
+    newLocation = 'ukraine';
+  }
+  else if (person === 'alla' || undefined) {
     newLocation = 'alla';
   } else {
     newLocation = 'ukraine';
