@@ -270,3 +270,16 @@ pre {
 a.package-link {
   color: red;
 }
+
+
+.simple-keyboard {
+  max-width: 850px;
+  display: none;
+}
+
+.show-keyboard {
+  display: block;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
