@@ -230,7 +230,7 @@ const TableRow = ({item, idx, allowImages, visibleEditButton, packageName, updat
   }
 
   const saveSoldPrice = (itemId) => {
-    const customer = window.localStorage.getItem('customer');;
+    const customer = window.localStorage.getItem('customer');
     let person;
     let sellingMonth;
 
@@ -246,9 +246,8 @@ const TableRow = ({item, idx, allowImages, visibleEditButton, packageName, updat
       sellingMonth = customer;
     }
 
-    // const uahUsdConversion = window.localStorage.getItem('uahUsdConverion') || 28;
-    const convertedPrice = String(price);
-    // const convertedPrice = String(price / uahUsdConversion);
+    const uahUsdConversion = window.localStorage.getItem('uahUsdConverion') || 39;
+    const convertedPrice = String(price / uahUsdConversion);
 
     fetch(`/clothing/sellitem/${itemId}`, {
       method: "POST",

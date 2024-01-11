@@ -177,6 +177,8 @@ itemRouter.post('/sellitem/:itemId', requiresAuthentication, async (req, res) =>
     soldPrice = soldPrice.slice(0, -1);
   }
 
+  soldPrice = Number(soldPrice).toFixed(2);
+
   let customer = req.body.customer;
   const person = req.body.person;
   let order = req.body.order;

@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('click', (e) => {
     if (e.target.classList.contains('convert-value')) {
-      let uahConversion = window.localStorage.getItem('uahUsdConverion') || 28;
+      let uahConversion = window.localStorage.getItem('uahUsdConverion') || 39;
       let regex = /[^0-9.]/g;
 
       let uahInput;
