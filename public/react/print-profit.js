@@ -1,5 +1,5 @@
 const e = React.createElement;
-const {useState, useEffect} = React;
+const { useState, useEffect } = React;
 
 const Print = () => {
   const [items, setItems] = useState([]);
@@ -19,26 +19,13 @@ const Print = () => {
     setShippingCost(response.shippingCost);
     setProfit(response.profit);
     setRevenue(response.revenue);
-  }, [])
-
-  const formatText = (extraInfo) => {
-    if (extraInfo === null) {
-      return;
-    }
-    return extraInfo.split("\r\n").map((text, idx) => {
-      return (<p key={idx}>{text}</p>);
-    });
-  }
-
-  const formatPrice = (item) => {
-    return `Price: ${item.purchase_price}
-    Tax: ${item.tax_amount}
-    Total: ${item.total_price}`;
-  }
+  }, []);
 
   return (
     <main>
-      <button onClick={() => setAllowImages(!allowImages)}>Toggle Images</button>
+      <button onClick={() => setAllowImages(!allowImages)}>
+        Toggle Images
+      </button>
       <table>
         <thead>
           <tr>
@@ -59,23 +46,12 @@ const Print = () => {
         <tbody>
           {items.map((item, idx) => {
             return (
-              <tr key={item.id}>
-                <th>{idx + 1}</th>
-                <td>{item.brand}</td>
-                <td>{item.type}</td>
-                <td>{item.size}</td>
-                <td>{item.colors}</td>
-                <td>{item.tag_number}</td>
-                <td>${formatPrice(item)}</td>
-                <th>${item.shipping_cost}</th>
-                <th>${item.pending ? 'PENDING' : item.sold_price}</th>
-                <th>${item.profit}</th>
-                <td>{formatText(item.extra_info)}</td>
-                {allowImages &&
-                <td>
-                  {item.picture && <img height="150px" src={`https://d2hcaqfu7kwyzt.cloudfront.net/${item.picture}`} />}
-                </td>}
-              </tr>
+              <TableRow
+                key={item.id}
+                item={item}
+                idx={idx}
+                allowImages={allowImages}
+              />
             );
           })}
           <tr>
@@ -85,17 +61,106 @@ const Print = () => {
             <td></td>
             <td></td>
             <td></td>
-            <td><strong>${sumOfItems}</strong></td>
-            <td><strong>${shippingCost}</strong></td>
-            <td><strong>${revenue}</strong></td>
-            <td><strong>${profit}</strong></td>
+            <td>
+              <strong>${sumOfItems}</strong>
+            </td>
+            <td>
+              <strong>${shippingCost}</strong>
+            </td>
+            <td>
+              <strong>${revenue}</strong>
+            </td>
+            <td>
+              <strong>${profit}</strong>
+            </td>
           </tr>
         </tbody>
         <tfoot></tfoot>
       </table>
     </main>
-  )
-}
+  );
+};
+
+const TableRow = ({ item, idx, allowImages }) => {
+  const [arrived, setArrived] = useState(item.arrived);
+
+  const sold = item.sold_price > 0;
+
+  const formatText = (extraInfo) => {
+    if (extraInfo === null) {
+      return;
+    }
+    return extraInfo.split('\r\n').map((text, idx) => {
+      return <p key={idx}>{text}</p>;
+    });
+  };
+
+  const formatPrice = (item) => {
+    return `Price: ${item.purchase_price}
+    Tax: ${item.tax_amount}
+    Total: ${item.total_price}`;
+  };
+
+  const updateArrived = (id) => {
+    fetch(`/clothing/updatearrived/${id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ itemId: id, arrived: !arrived }),
+    }).then(() => {
+      setArrived(!arrived);
+    });
+  };
+
+  const setBackgroundColor = () => {
+    let bgColor = null;
+
+   if (sold) {
+      bgColor = 'red';
+    } else if (arrived) {
+      bgColor = 'cyan';
+    }
+
+    return {backgroundColor: bgColor};
+  }
+
+  return (
+    <tr style={setBackgroundColor()}>
+      <th>{idx + 1}</th>
+      <td>{item.brand}</td>
+      <td>{item.type}</td>
+      <td>{item.size}</td>
+      <td>{item.colors}</td>
+      <td>{item.tag_number}</td>
+      <td>${formatPrice(item)}</td>
+      <th>${item.shipping_cost}</th>
+      <th>${item.pending ? 'PENDING' : item.sold_price}</th>
+      <th>${item.profit}</th>
+      <td>{formatText(item.extra_info)}</td>
+      {allowImages && (
+        <ClothingImage
+          picture={item.picture}
+          updateArrived={updateArrived}
+          id={item.id}
+        />
+      )}
+    </tr>
+  );
+};
+
+const ClothingImage = ({ picture, id, updateArrived }) => {
+  return (
+    <td onClick={() => updateArrived(id)}>
+      {picture && (
+        <img
+          height='150px'
+          src={`https://d2hcaqfu7kwyzt.cloudfront.net/${picture}`}
+        />
+      )}
+    </td>
+  );
+};
 
 const domContainer = document.querySelector('#print');
 ReactDOM.render(e(Print), domContainer);
