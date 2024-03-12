@@ -320,3 +320,4 @@ const domContainer = document.querySelector('#print');
 ReactDOM.render(e(Print), domContainer);
 
 // ALTER TABLE clothing ADD COLUMN arrived boolean DEFAULT false;
+// ALTER TABLE clothing ADD COLUMN marked boolean DEFAULT false;

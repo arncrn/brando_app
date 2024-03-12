@@ -370,6 +370,13 @@ const editArrived = async (itemId, arrived) => {
   return result.rowCount > 0;
 }
 
+const editMarked = async (itemId, marked) => {
+  const UPDATE_MARKED = "UPDATE clothing SET marked = $1 WHERE id = $2";
+  let result = await dbQuery(UPDATE_MARKED, marked, itemId);
+
+  return result.rowCount > 0;
+}
+
 module.exports = {
   toggleSeen,
   findById,
@@ -412,5 +419,6 @@ module.exports = {
   getBrands,
   getTypes,
   editSoldTo,
-  editArrived
-}
+  editArrived,
+  editMarked,
+};

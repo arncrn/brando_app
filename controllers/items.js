@@ -286,6 +286,13 @@ itemRouter.post('/updatearrived/:itemId', requiresAuthentication, async (req, re
   res.sendStatus(200).end();
 })
 
+itemRouter.post('/updatemarked/:itemId', requiresAuthentication, async (req, res) => {
+  const itemId = req.params.itemId;
+  const marked = req.body.marked;
+  await Clothing.editMarked(itemId, marked);
+  res.sendStatus(200).end();
+})
+
 itemRouter.post('/duplicateitem/:itemId', requiresAuthentication, async (req, res) => {
   let itemId = req.params.itemId;
   let duplicateId = await Clothing.duplicate(itemId);

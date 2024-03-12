@@ -82,9 +82,7 @@ const Print = () => {
 };
 
 const TableRow = ({ item, idx, allowImages }) => {
-  const [arrived, setArrived] = useState(item.arrived);
-
-  const sold = item.sold_price > 0;
+  const [marked, setMarked] = useState(item.marked);
 
   const formatText = (extraInfo) => {
     if (extraInfo === null) {
@@ -101,24 +99,22 @@ const TableRow = ({ item, idx, allowImages }) => {
     Total: ${item.total_price}`;
   };
 
-  const updateArrived = (id) => {
-    fetch(`/clothing/updatearrived/${id}`, {
+  const updateMarked = (id) => {
+    fetch(`/clothing/updateMarked/${id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ itemId: id, arrived: !arrived }),
+      body: JSON.stringify({ itemId: id, marked: !marked }),
     }).then(() => {
-      setArrived(!arrived);
+      setMarked(!marked);
     });
   };
 
   const setBackgroundColor = () => {
     let bgColor = null;
 
-   if (sold) {
-      bgColor = 'red';
-    } else if (arrived) {
+    if (marked) {
       bgColor = 'cyan';
     }
 
@@ -141,7 +137,7 @@ const TableRow = ({ item, idx, allowImages }) => {
       {allowImages && (
         <ClothingImage
           picture={item.picture}
-          updateArrived={updateArrived}
+          updateMarked={updateMarked}
           id={item.id}
         />
       )}
@@ -149,9 +145,9 @@ const TableRow = ({ item, idx, allowImages }) => {
   );
 };
 
-const ClothingImage = ({ picture, id, updateArrived }) => {
+const ClothingImage = ({ picture, id, updateMarked }) => {
   return (
-    <td onClick={() => updateArrived(id)}>
+    <td onClick={() => updateMarked(id)}>
       {picture && (
         <img
           height='150px'
