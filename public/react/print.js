@@ -279,7 +279,7 @@ const TableRow = ({
     let sellingMonth;
     let convertUahToUsd = true;
 
-    if (price === undefined) {
+    if (price === undefined || price === '') {
       return;
     }
 
