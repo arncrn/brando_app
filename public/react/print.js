@@ -307,11 +307,16 @@ const TableRow = ({
       body: JSON.stringify({
         soldPrice: convertUahToUsd
           ? convertedPrice
-          : String(price).slice(0, -1),
+          : subtractFivePercent(String(price).slice(0, -1)),
         customer: sellingMonth,
         person: person,
       }),
     }).then((response) => response.text());
+  };
+
+  const subtractFivePercent = (priceString) => {
+    let converted = Number(priceString) * 0.95;
+    return String(converted);
   };
 
   const isAllaPackage = () => {
@@ -368,6 +373,3 @@ const TableRow = ({
 
 const domContainer = document.querySelector('#print');
 ReactDOM.render(e(Print), domContainer);
-
-// ALTER TABLE clothing ADD COLUMN arrived boolean DEFAULT false;
-// ALTER TABLE clothing ADD COLUMN marked boolean DEFAULT false;
