@@ -315,8 +315,7 @@ const TableRow = ({
   };
 
   const subtractFivePercent = (priceString) => {
-    let converted = Number(priceString) * 0.95;
-    return String(converted);
+    return (Number(priceString) * 0.95).toFixed(2);
   };
 
   const isAllaPackage = () => {
