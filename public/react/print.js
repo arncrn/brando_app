@@ -347,7 +347,7 @@ const TableRow = ({
       <td>${item.shipping_cost}</td>
       <SoldPrice setPrice={setPrice} price={price} editEnabled={editEnabled} />
       <td>
-        {Number(item.sold_price) > 0 ? "$" + (Number(item.sold_price) - Number(item.total_price) + Number(item.shipping_cost)).toFixed(2) : ""}
+        {Number(item.sold_price) > 0 ? "$" + (Number(item.sold_price) - Number(item.total_price) - Number(item.shipping_cost)).toFixed(2) : ""}
       </td>
       <ExtraInfoText
         editEnabled={editEnabled}
