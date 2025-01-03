@@ -8,7 +8,7 @@
     "start": "NODE_ENV=production node index.js",
     "dev": "NODE_ENV=development nodemon index.js",
     "backup": "pg_dump -d brandomania3 --inserts > backup.sql",
-    "backup:heroku": "dropdb brandomania && heroku pg:pull DATABASE_URL brandomania --app pacific-everglades-84945",
+    "backup:heroku": "dropdb brandomania_backup && heroku pg:pull DATABASE_URL brandomania_backup --app pacific-everglades-84945",
     "sql-file:heroku": "pg_dump -d brandomania --inserts > heroku.sql",
     "test": "NODE_ENV=test jest --verbose --runInBand",
     "build": "webpack"

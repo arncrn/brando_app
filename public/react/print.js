@@ -66,6 +66,7 @@ const Print = () => {
             <th>Purchase Price</th>
             <th>Shipping Cost</th>
             <th>Selling Price</th>
+            <th>Profit</th>
             <th>Extra Details</th>
             {allowImages && <th>Image</th>}
             <th>Customer</th>
@@ -345,6 +346,9 @@ const TableRow = ({
       <td>${formatPrice(item)}</td>
       <td>${item.shipping_cost}</td>
       <SoldPrice setPrice={setPrice} price={price} editEnabled={editEnabled} />
+      <td>
+        {Number(item.sold_price) > 0 ? "$" + (Number(item.sold_price) - Number(item.total_price) + Number(item.shipping_cost)).toFixed(2) : ""}
+      </td>
       <ExtraInfoText
         editEnabled={editEnabled}
         extraInfo={extraInfo}
@@ -372,3 +376,25 @@ const TableRow = ({
 
 const domContainer = document.querySelector('#print');
 ReactDOM.render(e(Print), domContainer);
+
+// ALTER TABLE clothing ADD COLUMN arrived boolean DEFAULT false;
+// ALTER TABLE clothing ADD COLUMN marked boolean DEFAULT false;
+
+// SELECT COUNT(ID)
+// FROM clothing
+// WHERE order_id = 142;
+
+// sold_price
+
+// SELECT id, sold_price
+// FROM clothing
+// WHERE order_id = 142
+// AND sold_price IS NULL;
+
+// UPDATE clothing
+// SET order_id = NULL
+// WHERE order_id = 142 AND sold_price IS NULL;
+
+// UPDATE clothing
+// SET purchase_price = purchase_price * 0.68
+// WHERE receipt_id = 1695;
