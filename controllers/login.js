@@ -2,8 +2,9 @@ const jwt = require('jsonwebtoken');
 const loginRouter = require('express').Router();
 const Login = require('../models/login');
 const config = require('../lib/config');
+const { looseAuthCheck } = require('../utils/middleware');
 
-loginRouter.get('/', (req, res) => {
+loginRouter.get('/', looseAuthCheck, (req, res) => {
   if (req.user) {
     res.redirect('/clothing');
   } else {
@@ -11,7 +12,7 @@ loginRouter.get('/', (req, res) => {
   }
 });
 
-loginRouter.get('/login', (req, res) => {
+loginRouter.get('/login', looseAuthCheck, (req, res) => {
   if (req.user) {
     res.redirect('/clothing');
   } else {
@@ -29,9 +30,13 @@ loginRouter.post('/login', async (req, res) => {
 
     if (success) {
       const secretKey = config.SECRET;
-      const token = jwt.sign({ userID: user.id }, secretKey, {
-        expiresIn: '30d',
-      });
+      const token = jwt.sign(
+        { userID: user.id, userName: user.username },
+        secretKey,
+        {
+          expiresIn: '30d',
+        }
+      );
 
       res.cookie('auth-key', token, {
         httpOnly: true, // prevents access from javasript (more secure)
