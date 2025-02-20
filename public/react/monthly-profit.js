@@ -7,7 +7,11 @@ const MonthlyProfit = () => {
   const [combinedInfo, setCombinedInfo] = useState([]);
 
   useEffect(async () => {
-    const response = await (await fetch("/orders/monthly-profits/data")).json();
+    const response = await (
+      await fetch('/orders/monthly-profits/data', {
+        credentials: include,
+      })
+    ).json();
     const nastyaProfit = extractNastyaData(response);
     const jeniaProfit = extractJeniaData(response);
 
@@ -20,9 +24,9 @@ const MonthlyProfit = () => {
 
   const isInTheFuture = (month, year) => {
     const currentDate = new Date();
-    const dataDate =  new Date(`${month} ${year}`);
+    const dataDate = new Date(`${month} ${year}`);
     return dataDate > currentDate;
-  }
+  };
 
   const combineExtractedData = (nastya, jenia) => {
     let combined = [];
@@ -38,42 +42,44 @@ const MonthlyProfit = () => {
       combined.push({
         date: `${month} ${year}`,
         nastya: record.total_profit,
-        jenia: jeniaRecord.total_profit
+        jenia: jeniaRecord.total_profit,
       });
     });
 
     return combined;
-  }
+  };
 
   const extractNastyaData = (groupData) => {
     return groupData
-      .filter(data => {
+      .filter((data) => {
         return data.name.split(' ').length === 2;
-      }).map(filtered => {
+      })
+      .map((filtered) => {
         const [month, year] = filtered.name.split(' ');
         return {
           ...filtered,
           name: 'Nastya',
           month,
-          year
-        }
-      })
-  }
+          year,
+        };
+      });
+  };
 
   const extractJeniaData = (groupData) => {
-    return groupData.filter(data => {
-      return data.name.match(/(jenia)/i);
-    })
-    .map(filtered => {
-      const [name, month, year] = filtered.name.split(" ");
-      return {
-        ...filtered,
-        name,
-        month, 
-        year,
-      }
-    })
-  }
+    return groupData
+      .filter((data) => {
+        return data.name.match(/(jenia)/i);
+      })
+      .map((filtered) => {
+        const [name, month, year] = filtered.name.split(' ');
+        return {
+          ...filtered,
+          name,
+          month,
+          year,
+        };
+      });
+  };
 
   const calculateTotalProfit = (personInfo) => {
     const total = personInfo.reduce((sum, info) => {
@@ -81,8 +87,7 @@ const MonthlyProfit = () => {
     }, 0);
 
     return formatCurrency(total);
-  }
-
+  };
 
   const formatCurrency = (amount) => {
     const formatter = new Intl.NumberFormat('en-US', {
@@ -91,18 +96,18 @@ const MonthlyProfit = () => {
     });
 
     return formatter.format(amount);
-  }
+  };
 
   return (
     <main>
-      <table className="table">
+      <table className='table'>
         <thead>
           <tr>
             <th>Month</th>
-            <th colSpan="1">Nastya</th>
-            <th colSpan="1">Jenia</th>
-            <th colSpan="1">Alla</th>
-            <th colSpan="1">Nastya/Alla</th>
+            <th colSpan='1'>Nastya</th>
+            <th colSpan='1'>Jenia</th>
+            <th colSpan='1'>Alla</th>
+            <th colSpan='1'>Nastya/Alla</th>
           </tr>
           <tr>
             <th></th>
@@ -117,10 +122,14 @@ const MonthlyProfit = () => {
             return (
               <tr>
                 <td>{info.date}</td>
-                <td style={{ color: "green", textAlign: 'right' }}>{formatCurrency(info.nastya)}</td>
-                <td style={{ color: "green", textAlign: 'right'}}>{formatCurrency(info.jenia)}</td>
-                <td style={{ color: "green", textAlign: 'right' }}>0</td>
-                <td style={{ color: "green", textAlign: 'right' }}>0</td>
+                <td style={{ color: 'green', textAlign: 'right' }}>
+                  {formatCurrency(info.nastya)}
+                </td>
+                <td style={{ color: 'green', textAlign: 'right' }}>
+                  {formatCurrency(info.jenia)}
+                </td>
+                <td style={{ color: 'green', textAlign: 'right' }}>0</td>
+                <td style={{ color: 'green', textAlign: 'right' }}>0</td>
               </tr>
             );
           })}
@@ -139,5 +148,5 @@ const MonthlyProfit = () => {
   );
 };
 
-const domContainer = document.querySelector("#monthly-profit");
+const domContainer = document.querySelector('#monthly-profit');
 ReactDOM.render(e(MonthlyProfit), domContainer);

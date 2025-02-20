@@ -1,8 +1,16 @@
 // addPhoto is set globally by public/js/save-image.js (aka bundled-save-image.js)
 
-const NEEDED_VALUES = ['size', 'brand', 'type', 'colors', 'tag_number', 'gender', 'location', 'purchase_price'];
+const NEEDED_VALUES = [
+  'size',
+  'brand',
+  'type',
+  'colors',
+  'tag_number',
+  'gender',
+  'location',
+  'purchase_price',
+];
 const UAH_CONVERSION = 28;
-
 
 class PopupDisplay {
   constructor() {
@@ -23,15 +31,15 @@ class PopupDisplay {
 
     this.newImageUrl = '';
 
-    this.previewBox; 
-    this.form; 
+    this.previewBox;
+    this.form;
     this.imageInput;
     this.newItemContainer;
     this.imageName;
   }
 
   removeImagePreview() {
-    while(this.previewBox.firstChild) {
+    while (this.previewBox.firstChild) {
       this.previewBox.removeChild(this.previewBox.firstChild); // might need to bind?
     }
   }
@@ -52,18 +60,30 @@ class PopupDisplay {
 
   removeActiveTabs() {
     let navs = this.modalContainer.querySelectorAll('.modal-nav');
-    [...navs].forEach(nav => nav.classList.remove('active'));
+    [...navs].forEach((nav) => nav.classList.remove('active'));
   }
 
   displayTab() {
     this.hideAllTabs();
     switch (this.currentTab) {
-      case 'main-tab': this.basicDetails.style.display = 'flex'; break;
-      case 'image-tab': this.imageDisplay.style.display = 'flex'; break;
-      case 'price-tab': this.priceDetails.style.display = 'flex'; break;
-      case 'package-tab': this.packageDetails.style.display = 'flex'; break;
-      case 'order-tab': this.orderDetails.style.display = 'flex'; break;
-      case 'extra-info-tab': this.extraInfo.style.display = 'flex'; break;
+      case 'main-tab':
+        this.basicDetails.style.display = 'flex';
+        break;
+      case 'image-tab':
+        this.imageDisplay.style.display = 'flex';
+        break;
+      case 'price-tab':
+        this.priceDetails.style.display = 'flex';
+        break;
+      case 'package-tab':
+        this.packageDetails.style.display = 'flex';
+        break;
+      case 'order-tab':
+        this.orderDetails.style.display = 'flex';
+        break;
+      case 'extra-info-tab':
+        this.extraInfo.style.display = 'flex';
+        break;
     }
   }
 
@@ -75,11 +95,18 @@ class PopupDisplay {
 
   trimStrangeWhiteSpaceFromExtraInfo() {
     let textArea = this.modalContainer.querySelector('textarea');
-    textArea.value = textArea.value.split(/\n/).map(string => string.trim()).join('\n');
+    textArea.value = textArea.value
+      .split(/\n/)
+      .map((string) => string.trim())
+      .join('\n');
   }
 
   removeModal(event) {
-    if (!this._isModalForm(event.target) || event.target.id === 'cancel' || event === 'close') {
+    if (
+      !this._isModalForm(event.target) ||
+      event.target.id === 'cancel' ||
+      event === 'close'
+    ) {
       event.preventDefault();
       // let modalContainer = document.getElementById('modal-container');
       this.modalContainer.innerHTML = null;
@@ -100,11 +127,19 @@ class PopupDisplay {
   }
 
   getPageDetails() {
-    this.basicDetails = this.modalContainer.querySelector('#item-basic-details');
+    this.basicDetails = this.modalContainer.querySelector(
+      '#item-basic-details'
+    );
     this.imageDisplay = this.modalContainer.querySelector('#image-display');
-    this.priceDetails = this.modalContainer.querySelector('#item-price-details');
-    this.packageDetails = this.modalContainer.querySelector('#item-package-details');
-    this.orderDetails = this.modalContainer.querySelector('#item-order-details');
+    this.priceDetails = this.modalContainer.querySelector(
+      '#item-price-details'
+    );
+    this.packageDetails = this.modalContainer.querySelector(
+      '#item-package-details'
+    );
+    this.orderDetails = this.modalContainer.querySelector(
+      '#item-order-details'
+    );
     this.extraInfo = this.modalContainer.querySelector('#item-extra-info');
 
     this.soldPriceUSD = this.modalContainer.querySelector('#sold-price-usd');
@@ -113,7 +148,8 @@ class PopupDisplay {
     this.form = this.modalContainer.querySelector('form');
     this.previewBox = this.modalContainer.querySelector('#preview');
     this.imageInput = this.modalContainer.querySelector('#picture-uploader');
-    this.newItemContainer = this.modalContainer.querySelector('#item-container');
+    this.newItemContainer =
+      this.modalContainer.querySelector('#item-container');
     this.imageName = document.querySelector('#clothing-picture');
   }
 
@@ -126,30 +162,9 @@ class PopupDisplay {
     this.extraInfo.style.display = 'none';
   }
 
-  // submitForm(formData) {
-  //   let XHR = new XMLHttpRequest();
-  //   XHR.open('POST', `/edititem/${formData.id}`);
-  //   XHR.setRequestHeader('Content-Type', 'application/json');
-  //   XHR.addEventListener('load', event => {
-  //     let request = event.target;
-  //     if (request.status === 200) {
-  //       let itemToReplace = document.querySelector(`[data-item-id="${formData.id}"]`);
-  //       itemToReplace.innerHTML = request.response;
-  //       this.forceCloseModal();
-  //       this.displayFlashMessage();
-  //     }
-  //   })
-
-  //   XHR.addEventListener('error', event => {
-  //     console.log(event);
-  //   })
-
-  //   XHR.send(JSON.stringify(formData));
-  // }
-
   displayFlashMessage() {
     let flashMessage = document.querySelector('#flash-message');
-    flashMessage.style.display="flex";
+    flashMessage.style.display = 'flex';
     setTimeout(() => {
       flashMessage.style.display = 'none';
     }, 3000);
@@ -168,50 +183,54 @@ class PopupDisplay {
 
 let popupDisplay = new PopupDisplay();
 
-
 document.addEventListener('click', (event) => {
   if (event.target.classList.contains('edit')) {
     let itemId = popupDisplay.findItemId(event.target);
     let xhr = new XMLHttpRequest();
 
     xhr.open('GET', `/clothing/item/${itemId}`);
-    xhr.addEventListener('load', event => {
+    xhr.withCredentials = true;
+    xhr.addEventListener('load', (event) => {
       //working
       let response = event.target.response;
       popupDisplay.openModal(response);
       popupDisplay.getPageDetails();
 
-      popupDisplay.modalContainer.addEventListener('click', event => {
+      popupDisplay.modalContainer.addEventListener('click', (event) => {
         if (event.target.classList.contains('modal-nav')) {
           popupDisplay.removeActiveTabs();
           popupDisplay.changeTab(event.target);
         }
-      })
-
-      popupDisplay.imageInput.addEventListener('change', event => {
-        popupDisplay.displayImagePreview(event.currentTarget.files[0]);
-      })
-
-      popupDisplay.soldPriceUSD.addEventListener('input', event => {
-        let regex = /[^0-9.]/g;
-        let soldPrice = event.target.value.replace(regex, '');
-        popupDisplay.soldPriceUAH.value = (+soldPrice * UAH_CONVERSION).toFixed(2);
       });
 
-      popupDisplay.soldPriceUAH.addEventListener('input', event => {
+      popupDisplay.imageInput.addEventListener('change', (event) => {
+        popupDisplay.displayImagePreview(event.currentTarget.files[0]);
+      });
+
+      popupDisplay.soldPriceUSD.addEventListener('input', (event) => {
         let regex = /[^0-9.]/g;
         let soldPrice = event.target.value.replace(regex, '');
-        popupDisplay.soldPriceUSD.value = (+soldPrice / UAH_CONVERSION).toFixed(2);
-      })
+        popupDisplay.soldPriceUAH.value = (+soldPrice * UAH_CONVERSION).toFixed(
+          2
+        );
+      });
+
+      popupDisplay.soldPriceUAH.addEventListener('input', (event) => {
+        let regex = /[^0-9.]/g;
+        let soldPrice = event.target.value.replace(regex, '');
+        popupDisplay.soldPriceUSD.value = (+soldPrice / UAH_CONVERSION).toFixed(
+          2
+        );
+      });
 
       popupDisplay.form.addEventListener('submit', async (event) => {
         const removeSpaces = (string) => {
           return string.split(' ').join('-').toLowerCase();
-        }
-        
+        };
+
         event.preventDefault();
         let form = popupDisplay.form;
-        let formObj = {}
+        let formObj = {};
         let brand = '';
         let tagNumber = '';
         let type = '';
@@ -220,7 +239,8 @@ document.addEventListener('click', (event) => {
         for (let i = 0; i < form.elements.length; i += 1) {
           let element = form.elements[i];
           if (element.name === 'brand') brand = removeSpaces(element.value);
-          if (element.name === 'tag_number') tagNumber = removeSpaces(element.value);
+          if (element.name === 'tag_number')
+            tagNumber = removeSpaces(element.value);
           if (element.name === 'type') type = removeSpaces(element.value);
           if (element.name === 'colors') colors = removeSpaces(element.value);
           formObj[element.name] = element.value;
@@ -228,34 +248,39 @@ document.addEventListener('click', (event) => {
             if (!element.value) {
               alert(`Missing ${element.name}`);
               return;
-            } 
+            }
           }
         }
-    
+
         let file = popupDisplay.imageInput.files[0];
         if (file) {
           // ! add color to image name?
           let imageName = `${brand}-${type}-${colors}-${tagNumber}.png`;
           shouldUpdateImage = true;
           try {
-            await addPhoto("unprocessed", imageName);
+            await addPhoto('unprocessed', imageName);
           } catch (error) {
-            console.log("the image did not upload:", error);
-            alert("the image did not upload:", error);
+            console.log('the image did not upload:', error);
+            alert('the image did not upload:', error);
           }
         }
-        
+
         let itemId = formObj.id;
         let formData = new FormData(form);
 
-        let postUrl = shouldUpdateImage ? '/clothing/edititem' : '/clothing/editpartial';
+        let postUrl = shouldUpdateImage
+          ? '/clothing/edititem'
+          : '/clothing/editpartial';
 
         let XHR = new XMLHttpRequest();
         XHR.open('POST', postUrl);
-        XHR.addEventListener('load', event => {
+        XHR.withCredentials = true; // Ensure cookies are included
+        XHR.addEventListener('load', (event) => {
           let request = event.target;
           if (request.status === 200) {
-            let itemToReplace = document.querySelector(`[data-item-id="${itemId}"]`);
+            let itemToReplace = document.querySelector(
+              `[data-item-id="${itemId}"]`
+            );
             itemToReplace.innerHTML = request.response;
             if (popupDisplay.newImageUrl) {
               itemToReplace.querySelector('img').src = popupDisplay.newImageUrl;
@@ -263,80 +288,23 @@ document.addEventListener('click', (event) => {
             popupDisplay.forceCloseModal();
             popupDisplay.displayFlashMessage();
           }
-        })
+        });
 
-        XHR.addEventListener('error', event => {
+        XHR.addEventListener('error', (event) => {
           console.log(event);
-        })
+        });
 
         XHR.send(formData);
-        
-        // let formData = {};
-        // [...popupDisplay.form.elements].forEach(element => {
-        //   if (element.name) {
-        //     if (['purchase_price', 'shipping_cost', 'sold_price'].includes(element.name)) {
-        //       let regex = /[^0-9.]/g;
-        //       formData[element.name] = element.value.replace(regex, '');
-        //     } else {
-        //       formData[element.name] = element.value;
-        //     }
-        //   }
-        // })
-
-        // console.log(formData);
-
-        // popupDisplay.submitForm(formData);
-      })
-
+      });
     });
 
-    xhr.addEventListener('error', error => {
+    xhr.addEventListener('error', (error) => {
       console.log(error);
     });
 
     xhr.send();
   }
 });
-
-
-// for uploading images to amazon's aws s3
-// https://devcenter.heroku.com/articles/s3-upload-node
-// function getSignedRequest(file) {
-//   const xhr = new XMLHttpRequest();
-//   xhr.open('GET', `/sign-s3?file-name=${file.name}&file-type=${file.type}`);
-//   xhr.onreadystatechange = () => {
-//     if(xhr.readyState === 4){
-//       if(xhr.status === 200){
-//         const response = JSON.parse(xhr.response);
-//         uploadFile(file, response.signedRequest, response.url);
-//       }
-//       else{
-//         alert('Could not get signed URL.');
-//       }
-//     }
-//   };
-//   xhr.send();
-// }
-
-// for uploading images to amazon's aws s3
-// https://devcenter.heroku.com/articles/s3-upload-node
-// function uploadFile(file, signedRequest, url){
-//   const xhr = new XMLHttpRequest();
-//   xhr.open('PUT', signedRequest);
-//   xhr.onreadystatechange = () => {
-//     if(xhr.readyState === 4){
-//       if(xhr.status === 200){
-//         document.getElementById('preview').src = url;
-//         // let previewBox = document.getElementById('preview');
-//         document.getElementById("edit-clothing-picture").value = url;
-//       }
-//       else{
-//         alert('Could not upload file.');
-//       }
-//     }
-//   };
-//   xhr.send(file);
-// }
 
 function showImage(file) {
   document.getElementById('preview').src = URL.createObjectURL(file);

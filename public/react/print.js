@@ -23,10 +23,14 @@ const Print = () => {
   useEffect(async () => {
     const pkgId = document.querySelector('[data-pkg-id]').dataset.pkgId;
     let response = await (
-      await fetch(`/packages/packageitems/${pkgId}`)
+      await fetch(`/packages/packageitems/${pkgId}`, {
+        credentials: 'include',
+      })
     ).json();
     let pkgResponse = await (
-      await fetch(`/packages/singlepackage/${pkgId}`)
+      await fetch(`/packages/singlepackage/${pkgId}`, {
+        credentials: 'include',
+      })
     ).json();
     setPkg(pkgResponse);
     setItems(response.items);
@@ -239,6 +243,7 @@ const TableRow = ({
   const updateArrived = (id) => {
     fetch(`/clothing/updatearrived/${id}`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -251,6 +256,7 @@ const TableRow = ({
   const handleSave = (itemId) => {
     fetch(`/clothing/updatesoldlink/${itemId}`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -267,6 +273,7 @@ const TableRow = ({
   const saveExtraInfo = (itemId) => {
     fetch(`/clothing/editExtraInfo/${itemId}`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -302,6 +309,7 @@ const TableRow = ({
 
     fetch(`/clothing/sellitem/${itemId}`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -347,7 +355,14 @@ const TableRow = ({
       <td>${item.shipping_cost}</td>
       <SoldPrice setPrice={setPrice} price={price} editEnabled={editEnabled} />
       <td>
-        {Number(item.sold_price) > 0 ? "$" + (Number(item.sold_price) - Number(item.total_price) - Number(item.shipping_cost)).toFixed(2) : ""}
+        {Number(item.sold_price) > 0
+          ? '$' +
+            (
+              Number(item.sold_price) -
+              Number(item.total_price) -
+              Number(item.shipping_cost)
+            ).toFixed(2)
+          : ''}
       </td>
       <ExtraInfoText
         editEnabled={editEnabled}
@@ -376,25 +391,3 @@ const TableRow = ({
 
 const domContainer = document.querySelector('#print');
 ReactDOM.render(e(Print), domContainer);
-
-// ALTER TABLE clothing ADD COLUMN arrived boolean DEFAULT false;
-// ALTER TABLE clothing ADD COLUMN marked boolean DEFAULT false;
-
-// SELECT COUNT(ID)
-// FROM clothing
-// WHERE order_id = 142;
-
-// sold_price
-
-// SELECT id, sold_price
-// FROM clothing
-// WHERE order_id = 142
-// AND sold_price IS NULL;
-
-// UPDATE clothing
-// SET order_id = NULL
-// WHERE order_id = 142 AND sold_price IS NULL;
-
-// UPDATE clothing
-// SET purchase_price = purchase_price * 0.68
-// WHERE receipt_id = 1695;

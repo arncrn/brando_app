@@ -9,7 +9,7 @@ class RightClick {
   }
 
   isContextMenu(node) {
-    if (node.classList.contains("right-click-options")) {
+    if (node.classList.contains('right-click-options')) {
       return true;
     } else if (node.parentElement === null) {
       return false;
@@ -37,7 +37,9 @@ class RightClick {
   }
 
   setOptionBlock() {
-    this.optionBlock = document.getElementById(`right-click-option-${this.itemId}`)
+    this.optionBlock = document.getElementById(
+      `right-click-option-${this.itemId}`
+    );
   }
 
   removeContextMenu() {
@@ -48,13 +50,17 @@ class RightClick {
   }
 
   removeItemFromPage() {
-    let currentElement = document.querySelector(`[data-item-id="${this.itemId}"]`);
+    let currentElement = document.querySelector(
+      `[data-item-id="${this.itemId}"]`
+    );
     this.removeContextMenu();
     currentElement.remove();
   }
 
   insertItemIntoPage(responseHTML) {
-    let currentElement = document.querySelector(`[data-item-id="${this.itemId}"]`);
+    let currentElement = document.querySelector(
+      `[data-item-id="${this.itemId}"]`
+    );
     let newElement = this.convertHtmlStringToDomElement(responseHTML);
     newElement.classList.add('glowing');
     currentElement.insertAdjacentElement('afterend', newElement);
@@ -65,7 +71,7 @@ class RightClick {
 
   displayFlashMessage() {
     let flashMessage = document.querySelector('#flash-message');
-    flashMessage.style.display="flex";
+    flashMessage.style.display = 'flex';
     setTimeout(() => {
       flashMessage.style.display = 'none';
     }, 3000);
@@ -80,28 +86,30 @@ class RightClick {
   duplicateItem() {
     let XHR = new XMLHttpRequest();
     XHR.open('POST', `/clothing/duplicateitem/${this.itemId}`);
-    XHR.addEventListener('load', event => {
+    XHR.withCredentials = true; // Ensure cookies are included
+    XHR.addEventListener('load', (event) => {
       let request = event.target;
       this.insertItemIntoPage(request.response);
       this.displayFlashMessage();
     });
-    XHR.addEventListener('error', err => {
+    XHR.addEventListener('error', (err) => {
       console.log(err);
-    })
+    });
     XHR.send();
   }
 
   deleteItem() {
     let XHR = new XMLHttpRequest();
     XHR.open('POST', `/clothing/deleteitem/${this.itemId}`);
-    XHR.addEventListener('load', event => {
+    XHR.withCredentials = true; // Ensure cookies are included
+    XHR.addEventListener('load', (event) => {
       let request = event.target;
       this.removeItemFromPage();
       this.displayFlashMessage();
     });
-    XHR.addEventListener('error', err => {
+    XHR.addEventListener('error', (err) => {
       console.log(err);
-    })
+    });
     XHR.send();
   }
 
@@ -132,4 +140,4 @@ document.addEventListener('contextmenu', (event) => {
 
     document.addEventListener('click', rightClick.setContextBehavior);
   }
-})
+});

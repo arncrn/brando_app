@@ -13,7 +13,11 @@ const Print = () => {
     // const pkgId = document.querySelector('[data-pkg-id]').dataset.pkgId;
     const orderId = document.querySelector('[data-order-id]').dataset.orderId;
 
-    let response = await (await fetch(`/orders/orderitems/${orderId}`)).json();
+    let response = await (
+      await fetch(`/orders/orderitems/${orderId}`, {
+        credentials: include,
+      })
+    ).json();
     setItems(response.items);
     setSumOfItems(response.sumOfItems);
     setShippingCost(response.shippingCost);
@@ -102,6 +106,7 @@ const TableRow = ({ item, idx, allowImages }) => {
   const updateMarked = (id) => {
     fetch(`/clothing/updateMarked/${id}`, {
       method: 'POST',
+      credentials: include,
       headers: {
         'Content-Type': 'application/json',
       },
@@ -118,8 +123,8 @@ const TableRow = ({ item, idx, allowImages }) => {
       bgColor = 'cyan';
     }
 
-    return {backgroundColor: bgColor};
-  }
+    return { backgroundColor: bgColor };
+  };
 
   return (
     <tr style={setBackgroundColor()}>

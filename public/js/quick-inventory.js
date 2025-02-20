@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
   document.addEventListener('click', (e) => {
     if (e.target.classList.contains('quick-inventory-button')) {
       let itemId = e.target.parentNode.parentNode.id.split('-')[2];
@@ -7,20 +6,21 @@ document.addEventListener('DOMContentLoaded', () => {
       let location = e.target.textContent.toLowerCase();
       let inStock = true;
       if (location === 'none') inStock = false;
-      
+
       fetch(`/clothing/updateinventory/${itemId}`, {
-        method: "POST",
+        method: 'POST',
+        credentials: include,
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({location, inStock}),
+        body: JSON.stringify({ location, inStock }),
       })
-      .then(response => {
-        return response.text()
-      })
-      .then(data => {
-        if (data) itemToReplace.innerHTML = data;
-      })
+        .then((response) => {
+          return response.text();
+        })
+        .then((data) => {
+          if (data) itemToReplace.innerHTML = data;
+        });
     }
-  })
-})
+  });
+});
