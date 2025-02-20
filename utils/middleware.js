@@ -29,7 +29,9 @@ function looseAuthCheck(req, res, next) {
   const token = req.cookies && req.cookies['auth-key'];
 
   try {
-    req.user = jwt.verify(token, secretKey);
+    if (token) {
+      req.user = jwt.verify(token, secretKey);
+    }
     next();
   } catch (error) {
     console.error(error);
