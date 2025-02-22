@@ -15,7 +15,7 @@ const Print = () => {
 
     let response = await (
       await fetch(`/orders/orderitems/${orderId}`, {
-        credentials: include,
+        credentials: 'include',
       })
     ).json();
     setItems(response.items);
@@ -106,7 +106,7 @@ const TableRow = ({ item, idx, allowImages }) => {
   const updateMarked = (id) => {
     fetch(`/clothing/updateMarked/${id}`, {
       method: 'POST',
-      credentials: include,
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },

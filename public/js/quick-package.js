@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     timeout = setTimeout(() => {
       let pkgId = pkgInput.value.replace(regex, '') || 0;
       fetch(`/packages/singlepackage/${pkgId}`, {
-        credentials: include,
+        credentials: 'include',
       })
         .then((response) => response.json())
         .then((pkgData) => {
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       fetch(`/clothing/addtopackage/${itemId}`, {
         method: 'POST',
-        credentials: include,
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },

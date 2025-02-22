@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let itemToReplace = document.querySelector(`[data-item-id="${itemId}"]`);
       fetch(`/clothing/unsellitem/${itemId}`, {
         method: 'POST',
-        credentials: include,
+        credentials: 'include',
       })
         .then((response) => response.text())
         .then((data) => {
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
       let itemToReplace = document.querySelector(`[data-item-id="${itemId}"]`);
       fetch(`/clothing/sellitem/${itemId}`, {
         method: 'POST',
-        credentials: include,
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },

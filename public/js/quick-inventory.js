@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       fetch(`/clothing/updateinventory/${itemId}`, {
         method: 'POST',
-        credentials: include,
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },

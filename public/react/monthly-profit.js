@@ -9,7 +9,7 @@ const MonthlyProfit = () => {
   useEffect(async () => {
     const response = await (
       await fetch('/orders/monthly-profits/data', {
-        credentials: include,
+        credentials: 'include',
       })
     ).json();
     const nastyaProfit = extractNastyaData(response);
