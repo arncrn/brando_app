@@ -9,6 +9,7 @@
     "dev": "NODE_ENV=development nodemon index.js",
     "backup": "pg_dump -d brandomania3 --inserts > backup.sql",
     "backup:heroku": "dropdb brandomania_backup && heroku pg:pull DATABASE_URL brandomania_backup --app pacific-everglades-84945",
+    "refresh-db": "heroku pg:backups:capture --app pacific-everglades-84945 && heroku pg:backups:download --app pacific-everglades-84945 && dropdb brandomania_backup && createdb brandomania_backup && pg_restore --verbose --no-owner --no-comments --dbname=brandomania_backup latest.dump",
     "sql-file:heroku": "pg_dump -d brandomania --inserts > heroku.sql",
     "test": "NODE_ENV=test jest --verbose --runInBand",
     "build": "webpack"
